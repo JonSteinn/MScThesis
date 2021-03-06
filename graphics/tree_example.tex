@@ -1,0 +1,62 @@
+{
+\newcommand{\gridnodeempty}{%
+\begin{tikzpicture}[scale=0.3, baseline=(current bounding box.center)]
+\useasboundingbox (0,-3) rectangle (3,3);
+			\draw[thick, rounded corners=3pt] (0,0) rectangle (3,3);
+			\draw[pattern=north west lines, pattern color=lightgray]  (3,0) to[rounded corners=3pt] (0,0) to[rounded corners=3pt] (0,3) to[rounded corners=3pt] (3,3) to[rounded corners=3pt] cycle;
+;
+			    \end{tikzpicture}
+}
+
+\newcommand{\gridnodesingle}[1]{%
+\begin{tikzpicture}[scale=0.3, baseline=(current bounding box.center)]
+\useasboundingbox (0,-3) rectangle (3,3);
+			\draw[thick, rounded corners=3pt] (0,0) rectangle (3,3);
+			\node at (1.5, 1.5) {#1};
+;
+			    \end{tikzpicture}
+}
+
+
+\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+    \node (root) at (0, 0) {\gridnodesingle{$G$}};
+    \node (lvl_1_1) at (-1.5, -2.25) {\gridnodeempty};
+    \node (lvl_1_2) at (1.5, -2.25) {\gridnodesingle{$G_{\geq1}$}};
+    \node (lvl_2_1) at (-3, -4.5) {\gridnodesingle{$A$}};
+    \node (lvl_2_2) at (1.5, -4.5) {\gridnodesingle{$B$}};
+    \node (lvl_2_3) at (6, -4.5) {\gridnodesingle{$C$}};
+    \node (lvl_3_1) at (-4,-6.75) {\gridnodesingle{\gridN}};
+    \node (lvl_3_2) at (-2,-6.75) {\gridnodesingle{$G$}};
+    \node (lvl_3_3) at (0.5,-6.75) {\gridnodesingle{$D$}};
+    \node (lvl_3_4) at (2.5,-6.75) {\gridnodesingle{\gridU}};
+    \node (lvl_3_5) at (5,-6.75) {\gridnodesingle{\gridD}};
+    \node (lvl_3_6) at (7,-6.75) {\gridnodesingle{$E$}};
+    \node (lvl_4_1) at (-1,-9) {\gridnodeempty};
+    \node (lvl_4_2) at (0.5,-9) {\gridnodesingle{$B$}};
+    \node (lvl_4_3) at (2,-9) {\gridnodesingle{$A$}};
+    \node (lvl_4_4) at (5.5,-9) {\gridnodeempty};
+    \node (lvl_4_5) at (7,-9) {\gridnodesingle{$C$}};
+    \node (lvl_4_6) at (8.5,-9) {\gridnodesingle{$A$}};
+    
+    \ptedge{(root)}{(-0.5,1.2)}{(lvl_1_1)}{(-0.5,1.3)}
+    \ptedge{(root)}{(-0.5,1.2)}{(lvl_1_2)}{(-0.5,1.3)}
+    
+    \ptedge{(lvl_1_2)}{(-0.5,1.2)}{(lvl_2_1)}{(-0.5,1.3)}
+    \ptedge{(lvl_1_2)}{(-0.5,1.2)}{(lvl_2_2)}{(-0.5,1.3)}
+    \ptedge{(lvl_1_2)}{(-0.5,1.2)}{(lvl_2_3)}{(-0.5,1.3)}
+    
+    \ptedge{(lvl_2_1)}{(-0.5,1.2)}{(lvl_3_1)}{(-0.5,1.3)}
+    \ptedge{(lvl_2_1)}{(-0.5,1.2)}{(lvl_3_2)}{(-0.5,1.3)}
+    \ptedge{(lvl_2_2)}{(-0.5,1.2)}{(lvl_3_3)}{(-0.5,1.3)}
+    \ptedge{(lvl_2_2)}{(-0.5,1.2)}{(lvl_3_4)}{(-0.5,1.3)}
+    \ptedge{(lvl_2_3)}{(-0.5,1.2)}{(lvl_3_5)}{(-0.5,1.3)}
+    \ptedge{(lvl_2_3)}{(-0.5,1.2)}{(lvl_3_6)}{(-0.5,1.3)}
+    
+    \ptedge{(lvl_3_3)}{(-0.5,1.2)}{(lvl_4_1)}{(-0.5,1.3)}
+    \ptedge{(lvl_3_3)}{(-0.5,1.2)}{(lvl_4_2)}{(-0.5,1.3)}
+    \ptedge{(lvl_3_3)}{(-0.5,1.2)}{(lvl_4_3)}{(-0.5,1.3)}
+    \ptedge{(lvl_3_6)}{(-0.5,1.2)}{(lvl_4_4)}{(-0.5,1.3)}
+    \ptedge{(lvl_3_6)}{(-0.5,1.2)}{(lvl_4_5)}{(-0.5,1.3)}
+    \ptedge{(lvl_3_6)}{(-0.5,1.2)}{(lvl_4_6)}{(-0.5,1.3)}
+\end{tikzpicture}
+}

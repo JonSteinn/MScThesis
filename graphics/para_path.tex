@@ -1,0 +1,39 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},edge/.style = {->,> = latex'}]
+    \node[vertex, double=white] (a) at (0,0) {$A$};
+    \node[vertex] (b) at (4,0) {$B$};
+    \node[vertex] (c) at (0,2) {$\set{\varepsilon}$};
+    \node[vertex] (d) at (4,2) {$\set{c}$};
+    \draw[edge] (a) to node[midway,right] {{\tiny$1$,$\sqcup$}} (c);
+    \draw[edge] (a) to[bend left] node[midway,above] {{\tiny$2$,$\sqcup$}} (b);
+    \draw[edge] (b) to node[midway,left] {{\tiny$3$,$\times$}} (d);
+    \draw[edge] (b) to[bend left] node[midway,below] {{\tiny$4$,$\times$}} (a);
+\end{tikzpicture}
+\hspace{1cm}
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},edge/.style = {->,> = latex'}]
+    \node[vertex, double=white] (a) at (0,0) {$E$};
+    \node[vertex] (b) at (2,0) {$F$};
+    \node[vertex] (c) at (4,0) {$\set{\varepsilon}$};
+    \node[vertex] (d) at (0,3) {$G$};
+    \node[vertex] (e) at (2,3) {$H$};
+    \node[vertex] (f) at (4,3) {$\set{d}$};
+    \node[vertex] (g) at (6,0) {$I$};
+    \node[vertex] (h) at (6,3) {$J$};
+    
+    \draw[edge] (a) to[bend left] node[midway,above] {{\tiny$1$,$\sqcup$}} (b);
+    \draw[edge] (a) to node[midway,right] {{\tiny$2$,$\sqcup$}} (d);
+    
+    \draw[edge] (b) to node[midway,below] {{\tiny$3$,$\sqcup$}} (c);
+    \draw[edge] (b) to[bend left] node[midway,below] {{\tiny$4$,$\sqcup$}} (a);
+    
+    \draw[edge] (d) to node[midway,above] {{\tiny$5$,$\mathbf{1}^\circ$}} (e);
+    
+    \draw[edge] (e) to node[midway,above] {{\tiny$6$,$\times$}} (f);
+    \draw[edge] (e) to node[midway,below left] {{\tiny$7$,$\times$}} (g);
+    
+    \draw[edge] (g) to node[midway,below] {{\tiny$8$,$\sqcup$}} (c);
+    \draw[edge] (g) to[bend left] node[midway,left] {{\tiny$9$,$\sqcup$}} (h);
+    
+    \draw[edge] (h) to node[midway,above] {{\tiny$10$,$\times$}} (f);
+    \draw[edge] (h) to[bend left] node[midway,right] {{\tiny$11$,$\times$}} (g);
+\end{tikzpicture}
+

@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+  \def\xs{1.0}
+  \def\ys{1.0}
+  \def\ps{1.0}
+  \draw (0.001,0.001) grid[xscale=\xs,yscale=\ys] (4.999, 2.999);
+  \draw[rounded corners=2ex] (0,0) rectangle (5,3);
+  \coordinate (p0) at (0.3333333333333333*\xs,2.8*\ys);
+  \coordinate (p1) at (0.6666666666666666*\xs,2.6*\ys);
+  \coordinate (p2) at (1.25*\xs,0.25*\ys);
+  \coordinate (p3) at (1.5*\xs,2.4*\ys);
+  \coordinate (p4) at (1.75*\xs,0.5*\ys);
+  \coordinate (p5) at (3.3333333333333335*\xs,1.5*\ys);
+  \coordinate (p6) at (3.6666666666666665*\xs,0.75*\ys);
+  \coordinate (p7) at (4.5*\xs,2.2*\ys);
+  \draw (p0)--(p1)--(p2)--(p3)--(p4)--(p5)--(p6)--(p7);
+  \fill (p0) circle (0.1*\ps);
+  \fill (p1) circle (0.1*\ps);
+  \fill (p2) circle (0.1*\ps);
+  \fill (p3) circle (0.1*\ps);
+  \fill (p4) circle (0.1*\ps);
+  \fill (p5) circle (0.1*\ps);
+  \fill (p6) circle (0.1*\ps);
+  \fill (p7) circle (0.1*\ps);
+\end{tikzpicture}

@@ -1,0 +1,59 @@
+
+\coverchapter{Parallel bijections}\label{ch:pbijection}
+
+\todo[inline]{Some introductory words...}
+
+
+\section{Forward and backward maps}
+\todo[inline,caption={}]{
+\begin{itemize}
+    \item forward map
+    \item backward map
+    \item define spec that includes f\&b maps for all rules
+    \item Deal with `None` (mutual exclusivity) in rules and always map to tuples. Probably need to define `mutually exclusive constructors` or something like that
+    \item def breaking objects down into atoms (name idea: atomic segregation, desegregate other way)
+    \item def parse tree
+    \item def building objects from 'atomized' 
+    \item might need some additional info in maps that break down objects
+    \item lemma: matching order is a bijection between paths that don't end in empty or with eq step in para graphs?
+\end{itemize}
+}
+\todo[inline]{JSE: Move to chap2}
+\begin{definition}
+Let $\spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right)$ and $\spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)$ be two parallel specifications with $k_1$ and $k_2$ rules respectively. Let 
+\[
+A= \cset{\left(L^{(1)}_i,L^{(2)}_j\right)}{i \in [k_1], j \in [k_2], O^{(1)}_i \neq \mathbf{1}^\circ, O^{(2)}_j \neq \mathbf{1}^\circ}
+\]
+and $B$ the set of all bijections between subsets of $[\max(D^{(1)}_1,\dotsc,D^{(1)}_k)]$ and subsets of $[\max(D^{(2)}_1,\dotsc,D^{(2)}_k)]$
+then the \emph{matching order} is $\Gamma: A \mapsto B$
+\[
+    \Gamma\left(L^{(1)}_i,L^{(2)}_j\right) = \phi
+\]
+where $\phi$ is a bijection between $\cset{t \in [D^{(1)}_i]}{R^{(1)}_{it} \neq \emptyset}$ and $\cset{t\in[D^{(2)}_j]}{R^{(2)}_{jt} \neq \emptyset}$
+such that $\phi(a) = b$ if path pairs with $\alpha_1\dotsm\alpha_s$ and $\beta_1\dotsm\beta_q$ with tails $L^{(1)}_i$ and $L^{(2)}_j$ (respectively) had a bijection of path expansions $\rho$ such that $\rho(\alpha_1\dotsm\alpha_{s+1}) = \beta_1\dotsm\beta_{q+1}$ and  $\alpha_{s+1}$ corresponds to the edge from $L^{(1)}_i$ to $R^{(1)}_{ia}$ and $\beta_{q+1}$ the edge from $L^{(2)}_j$ to $R^{(2)}_{jb}$.
+\end{definition}
+
+Let $\circ$ be op that prepends edge to path
+\begin{definition}
+Given two parallel specifications $\spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right)$ and $\spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)$ and a non-empty rooted path $e_1e_2 \cdots e_n$ in $\mathfrak{G}(\spec{C})$ that does not end with an equivalent step and let
+\[
+    \xi(e_i,D^{(k)})  = (\xi_1(e_i,D^{(k)}),\xi_2(e_i,D^{(k)})) = (e',R^{(2)}_{kz})  
+\]
+where $z=\Gamma(C^{(i)}, D^{(k)})(j), \src(e_1) = C^{(i)}, e_i: C^{(i)}\to R^{(1)}_{ij}, e': D^{(k)} \to R^{(2)}_{kz}$ then
+\[
+    \Gamma^+(e_1\cdots e_n,D) =  \begin{cases}
+        \xi_1(e_1,D) & \text{ if $n=1$}\\
+        \Gamma^+(e_2 \cdots e_n,D) & \textsf{if $e_1$ is an equiv step}\\
+        w \circ \Gamma^+(e_1 \cdots e_n, D') & \text{If $D \cong D'$ and step is $w$}\\
+        e' \circ \Gamma^+(e_2\dotsm e_n, D') & \text{ otherwise, where } (e',D') = \xi(e_1,D)
+    \end{cases}
+\]
+then $\phi(e) = \Gamma(e,r_2)$ is called the path matching of $e$.
+\end{definition}
+
+\begin{proposition}
+For paralell specifications, the mapping $\Gamma^+$ is a bijection between the set of paths in their specification graphs that do not end in equivalence steps. Further more, it preserves the number of non-equivalent steps and terminal class endings. 
+\end{proposition}
+
+\section{Parallel bijections}
+\section{The bijection algorithm}

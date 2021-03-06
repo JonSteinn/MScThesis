@@ -1,0 +1,284 @@
+\coverchapter{Parallel specifications}\label{ch:parallel}
+The concept of parallelism\footnote{Not to be confused with the programming paradigm.} in specifications is a binary relation over $\specset \times \specset$ where $\specset$ is the set of all specifications. Its purpose is to structurally match specifications with the aim of constructing a bijection between them. In order to define this relation  we will need to formalize some notation and define supporting concepts.
+
+A combinatorial class that is empty or contains a single element of size less than 2 is called a \emph{terminal class}. Let
+\begin{align*}
+    \sclsi{C}{1} &\cong \sclsi{C}{11} \circ_1 \sclsi{C}{12} \circ_1 \dotsm \circ_1 \sclsi{C}{1n_1}\\
+    \sclsi{C}{2} &\cong \sclsi{C}{21} \circ_2 \sclsi{C}{22} \circ_2 \dotsm \circ_2 \sclsi{C}{2n_2}\\
+    &\hspace{0.25cm}\vdots\\
+    \sclsi{C}{k} &\cong \sclsi{C}{k1} \circ_k \sclsi{C}{k2} \circ_k \dotsm \circ_k \sclsi{C}{kn_k}\\
+\end{align*}
+be the rules of a specification $\spec{C}$ for a class $\sclsi{C}{1}$ where each $\sclsi{C}{ij}$ is a terminal class or in $\set{\sclsi{C}{1}, \sclsi{C}{2}, \dotsc, \sclsi{C}{k}}$ for $(i,j) \in \cset{(a,b)}{a \in [k], b \in [n_a]}$ and $\circ_1,\circ_2,\dotsc,\circ_k$ are constructors. For equivalence rules, $\sclsi{C}{i} \cong \sclsi{C}{i1}$, the constructor $\circ_i$ is an identity unary operator $\mathbf{1}^\circ$. To describe this specification we will use the notation 
+\[
+    \spec{C} = (L,O,R,D) = 
+    \left(
+    \begin{pmatrix}
+        \sclsi{C}{1}\\ \sclsi{C}{2}\\ \vdots\\ \sclsi{C}{k}
+    \end{pmatrix}
+    \begin{matrix}\\ \\ \\,\end{matrix}
+    \begin{pmatrix}
+        \circ_1\\\circ_2\\\vdots\\\circ_k
+    \end{pmatrix}
+    \begin{matrix}\\ \\ \\,\end{matrix}
+    \begin{pmatrix}
+    R_{11} & R_{12} & \dotsm & R_{1t} \\
+    R_{21} & R_{22} & \dotsm & R_{2t} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    R_{k1} & R_{k2} & \dotsm & R_{kt}
+    \end{pmatrix}
+    \begin{matrix}\\ \\ \\,\end{matrix}
+    \begin{pmatrix}
+        n_1\\n_2\\\vdots\\n_k
+    \end{pmatrix}
+    \right)
+\]
+where $t = \max\set{n_1,n_2,\dotsc,n_k}$, $R_{ij} = \sclsi{C}{ij}$ for $(i,j) \in \cset{(a,b)}{a \in [k], b \in [n_a]}$ and the remaining entries of $R$ are the empty set (and of no importance). If we revisit the specification for $\Av{132}$ from \SectionRef{sec:tilings} with this notation we have 
+\[
+    \spec{C} = \left(
+    \begin{pmatrix}\Av{132}\\\textsf{Av}_{\geq1}(132)\end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}\sqcup\\ \times\end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+    \set{\varepsilon} & \textsf{Av}_{\geq1}(132) & \emptyset \\
+    \Av{132} & \set{\point{0.1}} & \Av{132}
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}2\\3\end{pmatrix}
+    \right)\begin{matrix}\\.\end{matrix}
+\]
+
+\section{Specification graphs}
+\begin{definition}
+Let $\spec{C} = \left(L, O, R, D\right)$ be a specification with $k$ rules. The \emph{specification graph} of $\spec{C}$ is the rooted directed multigraph $\specg{C} = (V,E,r,\src,\dst,\op)$ with vertices 
+\[
+V = \bigcup_{i=1}^k\set{L_i,R_{i1},R_{i2},\dotsc,R_{iD_i}},
+\]
+labelled edges $E = \left[\sum_{i=1}^kD_i\right]$, a root $r = L_1$ and mappings from edge labels to their sources, destinations and constructors, $(\src(e), \dst(e), \op(e)) = \left(L_{\alpha(e)},R_{\alpha(e)\beta(e)},O_{\alpha(e)}\right)$
+with $\alpha(e) = \min\cset{i \in [k]}{D_1 + D_2 + \dotsm + D_k \geq e}$ and $\beta(e) = e-\sum_{i=1}^{\alpha(e) - 1}D_i$.
+\end{definition}
+
+The only purpose of the maps $\alpha$ and $\beta$ is to uniquely relate an edge label with a rule and a class on its right-hand side. How that is done exactly is not important and any such mappings would work. An example for the aforementioned specification for $\Av{132}$ can be seen in \FigureRef{fig:specgraph132}.
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/spec_graph_132}
+    \caption{The specification graph for a specification for $\Av{132}$.}
+    \label{fig:specgraph132}
+\end{figure}
+
+A path in a rooted multigraph can be described as a sequence of edges\footnote{Using a sequence of vertices is ambiguous in multigraphs.}. A rooted path is any such sequence that starts with an edge from the root. There is also an empty rooted path, $\varepsilon$, corresponding to going nowhere from the root. For a finite rooted path $e_1e_2\dotsm e_n$ in a specification graph we define $\textsf{tail}(e_1e_2\dotsm e_n)$\todo{JSE: mention that we use the word tail as well to describe this} as $\dst(e_n)$ if $n>0$ and the root otherwise.
+
+\begin{definition}
+Let $(V,E,r,\src,\dst,\op)$ be a specification graph. Given a finite rooted path $e_1e_2\dotsm e_m \in E^m$, its \emph{path expansion}, denoted $p_+(e_1e_2\dotsm e_m)$,
+is the set 
+\[
+    \cset{e_1e_2\dotsm e_m e_{m+1}}{e_{m+1} \in E, \ \dst(e_{m+1}) \neq \emptyset \text{ and } \src(e_{m+1}) = \textsf{tail}(e_1e_2\dotsm e_m)}.
+\]
+\end{definition}
+If a path ends in a terminal class, its path expansion is the empty set. Note also that we never expand to empty classes. In the graph from \FigureRef{fig:specgraph132} we have $p_+(\varepsilon) = \set{1,2}$, $p_+(2) = \set{23,24,25}$, $p_+(24) = \emptyset$ and $p_+(2523) = \set{25231, 25232}$.
+
+
+\begin{definition}
+A \emph{specification path} in a specification graph $(V,E,r,\src,\dst,\op)$ is a finite rooted path $p=e_1e_2\dotsm e_m \in E^m$ in said graph such that $\textsf{tail}(p)$ is a terminal class or there exists a $j\in[m]$ such that $\src(e_j) = \textsf{tail}(p)$.
+\end{definition}
+The paths $1$, $24$, $23$, $25$, $23232$, $232323$ and $252324$ are examples of specification paths in the specification graph in \FigureRef{fig:specgraph132}. In fact, all finite rooted paths in the graph except the paths $\varepsilon$ and $2$ are specification paths. We will use the notation $e_1^{\op(e_1)}e_2^{\op(e_2)}\dotsm e_m^{\op(e_m)}$ interchangeably with the one without the constructors, often opting for the inclusion of constructors when their relevance is of importance. 
+
+\begin{definition}
+Let $\spec{C}$ be a specification and $p=e_1e_2\dotsm e_m \in E^m$ be a specification path in $\mathfrak{G}\left(\spec{C}\right) = (V,E,r,\src, \dst, \op)$. The \emph{nonequivalent steps} of $p$, denoted $\vartheta(p)$, is the path indices that do not correspond to a equivalence rule, that is $\vartheta(p) = \cset{i\in[m]}{\op(e_i) \neq \mathbf{1}^\circ}$.
+\end{definition}
+Suppose we have a specification  
+\[
+    \spec{A} = \left(\begin{pmatrix}A\\B\\C\\D\end{pmatrix}\begin{matrix}\\\\\\,\end{matrix} \begin{pmatrix}\sqcup\\ \mathbf{1}^\circ\\ \times\\ \mathbf{1}^\circ\end{pmatrix}\begin{matrix}\\\\\\,\end{matrix}\begin{pmatrix} \set{\varepsilon} & B \\ C & \emptyset \\ \set{c} & D \\ A & \emptyset\end{pmatrix}\begin{matrix}\\\\\\,\end{matrix}\begin{pmatrix}2\\1\\2\\1\end{pmatrix}\right)
+\]
+where $c$ is an atom. For the specification path $p = 2356235$ in $\mathfrak{G}\left(\spec{A}\right)$ the nonequivalent steps are $\vartheta(p) = \set{1,3,5,7}$. The specification graph for $\spec{A}$, as well as the path $p$ where the nonequivalent steps are solid can be seen in \FigureRef{fig:noneqsteps}. 
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/noneq_steps}
+    \caption{A specification graph on the left and a specification path from the graph, $e_1e_2\dotsm e_7=2356235$, on the right with nonequivalent steps, $\set{1,3,5,7}$, as solid arrows.}
+    \label{fig:noneqsteps}
+\end{figure}
+
+\section{Parallel specifications}
+\begin{definition}
+Two constructors $\circ_1$ and $\circ_2$ are equivalent, $\circ_1 \equiv \circ_2$, if
+\[
+    \sclsi{C}{1} \circ_1 \sclsi{C}{2} \circ_1 \dotsm \circ_1 \sclsi{C}{n} \cong \sclsi{D}{1} \circ_2 \sclsi{D}{2} \circ_2 \dotsm \circ_2 \sclsi{D}{n}
+\]
+are isomorphic for all classes $\sclsi{C}{1},\sclsi{C}{2},\dotsc,\sclsi{C}{n}$ and $\sclsi{D}{1},\sclsi{D}{2},\dotsc,\sclsi{D}{n}$ in the domain of $\circ_1$ and $\circ_2$ respectively, where $\sclsi{C}{i}\cong\sclsi{D}{i}$ for $i \in [n]$\footnote{For our purposes it would suffice to restrict the domains to classes of specifications.}.
+\end{definition}
+\begin{definition}
+Let $\spec{C}$ and $\spec{D}$ be two specifications with specification graphs $\specg{C}=(V_1,E_1,r_1,\src_1,\dst_1,\op_1)$ and $\specg{D} = (V_2,E_2,r_2,\src_2,\dst_2,\op_2)$ respectively. Let $\alpha=\alpha_1\alpha_2 \dotsm \alpha_n$ be a specification path in $\mathfrak{G}\left(\spec{C}\right)$ and $\beta=\beta_1\beta_2 \dotsm \beta_k$ in $\mathfrak{G}\left(\spec{D}\right)$. We say that $\alpha$ and $\beta$ are \emph{parallel specification paths} if all of the following conditions are met.
+\begin{enumerate}[i.]
+    \item The length, ignoring equivalences, is the same, that is $|\vartheta(\alpha)| = |\vartheta(\beta)| = s$.
+    \item For all $q\in[s]$ we have $\op_1(\alpha_{i_q}) \equiv \op_2(\beta_{j_q})$ where $(i_1,i_2,\dotsc,i_s)$ and $(j_1,j_2,\dotsc,j_s)$ are the ordered elements of $\vartheta(\alpha)$ and $\vartheta(\beta)$ respectively.
+    \item Either $\dst_1(\alpha_n)$ and $\dst_2(\beta_n)$ are both non-empty terminal classes and the length of their respective objects are the same or there is a $(a,b) \in [n] \times [k]$ such that $\src_1(\alpha_a) = \dst_1(\alpha_n)$, $\src_2(\beta_b) = \dst_2(\beta_k)$ and $|\cset{i \in \vartheta(\alpha)}{a \leq i \leq n}| = |\cset{j \in \vartheta(\beta)}{b \leq j \leq k}|$.
+\end{enumerate}
+Additionally, if both paths are empty, they are parallel if $r_1$ and $r_2$ are terminal classes and a length preserving bijection exists between them.\todo{jse: I can remove this if I allow paths that end in empty classes - would that matter since never expanded to?}
+\end{definition}
+Parallel paths can be summarized as those we can traverse simultaneously, ignoring all equivalence rules, having equivalent constructors at every step and end in either terminal classes, for which a length preserving bijection exists between, or a recursion at an equal distance. We write $\alpha \parallel \beta$ to indicate that specification paths $\alpha$ and $\beta$ are parallel and $\alpha \nparallel \beta$ to indicate that they are not. Suppose we have specifications
+\[
+    \spec{C} = \left(
+        \begin{pmatrix}
+            A\\
+            B
+        \end{pmatrix}
+        \begin{matrix}\\,\end{matrix}
+        \begin{pmatrix}
+            \sqcup\\
+            \times
+        \end{pmatrix}
+        \begin{matrix}\\,\end{matrix}
+        \begin{pmatrix}
+            \set{\varepsilon} & B\\
+            \set{c} & A
+        \end{pmatrix}
+        \begin{matrix}\\,\end{matrix}
+        \begin{pmatrix}
+            2\\
+            2
+        \end{pmatrix}
+    \right)
+\]
+and
+\[
+    \spec{D} = \left(
+        \begin{pmatrix}
+            E\\
+            F\\
+            G\\
+            H\\
+            I\\
+            J
+        \end{pmatrix}
+        \begin{matrix}\\\\\\\\\\,\end{matrix}
+        \begin{pmatrix}
+            \sqcup\\
+            \sqcup\\
+            \mathbf{1}^\circ\\
+            \times\\
+            \sqcup\\
+            \times
+        \end{pmatrix}
+        \begin{matrix}\\\\\\\\\\,\end{matrix}
+        \begin{pmatrix}
+            F & G\\
+            \set{\varepsilon} & E\\
+            H & \emptyset\\
+            \set{d} & I\\
+            \set{\varepsilon} & J\\
+            \set{d} & I
+        \end{pmatrix}
+        \begin{matrix}\\\\\\\\\\,\end{matrix}
+        \begin{pmatrix}
+            2\\
+            2\\
+            1\\
+            2\\
+            2\\
+            2
+        \end{pmatrix}
+    \right)
+\]
+where $c$ and $d$ are atoms. The specifications paths $2^\sqcup4^\times2^\sqcup4^\times$ and $2^\sqcup5^{\mathbf{1}^\circ}7^\times9^\sqcup11^\times$, in their respective specification graphs $\mathfrak{G}\left(\spec{C}\right)$ and $\mathfrak{G}\left(\spec{D}\right)$, shown in \FigureRef{fig:para_path}, are parallel.
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/para_path}
+    \caption{The paths $2^\sqcup4^\times2^\sqcup4^\times$ in the left graph and $2^\sqcup5^{\mathbf{1}^\circ}7^\times9^\sqcup11^\times$ in the right graph are parallel specification paths.}
+    \label{fig:para_path}
+\end{figure}
+\begin{definition}\label{def:parspec}
+Let $\spec{C}$ and $\spec{D}$ be two specifications with specification graphs $\specg{C} = (V_1,E_1,r_1,\src_1,\dst_1,\op_1)$ and $\specg{D} = (V_2,E_2,r_2,\src_2,\dst_2,\op_2)$ respectively. Let 
+\[
+    \mathfrak{p}: \bigcup_{i=0}^\infty E_1^i \times \bigcup_{i=0}^\infty E_2^i \mapsto \set{0,1}
+\]
+such that
+\[
+\mathfrak{p}(\alpha,\beta) = \begin{cases}
+1 & \parbox[t]{.65\textwidth}{if $\alpha \parallel \beta$ or there exists a bijection $\phi: p_+(\alpha) \mapsto p_+(\beta)$ such that $\mathfrak{p}(a,\phi(a)) = 1$ for all $a\in p_+(\alpha)$}\\
+\mathfrak{p}(\alpha',\beta) & \parbox[t]{.65\textwidth}{otherwise if $p_+(\alpha) = \set{\alpha'}$ and $\textsf{tail}(\alpha) \cong \textsf{tail}(\alpha')$}\\
+\mathfrak{p}(\alpha,\beta') & \parbox[t]{.65\textwidth}{otherwise if $p_+(\beta) = \set{\beta'}$ and $\textsf{tail}(\beta) \cong \textsf{tail}(\beta')$}\\
+0 & \text{otherwise}
+\end{cases}
+\]
+for rooted paths $\alpha$ in $\mathfrak{G}\left(\spec{C}\right)$ and $\beta$ in $\mathfrak{G}\left(\spec{D}\right)$. Let $\varepsilon_\mathcal{C}$ and $\varepsilon_\mathcal{D}$ be the empty rooted paths in $\mathfrak{G}\left(\spec{C}\right)$ and $\mathfrak{G}\left(\spec{D}\right)$ respectively. We say that the specifications $\spec{C}$ and $\spec{D}$ are \emph{parallel} if $\mathfrak{p}\left(\varepsilon_\mathcal{C},\varepsilon_\mathcal{D}\right) = 1$.
+\end{definition}
+In other words, starting from the empty rooted paths, either the paths are parallel (possibly ignoring some equivalences) or we can pair the expansion of both such that each pair is parallel. We use $\spec{C} \parallel \spec{D}$ and $\spec{C} \nparallel \spec{D}$ do indicate that specifications are or are not parallel. Take for example the specifications
+\[
+    \spec{C} = \left(
+    \begin{pmatrix}
+        A\\B    
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        \sqcup\\
+        \times
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        \set{\varepsilon} & B & \emptyset\\
+        \set{c} & A & A
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        2\\3
+    \end{pmatrix}
+    \right)
+\]
+and
+\[
+    \mathcal{D} = \left(
+        \begin{pmatrix}
+            E\\F\\G\\H
+        \end{pmatrix}
+        \begin{matrix}\\\\\\,\end{matrix}
+        \begin{pmatrix}
+            \sqcup\\\times\\\mathbf{1}^\circ\\\sqcup
+        \end{pmatrix}
+        \begin{matrix}\\\\\\,\end{matrix}
+        \begin{pmatrix}
+            F & \set{\varepsilon} & \emptyset\\
+            G & \set{d} & E\\
+            H & \emptyset & \emptyset\\
+            \set{\varepsilon} & F & \emptyset
+        \end{pmatrix}
+        \begin{matrix}\\\\\\,\end{matrix}
+        \begin{pmatrix}
+            2\\3\\1\\2
+        \end{pmatrix}
+    \right)
+\]
+where $c$ and $d$ are atoms. These specifications are parallel as can be seen in \FigureRef{fig:para_spec} which includes specification graphs for both along with the recursion tree for their empty rooted paths.
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/para_spec}
+    \vspace{0.7cm}
+    \input{graphics/recursion_tree}
+    \caption{The specification graphs of two parallel specifications and the recursion tree for $\mathfrak{p}$ starting from their empty rooted paths.}
+    \label{fig:para_spec}
+\end{figure}
+
+Later when we look to construct bijections with parallel specifications in \ChapterRef{ch:pbijection} the bijections used in $\mathfrak{p}$ will become important. For parallel specifications they form a mapping from the set of class pairs (that are not terminal or on the left of an equivalence rule) to the bijection that matches their expansion. By Definition \ref{def:parspec} there is technically nothing stopping us from using different bijections (if more than one exist) for the same pairs if they come up multiple times but we will always choose a fixed one. We will refer to this mapping as a \emph{matching order}.
+
+The parallel relation is reflexive and symmetric for both specification paths and specifications. This is a natural consequence of the definition of specification paths while for specification we can use the identity map and the inverse of the bijection as matching orders. The parallel relation is however not transitive for specification paths. A counterexample would be a path $a$ parallel to $b$ and $b$ parallel to $c$, both with recursion but at different positions in $b$.
+
+\begin{proposition}
+The parallel relation for specifications is transitive.
+\end{proposition}
+\begin{proof}
+Suppose we have specifications $\spec{A}$, $\spec{B}$ and $\spec{C}$ where $\spec{A} \parallel \spec{B}$ with matching order $\Gamma_1$ and $\spec{B} \parallel \spec{C}$ with matching order $\Gamma_2$. We can mimic the paths taken previously from the perspective of $\spec{B}$ (bijection wise) until we reach paths $a = a_1a_2 \dotsm a_k$, $b = b_1b_2 \dotsm b_k$, and $c = c_1c_2 \dotsm c_k$ (all pruned of equivalence steps) that were not expanded further for both $(\spec{A},\spec{B})$ and $(\spec{B},\spec{C})$. If all end in terminal classes then $\mathfrak{p}(a,c)=1$. Otherwise at least one pair has a recursion. Suppose it is $a$ and $b$ and there is an $i$ such that $\dst(a_k)=\src(a_i)$ and $\dst(b_k)=\src(b_i)$. We continue to expand with $\Gamma_1(\src(a_i),\src(b_i)) \circ \Gamma_2(\dst(b_k),\dst(c_k))$ and from here on there will always exist a class $\mathcal{B}$ such that $(\dst(a_{k+1}),\mathcal{B})$ is in the domain of $\Gamma_1$ and $(\mathcal{B}, \dst(c_{k+1}))$ in the domain of $\Gamma_2$. Since there is a finite number of class pairs from $\mathcal{A}$ and $\mathcal{C}$ we will always reach a recursion that matches in both.
+\end{proof}
+
+\section{The parallel algorithm}
+The parallel algorithm checks if two specifications are parallel and if so, returns the matching order. The graphs are expanded as trees simultaneously\footnote{Not concurrently.} and lineal descendants from the root form a path. At any node in the tree will be the tail of the path taken. A node corresponding to the path $q$ is the parent of the nodes corresponding to the paths in $p_+(q)$, which are called children. As the matching order for any path only depends on its tail, the mapping returned will be from a pair of classes to a permutation representing their indexed expansion matching, as children are kept in an indexable data structure.
+
+The algorithm uses dynamic programming to match pairs, remembering both successes and failures. The matching order is done with an iterative backtracking to avoid nesting recursions and fail as soon as possible. If we cannot match the first child to some child in the other node, there is no point trying to match the second child. Whether children 1 and 3 match for given nodes has nothing to do with what children were matched previously so we also remember child matching failures to limit each pair to a single attempt.
+
+The algorithm takes two specifications as input where each specification is represented by a quadruple $(r,o,\phi,n)$ where $r$ is the root class and $o$, $\phi$ and $n$ are maps from classes to constructors, $n$-tuple of non-empty children and the number of non-empty children respectively. The pseudocode can be seen in Algorithm \ref{alg:paraspec} where we use a \texttt{stack} with \texttt{size}, \texttt{pop} and \texttt{push} operations. 
+
+\begin{algorithm}
+\input{algs/parallel}
+\caption{The parallel algorithm}
+\label{alg:paraspec}
+\end{algorithm}
+
+Let $n$ and $k$ be the number of classes in the two specifications and $m$ the largest number of children in both specifications. Each pair of specification is never expanded more than once. Each expansion will at most attempt to match each pair of children. By the rule of product there are $nk$ pairs of specification and at most $m^2$ pairs of children. Therefore the worst case time complexity is $\mathcal{O}(nkm^2)$.

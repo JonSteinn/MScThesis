@@ -1,0 +1,107 @@
+% Modes: draft/proof/final % Optional: debug, online
+\documentclass[online,masters,deptscs,forcegraphics,final]{ruthesis}
+
+\usepackage[backend=biber,bibencoding=utf8,style=ieee]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{custom}
+
+\newML{program}{Computer Science}{Tölvunarfræði}
+\program{\MLprogram}
+
+% Supervisor's signature (\MLjan, \MLfeb, \MLmar, ... \MLdec)
+\whensigned{10}{\MLmay}{2021}
+
+\newML{Title}{Automated bijections with combinatorial exploration}{Sjálfvirknivæddar gagntækar varpanir með fléttufræðilegri könnun}
+\newML{TITLE}{AUTOMATED BIJECTIONS WITH COMBINTAORIAL EXPLORATION}{SJÁLFVIRKNIVÆDDAR GAGNTÆKAR VARPARNI MEÐ FLÉTTUFRÆÐILEGRI KÖNNUN}
+\setTitle{\MLTitle}{\MLTITLE}
+
+\author{J\'{o}n~Steinn~El\'{i}asson}
+
+\ects{30}
+
+% \MLSeniorProfessor \MLProfessor \MLAssociateProfessor \MLAdjunctProfessor \MLEmeritusProfessor \Iceland \MLReykjavikUniversity \MLUniversityIceland
+\supervisors{
+  \personinfo{Henning Ulfarsson}{\MLSupervisor}{Position}{\MLReykjavikUniversity}{\MLIceland}
+  \personinfo{Co-advisor}{Co-advisor}{Position}{Institute}{Country}
+}
+\examiners{
+  \personinfo{Examiner 1}{\MLExaminer}{Position}{Institute}{Country}
+  \personinfo{Examiner 2}{\MLExaminer}{Position}{Institute}{Country}
+}
+
+\newML{AbstractText}{english abstract...}{Islenskur abstract}
+\setAbstract{\MLAbstractText}
+
+\makeindex{}
+\indexintoc{}
+
+\finalifforcegraphics{hyperref}
+\usepackage[hidelinks]{hyperref} 
+
+
+\definecolor{todocolor}{RGB}{205,235,139}
+\definecolor{todo-idea}{RGB}{120,180,255}
+\definecolor{todo-error}{RGB}{208,31,60}
+\definecolor{todo-question}{RGB}{255,255,136}
+\usepackage[colorinlistoftodos, color=todocolor, textsize=small]{todonotes}
+
+\input{macros}
+
+\begin{document}
+\frontmatter{}
+
+\frontrequiredpages{}
+
+
+%% Dedication is optional, comment out if it is absent
+%% RUM: Not mentioned
+\begin{dedications}
+  I dedicate this to...
+\end{dedications}
+
+\enableindents{}
+
+\coverchapter{Acknowledgements} 
+Acknowledgement text...
+
+\starttables{}% setup formatting
+
+\tableofcontents{}\clearpage%%RUM: "Table of contents"
+\listoffigures{}\clearpage%%RUM: "List of figures"
+\listoftables{}\clearpage%%RUM: "List of tables"
+\listoffixmes{}
+
+\starttext{}
+
+\todo[inline,caption={}]{JSE: General notes
+\begin{itemize}
+    \item Use ``respectively'' less
+    \item Find pages in books for references
+    \item Prune intro of info that I don't end up using (will probably use everything though)
+    \item Constructors can be unary (e.g. seq), update to stop conditioning on out-degree (this should be updated in code too if it is done there)
+    \item Example of non-admissible constructors? Do we use any such constr.? Should we?
+    \item Resize graph nodes for $\set{x}$ to be same as others.
+    \item Swap to function from operators for constructors? 
+    \item Rethink eq when introducing fusion
+    \item minimal lstlisting example in appendix?
+    \item discuss meaning of defs prior to them?
+\end{itemize}
+}
+\clearpage
+
+\input{chapters/01_introduction}\clearpage
+\input{chapters/02_parallel}\clearpage
+\input{chapters/03_bijections}\clearpage
+\input{chapters/04_bijection_search}\clearpage
+\input{chapters/05_results}\clearpage
+\input{chapters/06_conclusion}\clearpage
+
+\clearpage
+\printbibliography{}
+
+%\appendix{}
+
+\clearforchapter{}
+
+\end{document}

@@ -1,0 +1,28 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},edge/.style = {->,> = latex'}]
+    % Left vertices
+    \node[vertex, double=white] (a) at (0,0) {$A$};
+    \node[vertex] (b) at (4,0) {$B$};
+    \node[vertex] (c) at (4,4) {$C$};
+    \node[vertex] (d) at (0,4) {$D$};
+    \node[vertex] (e) at (1.4,1.4) {$\set{\varepsilon}$};
+    \node[vertex] (f) at (2.6,2.6) {$\set{c}$};
+    % Left edges
+    \draw[edge] (a) to node[midway,above] {{\tiny$2$,$\sqcup$}} (b);
+    \draw[edge] (b) to node[midway,left] {{\tiny$3$,$\mathbf{1}^\circ$}} (c);
+    \draw[edge] (c) to node[midway,below] {{\tiny$5$,$\times$}} (d);
+    \draw[edge] (d) to node[midway,right] {{\tiny$6$,$\mathbf{1}^\circ$}} (a);
+    \draw[edge] (a) to node[midway,above left,xshift=0.5mm,yshift=-0.5mm] {{\tiny$1$,$\sqcup$}} (e);
+    \draw[edge] (c) to node[midway,above left,xshift=0.5mm,yshift=-0.5mm] {{\tiny$4$,$\times$}} (f);
+    % Right vertices
+    \foreach \c [count=\xi] in {A,B,C,D,A,B,C,D} {
+        \node[vertex] (e\xi) at ({8 + 2*cos((\xi-1)*45)},{2 + 2*sin((\xi-1)*45)}) {$\c$};    
+    }
+    % Right edges
+    \foreach \x [evaluate=\y using int(1+\x)] in {1,2,...,7} {
+        \ifthenelse{\x = 2 \OR \x = 4 \OR \x = 6}{%
+            \draw[edge,dotted] (e\x) to node[midway,xshift={10*cos((\x-1)*45 + 22.5)},yshift={10*sin((\x-1)*45 + 22.5)}] {{\tiny$e_{\x}$}} (e\y);
+        }{%
+            \draw[edge] (e\x) to node[midway,xshift={10*cos((\x-1)*45 + 22.5)},yshift={10*sin((\x-1)*45 + 22.5)}] {{\tiny$e_{\x}$}} (e\y);
+        }
+    }
+\end{tikzpicture}

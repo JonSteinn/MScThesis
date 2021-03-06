@@ -1,0 +1,42 @@
+\newcommand{\Av}[1]{\textsf{Av}\left(#1\right)}
+\newcommand{\Co}[1]{\textsf{Co}\left(#1\right)}
+\newcommand{\contains}[2]{#2 \preceq #1}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\cset}[2]{\left\{#1 \mid #2\right\}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand\at[2]{\left.#1\right|_{#2}}
+\newcommand{\gridN}{\raisebox{-2pt}{\tikz{\draw[step=0.2] (0,0) grid (.2,.4);}}}
+\newcommand{\gridD}{\raisebox{-2pt}{\tikz{\fill[gray!50] (0,0) rectangle (0.2,0.2);\draw[step=0.2] (0,0) grid (.2,.4);}}}
+\newcommand{\gridU}{\raisebox{-2pt}{\tikz{\fill[gray!50] (0,0.2) rectangle (0.2,0.4);\draw[step=0.2] (0,0) grid (.2,.4);}}}
+
+\newcommand\ptedge[4]{
+  \draw ($#1 + (0.5, -1.3) + #2$)..%
+  controls ($#1 + #2 + (0.5, -1.3) + (0, -1)$)%
+  and ($#3 + #4 + (0, 1) + (0.5, -0.3)$)..%
+  ($#3 + #4 + (0.5, -0.3)$);
+}
+
+\newcommand{\point}[1]{%
+    \begin{tikzpicture}
+        \filldraw (0, 0) circle (#1);
+    \end{tikzpicture}
+}
+
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+\newcommand{\algorithmiccontinue}{\textbf{continue}}
+
+% Paper notation : Change here should change everything in paper
+\newcommand{\st}[1]{\textsf{st}\left(#1\right)}
+\newcommand{\sseq}[2]{\Xi_{#1}#2}
+\newcommand{\spec}[1]{\check{\mathcal{#1}}}
+\newcommand{\specset}{\mathfrak{A}}
+\newcommand{\specg}[1]{\mathfrak{G}\left(\check{\mathcal{#1}}\right)}
+\newcommand{\sclsi}[2]{\mathcal{#1}^{\left(#2\right)}}
+\newcommand{\src}{\textsf{src}}
+\newcommand{\dst}{\textsf{dst}}
+\newcommand{\op}{\textsf{op}}
