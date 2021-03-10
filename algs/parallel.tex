@@ -49,7 +49,7 @@
         \EndIf
         \State $m_{i_2} \gets i_1$
         \If{$i_1 = n_1(\mathcal{C})$}
-            \State $(A,S,M) \gets \left(A \setminus V \times U, S \cup \set{(\mathcal{C}, \mathcal{D})}, M \cup \set{(\mathcal{C}, \mathcal{D}, m)}\right)$
+            \State $(A,S,M) \gets \left(A \setminus V \times U, S \cup \set{(\mathcal{C}, \mathcal{D})}, M \cup \set{((\mathcal{C}, \mathcal{D}), m)}\right)$
             \State\Return{$1$}
         \EndIf
         \For{$j \in [n_1(\mathcal{C})] \setminus u \text{ in decreasing order }$}

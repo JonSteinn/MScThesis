@@ -22,12 +22,12 @@
 
 % \MLSeniorProfessor \MLProfessor \MLAssociateProfessor \MLAdjunctProfessor \MLEmeritusProfessor \Iceland \MLReykjavikUniversity \MLUniversityIceland
 \supervisors{
-  \personinfo{Henning Ulfarsson}{\MLSupervisor}{Position}{\MLReykjavikUniversity}{\MLIceland}
-  \personinfo{Co-advisor}{Co-advisor}{Position}{Institute}{Country}
+  \personinfo{Henning Ulfarsson}{\MLSupervisor}{Assistant Professor}{\MLReykjavikUniversity}{\MLIceland}
+  \personinfo{Christian Bean}{Co-advisor}{Postdoctoral Researcher}{\MLReykjavikUniversity}{\MLIceland}
 }
 \examiners{
-  \personinfo{Examiner 1}{\MLExaminer}{Position}{Institute}{Country}
-  \personinfo{Examiner 2}{\MLExaminer}{Position}{Institute}{Country}
+  \personinfo{Jay Pantone}{\MLExaminer}{Assistant Professor}{Marquette University}{United States}
+  \personinfo{Émile Nadeau}{\MLExaminer}{Doctoral Student}{\MLReykjavikUniversity}{\MLIceland}
 }
 
 \newML{AbstractText}{english abstract...}{Islenskur abstract}
@@ -82,25 +82,27 @@ Acknowledgement text...
     \item Constructors can be unary (e.g. seq), update to stop conditioning on out-degree (this should be updated in code too if it is done there)
     \item Example of non-admissible constructors? Do we use any such constr.? Should we?
     \item Resize graph nodes for $\set{x}$ to be same as others.
-    \item Swap to function from operators for constructors? 
-    \item Rethink eq when introducing fusion
+    \item Rethink equiv when introducing fusion
     \item minimal lstlisting example in appendix?
     \item discuss meaning of defs prior to them?
+    \item consistency with equivalence equivalent
+    \item List of Algorithms? 
 \end{itemize}
 }
 \clearpage
 
 \input{chapters/01_introduction}\clearpage
-\input{chapters/02_parallel}\clearpage
-\input{chapters/03_bijections}\clearpage
-\input{chapters/04_bijection_search}\clearpage
-\input{chapters/05_results}\clearpage
-\input{chapters/06_conclusion}\clearpage
+\input{chapters/02_background}\clearpage
+\input{chapters/03_parallel}\clearpage
+\input{chapters/04_bijections}\clearpage
+\input{chapters/05_bijection_search}\clearpage
+\input{chapters/06_results}\clearpage
+\input{chapters/07_conclusion}\clearpage
 
 \clearpage
 \printbibliography{}
 
-%\appendix{}
+%\appendix{Minimal working example}
 
 \clearforchapter{}
 
