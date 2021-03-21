@@ -30,7 +30,8 @@
   \personinfo{Émile Nadeau}{\MLExaminer}{Doctoral Student}{\MLReykjavikUniversity}{\MLIceland}
 }
 
-\newML{AbstractText}{english abstract...}{Islenskur abstract}
+
+\newML{AbstractText}{\input{chapters/00_A_en_abstract}}{\input{chapters/00_B_is_abstract}}
 \setAbstract{\MLAbstractText}
 
 \makeindex{}
@@ -40,6 +41,8 @@
 \usepackage[hidelinks]{hyperref} 
 
 
+%\usepackage{lineno}
+%\linenumbers
 \definecolor{todocolor}{RGB}{205,235,139}
 \definecolor{todo-idea}{RGB}{120,180,255}
 \definecolor{todo-error}{RGB}{208,31,60}
@@ -57,7 +60,7 @@
 %% Dedication is optional, comment out if it is absent
 %% RUM: Not mentioned
 \begin{dedications}
-  I dedicate this to...
+I dedicate this thesis to my wife, Sólborg Erla Ingvarsdóttir, and our sons,\\ Ingvar Sölvi Jónsson and Þorkell Ari Jónsson.
 \end{dedications}
 
 \enableindents{}
@@ -78,15 +81,21 @@ Acknowledgement text...
 \begin{itemize}
     \item Use ``respectively'' less
     \item Find pages in books for references
-    \item Prune intro of info that I don't end up using (will probably use everything though)
+    \item Prune backgr of info that I don't end up using (will probably use everything though)
     \item Constructors can be unary (e.g. seq), update to stop conditioning on out-degree (this should be updated in code too if it is done there)
     \item Example of non-admissible constructors? Do we use any such constr.? Should we?
     \item Resize graph nodes for $\set{x}$ to be same as others.
     \item Rethink equiv when introducing fusion
-    \item minimal lstlisting example in appendix?
-    \item discuss meaning of defs prior to them?
+    \item discuss meaning of defs prior to (not after) them?
     \item consistency with equivalence equivalent
-    \item List of Algorithms? 
+    \item List of Algorithms? Listings?
+    \item ProofTrees are noted as grammar in figs (intentionally vague), define if I want to use the word prooftrees
+    \item If we get this to work for fusion and it doesn't fit into this, add a ch/sec for it and touch on differences.
+    \item Simplify everything once we have connected ch 3 and 4, especially those cases functions
+    \item Use unique greek letters (etc) for different things. Especially phi and varphi (which I usually overuse). Make a list of everything used (and for what purpose) to get an overview. Then assign unique symbols. Leave some symbols for 'let symb be a'
+    \item comma+period in functions w cases
+    \item use eq-environments more, that is... reduce `complicated` stuff flowing in text
+    \item some figures probably need subfigures (a), (b), ...
 \end{itemize}
 }
 \clearpage
@@ -97,12 +106,14 @@ Acknowledgement text...
 \input{chapters/04_bijections}\clearpage
 \input{chapters/05_bijection_search}\clearpage
 \input{chapters/06_results}\clearpage
-\input{chapters/07_conclusion}\clearpage
+\input{chapters/07_cremark}\clearpage
 
-\clearpage
 \printbibliography{}
 
-%\appendix{Minimal working example}
+\begin{appendices}
+\input{chapters/A_min_example}\clearpage
+\input{chapters/B_symbols}\clearpage
+\end{appendices}
 
 \clearforchapter{}
 

@@ -1,30 +1,80 @@
-
 \coverchapter{Parallel bijections}\label{ch:pbijection}
 
-\todo[inline]{Some introductory words...}
+Given an object of a root class in a specification, we need a systematic way of breaking it down into objects of terminal classes and given such objects of terminal classes, a systematic way to reconstruct the object of the root class. The idea behind our bijection is fairly simple. We take an object belonging to the root of a specification, break it down and reconstruct it with a parallel specification.
+
+Let $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ be a specification. In order for us to achieve this bijection, every rule $L_i \cong R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$ must be accompanied by a bijection $\phi_i: L_i \mapsto R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$. A specification along with such a collection of bijections is said to be \emph{parsable}.
+
+Take for example a rule $\mathcal{C} \cong \mathcal{C}^{(1)} \times \mathcal{C}^{(2)}$. Any bijection for this rule would map an object of $\mathcal{C}$ to a tuple of two objects $(c_1,c_2)$ with $c_1 \in \mathcal{C}^{(1)}$ and $c_2 \in \mathcal{C}^{(2)}$. It is not as simple for disjoint union as the object will belong to exactly one of the resulting classes. Suppose $\mathcal{C} \cong \mathcal{C}^{(1)} \sqcup \mathcal{C}^{(2)}$ and we have an object $c\in\mathcal{C}$ and a bijection $\phi$ for this rule, how does $\phi(c)$ look exactly? If this was just a typical set union, the bijection would be the identity map but there would be no information about which set the mapped element belongs to. Flajolet and Sedgewick \cite{flajolet:ac} use unique colors, $m_1$ and $m_2$, to mark the elements, that is
+\[
+    \mathcal{C}^{(1)} \sqcup \mathcal{C}^{(2)} = \left(\set{m_1} \times \mathcal{C}^{(1)}\right) \cup \left(\set{m_2} \times \mathcal{C}^{(2)}\right).
+\]
+This way, $\phi(c)$ would be a tuple of a color and an element in $\mathcal{C}^{(1)} \cup \mathcal{C}^{(2)}$. We propose a slightly different approach, which ultimately achieves the same thing. Instead of marking with colors, we mark with edges from the specification graph. We further extend this marking for any constructor. The bijective nature of the map remains as the edges are uniquely determined but will need some trivial transformation for elements to belong to the original set.
+
+If we look at the specification for $\Av{132}$ with the specification graph from \FigureRef{fig:specgraph132}, then for example we have $\phi_1(\varepsilon) = (\varepsilon, 1)$, $\phi_1(321) = (321, 2)$ and 
+\[
+    \phi_2(534612) = ((\st{534},3), (\st{6},4), (\st{12},5)) = ((312,3), (1,4), (12,5)).
+\]
+
+\section{Object parsing}
+Given a parsable specification $\spec{C} = (L,O,R,D)$ with $k$ rules, its collection of bijections $(\phi_1,\phi_2,\dotsc,\phi_k)$, specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic segregation} of $c$ in $\spec{C}$ where \[
+    \varphi_{\spec{C}}(c,p) = \begin{cases}
+        \set{p} & \text{ if } \textsf{tail}(p) \text{ is a terminal class}\\
+        \bigcup_{i=1}^\ell\varphi_{\spec{C}}(c_i,p \oplus e_i) & \text{ if }
+        \textsf{tail}(p) = L_i \text{ and } \phi_i(c) = ((c_1,e_1),\dotsc,(c_\ell,e_\ell))
+    \end{cases}
+\]
+\todo[inline]{JSE: Example, with fig}
+\todo[inline]{JSE: Use better symbols for everything}
+Given a set of terminal ending paths $S$ we define $A(S)$ as $\cset{(p,c)}{c \in \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $m(P)$ as the pair with the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define 
+\[
+    Q(P) = \cset{(e_1e_2 \dotsm e_{n-1} \oplus e', c) \in P}{m(P) = e_1e_2 \dotsm e_n}.
+\]
+This mapping is undefined for a singleton set where the only path is the empty one. Suppose $m(P) = (p \oplus e', c)$, $\src(e') = L_i$ and 
+\[
+    Q(P) = \set{((p \oplus q_1), c_1),\dotsc, ((p \oplus q_r), c_r)}
+\]
+where $q_1 < q_2 < \dotsm < q_r$, then
+\[
+    B(P) = \set{(p, \varphi^{-1}_i((c_1,q_1), (c_2,q_2), \dotsc, (c_r,q_r)))}.
+\]
+Note that the way edge labels are defined guarantees consistency between order of labels and the right hand side of rules.
+
+Given a set of terminal ending paths $Q$ we define 
+$\omega^{-1}_{\spec{C}}(Q) = f(A(Q))$ where 
+\[
+    f(P) = \begin{cases}
+        c & \text{if } |P| = 1 \text{ and } (\varepsilon, c) \in P\\
+        f(\left(P \setminus Q(P)\right) \cup B(P)) & \text{otherwise}
+    \end{cases}
+\]
+\todo[inline]{JSE: example, visual}
 
 
-\section{Title on breaking down root classes (+other way)}
-\todo[inline,caption={}]{
-\begin{itemize}
-    \item forward map
-    \item backward map
-    \item define spec that includes f\&b maps for all rules, bijectable? 
-    \item Deal with `None` (mutual exclusivity) in rules and always map to tuples. Probably need to define `mutually exclusive constructors` or something like that. If paths are used, it doesn't rly matter as long as classes are passed along but will need some notation to include the correct class.
-    \item def breaking objects down into atoms (name idea: atomic segregation, desegregate other way)
-    \item def building objects from 'atomized'
-\end{itemize}
-}
+
 
 \section{Parallel bijections}
-\todo[inline,caption={}]{
-\begin{itemize}
-    \item Define map
-    \item is bijective proof
-    \item corollary: Parallel => Isomorphism
-    \item example
-\end{itemize}
-}
+\begin{definition}
+Let $\spec{C}$ and $\spec{D}$ be two parallel specifications with matching order $\Gamma$ and root classes $\mathcal{C}$ and $\mathcal{D}$, then their \emph{parallel map} is
+$\mathfrak{P}: \mathcal{C} \mapsto \mathcal{D}$ where, for any $c \in \mathcal{C}$, we have
+$\mathfrak{P}(c) = \omega_{\spec{D}}^{-1}(\cset{\Gamma^+(p)}{p \in \omega_{\spec{C}}(c)})$.
+\end{definition}
+\todo[inline]{JSE: Visual example}
+\begin{proposition}
+The parallel map is a bijection for parallel specifications.
+\end{proposition}
+\begin{proof}
+asdf
+\end{proof}
+\begin{corollary}
+Let $\mathcal{C}$ and $\mathcal{D}$ be the root classes of two parallel specifications, then $\mathcal{C} \cong \mathcal{D}$.
+\end{corollary}
 
 \section{The bijection algorithm}
-Implementation of the mapping itself (and maybe a few words on the inverse)
+\todo[inline,caption={}]{
+\begin{itemize}
+    \item Explain in words
+    \item Provide pseudo
+    \item analyze complexity 
+    \item Example
+\end{itemize}
+}

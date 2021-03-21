@@ -1,6 +1,6 @@
 \coverchapter{Background}\label{ch:backgr}
 \section{Combinatorics\label{sec:combinatorics}}
-A \emph{bijection} from a set $A$ to a set $B$ is a function which relates each element of $A$ to a unique element of $B$ and vice versa. Suppose $A$ is the set of binary strings of length $n$ avoiding consecutive 1's and $B$ the set of subsets of $\{1,2,\ldots,n\}$ containing no consecutive numbers. By mapping each binary string $b_1b_2\dotsm b_n$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
+A \emph{bijection} between two sets, $A$ and $B$, is a function which relates each element of $A$ to a unique element of $B$ and vice versa. Suppose $A$ is the set of binary strings of length $n$ avoiding consecutive 1's and $B$ the set of subsets of $\{1,2,\ldots,n\}$ containing no consecutive numbers. By mapping each binary string $b_1b_2\dotsm b_n \in A$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
 
 \begin{figure}[ht!]
     \centering
@@ -13,11 +13,16 @@ A \emph{combinatorial class} is a set $\mathcal{C}$ and a size function $\mathca
 \[
     |\mathcal{C}_0|, |\mathcal{C}_1|, |\mathcal{C}_2|,\dotsc,|\mathcal{C}_n|,\dotsc
 \]
-where each term counts the number of elements of a fixed length. This sequence is the focal point of enumerative combinatorics. We might look for a formula for the terms, a recurrence relation or an asymptotic equivalence. If two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$ share this sequence we say they are \emph{isomorphic}, denoted $\mathcal{C} \cong \mathcal{D}$. This is equivalent to the existence of a bijection between $\mathcal{C}$ and $\mathcal{D}$. Another way to present this sequence is with a power series $\sum_{i=0}^\infty |\mathcal{C}_i|z^i$ called a \emph{generating function} and famously described as a ``clothesline on which we hang up a sequence of numbers for display'' in Wilf \cite{wilf:gf}, referring to their refined closed form. For example the sequence of Fibonacci numbers $\left(f_i\right)_{i=0}^\infty$ has the generating function
+where each term counts the number of elements of a fixed length. This sequence is referred to as the \emph{counting seqeuence} of $\mathcal{C}$. It is the focal point of enumerative combinatorics. We might look for a formula for the terms, a recurrence relation or an asymptotic equivalence. Another way to present the counting sequence is with a power series $\sum_{i=0}^\infty |\mathcal{C}_i|z^i$ called a \emph{generating function} and famously described as a ``clothesline on which we hang up a sequence of numbers for display'' in Wilf \cite{wilf:gf}, referring to their refined closed form. For example the sequence of Fibonacci numbers $\left(f_i\right)_{i=0}^\infty$ has the generating function
 \[
     \sum_{i=0}^\infty f_iz^i = 0 + z + z^2 + 2z^3 + 3z^4 + 5z^5 + 8z^6 + \dotsb = \frac{z}{1-z-z^2}.
 \]
-The \emph{symbolic method} in Flajolet and Sedgewick \cite{flajolet:ac} describes how combinatorial classes can be constructed. To that end, they define \emph{constructor}, \emph{combinatorial rule} and \emph{combinatorial specification}. We will demonstrate these concepts with an example. Consider a $2 \times n$ grid where each square can be raised or not as shown in \FigureRef{fig:raised_grid}. How many unique grids exist such that one can pass from left to right?
+
+If two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$ share a counting sequence we say they are \emph{isomorphic}, denoted $\mathcal{C} \cong \mathcal{D}$. This is equivalent to the existence of a length preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. Isomorphism is an equivalence relation on the set of all combinatorial classes. The equivalence class of a combinatorial class $\mathcal{C}$, for the set of all combinatorial classes and the isomorphism relation, is the set of all combinatorial classes that are isomorphic to $\mathcal{C}$.
+
+The \emph{symbolic method} in Flajolet and Sedgewick \cite{flajolet:ac} describes how combinatorial classes can be constructed. To that end, they define \emph{constructor}, \emph{combinatorial rule} and \emph{combinatorial specification}. We will demonstrate these concepts with an example. 
+
+Consider a $2 \times n$ grid where each square can be raised or not as shown in \FigureRef{fig:raised_grid}. How many unique grids exist such that one can pass from left to right?
 
 \begin{figure}[ht!]
     \centering
@@ -43,9 +48,9 @@ and solving for $G(z)$ gives $G(z) = \frac{1+z}{1-2z-z^2}$. The Taylor series fo
 \[
     \sum_{i=0}^\infty \frac{G^{(i)}(0)}{i!}z^i = 1+3z+7z^2+17z^3+ 41z^4 + 99z^5 + \dotsm
 \]
-which corresponds to the number of grids for each size e.g., there are 17 and 99 unique passable $2\times3$ and $2\times5$ grids respectively. We can even go further with some calculus and find the exact formula, $|G_n| = \frac{\left(1+\sqrt{2}\right)^{n+1} + \left(1-\sqrt{2}\right)^{n+1}}{2}$. This is not always the case and depends on the type of generating function we have.
+which corresponds to the number of grids for each size, e.g., there are 17 and 99 unique passable $2\times3$ and $2\times5$ grids respectively. We can even go further with some calculus and find the exact formula, $|G_n| = \frac{\left(1+\sqrt{2}\right)^{n+1} + \left(1-\sqrt{2}\right)^{n+1}}{2}$. This is not always the case and depends on the type of generating function we have.
 
-In the context of this paper, we will usually refer to combinatorial classes as just classes and the same goes for combinatorial specifications and rules. We also assume all constructors to be admissible.
+In the context of this thesis, we will usually refer to combinatorial classes as just classes and the same goes for combinatorial specifications and rules. We also assume all constructors to be admissible.
 
 \section{Permutations\label{sec:permutations}}
 A \emph{permutation} $\pi$ is a one-to-one correspondence between a set and itself. In our context, the set in question is $[n] = \{1,2,\dotsc,n\}$. We adopt a one line notation for permutations, $\pi = \pi_1 \pi_2 \dotsm \pi_n$ where $\pi_i = j$ if $i$ maps to $j$. The permutation $1423$ maps $\{1,2,3,4\}$ to itself. This correspondence can be seen in \FigureRef{fig:perm_example} as well as a geometric representation of the permutation which displays the points $\cset{(i,\pi(i))}{i \in [n]}$ in the Cartesian plane.
@@ -59,9 +64,21 @@ A \emph{permutation} $\pi$ is a one-to-one correspondence between a set and itse
 
 A permutation on $[n]$ is said to be of length $n$ and $\mathcal{S}_n$ is the set of all permutations of length $n$. The set of permutations of length 3 is $\mathcal{S}_3 = \{123,132,213,231,312,321\}$. There is a permutation of length $0$, namely the empty permutation, denoted $\varepsilon$. This is the unique map from $\emptyset$ to $\emptyset$. The set of all permutations is denoted by $\mathcal{S}$. It is a combinatorial class since $\mathcal{S}_n$ is finite for all $n\in\N$, containing $n!$ elements.
 
-The $S$-\emph{subsequence} of a permutation $\pi \in \mathcal{S}_n$ for $S\subseteq [n]$ is the sequence $\sseq{S}{\pi}=\pi_{i_1}\pi_{i_2}\dotsb \pi_{i_{|S|}}$ \todo{JSE: revisit this notation, $\Xi_S\pi$} where $\{i_1,i_2,\dotsc,i_{|S|}\} = S$ and $i_1 < i_2 < \dotsb < i_{|S|}$. Given an $S$-subsequence $\gamma$ of a permutation $\pi \in \mathcal{S}_n$, its \emph{standardization}, $\st{\gamma}$, is the sequence where the $i^\text{th}$ largest entry has been replaced by $i$. Let $\pi = 41253 \in \mathcal{S}_5$ and $S=\{1,3,4\}$, then $\st{\sseq{S}{\pi}} = \st{425} = 213$.
+Given a permutation $\pi = \pi_1\pi_2\dotsm\pi_n$, its \emph{reverse} is $\textsf{r}(\pi) = \pi^\textsf{rev} = \pi_n\pi_{n-1}\dotsm\pi_1$ and its \emph{inverse} is $\textsf{i}(\pi) = \pi^{-1} = \pi_{i_1}\pi_{i_2}\dotsm\pi_{i_n}$ where $\pi_{i_j} = k$ if $\pi_k = j$. The reverse of $132$ is $231$ and the inverse of $51324$ is $24351$. These two functions and their compositions generate the dihedral group $D_4$, that is the symmetries of a square using the graphical representation of a permutation. We define these 8 symmetry maps as $\textsf{sym}_0,\textsf{sym}_1,\dotsc,\textsf{sym}_7$ as is shown in \TableRef{tab:permsym} which also includes an example for the permutation $1423$.
 
-Given two permutations $\pi \in \mathcal{S}_n$ and $\sigma \in \mathcal{S}_k$ we say that $\pi$ \emph{contains} $\sigma$, denoted $\contains{\pi}{\sigma}$, if there exists a subset $S \subseteq [n]$ such that $\st{\sseq{S}{\pi}} = \sigma$. If $\pi$ does not contain $\sigma$, it \emph{avoids} it. In the context of containment, we usually refer to the contained permutation as a \emph{pattern} and that permutations contain or avoid a pattern. The permutation $356214$ contains the pattern $4213$ since $\st{\sseq{\{2, 4, 5, 6\}}{356214}} = \st{5214} = 4213$. It, however, avoids the pattern $1432$ since $1432 \notin \cset{\st{\sseq{S}{356214}}}{S \subseteq [6]}$. An occurrence of $4213$ in $356214$ can be seen in \FigureRef{fig:pattern_containment}.
+\begin{table}[ht!]
+    \centering
+    \input{tables/permsym}
+    \caption{The 8 symmetry maps for permutations interpreted with reverse and inverse, dihedral group $D_4$ and an example for $\pi=1423$.}
+    \label{tab:permsym}
+\end{table}
+
+We define $\textsf{sym}(\pi) = \cset{\textsf{sym}_i(\pi)}{i \in \set{0,1,\dotsc,7}}$ as the \emph{symmetries of} $\pi$. Note that two different symmetry functions can map to the same permutation, e.g., $\textsf{sym}(1) = \set{1}$. For all $\pi \in \mathcal{S}$ we have $1 \leq |\textsf{sym}(\pi)| \leq 8$.
+
+
+The $S$-\emph{subsequence} of a permutation $\pi \in \mathcal{S}_n$ for $S\subseteq [n]$ is the sequence $\sseq{S}{\pi}=\pi_{i_1}\pi_{i_2}\dotsb \pi_{i_{|S|}}$ where $\{i_1,i_2,\dotsc,i_{|S|}\} = S$ and $i_1 < i_2 < \dotsb < i_{|S|}$. Given an $S$-subsequence $\gamma$ of a permutation $\pi \in \mathcal{S}_n$, its \emph{standardization}, $\st{\gamma}$, is the sequence where the $i^\text{th}$ largest entry has been replaced by $i$. Let $\pi = 41253 \in \mathcal{S}_5$ and $S=\{1,3,4\}$, then $\st{\sseq{S}{\pi}} = \st{425} = 213$.
+
+Given two permutations $\pi \in \mathcal{S}_n$ and $\sigma \in \mathcal{S}_k$ we say that $\pi$ \emph{contains} $\sigma$, denoted $\contains{\pi}{\sigma}$, if there exists a subset $S \subseteq [n]$ such that $\st{\sseq{S}{\pi}} = \sigma$. If $\pi$ does not contain $\sigma$, it \emph{avoids} it. In the context of containment, we usually refer to the contained permutation as a (classical) \emph{pattern}\footnote{There are other types of patterns that we do not concern ourselves with in this thesis} and that permutations contain or avoid a pattern. The permutation $356214$ contains the pattern $4213$ since $\st{\sseq{\{2, 4, 5, 6\}}{356214}} = \st{5214} = 4213$. It, however, avoids the pattern $1432$ since $1432 \notin \cset{\st{\sseq{S}{356214}}}{S \subseteq [6]}$. An occurrence of $4213$ in $356214$ can be seen in \FigureRef{fig:pattern_containment}.
 
 \begin{figure}[ht!]
     \centering
@@ -74,11 +91,30 @@ A set of permutation $\Pi$ is \emph{closed downwards} with respect to containmen
 \[
     \bigcup_{\pi \in \Pi}\cset{\sigma \in \mathcal{S}}{\contains{\pi}{\sigma}} \subseteq \Pi.
 \]
-A set of permutations that is closed downwards is called a \emph{permutation class}. The set $\{\varepsilon, 1, 12, 123\}$ is closed downwards since all patterns contained in each of its elements belongs to the set. We can extend this set to include all increasing permutations, $\set{\varepsilon, 1, 12, 123, 1234, \dotsc}$ and it is still closed downwards. Both sets are therefore permutation classes.
+A set of permutations that is closed downwards is called a \emph{permutation class}. The set $\{\varepsilon, 1, 12, 123\}$ is closed downwards since all patterns contained in each of its elements belongs to the set. We can extend this set to include all increasing permutations, $\set{\varepsilon, 1, 12, 123, 1234, \dotsc}$ and it is still closed downwards. Both sets are therefore permutation classes. Isorphism between permutation classes is often called \emph{Wilf equivalence} and their equivalence classes are called \emph{Wilf classes}. 
 
-A permutation $\pi$ \emph{avoids} a set of permutations $\Pi$ if it avoids every $\sigma \in \Pi$. It \emph{contains} $\Pi$ if it does not avoid it, that is, it contains any permutation of $\Pi$. Let $\Av{\Pi} = \cset{\pi \in \mathcal{S}}{\pi \text{ avoids } \Pi}$. We may abuse this notation by omitting the brackets, writing $\Av{\sigma_1,\sigma_2}$ instead of $\Av{\set{\sigma_1,\sigma_2}}$. Let $\textsf{Av}_n\left(\Pi\right) = \cset{\pi \in \Av{\Pi}}{|\pi| = n}$ for $n\in\N$.
+A permutation $\pi$ \emph{avoids} a set of permutations $\Pi$ if it avoids every $\sigma \in \Pi$. It \emph{contains} $\Pi$ if it does not avoid it, that is, it contains any permutation of $\Pi$. Let $\Av{\Pi} = \cset{\pi \in \mathcal{S}}{\pi \text{ avoids } \Pi}$. We may abuse this notation by omitting the brackets, writing $\Av{\sigma_1,\sigma_2}$ instead of $\Av{\set{\sigma_1,\sigma_2}}$. Define $\textsf{Av}_n\left(\Pi\right) = \cset{\pi \in \Av{\Pi}}{|\pi| = n}$ for $n\in\N$.
 
 A set of permutations $\mathcal{B}$ is called a \emph{basis} if for all $\pi\in\mathcal{B}$ there does not exist a $\sigma \in \mathcal{B} \setminus \set{\pi}$ such that $\contains{\pi}{\sigma}$. The set $\{12,21\}$ is a basis while $\{12,231\}$ is not since $\contains{231}{12}$. Any permutation class can be described in terms of a basis. For example $\{\varepsilon,1,12,123\} = \Av{21, 1234}$ and $\{\varepsilon, 1, 12, 123, 1234,\dotsc\} = \Av{21}$.
+
+Let $\mathcal{B}$ be a basis. We extent the definition of symmetry maps to bases such that $\textsf{sym}_i(\mathcal{B}) = \cset{\textsf{sym}_i(\sigma)}{\sigma \in \mathcal{B}}$ and $\textsf{sym}(\mathcal{B}) = \cset{\textsf{sym}_i(\mathcal{B})}{i \in \set{0,1,\dotsc,7}}$. For any basis $\mathcal{B}$, all the permutation classes in $\cset{\Av{B}}{B \in \textsf{sym}(\mathcal{B})}$ belong to the same Wilf class. As symmetries are considered trivial bijections, we usually only concern ourselves with the lexicographically minimal representation of each basis symmetry, e.g., the 3 Wilf classes of bases avoiding a single classical pattern of length $4$ are shown in \TableRef{tab:wilfcls4} where no basis is a symmetry of another within the same Wilf class.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c}
+        Wilf class & Counting sequence\\
+        \hline
+        $\begin{matrix}\Av{1234}\\\Av{1243}\\\Av{1432}\\\Av{2143}\end{matrix}$ & $1, 2, 6, 23, 103, 513, 2761, 15767, \dotsc$ \\
+        \hline
+        $\begin{matrix}\Av{1324}\end{matrix}$ & $1, 2, 6, 23, 103, 513, 2762, 15793,\dotsc$\\
+        \hline
+        $\begin{matrix}\Av{1342}\\\Av{2413}\end{matrix}$ & $1, 2, 6, 23, 103, 512, 2740, 15485,\dotsc$
+    \end{tabular}
+    \caption{The lexicographically minimal representation of the three Wilf classes for a single pattern avoided from $\mathcal{S}_4$, excluding all symmetries.}
+    \label{tab:wilfcls4}
+\end{table}
+
+
 
 
 \section{Gridded permutations\label{sec:griddedpermutations}}

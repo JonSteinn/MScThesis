@@ -1,0 +1,23 @@
+\coverchapter{Conclusion}\label{ch:conclusion}
+
+\section{Future work}\label{s:fw}
+Many ideas on improvements and applications arose during this thesis and some did not fit into its time frame. We will go over some of the ideas that did not come to fruition. This will mostly be conveyed from the perspective of permutations but could be generalized for other domains.
+
+Further analysis of the resulting bijection could be insightful. Do they match some previously known bijections. Is there an obvious way to simplify the bijection's description and can that be generalized? Are any common permutation statistics preserved? Is there a good way to visualize the bijections?
+
+The current universe expansion will stop when any specification is found, for both root classes. Usually the universes contains multiple specifications at that point. A more elegant universe expansion halting is desirable, based on some criteria of parallel specifications.
+
+Instead of searching for specifications individually and then try to find parallel specifications from the extended universe of those searches, it would be preferable to write our own search that is intended for finding parallel specifications. This would open the doors for parallel specification related heuristics, where the expansion of a class with a strategy could be evaluated against the other universe. We could even look into some domain specific machine learning related heuristics. 
+
+We might look to produce conjectures on equivalent tilings if we find a partial match. Suppose we know the root classes are isomorphic and at some point, in the trees, we can match all but one children pair. This pair could be isomorphic but we lack the strategies to match them. These would require humans to look at and try to prove but in return, could help formalize some theory about tiling equivalences, which would help find more specifications and bijections.
+
+\section{Concluding remarks}
+We believe this thesis presents the first ever fully automated way of constructing bijections between combinatorial classes. It is built on top of the specification search by Bean \cite{BeanPhd:phd}. The thesis contains both the theoretical and algorithmic foundations to find and create such a bijection and is accompanied by open source implementations.
+
+Unlike the translation method in Wood and Zeilberger \cite{wood_zeilberger}, our automated bijection does not require any previous mathematical work, e.g., algebraic proof. It does only depend on sufficient implementations of strategies for domains.
+
+As we discussed in \SectionRef{s:fw}, the search is done from an universe that is expended with a completely different goal in mind. We believe this to be a limiting factor of finding bijections. On the contrary, it's strength is that it can find a bijection without any supplied information, given that a domain has adequate strategies.
+
+There are a great many articles entirely about bijections between sets. Some might even just contain a single one. This process has now been entirely automated. Nothing will ever replace the art of a human constructed bijection or the structural insight they might provide, nor do we intend to. However, combinatorial classes can be come immensely complex and tedious to work with by hand. Others might be of limited interest. The automated bijection can replace the human mind in those cases. There are after all, infinite bases, for which we can define permutaion classes. It could also provide some insight about how one might go about constructing a bijection by hand.
+
+To demonstrate our automated bijection's potential we have connected numerous permutation classes with bijections, paying homage to several articles. Our hope is that this work will encourage others to extend \css{} into more domains and continue this work, or inspire different approaches to fully automated bijections.

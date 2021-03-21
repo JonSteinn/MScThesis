@@ -1,0 +1,25 @@
+\coverchapter{Minimal working example}\label{ch:minex}
+Listing \ref{lst:min} shows a minimal example of how one can search for bijection and then, use its map and inverse map. In this example the two symmetric classes $\Av{231}$ and $\Av{132}$ are used.
+
+\begin{lstlisting}[style=py,language=Python,caption={A minimal example to find a bijection.},label={lst:min}]
+from comb_spec_searcher import find_bijection_between
+from tilings.strategies import BasicVerificationStrategy
+from tilings.tilescope import TileScope, TileScopePack
+
+pack = TileScopePack.row_and_col_placements(row_only=True)
+pack = pack.add_verification(BasicVerificationStrategy(), replace=True)
+searcher1 = TileScope("231", pack)
+searcher2 = TileScope("132", pack)
+
+bijection = find_bijection_between(searcher1, searcher2)
+if bijection is None:
+    print("Could not find a bijection")
+else:
+    for gp in bijection.domain.generate_objects_of_size(5):
+        print(f"{gp} -> {bijection.map(gp)}")
+    for gp in bijection.codomain.generate_objects_of_size(5):
+        print(f"{gp} -> {bijection.inverse_map(gp)}")
+    # Display specifications in browser tabs:
+    # bijection.domain.show()
+    # bijection.codomain.show()
+\end{lstlisting}

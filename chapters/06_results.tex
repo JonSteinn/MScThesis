@@ -1,25 +1,17 @@
 
 \coverchapter{Results}\label{ch:results}
-\section{Cross domain successes}
-The search method we have developed and the resulting bijection works between different domains. The problem however is the lack of maintained implementations of domains using \css{}. With \css{} being a product of a research group that is mainly interested in permutation patterns, unsurprisingly the most supported domain is \tsc{}.
+The search method we have developed and the resulting bijections work between different domains. The problem however is the lack of maintained implementations of domains using \css{}. With \css{} being a product of a research group that is mainly interested in permutation patterns, unsurprisingly the most supported domain are permutations with \tsc{}. As a consequence, we will mostly demonstrate bijections found between permutation classes.
 
-There is a very simple example for words provided in the project's repository. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in words is another word that occurs as a subsequence. This class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive ones, that is
+\section{Cross domain successes}
+There is a very simple example for words provided in repository for \css{}. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in a word is another word that occurs as a consecutive subsequence. This class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive 1's, that is
 \[
     (\varepsilon, \set{0,1}, \set{11}) = \set{\varepsilon, 0, 1, 00, 01, 10, 000, 001, 010, 100, 101, \dotsc}.
 \]
 
 
-The bijection search will easily find bijections between sets such as $(\varepsilon, \set{0,1}, \set{11})$ and $(\varepsilon, \set{a,b}, \set{bb})$, that are identical given a mapping of the letters of the alphabet. The same goes for the trivial sets $(\epsilon, \set{0}, \emptyset)$ and $\Av{12}$, where there is only a single element of each length. The implementation for words has few strategies and limited effort was allocated to finding bijections between words and permutation classes. We will demonstrate two such bijections in greater detail but there is a caveat that needs to be addressed.
+The bijection search will easily find bijections between sets such as $(\varepsilon, \set{0,1}, \set{11})$ and $(\varepsilon, \set{a,b}, \set{bb})$, that are identical given a bijection of the letters of the alphabet. The same goes for the trivial sets $(\epsilon, \set{0}, \emptyset)$ and $\Av{12}$, where there is only a single element of each length. The implementation for words has few strategies and limited effort was allocated to finding bijections between words and permutation classes. We will demonstrate two such bijections in greater detail but there is a caveat that needs to be addressed.
 
-Take the class $\mathcal{W} = (\varepsilon, \set{a,b}, \emptyset)$ for example. For any fixed length $n$, there are $2^n$ unique words as we have a choice between two letters for each position in any sequence. This produces the sequence 
-\[
-    1, 2, 4, 8, 16, 32, 64, \dotsc
-\]
-while the permutation class, $\Av{231,321}$, has the sequence 
-\[
-    1, 1, 2, 4, 8, 16, 32, \dotsc
-\]
-which is off by one. We could use $\textsf{Av}_{\geq1}(231,312)$ instead, which shares this sequence with the words, but that brings another problem. Words of length $n$ would map to permutations of length $n+1$ while parallel specifications requires atoms to match. What we can do instead, is placing the largest point of $\textsf{Av}_{\geq1}(231,312)$ and factoring it out. That leaves us with a tiling root $\mathcal{T}$ where
+Take the class $\mathcal{W} = (\varepsilon, \set{a,b}, \emptyset)$ for example. For any fixed length $n$, there are $2^n$ unique words as we have a choice between two letters for each position in any sequence. This produces the sequence $1, 2, 4, 8, 16, 32, 64, \dotsc$ while the permutation class, $\Av{231,321}$, has the sequence $1, 1, 2, 4, 8, 16, 32, \dotsc$ which is off by one. We could use $\textsf{Av}_{\geq1}(231,312)$ instead, which shares this sequence with the words if we start from $n=1$, but that brings another problem. Words of length $n$ would map to permutations of length $n+1$ while parallel specifications require atoms to match. What we can do instead, is place the top point of $\textsf{Av}_{\geq1}(231,312)$ and factoring it out. That leaves us with a tiling root $\mathcal{T}$ where
 \begin{align*}
     \Av{231,312} &\cong \set{\varepsilon} \sqcup \textsf{Av}_{\geq1}(231,312),\\
     \textsf{Av}_{\geq1}(231,312) &\cong \set{\point{0.1}}\times \textsf{Grid}(\mathcal{T}).
@@ -30,33 +22,19 @@ The tiling in question here is
 \]
 Now we can find and construct bijections between $\mathcal{W}$ and $\textsf{Grid}(\mathcal{T})$. This will map the words to gridded permutations in $\mathcal{G}^{(2,1)}$ instead of $\mathcal{G}^{(1,1)}$, but the mapping from them to permutations is trivial.
 
-The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \set{11})$ and $\Av{231,312,321}$. These are counted by the Fibonacci numbers but here we have the same issue as before, with one sequence being off my one. We remedy this exactly the same way as before, leaving us with a tiling root that can be seen in figure \FigureRef{fig:fibpermoffbyone}. This tiling can have at most a single point in cell $(1,0)$ and if it includes one, it must be greater than all the points in cell $(0,0)$. This can easily by mapped back to permutation by appending $n+1$ to the underlying permutation for any gridded permutation that has no points in cell $(1,0)$ and for those that do, we place $n+1$ immediately prior to the last element. \TableRef{tab:wordtilmap} shows the bijection constructed for $n \in \set{0,1,2,3}$ and the corresponding permutation with the mapping described above. 
+The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \set{11})$ and $\Av{231,312,321}$. These are counted by the Fibonacci numbers but here we have the same issue as before, with one sequence being off my one. We remedy this exactly the same way as before, leaving us with a tiling root that can be seen in figure \FigureRef{fig:fibpermoffbyone}. This tiling can have at most a single point in cell $(1,0)$ and if it includes one, it must be greater than all the points in cell $(0,0)$. This can easily by mapped back to permutations by appending $n+1$ to the underlying permutation for any gridded permutation that has no points in cell $(1,0)$ and for those that do, we place $n+1$ immediately prior to the last element. \TableRef{tab:wordtilmap} shows the bijection constructed for $n \in \set{0,1,2,3}$ and the corresponding permutation with the mapping described above. \FigureRef{fig:fibwordpermtrees} shows the two parallel specifications that were found. Note that there is an empty class in the specification for words.
 
 \begin{figure}[ht!]
     \centering
     \input{graphics/fibperm_offbyone}
-    \caption{The tiling required to deal with off by one and atom matching to find a bijection between binary strings with no consecutive ones and $\Av{231,312,321}$.}
+    \caption{The tiling used instead of $\Av{231,312,321}$, to deal with the sequence offset of binary strings with no consecutive 1's.}
     \label{fig:fibpermoffbyone}
 \end{figure}
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{c|c|c}
-        Word & Gridded permutation & Permutation\\
-        \hline
-        $\varepsilon$ & $\varepsilon$ & $1$\\
-        $0$ & $1^{(0,0)}$ & $12$\\
-        $1$ & $1^{(1,0)}$ & $21$\\
-        $00$ & $12^{(0,0)}$ & $123$\\
-        $01$ & $21^{(0,0)}$ & $213$\\
-        $10$ & $1^{(0,0)}2^{(1,0)}$ & $132$\\
-        $000$ & $123^{(0,0)}$ & $1234$\\
-        $001$ & $213^{(0,0)}$ & $2134$\\
-        $010$ & $132^{(0,0)}$ & $1324$\\
-        $100$ & $12^{(0,0)}3^{(1,0)}$ & $1243$\\
-        $101$ & $21^{(0,0)}3^{(1,0)}$ & $2143$\\
-    \end{tabular}
-    \caption{An automated bijection between binary strings avoiding consecutive ones and a slightly altered tiling for $\Av{231,312,321}$ and the permutation corresponding to each gridded permutation.}
+    \input{tables/bin2perm_map}
+    \caption{An automated bijection up to $n=3$ between binary strings avoiding consecutive 1's and $\textsf{Grid}(\mathcal{T})$, where $\mathcal{T}$ is the tiling for $\textsf{Av}_{\geq1}(231,312,321)$ after placing and factoring out the top point. The corrsesponding permutation is also shown.}
     \label{tab:wordtilmap}
 \end{table}
 
@@ -66,8 +44,19 @@ The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \s
 \begin{figure}
     \centering
     \input{graphics/fibwordpermpartrees}
-    \caption{The grammar of the two specifications found by the bijection finder for binary strings avoiding two consecutive ones and $\Av{231,312,321}$.}
+    \caption{The grammar of the specifications found for binary strings avoiding consecutive 1's and $\textsf{Av}_{\geq1}(231,312,321)$ after placing and factoring out the top point.}
     \label{fig:fibwordpermtrees}
 \end{figure}
 
 \section{Permutation classes}
+\todo[inline,caption={}]{
+\begin{itemize}
+    \item Talk about symmetries and that we don't bother with them
+    \item Maybe add a section on symmetries in background?
+    \item Start by crossing of articles (can subsection on them)
+    \item Simion\&Schmidt, etc [todo: find more]
+    \item Dump remaining 
+    \item Could maybe visualize the group of classes as graphs [at least one example]
+    \item Deal with Av(very long list of patterns) in some sensible way
+\end{itemize}
+}

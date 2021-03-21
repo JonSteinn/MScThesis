@@ -66,7 +66,7 @@ The only purpose of the maps $\alpha$ and $\beta$ is to uniquely relate an edge 
     \label{fig:specgraph132}
 \end{figure}
 
-A path in a rooted multigraph can be described as a sequence of edges\footnote{Using a sequence of vertices is ambiguous in multigraphs.}. A rooted path is any such sequence that starts with an edge from the root. There is also an empty rooted path, $\varepsilon$, corresponding to going nowhere from the root. For a finite rooted path $e_1e_2\dotsm e_n$ in a specification graph we define $\textsf{tail}(e_1e_2\dotsm e_n)$ as $\dst(e_n)$ if $n>0$ and the root otherwise and refer to it as the tail of $e_1e_2\dotsm e_n$.
+A path in a rooted multigraph can be described as a sequence of edges\footnote{Using a sequence of vertices is ambiguous in multigraphs.}. A rooted path is any such sequence that starts with an edge from the root. There is also an empty rooted path, $\varepsilon$, corresponding to going nowhere from the root. For a finite rooted path $p=e_1e_2\dotsm e_n$ in a specification graph we define $\textsf{tail}(p)$ as $\dst(e_n)$ if $n>0$ and the root otherwise and refer to it as the tail of $p$. The length of $p$ is $|p|=n$.
 
 \begin{definition}
 Let $(V,E,r,\src,\dst,\op)$ be a specification graph. Given a finite rooted path $e_1e_2\dotsm e_m \in E^m$, its \emph{path expansion}, denoted $p_+(e_1e_2\dotsm e_m)$,
@@ -256,8 +256,9 @@ where $c$ and $d$ are atoms. These specifications are parallel as can be seen in
     \label{fig:para_spec}
 \end{figure}
 
-The parallel relation is reflexive and symmetric for both specification paths and specifications. This is a natural consequence of the definition of specification paths while for specification we can use the identity map and the inverse of the bijection as matching orders. The parallel relation is however not transitive for specification paths. A counterexample would be a path $a$ parallel to $b$ and $b$ parallel to $c$, both with recursion but at different positions in $b$.
+The parallel relation is reflexive and symmetric for both specification paths and specifications. This is a natural consequence of the definition of specification paths while for specification we can use the identity map and the inverse of the bijection to match path expansions. The parallel relation is however not transitive for specification paths. A counterexample would be a path $a$ parallel to $b$ and $b$ parallel to $c$, both with recursion but at different positions in $b$.
 
+\todo[inline]{JSE: this probably needs some rephrasing after the new matching-order def + add fig}
 \begin{proposition}
 The parallel relation for specifications is transitive.
 \end{proposition}

@@ -98,7 +98,7 @@
   numbers=left,%
   numberstyle=\tiny,%
   numberfirstline=true,%
-  stepnumber=2,%
+  stepnumber=1,%
   numbersep=5pt,%
   columns=fullflexible,%
   tabsize=4,%
@@ -108,6 +108,29 @@
   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow}}, % red arrow
   % from http://tex.stackexchange.com/questions/116534/lstlisting-line-wrapping
 }
+
+\definecolor{lstkeyword}{rgb}{0.0,0.4,0.0}
+\definecolor{lststring}{rgb}{0.75,0,0.0}
+
+\lstdefinestyle{py}{
+    backgroundcolor=\color{gray!5},   
+    commentstyle=\color{blue},
+    keywordstyle=\color{lstkeyword},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{lststring},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
 \lstset{%
   language=,%default similar to verbatim
   style=default,
@@ -341,3 +364,5 @@
 \newtheorem{corollary}{Corollary}[chapter]
 \newtheorem{lemma}{Lemma}[chapter]
 \newtheorem{definition}{Definition}[chapter]
+
+\RequirePackage{adjustbox}
