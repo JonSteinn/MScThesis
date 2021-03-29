@@ -1,4 +1,5 @@
 \newcommand{\Av}[1]{\textsf{Av}\left(#1\right)}
+\newcommand{\Avn}[2]{\textsf{Av}_{#1}\left(#2\right)}
 \newcommand{\Co}[1]{\textsf{Co}\left(#1\right)}
 \newcommand{\contains}[2]{#2 \preceq #1}
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -43,3 +44,18 @@
 
 \newcommand{\css}{\texttt{CombSpecSearcher}}
 \newcommand{\tsc}{\texttt{TileScope}}
+
+\newcommand{\sym}{\textsf{sym}}
+
+\newcommand{\rev}{\textsf{r}}
+\newcommand{\inv}{\textsf{i}}
+
+\newcommand{\wordseq}[2]{#1_1 #1_2 \dotsm #1_{#2}}
+\newcommand{\wordrev}[2]{#1_{#2} #1_{#2 - 1} \dotsm #1_1}
+\newcommand{\wordidx}[3]{#1_{#2_1} #1_{#2_2} \dotsm #1_{#2_{#3}}}
+\newcommand{\perm}[2]{\wordseq{#1}{#2}}
+\newcommand{\setn}{\set{1,2,\dotsc,n}}
+\newcommand{\idxset}[2]{\set{#1_1,#1_2,\dotsc,#1_{#2}}}
+\newcommand{\idxord}[2]{#1_1 < #1_2 < \dotsm < #1_{#2}}
+
+\newcommand{\sort}{\textsf{sort}}

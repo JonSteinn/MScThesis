@@ -50,29 +50,28 @@
 \usepackage[colorinlistoftodos, color=todocolor, textsize=small]{todonotes}
 
 \input{macros}
+\patchcmd{\listof}{1.5em}{0pt}{}{}
 
 \begin{document}
 \frontmatter{}
 
 \frontrequiredpages{}
 
-
-%% Dedication is optional, comment out if it is absent
-%% RUM: Not mentioned
 \begin{dedications}
 I dedicate this thesis to my wife, Sólborg Erla Ingvarsdóttir, and our sons,\\ Ingvar Sölvi Jónsson and Þorkell Ari Jónsson.
 \end{dedications}
 
 \enableindents{}
 
-\coverchapter{Acknowledgements} 
-Acknowledgement text...
+\input{chapters/00_C_acknowledgements}
 
 \starttables{}% setup formatting
 
-\tableofcontents{}\clearpage%%RUM: "Table of contents"
-\listoffigures{}\clearpage%%RUM: "List of figures"
-\listoftables{}\clearpage%%RUM: "List of tables"
+\tableofcontents{}\clearpage
+\listoffigures{}\clearpage
+\listoftables{}\clearpage
+\addcontentsline{toc}{chapter}{List of Algorithms}
+\listofalgorithms{}\clearpage
 \listoffixmes{}
 
 \starttext{}
@@ -82,20 +81,18 @@ Acknowledgement text...
     \item Use ``respectively'' less
     \item Find pages in books for references
     \item Prune backgr of info that I don't end up using (will probably use everything though)
-    \item Constructors can be unary (e.g. seq), update to stop conditioning on out-degree (this should be updated in code too if it is done there)
     \item Example of non-admissible constructors? Do we use any such constr.? Should we?
     \item Resize graph nodes for $\set{x}$ to be same as others.
     \item Rethink equiv when introducing fusion
-    \item discuss meaning of defs prior to (not after) them?
-    \item consistency with equivalence equivalent
-    \item List of Algorithms? Listings?
+    \item consistency and correct use of: equivalence equivalent
     \item ProofTrees are noted as grammar in figs (intentionally vague), define if I want to use the word prooftrees
     \item If we get this to work for fusion and it doesn't fit into this, add a ch/sec for it and touch on differences.
     \item Simplify everything once we have connected ch 3 and 4, especially those cases functions
     \item Use unique greek letters (etc) for different things. Especially phi and varphi (which I usually overuse). Make a list of everything used (and for what purpose) to get an overview. Then assign unique symbols. Leave some symbols for 'let symb be a'
     \item comma+period in functions w cases
-    \item use eq-environments more, that is... reduce `complicated` stuff flowing in text
-    \item some figures probably need subfigures (a), (b), ...
+    \item some figures probably need subfigures (a), (b),
+    \item If combexp article is out before mine, ref it for proof trees, strategies, css and tilescope
+    \item Add assumption that all rules are isomorphism-rules and that any rule-bijection will 'encode colors'
 \end{itemize}
 }
 \clearpage

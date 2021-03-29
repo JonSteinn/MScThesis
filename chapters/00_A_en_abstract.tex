@@ -1,9 +1,2 @@
-\textbf{Introduction.} This thesis introduces a fully automated and domain agnostic bijection search built on top of an existing automated specification framework. \textbf{Methods.} We define a binary relation on specifications, which is used to define a bijection between their classes. This theory is accompanied by a search method for specifications satisfying this relation. \textbf{Results.} The search method was mainly applied to the domain of permutation patterns, where a total of 1324 bijections have been found, excluding symmetries and compositions. \textbf{Conclusion.} As far as we know, this is the first ever fully automated bijection with prior attempts requiring mathematical preliminary work.
-
-\vspace{2cm}
-{
-\tiny
-disclaimer: The number of bijections found is made up for the purposes of REM handin\\
-
-TODO: Remove sectioning from abstract after REM handin
-}
+\newcommand{\bijectionsfound}{\begin{tikzpicture}\draw (0,0) -- (1,0);\end{tikzpicture}}
+Bijections appear in most areas of mathematics. They are of particular importance in the field of combinatorics, where they are the preferred way of enumerating infinite sequences of finite sets. The aim of this thesis is to develop a fully automated and domain agnostic bijection search built on top of an existing automated combinatorial specification framework. We define a binary relation on specifications that structurally associates them. When satisfied, a bijection can be constructed between their classes. This theoretical foundation is accompanied by a search algorithm for specifications satisfying this relation. The algorithm utilizes dynamic programming and backtracking. If a bijection is found it can map objects between the classes of the specifications, in both directions. The search algorithm was mainly applied to the domain of permutation patterns, where a total of \bijectionsfound{} bijections were discovered, excluding symmetries and compositions. In many cases no previous bijections were known. Several cross-domain bijections were also discovered. As far as we know, this is the first ever fully automated bijection framework, with prior attempts requiring preliminary mathematical work. It can offer substantial structural insight into classes and can be considered a significant innovation in automated mathematics.
