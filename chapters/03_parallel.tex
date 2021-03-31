@@ -105,7 +105,7 @@ A path in a rooted multigraph can be described as a sequence of edges\footnote{U
 \begin{definition}
 Let $(V,E,r,\src,\dst,\op)$ be a specification graph. Given a finite rooted path $p \in E^m$, its \emph{path expansion} is the set 
 \[
-    p^+ = \cset{p \oplus e'}{e' \in E, \ \dst(e') \neq \emptyset \text{ and } \src(e') = \textsf{tail}(p)}.
+    p^\oplus = \cset{p \oplus e'}{e' \in E, \ \dst(e') \neq \emptyset \text{ and } \src(e') = \textsf{tail}(p)}.
 \]
 \end{definition}
 If a path ends in a terminal class, its path expansion is the empty set. Note that we never expand to empty classes and that expansions only depend on the tail of the path. In the graph from \FigureRef{fig:specgraph132} we have $\varepsilon^+ = \set{1,2}$, $2^+ = \set{23,24,25}$, $24^+ = \emptyset$ and $2523^+ = \set{25231, 25232}$.
@@ -127,6 +127,21 @@ where $c$ is an atom. For the specification path $p = 2356235$ in $\mathfrak{G}\
     \caption{A specification graph on the left and a specification path from the graph, $e_1e_2\dotsm e_7=2356235$, on the right with nonequivalent steps, $\set{1,3,5,7}$, as solid arrows.}
     \label{fig:noneqsteps}
 \end{figure}
+
+Given a path $p = e_1e_2\dotsm e_n$ in a specification graph $(V,E,r,\src,\dst,\op)$ we define
+\[
+     \textsf{lstrip}(p) = \begin{cases} \textsf{lstrip}(e_2e_3\dotsm e_n) & \text{ if } n > 0 \text{ and } \op(e_1) = \mathbf{1}^\circ,\\
+     p & \text{ otherwise}
+     \end{cases}
+\]
+and
+\[
+    \textsf{rextend}(p) = \begin{cases}
+        \textsf{rextend}(q) & \text{ if } p^+ = \set{q} \text{ and } \textsf{tail}(p) \cong \textsf{tail}(q),\\
+        p & \text{ otherwise}.
+    \end{cases}
+\]
+In the graph from \FigureRef{fig:noneqsteps} we have $\textsf{lstrip}(356) = 56$ and $\textsf{rextend}(35) = 356$.
 
 \section{Parallel specifications}
 \begin{definition}
@@ -228,16 +243,10 @@ where $c$ and $d$ are atoms. For the specification graphs $\mathfrak{G}\left(\sp
 
 Before defining parallelism in specifications, we introduce the idea informally and provide a supporting definition. The relation is satisfied if, recursively, every path pair is either parallel or we can pair the expansions of both such that each pair is parallel, starting from the empty rooted paths and ignoring equivalences.
 
-Let $\mathfrak{G}(\spec{C})$ and $\mathfrak{G}(\spec{D})$ be two specification graphs. The rooted paths $\alpha$ in $\mathfrak{G}(\spec{C})$ and $\beta$ in $\mathfrak{G}(\spec{D})$ are said to be \emph{matchable} if one of the following conditions is met.
-\begin{itemize}
-    \item They are specification paths and $\alpha \parallel \beta$.
-    \item There exists a bijection $\phi: \alpha^+ \mapsto \beta^+$ such that $a$ and $\phi(a)$ are matchable for all $a\in \alpha^+$
-    \item The paths $\alpha'$ and $\beta$ are matchable where $\alpha^+ = \set{\alpha'}$ and $\textsf{tail}(\alpha) \cong \textsf{tail}(\alpha')$.
-    \item The paths $\alpha$ and $\beta'$ are matchable where $\beta^+ = \set{\beta'}$ and $\textsf{tail}(\beta) \cong \textsf{tail}(\beta')$.
-\end{itemize}
+Let $\mathfrak{G}(\spec{C})$ and $\mathfrak{G}(\spec{D})$ be two specification graphs. The rooted paths $\alpha$ in $\mathfrak{G}(\spec{C})$ and $\beta$ in $\mathfrak{G}(\spec{D})$ are said to be \emph{matchable} if $\textsf{rextend}(\alpha) \parallel \textsf{rextend}(\beta)$ or if there exists a bijection $\phi: \textsf{rextend}(\alpha)^+ \mapsto \textsf{rextend}(\beta)^+$ such that $a$ and $\phi(a)$ are matchable for all $a\in \textsf{rextend}(\alpha)^+$.
 
 \begin{definition}\label{def:parspec}
-Two specifications $\spec{C}$ and $\spec{D}$ are \emph{parallel} if the empty rooted paths in their respective specification graphs are parallel expandable.
+Two specifications $\spec{C}$ and $\spec{D}$ are \emph{parallel} if the empty rooted paths in their respective specification graphs are matchable.
 \end{definition}
 
 We use $\spec{C} \parallel \spec{D}$ and $\spec{C} \nparallel \spec{D}$ do indicate that specifications are or are not parallel. Take for example the specifications
@@ -298,7 +307,8 @@ where $c$ and $d$ are atoms. These specifications are parallel as can be seen in
 The parallel relation is reflexive and symmetric for both specification paths and specifications. This is a natural consequence of the definition of specification paths. For specifications we can use the identity map and the inverse of the bijection to match path expansions. The parallel relation is, however, not transitive for specification paths. A counterexample would be a path $a$ parallel to $b$ and $b$ parallel to $c$, both with recursion but at different positions in $b$ (ignoring equivalences). We will later show that the parallel relation is transitive for specifications but first we need to introduce a systematic way to capture the bijection between the path expansions.
 
 \section{Matching order}
-Later when we look to construct bijections with parallel specifications in \ChapterRef{ch:pbijection} the bijections used to pair path expansions will become important. Suppose we have two paths $\alpha$ and $\beta$, in each specification graph of two parallel specifications and they are matchable because there was a bijection between their expansions, $\alpha^+$ and $\beta^+$, such that every pair was matchable. The only difference between the elements in $\alpha^+$ is the last step and the same goes for $\beta^+$. Therefore, we actually have is a bijection between the last steps of paths in $\alpha^+$ and the last steps of path in $\beta^+$. Suppose the rules with the two tails on the left are
+\todo[inline]{JSE: Make matching order map edges instead of rule indices}
+Later when we look to construct bijections with parallel specifications in \ChapterRef{ch:pbijection} the bijections used to pair path expansions will become important. Suppose we have two paths $\alpha$ and $\beta$, in each specification graph of two parallel specifications and they are matchable because there was a bijection between their expansions, $\alpha^+$ and $\beta^+$, such that every pair was matchable. The only difference between the elements in $\alpha^+$ is the last step and the same goes for $\beta^+$. Therefore, we actually have is a bijection between the last steps of paths in $\alpha^+$ and the last steps of paths in $\beta^+$. Suppose the rules with the two tails on the left are
 \[
     \textsf{tail}(\alpha) = \mathcal{C} \cong \mathcal{C}^{(1)} \circ_1  \mathcal{C}^{(2)} \circ_1 \dotsm \circ_1 \mathcal{C}^{(s)}
 \]
@@ -328,25 +338,20 @@ The bijections shown in the recursion tree in \FigureRef{fig:para_spec} interpre
     \label{tab:corrmatch}
 \end{table}
 
-Given two classes $\mathcal{C}$ and $\mathcal{D}$, in specifications $\spec{C}$ and $\spec{D}$ respectively, in the domain of a matching order and an edge $e$ from $\mathcal{C}$ who's destination is not empty, we define $\xi_{\spec{D}}(e,\mathcal{D})$ as the corresponding edge from $\mathcal{D}$. More formally, let $\spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right)$ and $\spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)$ be two parallel specifications with matching order $\Gamma$. Let $(L_i^{(1)}, L_j^{(2)})$ be a pair of classes in the domain of $\Gamma$. Let $e$ be an edge in $\mathfrak{G}(\spec{C})$ with $\src(e) = L_i^{(1)}$ such that $\dst(e) = R^{(1)}_{ia}\neq\emptyset$. Define $\xi_{\spec{D}}(e,L_j^{(2)}) = e'$ if $\src(e') = L_j^{(2)}$, $\dst(e') = R^{(2)}_{jb}$ and $\Gamma(L_i^{(1)}, L_j^{(2)})(a) = b$. For example, given the specifications and bijections in \FigureRef{fig:para_spec}, we have $\xi_{\spec{D}}(5,F) = 3$ and $\xi_{\spec{C}}(3,B) = 5$.
-
-We can also extend the above matching of edges to entire paths. We will limit that to paths ending in non-empty terminal classes. We will mostly do so sequentially for each edge but special attention must be paid to equivalence rules.
-
-Given a path $p = e_1e_2\dotsm e_n$ in a specification graph $(V,E,r,\src,\dst,\op)$ we define
+\section{Path matching}
+Given two classes $\mathcal{C}$ and $\mathcal{D}$ in the domain of a matching order for two parallel specifications $\spec{C}$ and $\spec{D}$ and an edge $e$ with source $\mathcal{C}$ who's destination is not empty, we define $\xi_{\spec{D}}(e,\mathcal{D})$ as the corresponding edge from $\mathcal{D}$. More formally, let
 \[
-     \textsf{lstrip}(p) = \begin{cases} \textsf{lstrip}(e_2e_3\dotsm e_n) & \text{ if } n > 0 \text{ and } \op(e_1) = \mathbf{1}^\circ,\\
-     p & \text{ otherwise}
-     \end{cases}
+    \spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right) \text{ and } \spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)
 \]
-and
-\[
-    \textsf{rextend}(p) = \begin{cases}
-        \textsf{rextend}(q) & \text{ if } p^+ = \set{q} \text{ and } \textsf{tail}(p) \cong \textsf{tail}(q),\\
-        p & \text{ otherwise}.
-    \end{cases}
-\]
+be two parallel specifications with matching order $\Gamma$. Let $(L_i^{(1)}, L_j^{(2)})$ be a pair of classes in the domain of $\Gamma$. Let $e$ be an edge in $\mathfrak{G}(\spec{C})$ with $\src(e) = L_i^{(1)}$ such that $\dst(e) = R^{(1)}_{ia}\neq\emptyset$. Define $\xi_{\spec{D}}(e,L_j^{(2)}) = e'$ if $\src(e') = L_j^{(2)}$, $\dst(e') = R^{(2)}_{jb}$ and $\Gamma(L_i^{(1)}, L_j^{(2)})(a) = b$. For example, given the specifications and bijections in \FigureRef{fig:para_spec}, we have $\xi_{\spec{D}}(5,F) = 3$ and $\xi_{\spec{C}}(3,B) = 5$.
 
-Given two paths $\alpha = a_1a_2 \dotsm a_n$ and $\beta$ in $\mathfrak{G}(\spec{C})$ and $\mathfrak{G}(\spec{D})$ respectively, we define
+Define
+\[
+    \mathscr{P}(\spec{C}) = \cset{p}{p \text{ is a finite rooted path in } \mathfrak{G}(\spec{C}) \text{ and }p = \textsf{rextend}(p)}
+\]
+for a specification $\spec{C}$. These are the paths that do not have a tail on the left side of an equivalence rule. Given a specification $\spec{D}$, parallel to $\spec{C}$, we can extend the matching of edges to paths in $\mathscr{P}(\spec{C})$ and $\mathscr{P}(\spec{D})$. We will mostly do so sequentially for each edge but special attention must be paid to equivalence rules.
+
+Let $\alpha = a_1a_2 \dotsm a_n$ be a path in $\mathfrak{G}(\spec{C})$ and $\beta$ in $\mathfrak{G}(\spec{D})$ where $\spec{C} \parallel \spec{D}$. Define
 \[
     \Psi_{\spec{D}}(\alpha,\beta) = \psi_{\spec{D}}(\textsf{lstrip}(\alpha),\textsf{rextend}(\beta)) 
 \]
@@ -359,75 +364,55 @@ where
 \]
 
 \begin{definition}\label{def:pathmatch}
-Given two parallel specifications $\spec{C}$ and $\spec{D}$, let $p$ be a specification path in a $\mathfrak{G}(\spec{C})$ that ends in a non-empty terminal class. The \emph{path matching} of $p$ in $\mathfrak{G}(\spec{D})$ is $\gamma_{\spec{D}}(p) = \Psi_{\spec{D}}(p,\varepsilon)$.
+Let $\spec{C}$ and $\spec{D}$ be parallel specifications and $p \in \mathscr{P}(\spec{C})$. The \emph{path matching} of $p$ in $\mathscr{P}(\spec{D})$ is $\gamma_{\spec{D}}(p) = \Psi_{\spec{D}}(p,\varepsilon)$.
 \end{definition}
 
-%TODO HENDA
-\begin{comment}
-
-Let $\alpha$ and $\beta$ be paths in the specification graphs $\mathfrak{G}(\spec{C})$ and $\mathfrak{G}(\spec{D})$ respectively such that 
-
-\begin{align*}
-    &\Psi_{\spec{D}}(\varepsilon, \beta) = \beta\\
-    &\Psi_{\spec{D}}(e^{\mathbf{1}^\circ} \oplus \alpha, \beta) = \Psi_{\spec{D}}(\alpha, \beta)\\
-    &\Psi_{\spec{D}}(\alpha, \beta) = \Psi_{\spec{D}}(\alpha, \beta') \text{ if } \beta^+ = \set{\beta'} \text{ and } \textsf{tail}(\beta) \cong \textsf{tail}(\beta)\\
-    &\Psi_{\spec{D}}(\alpha_1\alpha_2\dotsm\alpha_n,\beta) = \Psi_{\spec{D}}(\alpha_2\alpha_3\dotsm\alpha_n, \beta \oplus e') \text{ if } \xi_{\spec{D}}(\alpha_n,\textsf{tail}(\beta)) = e'
-\end{align*}
-
-
-
-\begin{definition}\label{def:pathmatch}
-Let $\spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right)$ and $\spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)$ be two parallel specifications with specification graphs $\mathfrak{G}(\spec{C})=(V_1,E_1,r_1,\src_1,\dst_1,\op_1)$ and $\mathfrak{G}(\spec{D})=(V_2,E_2,r_2,\src_2,\dst_2,\op_2)$. Let $e=e_1e_2\dotsm e_n$ a rooted path in $\mathfrak{G}(\spec{C})$ that does not end with an equivalence step. Define
-\[
-    \xi\left(e_i,L^{(2)}_k\right)  = \left(\xi_1\left(e_i,L^{(2)}_k\right),\xi_2\left(e_i,L^{(2)}_k\right)\right) = \left(e',R^{(2)}_{k\ell}\right)  
-\]
-if $e_i \in E_1$, $e' \in E_2$, $\ell = \Gamma(L^{(1)}_j,L^{(2)}_k)(q)$, $\src(e_i) = L^{(1)}_j$, $\dst(e_i) = R^{(1)}_{jq}$, $\src(e') = L^{(2)}_k$ and $\dst(e') = R^{(2)}_{k\ell}$, then
-\[
-    \Psi_{\spec{C}}(e_1\cdots e_n, L^{(2)}_i) =
-    \begin{cases}
-        \xi_1(e_1,L^{(2)}_i) & \text{ if $n=1$}\\
-        \Psi_{\spec{C}}(e_2 \cdots e_n,L^{(2)}_i) & \text{ otherwise, if $\op(e_1) = \mathbf{1}^\circ$}\\
-        e' \oplus \Psi_{\spec{C}}(e_1 \cdots e_n, R^{(2)}_{i1}) & \text{ }\parbox[t]{.4\textwidth}{otherwise, if $L^{(2)}_i \cong R^{(2)}_{i1}$, $\src(e') = L^{(2)}_i$ and $\dst(e') = R^{(2)}_{i1}$}\\
-        e' \oplus \Psi_{\spec{C}}(e_2\dotsm e_n, R^{(2)}_{i}) & \text{ otherwise, where } (e',D') = \xi(e_1,D)
-    \end{cases}
-\]
-then $e' = \Gamma_+(e) = \Psi_{\spec{C}}(e,r_2)$ is called the \emph{path matching} of $e$ in $\mathfrak{G}(\spec{D})$ and $\Gamma^{-1}_+(e') = \Psi_{\spec{D}}(e',r_1)$ the \emph{inverse path matching} of $e'$ in $\mathfrak{G}(\spec{C})$.
-\end{definition}
-\end{comment}
-
-As an example, consider the path $242523$ in $\mathfrak{G}(\spec{C})$ in \FigureRef{fig:para_spec}. Its path matching in $\mathfrak{G}(\spec{D})$ and the resulting path's path matching in $\mathfrak{G}(\spec{C})$ are
-\begin{align*}
-    \gamma_{\spec{D}}(242523) &= \Psi_{\spec{D}}(242523, \varepsilon) = \psi_{\spec{D}}(242523, \varepsilon)\\
-    &= \Psi_{\spec{D}}(42523,1) = \psi_{\spec{D}}(42523,1)\\
-    &= \Psi_{\spec{D}}(2523,15) = \psi_{\spec{D}}(2523,15)\\
-    &= \Psi_{\spec{D}}(523,151) = \psi_{\spec{D}}(523,151)\\
-    &= \Psi_{\spec{D}}(23,1513) = \psi_{\spec{D}}(23,15136)\\
-    &= \Psi_{\spec{D}}(3,151368) = \psi_{\spec{D}}(3,151368)\\
-    &= \Psi_{\spec{D}}(\varepsilon,1513684) = \psi_{\spec{D}}(\varepsilon,1513684)\\
+As an example, consider the path $242523$ in $\mathscr{P}(\spec{C})$ in \FigureRef{fig:para_spec}. Its path matching in $\mathscr{P}(\spec{D})$ and the resulting path's path matching in $\mathscr{P}(\spec{C})$ are
+\begin{alignat*}{3}
+    \gamma_{\spec{D}}(242523) &= \Psi_{\spec{D}}(242523, \varepsilon) &&= \psi_{\spec{D}}(242523, \varepsilon)\\
+    &= \Psi_{\spec{D}}(42523,1) &&= \psi_{\spec{D}}(42523,1)\\
+    &= \Psi_{\spec{D}}(2523,15) &&= \psi_{\spec{D}}(2523,15)\\
+    &= \Psi_{\spec{D}}(523,151) &&= \psi_{\spec{D}}(523,151)\\
+    &= \Psi_{\spec{D}}(23,1513) &&= \psi_{\spec{D}}(23,15136)\\
+    &= \Psi_{\spec{D}}(3,151368) &&= \psi_{\spec{D}}(3,151368)\\
+    &= \Psi_{\spec{D}}(\varepsilon,1513684) &&= \psi_{\spec{D}}(\varepsilon,1513684)\\
     &= 1513684
-\end{align*}
+\end{alignat*}
 and
-\begin{align*}
-    \gamma_{\spec{C}}(1513684) &= \Psi_{\spec{C}}(1513684, \varepsilon) = \psi_{\spec{C}}(1513684, \varepsilon)\\
-    &= \Psi_{\spec{C}}(513684, 2) = \psi_{\spec{C}}(513684, 2)\\
-    &= \Psi_{\spec{C}}(13684, 24) = \psi_{\spec{C}}(13684, 24)\\
-    &= \Psi_{\spec{C}}(3684, 242) = \psi_{\spec{C}}(3684, 242)\\
-    &= \Psi_{\spec{C}}(684, 2425) = \psi_{\spec{C}}(84, 2425)\\
-    &= \Psi_{\spec{C}}(4, 24252) = \psi_{\spec{C}}(4, 24252)\\
-    &= \Psi_{\spec{C}}(\varepsilon, 242523) = \psi_{\spec{C}}(\varepsilon, 242523)\\
+\begin{alignat*}{3}
+    \gamma_{\spec{C}}(1513684) &= \Psi_{\spec{C}}(1513684, \varepsilon) &&= \psi_{\spec{C}}(1513684, \varepsilon)\\
+    &= \Psi_{\spec{C}}(513684, 2) &&= \psi_{\spec{C}}(513684, 2)\\
+    &= \Psi_{\spec{C}}(13684, 24) &&= \psi_{\spec{C}}(13684, 24)\\
+    &= \Psi_{\spec{C}}(3684, 242) &&= \psi_{\spec{C}}(3684, 242)\\
+    &= \Psi_{\spec{C}}(684, 2425) &&= \psi_{\spec{C}}(84, 2425)\\
+    &= \Psi_{\spec{C}}(4, 24252) &&= \psi_{\spec{C}}(4, 24252)\\
+    &= \Psi_{\spec{C}}(\varepsilon, 242523) &&= \psi_{\spec{C}}(\varepsilon, 242523)\\
     &= 242523.
-\end{align*}
+\end{alignat*}
+
+The matching order of any class pair will always relate a terminal class to another terminal such that they are isomorphic. Therefore the map $\gamma_{\spec{D}}$ will preserve terminal class tails in the sense that their tails are isomorphic terminal classes. For each nonequivalent step in a path $p$ in the domain of $\gamma_{\spec{D}}$ a nonequivalent step is constructed for $\gamma_{\spec{D}}(p)$. Any other steps added are equivalent steps. Therefore the number of nonequivalent steps is preserved.
 
 \begin{proposition}
-For parallel specifications $\mathcal{C}$ and $\mathcal{D}$, the mapping $\gamma_{\spec{D}}$ is a bijection between the set of specification paths that end in non-empty terminal classes in $\mathfrak{G}(\spec{C})$ and $\mathfrak{G}(\spec{D})$.% Furthermore, $\gamma_{\spec{D}}^{-1} = \gamma_{\spec{C}}$ and $\gamma_{\spec{C}}^{-1} = \gamma_{\spec{D}}$.
+The mapping $\gamma_{\spec{D}}: \mathscr{P}(\spec{C}) \mapsto \mathscr{P}(\spec{D})$ is a bijection for parallel specifications $\spec{C}$ and $\spec{D}$ with $\gamma_{\spec{C}} = \gamma_{\spec{D}}^{-1}$.
 \end{proposition}
 \begin{proof}
-\todo[inline]{jse: redo with new notation}
-In Definition \ref{def:parspec}, it has already been established that any bijection must pair a terminal class in one specification with another in the other one such that a length preserving bijection exists between them. Therefore, any path with such tails will preserve the terminal tail.
+Let $(\alpha,\beta) = (\alpha_1\alpha_2\dotsm\alpha_a,\beta_1\beta_2\dotsm\beta_b)\in \mathscr{P}(\spec{C}) \times \mathscr{P}(\spec{D})$ such that
+\[
+    \alpha = A_1 \oplus \alpha_{i_1} \oplus A_2 \oplus \alpha_{i_2} \oplus \dotsm \oplus A_k \oplus \alpha_{i_k} \oplus A_{k+1}
+\]
+and
+\[
+    \beta = B_1 \oplus \beta_{j_1} \oplus B_2 \oplus \beta_{j_2} \oplus \dotsm \oplus B_k \oplus \beta_{j_k} \oplus B_{j+1}
+\]
+where $\sort(\vartheta(\alpha)) = (\alpha_{i_1},\alpha_{i_2},\dotsm,\alpha_{i_k})$ and $\sort(\vartheta(\beta)) = (\beta_{j_1},\beta_{j_2},\dotsc,\beta_{j_k})$ and $A_i$ and $B_i$ are paths containing only equivalent steps for $i \in [k+1]$. The equivalent steps are uniquely determined by the nonequivalent steps and the map will ignore them for elements in the domain and add them for elements in the codomain.
 
-By Definition \ref{def:pathmatch} the only way where a single step is not produced in place of another single step is when an equivalence step is either skipped or added, so the number of nonequivalent steps must remain the same.
+Suppose that $\gamma_{\spec{D}}(\alpha) = \beta$, then $\xi_{\spec{D}}(\alpha_1\alpha_2\dotsm\alpha_{i_\ell},\src(\beta_{j_\ell})) = \beta_{j_\ell}$ for all $\ell \in [k]$. Therefore the matching order of $(\src(\alpha_{i_\ell}),\src(\beta_{j_\ell}))$ maps $\alpha_{i_\ell}$ to $\beta_{j_\ell}$ (or more pricesly, their indices in their rules) for all $\ell\in[j]$. Since the matching order is a bijection, its inverse will map $\beta_{j_\ell}$ to $\alpha_{i_\ell}$ and we have
+\[
+    \xi_{\spec{C}}(\beta_1\beta_2\dotsm\beta_{j_\ell},\src(\alpha_{i_\ell})) = \alpha_{i_\ell}
+\]
+for all $\ell \in [k]$. The map $\gamma_{\spec{C}}$ will remove any equivalent steps from $B$ and add that in the unique manner they can be added in the image, thus $\gamma_{\spec{C}}(\beta) = \alpha$.
 
-Let $\alpha = \alpha_1\alpha_2 \dotsm \alpha_n$ in $\mathfrak{G}(\spec{C})$ and suppose $\Gamma_+(\alpha) = \beta = \beta_1\beta_2 \dotsm \beta_k$. We know that $|\vartheta(\alpha)| = |\vartheta(\beta)|$ and suppose $i_1, i_2,\dotsc, i_t$ and $j_1,j_2,\dotsc,j_t$ are the ordered indexed of $\vartheta(\alpha)$ and $\vartheta(\beta)$ respectively. Then $\Gamma_+$ will replace $\alpha_{i_r}$ with $\beta_{j_r}$ (and vice versa for $\Gamma_+^{-1}$) for all $r \in [t]$. Now this is just a matter of what happens to equivalent steps. Those in $\alpha$ are discarded in $\Gamma^+$ and for any class in $\spec{D}$ that is on the left of an equivalent rule, we are forced to take that step and its added to the resulting path. For those forced equivalent steps, we discard them in $\Gamma^{-1}_+$ and again, we are forced to take exactly the same equivalent steps in the resulting path. Therefore $\Gamma_+^{-1}(\Gamma_+(\alpha)) = \alpha$. The case of $\Gamma_+(\Gamma^{-1}_+(\beta))$ for a generalized $\beta$ is analogous to our prior argument as the mappings are defined exactly the same but for different specifications.
+Analogously, we have $\gamma_{\spec{D}}(\alpha) = \beta$ assuming $\gamma_{\spec{C}}(\beta) = \alpha$. Since $\gamma_{\spec{C}}(\gamma_{\spec{D}}(\alpha)) = \alpha$ and $\gamma_{\spec{D}}(\gamma_{\spec{C}}(\beta)) = \beta$ the map is a bijection.
 \end{proof}
 
 \todo[inline]{JSE: this probably needs some rephrasing after the new matching-order def + add fig - also move to the most appropriate place}
