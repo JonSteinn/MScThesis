@@ -12,7 +12,7 @@ be the rules of a specification $\spec{C}$ for a class $\sclsi{C}{1}$ where $\ci
 \[
     (i,j) \in \mathscr{D}(\spec{C}) = \cset{(a,b)}{a \in [k], b \in [n_a]}.
 \]
-For any $i\in[k]$ where $n_i=1$ the constructor $o_i$ is a unary operator and in the case of equivalence rules, $\sclsi{C}{i} \cong \sclsi{C}{i1}$, the constructor $\circ_i$ is an identity unary operator $\mathbf{1}^\circ$. To describe this specification we will use the notation 
+For any $i\in[k]$ where $n_i=1$ the constructor $\circ_i$ is a unary operator and in the case of equivalence rules, $\sclsi{C}{i} \cong \sclsi{C}{i1}$, the constructor $\circ_i$ is an identity unary operator $\mathbf{1}^\circ$. To describe this specification we will use the notation 
 \[
     \spec{C} = (L,O,R,D) = 
     \left(
@@ -103,9 +103,9 @@ A path in a rooted multigraph can be described as a sequence of edges\footnote{U
 \]
 
 \begin{definition}
-Let $(V,E,r,\src,\dst,\op)$ be a specification graph. Given a finite rooted path $p \in E^m$, its \emph{path expansion} is the set 
+Let $(V,E,r,\src,\dst,\op)$ be a specification graph. Given a finite rooted path $p$, its \emph{path expansion} is the set 
 \[
-    p^\oplus = \cset{p \oplus e'}{e' \in E, \ \dst(e') \neq \emptyset \text{ and } \src(e') = \textsf{tail}(p)}.
+    p^+ = \cset{p \oplus e'}{e' \in E, \ \dst(e') \neq \emptyset \text{ and } \src(e') = \textsf{tail}(p)}.
 \]
 \end{definition}
 If a path ends in a terminal class, its path expansion is the empty set. Note that we never expand to empty classes and that expansions only depend on the tail of the path. In the graph from \FigureRef{fig:specgraph132} we have $\varepsilon^+ = \set{1,2}$, $2^+ = \set{23,24,25}$, $24^+ = \emptyset$ and $2523^+ = \set{25231, 25232}$.
@@ -163,7 +163,7 @@ Let $\alpha=\alpha_1\alpha_2 \dotsm \alpha_n$ be a specification path in $\mathf
 \begin{enumerate}[i.]
     \item The length, ignoring equivalences, is the same, that is $|\alpha^\ast| = |\beta^\ast| = s$.
     \item For all $q\in[s]$ we have $\op_1(\alpha_{i_q}) \equiv \op_2(\beta_{j_q})$ where $\sort(\alpha^\ast) = (i_1,i_2,\dotsc,i_s)$ and $\sort(\beta^\ast) = (j_1,j_2,\dotsc,j_s)$.
-    \item Either $\dst_1(\alpha_n)$ and $\dst_2(\beta_n)$ are isomorphic terminal classes or there exists a $(i,j) \in [n] \times [k]$ such that $\src_1(\alpha_i) = \dst_1(\alpha_n)$, $\src_2(\beta_j) = \dst_2(\beta_k)$ and
+    \item Either $\textsf{tail}(\alpha_n)$ and $\textsf{tail}(\beta_n)$ are isomorphic terminal classes or there exists a $(i,j) \in [n] \times [k]$ such that $\src_1(\alpha_i) = \dst_1(\alpha_n)$, $\src_2(\beta_j) = \dst_2(\beta_k)$ and
     \[
         |\cset{\ell \in \alpha^\ast}{i \leq \ell \leq n}| = |\cset{\ell \in \beta^\ast}{j \leq \ell \leq k}|.
     \]
@@ -273,7 +273,7 @@ We use $\spec{C} \parallel \spec{D}$ and $\spec{C} \nparallel \spec{D}$ do indic
 \]
 and
 \[
-    \mathcal{D} = \left(
+    \spec{D} = \left(
         \begin{pmatrix}
             E\\F\\G\\H
         \end{pmatrix}
@@ -294,72 +294,68 @@ and
         \end{pmatrix}
     \right)
 \]
-where $c$ and $d$ are atoms. These specifications are parallel as can be seen in \FigureRef{fig:para_spec} which includes specification graphs for both along with the recursion tree for their empty rooted paths.
+where $c$ and $d$ are atoms. Their specification graphs are shown in \FigureRef{fig:para_spec} and a matchable recursion tree for their empty rooted paths is shown in \FigureRef{fig:para_spec_rec}.
 \begin{figure}[ht!]
     \centering
     \input{graphics/para_spec}
-    \vspace{0.7cm}
-    \input{graphics/recursion_tree}
-    \caption{The specification graphs of two parallel specifications and the matchable recursion tree starting from their empty rooted paths.}
+    \caption{The specification graphs of two parallel specifications.}
     \label{fig:para_spec}
+\end{figure}
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/recursion_tree}
+    \caption{The recursion tree that shows that the empty rooted paths from the specifications graphs in \FigureRef{fig:para_spec} are matchable.}
+    \label{fig:para_spec_rec}
 \end{figure}
 
 The parallel relation is reflexive and symmetric for both specification paths and specifications. This is a natural consequence of the definition of specification paths. For specifications we can use the identity map and the inverse of the bijection to match path expansions. The parallel relation is, however, not transitive for specification paths. A counterexample would be a path $a$ parallel to $b$ and $b$ parallel to $c$, both with recursion but at different positions in $b$ (ignoring equivalences). We will later show that the parallel relation is transitive for specifications but first we need to introduce a systematic way to capture the bijection between the path expansions.
 
 \section{Matching order}
-\todo[inline]{JSE: Make matching order map edges instead of rule indices}
-Later when we look to construct bijections with parallel specifications in \ChapterRef{ch:pbijection} the bijections used to pair path expansions will become important. Suppose we have two paths $\alpha$ and $\beta$, in each specification graph of two parallel specifications and they are matchable because there was a bijection between their expansions, $\alpha^+$ and $\beta^+$, such that every pair was matchable. The only difference between the elements in $\alpha^+$ is the last step and the same goes for $\beta^+$. Therefore, we actually have is a bijection between the last steps of paths in $\alpha^+$ and the last steps of paths in $\beta^+$. Suppose the rules with the two tails on the left are
-\[
-    \textsf{tail}(\alpha) = \mathcal{C} \cong \mathcal{C}^{(1)} \circ_1  \mathcal{C}^{(2)} \circ_1 \dotsm \circ_1 \mathcal{C}^{(s)}
-\]
-\text{ and }
-\[
-    \textsf{tail}(\beta) = \mathcal{D} \cong \mathcal{D}^{(1)} \circ_2  \mathcal{D}^{(2)} \circ_2 \dotsm \circ_2 \mathcal{D}^{(r)},
-\]
-then the bijection can be interpreted as a bijection between $\cset{j \in [s]}{\mathcal{C}^{(j)} \neq \emptyset}$
-and $\cset{j \in [r]}{\mathcal{D}^{(j)} \neq \emptyset}$.
+Later when we look to construct bijections with parallel specifications in \ChapterRef{ch:pbijection} the bijections used to pair path expansions will become important. Let $\alpha$ and $\beta$ be matchable paths in each specification graph of two parallel specifications. Suppose they are matchable because there was a bijection between $\textsf{rextend}(\alpha)^+$ and $\textsf{rextend}(\beta)^+$, such that every pair was matchable. The only difference between the elements in $\textsf{rextend}(\alpha)^+$ is the last step and the same goes for $\textsf{rextend}(\beta)^+$. Therefore, we actually have is a bijection between the last steps of paths in $\textsf{rextend}(\alpha)^+$ and the last steps of paths in $\textsf{rextend}(\beta)^+$. 
 
-By Definition \ref{def:parspec} there is technically nothing stopping us from using different path expansion bijections (if more than one exist) for the same pair if it comes up multiple times but then again, there is also nothing stopping us from using the same one every time and that is precisely what we will do. This way, we can relate pairs of classes, in each specification, that are on the left of a non-equivalence rule to a bijection between the indices of the non-empty classes on the right of said rules. We refer to this mapping as the \emph{matching order} of the pair of classes.
+Suppose we have rooted paths $p_1$ and $p_2$ in $\mathfrak{G}(\spec{C})$ and $p_3$ and $p_4$ in $\mathfrak{G}(\spec{D})$ such that $p_1$ and $p_3$ are matchable because of a bijection between $\textsf{rextend}(p_1)^+$ and $\textsf{rextend}(p_3)^+$ and $p_2$ and $p_4$ because of a bijection between $\textsf{rextend}(p_2)^+$ and $\textsf{rextend}(p_4)^+$. If
+\[
+    \textsf{tail}(\textsf{rextend}(p_1)) = \textsf{tail}(\textsf{rextend}(p_2)) \text{ and } \textsf{tail}(\textsf{rextend}(p_3))=\textsf{tail}(\textsf{rextend}(p_4))
+\]
+then, in terms of last steps in their expansions, the domain and codomain of the two bijections are identical as the expansion only depends on tails. By Definition \ref{def:parspec} there is nothing stopping us from using different bijections in terms of last steps (if more than one exist) for the same tail pair if it comes up multiple times but then again, there is also nothing stopping us from using the same one every time and that is precisely what we will do. This way, we can relate pairs of classes, in each specification, that are on the left of a non-equivalence rule to a bijection between edges from them. We refer to this mapping as the \emph{matching order} of the pair of classes.
 
 \begin{definition}
 Let $\spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right)$ and $\spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)$ be two parallel specifications with $n$ and $m$ rules respectively. Let
 \[
-    \left(L^{(1)}_i,L^{(2)}_j\right) \in \set{L^{(1)}_1,L^{(1)}_2,\dotsc,L^{(1)}_n} \times \set{L^{(2)}_1, L^{(2)}_2, \dotsc, L^{(2)}_m}
+    \left(\mathcal{C},\mathcal{D}\right) \in \set{L^{(1)}_1,L^{(1)}_2,\dotsc,L^{(1)}_n} \times \set{L^{(2)}_1, L^{(2)}_2, \dotsc, L^{(2)}_m}
 \]
-be a pair of classes that are tails of paths $\alpha$ and $\beta$. Suppose $\alpha$ and $\beta$ are matchable because of an expansion bijection $\phi: \alpha^+ \mapsto \beta^+$. The \emph{matching order}, $\Gamma$, of $L^{(1)}_i$ and $L^{(2)}_j$ is a bijection $\varphi$ such that $\varphi(a) = b$ for $\alpha'\in \alpha^+$ and $\beta'\in \beta^+$ if $\phi(\alpha') = \beta'$, $\textsf{tail}(\alpha') = R^{(1)}_{ia}$ and $\textsf{tail}(\beta')=R^{(2)}_{jb}$.
+be a pair of classes that are tails of paths $\textsf{rextend}(\alpha)$ and $\textsf{rextend}(\beta)$. Suppose $\alpha$ and $\beta$ are matchable because of a path expansion bijection $\phi: \textsf{rextend}(\alpha)^+ \mapsto \textsf{rextend}(\beta)^+$ with
+\[
+    \textsf{rextend}(\alpha)^+ = \cset{\textsf{rextend}(\alpha) \oplus a_i}{i \in [k]} \text{ and } \textsf{rextend}(\beta)^+ = \cset{\textsf{rextend}(\beta) \oplus b_i}{i \in [k]}
+\]
+where $a_i$ and $b_i$ are edges. The \emph{matching order}, $\Gamma_{\mathcal{C},\mathcal{D}}$, for $\mathcal{C}$ and $\mathcal{D}$ is a bijection such that $\Gamma_{\mathcal{C},\mathcal{D}}(a_i) = b_j$ if $\phi(\textsf{rextend}(\alpha) \oplus a_i) = \textsf{rextend}(\beta) \oplus b_j$.
 \end{definition}
 
-The bijections shown in the recursion tree in \FigureRef{fig:para_spec} interpreted with matching order for classes of specifications can be seen in \TableRef{tab:corrmatch}. There are not any recurring pairs in this example but if there were, one would have to choose a fixed bijection and which one does not matter. The benefit of using the matching order is, that it allows us to extend this pairing for arbitrary long paths.
+ The bijections shown in the recursion tree in \FigureRef{fig:para_spec_rec} interpreted with matching order for classes of specifications can be seen in \TableRef{tab:corrmatch}. There are no recurring pairs in this example but if there were, one would have to choose a fixed bijection and which one does not matter. The benefit of using the matching order is that it allows us to extend this pairing for paths of any finite length.
 
 \begin{table}[ht!]
     \centering
     \input{tables/matchingorder}
-    \caption{The bijections from \FigureRef{fig:para_spec} interpreted with matching order.}
+    \caption{The bijections from \FigureRef{fig:para_spec_rec} interpreted with matching order.}
     \label{tab:corrmatch}
 \end{table}
 
 \section{Path matching}
-Given two classes $\mathcal{C}$ and $\mathcal{D}$ in the domain of a matching order for two parallel specifications $\spec{C}$ and $\spec{D}$ and an edge $e$ with source $\mathcal{C}$ who's destination is not empty, we define $\xi_{\spec{D}}(e,\mathcal{D})$ as the corresponding edge from $\mathcal{D}$. More formally, let
-\[
-    \spec{C} = \left(L^{(1)}, O^{(1)}, R^{(1)}, D^{(1)}\right) \text{ and } \spec{D} = \left(L^{(2)}, O^{(2)}, R^{(2)}, D^{(2)}\right)
-\]
-be two parallel specifications with matching order $\Gamma$. Let $(L_i^{(1)}, L_j^{(2)})$ be a pair of classes in the domain of $\Gamma$. Let $e$ be an edge in $\mathfrak{G}(\spec{C})$ with $\src(e) = L_i^{(1)}$ such that $\dst(e) = R^{(1)}_{ia}\neq\emptyset$. Define $\xi_{\spec{D}}(e,L_j^{(2)}) = e'$ if $\src(e') = L_j^{(2)}$, $\dst(e') = R^{(2)}_{jb}$ and $\Gamma(L_i^{(1)}, L_j^{(2)})(a) = b$. For example, given the specifications and bijections in \FigureRef{fig:para_spec}, we have $\xi_{\spec{D}}(5,F) = 3$ and $\xi_{\spec{C}}(3,B) = 5$.
-
 Define
 \[
     \mathscr{P}(\spec{C}) = \cset{p}{p \text{ is a finite rooted path in } \mathfrak{G}(\spec{C}) \text{ and }p = \textsf{rextend}(p)}
 \]
 for a specification $\spec{C}$. These are the paths that do not have a tail on the left side of an equivalence rule. Given a specification $\spec{D}$, parallel to $\spec{C}$, we can extend the matching of edges to paths in $\mathscr{P}(\spec{C})$ and $\mathscr{P}(\spec{D})$. We will mostly do so sequentially for each edge but special attention must be paid to equivalence rules.
 
-Let $\alpha = a_1a_2 \dotsm a_n$ be a path in $\mathfrak{G}(\spec{C})$ and $\beta$ in $\mathfrak{G}(\spec{D})$ where $\spec{C} \parallel \spec{D}$. Define
+Let $\alpha = a_1a_2 \dotsm a_n$ be a path in $\mathfrak{G}(\spec{C})$ and $\beta = \beta_1\beta_2\dotsm \beta_k$ in $\mathfrak{G}(\spec{D})$ where $\spec{C} \parallel \spec{D}$. Define
 \[
     \Psi_{\spec{D}}(\alpha,\beta) = \psi_{\spec{D}}(\textsf{lstrip}(\alpha),\textsf{rextend}(\beta)) 
 \]
 where
 \[
-    \psi_{\spec{D}}(\alpha_1\alpha_2\dotsm\alpha_n,\beta) = \begin{cases}
+    \psi_{\spec{D}}(\alpha,\beta) = \begin{cases}
         \beta & \text{ if } n = 0,\\
-        \Psi_{\spec{D}}(\alpha_2\alpha_3\dotsm\alpha_n, \beta \oplus \xi_{\spec{D}}(\alpha_1,\textsf{tail}(\beta))) & \text{ otherwise}.
+        \Psi_{\spec{D}}(\alpha_2\alpha_3\dotsm\alpha_n, \beta \oplus \Gamma_{\src(\alpha_1),\textsf{tail}(\beta)}(\alpha_1)) & \text{ otherwise}.
     \end{cases}
 \]
 
@@ -367,7 +363,7 @@ where
 Let $\spec{C}$ and $\spec{D}$ be parallel specifications and $p \in \mathscr{P}(\spec{C})$. The \emph{path matching} of $p$ in $\mathscr{P}(\spec{D})$ is $\gamma_{\spec{D}}(p) = \Psi_{\spec{D}}(p,\varepsilon)$.
 \end{definition}
 
-As an example, consider the path $242523$ in $\mathscr{P}(\spec{C})$ in \FigureRef{fig:para_spec}. Its path matching in $\mathscr{P}(\spec{D})$ and the resulting path's path matching in $\mathscr{P}(\spec{C})$ are
+As an example, consider the path $242523$ in $\mathscr{P}(\spec{C})$ in \FigureRef{fig:para_spec}. Its path matching in $\mathscr{P}(\spec{D})$ and its image's path matching in $\mathscr{P}(\spec{C})$ are
 \begin{alignat*}{3}
     \gamma_{\spec{D}}(242523) &= \Psi_{\spec{D}}(242523, \varepsilon) &&= \psi_{\spec{D}}(242523, \varepsilon)\\
     &= \Psi_{\spec{D}}(42523,1) &&= \psi_{\spec{D}}(42523,1)\\
@@ -402,31 +398,39 @@ Let $(\alpha,\beta) = (\alpha_1\alpha_2\dotsm\alpha_a,\beta_1\beta_2\dotsm\beta_
 \]
 and
 \[
-    \beta = B_1 \oplus \beta_{j_1} \oplus B_2 \oplus \beta_{j_2} \oplus \dotsm \oplus B_k \oplus \beta_{j_k} \oplus B_{j+1}
+    \beta = B_1 \oplus \beta_{j_1} \oplus B_2 \oplus \beta_{j_2} \oplus \dotsm \oplus B_k \oplus \beta_{j_k} \oplus B_{k+1}
 \]
-where $\sort(\vartheta(\alpha)) = (\alpha_{i_1},\alpha_{i_2},\dotsm,\alpha_{i_k})$ and $\sort(\vartheta(\beta)) = (\beta_{j_1},\beta_{j_2},\dotsc,\beta_{j_k})$ and $A_i$ and $B_i$ are paths containing only equivalent steps for $i \in [k+1]$. The equivalent steps are uniquely determined by the nonequivalent steps and the map will ignore them for elements in the domain and add them for elements in the codomain.
+where $\sort(\alpha^\ast) = (\alpha_{i_1},\alpha_{i_2},\dotsm,\alpha_{i_k})$ and $\sort(\beta^\st) = (\beta_{j_1},\beta_{j_2},\dotsc,\beta_{j_k})$ and $A_i$ and $B_i$ are paths containing only equivalent steps for $i \in [k+1]$. The equivalent steps are uniquely determined by the nonequivalent steps and the map will ignore them for elements in the domain and add them for elements in the codomain.
 
-Suppose that $\gamma_{\spec{D}}(\alpha) = \beta$, then $\xi_{\spec{D}}(\alpha_1\alpha_2\dotsm\alpha_{i_\ell},\src(\beta_{j_\ell})) = \beta_{j_\ell}$ for all $\ell \in [k]$. Therefore the matching order of $(\src(\alpha_{i_\ell}),\src(\beta_{j_\ell}))$ maps $\alpha_{i_\ell}$ to $\beta_{j_\ell}$ (or more pricesly, their indices in their rules) for all $\ell\in[j]$. Since the matching order is a bijection, its inverse will map $\beta_{j_\ell}$ to $\alpha_{i_\ell}$ and we have
+Suppose that $\gamma_{\spec{D}}(\alpha) = \beta$, then
 \[
-    \xi_{\spec{C}}(\beta_1\beta_2\dotsm\beta_{j_\ell},\src(\alpha_{i_\ell})) = \alpha_{i_\ell}
+    \Gamma_{\src(\alpha_{i_\ell}),\src(\beta_{j_\ell})}(\alpha_{i_\ell}) = \beta_{j_\ell} \text{ and }
+    \Gamma_{\src(\alpha_{i_\ell}),\src(\beta_{j_\ell})}^{-1}(\beta_{j_\ell}) = \alpha_{i_\ell}
 \]
-for all $\ell \in [k]$. The map $\gamma_{\spec{C}}$ will remove any equivalent steps from $B$ and add that in the unique manner they can be added in the image, thus $\gamma_{\spec{C}}(\beta) = \alpha$.
+for all $\ell \in [k]$. The map $\gamma_{\spec{C}}$ will ignore any equivalent steps in $\beta$ and convert $\beta_{j_\ell}$ to $\alpha_{i_\ell}$ for all $\ell \in [k]$. Since the equivalent steps in $\alpha$ are uniquely determined by the nonequivalent steps $\alpha_{i_1}$, $\alpha_{i_2}, \dotsc, \alpha_{i_k}$, the equivalent steps added by $\gamma_{\spec{C}}$ will be the same as in $\alpha$ and in the same positions, that is $\gamma_{\spec{C}}(\beta) = \alpha$.
 
 Analogously, we have $\gamma_{\spec{D}}(\alpha) = \beta$ assuming $\gamma_{\spec{C}}(\beta) = \alpha$. Since $\gamma_{\spec{C}}(\gamma_{\spec{D}}(\alpha)) = \alpha$ and $\gamma_{\spec{D}}(\gamma_{\spec{C}}(\beta)) = \beta$ the map is a bijection.
 \end{proof}
 
-\todo[inline]{JSE: this probably needs some rephrasing after the new matching-order def + add fig - also move to the most appropriate place}
 \begin{proposition}
 The parallel relation for specifications is transitive.
 \end{proposition}
 \begin{proof}
-Suppose we have specifications $\spec{A}$, $\spec{B}$ and $\spec{C}$ where $\spec{A} \parallel \spec{B}$ with matching order $\Gamma_1$ and $\spec{B} \parallel \spec{C}$ with matching order $\Gamma_2$. We can mimic the paths taken previously from the perspective of $\spec{B}$ (bijection wise) until we reach paths $a = a_1a_2 \dotsm a_k$, $b = b_1b_2 \dotsm b_k$, and $c = c_1c_2 \dotsm c_k$ (all pruned of equivalence steps) that were not expanded further for both $(\spec{A},\spec{B})$ and $(\spec{B},\spec{C})$. If all end in terminal classes then $\mathfrak{p}(a,c)=1$. Otherwise at least one pair has a recursion. Suppose it is $a$ and $b$ and there is an $i$ such that $\dst(a_k)=\src(a_i)$ and $\dst(b_k)=\src(b_i)$. We continue to expand with $\Gamma_1(\src(a_i),\src(b_i)) \circ \Gamma_2(\dst(b_k),\dst(c_k))$ and from here on there will always exist a class $\mathcal{B}$ such that $(\dst(a_{k+1}),\mathcal{B})$ is in the domain of $\Gamma_1$ and $(\mathcal{B}, \dst(c_{k+1}))$ in the domain of $\Gamma_2$. Since there is a finite number of class pairs from $\mathcal{A}$ and $\mathcal{C}$ we will always reach a recursion that matches in both.
+Let $\spec{A}$, $\spec{B}$ and $\spec{C}$ be specifications such that $\spec{A} \parallel\spec{B}$ and $\spec{B} \parallel \spec{C}$. Their empty rooted paths, $\varepsilon_{\spec{A}}$ and $\varepsilon_{\spec{C}}$, are matchable if $\textsf{rextend}(\varepsilon_{\spec{A}}) \parallel \textsf{rextend}(\varepsilon_{\spec{C}})$ or there exists a bijection
+\[
+    \phi: \textsf{rextend}(\varepsilon_{\spec{A}})^+ \mapsto \textsf{rextend}(\varepsilon_{\spec{C}})^+
+\]
+such that $p \parallel \phi(p)$ for all $p \in \textsf{rextend}(\varepsilon_{\spec{A}})^+$. Suppose we arrive, via this expansion, at paths $a$ and $c$ in the specification graphs of $\spec{A}$ and $\spec{C}$ respectively. If the tail of either $\textsf{rextend}(a)$ or $\textsf{rextend}(c)$ is a terminal class then the tail of the other must be as well since $\gamma_{\spec{C}}(\gamma_{\spec{B}}(\textsf{rextend}(a))) = c$ and both maps preserve terminal classes. Furthermore they must be isomorphic and thus the paths are parallel. If they include a recursion at the same distance they are parallel but that is not implied as the parallel relation is not transitive for specification paths. Suppose the paths are not parallel, then we can use the bijection
+\[
+    \gamma_{\spec{C}} \circ \gamma_{\spec{B}}: \textsf{rextend}(a)^+ \mapsto \textsf{rextend}(c)^+
+\]
+to further expand. Since there are finite possible pairs from each class, we always end up with a recursion at an equal distance or in terminal classes.
 \end{proof}
 
 
 
 \section{The parallel algorithm}
-The parallel algorithm checks if two specifications are parallel and if so, returns the matching order. The graphs are expanded as trees simultaneously\footnote{Not concurrently.} and lineal descendants from the root form a path. At any node in the tree will be the tail of the path taken. A node corresponding to the path $q$ is the parent of the nodes corresponding to the paths in $q^+$, which are called children. Matching orders are stored in a dictionary with class pairs keys. If we can traverse the trees down to matched specification paths, we have parallel specifications.
+The parallel algorithm checks if two specifications are parallel and if so, returns the matching order. The graphs are expanded as trees simultaneously\footnote{Not concurrently.} and lineal descendants from the root form a path. At any node\footnote{We refer to vertices as nodes in algorithmic context.} in the tree will be the tail of the path taken. A node corresponding to the path $q$, is the parent of the nodes corresponding to the paths in $q^+$, which are called children. Matching orders are stored in a dictionary with class pairs keys. We alter the matching order such that both the domain and codomain are standardized, e.g., the $i^\text{th}$ largest edge label is replaced by $i$. If we can traverse the trees down to matched specification paths, we have parallel specifications.
 
 The algorithm uses dynamic programming to match pairs, remembering both successes and failures. The matching order is done with an iterative backtracking to avoid nesting recursions and fail as soon as possible. If we cannot match the first child to some child in the other node, there is no point trying to match the second child. Whether children 1 and 3 match for given nodes has nothing to do with what children were matched previously so we also remember child matching failures to limit each pair to a single attempt.
 

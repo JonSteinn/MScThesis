@@ -1,0 +1,41 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},edge/.style = {->,> = latex'}]
+\node[vertex, double=white] (a) at (0,0) {$\mathcal{C}^{(1)}$};
+\node[vertex] (b) at (-2,0) {$\mathcal{C}^{(2)}$};
+\node[vertex] (c) at (-2,-2) {$\mathcal{C}^{(3)}$};
+\node[vertex] (d) at (0,-2) {$\mathcal{C}^{(4)}$};
+\node[vertex] (e) at (0,-4) {$\mathcal{C}^{(5)}$};
+\node[vertex] (neutral) at (2,-2) {$\set{\varepsilon}$};
+\node[vertex] (atom) at (-2,-4) {$\set{1}$};
+
+\draw[edge] (a) to node[midway,above right] {{\tiny$1$, $\sqcup$}} (neutral);
+\draw[edge] (a) to node[midway, above] {{\tiny$2$,$\sqcup$}} (b);
+\draw[edge] (b) to node[midway, left] {{\tiny$3$,$\mathbf{1}^\circ$}} (c);
+\draw[edge] (c) to node[midway, above left, xshift=4, yshift=-4] {{\tiny$4$,$\times$}} (a);
+\draw[edge] (c) to node[midway,left] {{\tiny$5$,$\times$}} (atom);
+\draw[edge] (c) to node[midway,above] {{\tiny$6$,$\times$}} (d);
+\draw[edge] (d) to node[midway,above] {{\tiny$7$,$\sqcup$}} (neutral);
+\draw[edge] (d) to[bend left] node[midway,right] {{\tiny$8$,$\sqcup$}} (e);
+\draw[edge] (e) to[bend left] node[midway,left] {{\tiny$9$,$\times$}} (d);
+\draw[edge] (e) to node[midway,above] {{\tiny$10$,$\times$}} (atom);
+\end{tikzpicture}
+\hspace{0.5cm}
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},edge/.style = {->,> = latex'}]
+\node[vertex, double=white] (a) at (0,0) {$\mathcal{D}^{(1)}$};
+\node[vertex] (b) at (-2,0) {$\mathcal{D}^{(2)}$};
+\node[vertex] (c) at (-2,-2) {$\mathcal{D}^{(3)}$};
+\node[vertex] (d) at (0,-2) {$\mathcal{D}^{(4)}$};
+\node[vertex] (e) at (0,-4) {$\mathcal{D}^{(5)}$};
+\node[vertex] (neutral) at (2,-2) {$\set{\varepsilon}$};
+\node[vertex] (atom) at (-2,-4) {$\set{1}$};
+
+\draw[edge] (a) to node[midway,above right] {{\tiny$1$, $\sqcup$}} (neutral);
+\draw[edge] (a) to node[midway, above] {{\tiny$2$,$\sqcup$}} (b);
+\draw[edge] (b) to node[midway, left] {{\tiny$3$,$\mathbf{1}^\circ$}} (c);
+\draw[edge] (c) to node[midway, above left, xshift=4, yshift=-4] {{\tiny$4$,$\times$}} (a);
+\draw[edge] (c) to node[midway,left] {{\tiny$5$,$\times$}} (atom);
+\draw[edge] (c) to node[midway,above] {{\tiny$6$,$\times$}} (d);
+\draw[edge] (d) to node[midway,above] {{\tiny$7$,$\sqcup$}} (neutral);
+\draw[edge] (d) to[bend left] node[midway,right] {{\tiny$8$,$\sqcup$}} (e);
+\draw[edge] (e) to[bend left] node[midway,left] {{\tiny$10$,$\times$}} (d);
+\draw[edge] (e) to node[midway,above] {{\tiny$9$,$\times$}} (atom);
+\end{tikzpicture}

@@ -1,0 +1,41 @@
+% TODO: Redo this crap properly 
+
+{
+\newcommand{\wordclass}[2]{%
+\begin{tikzpicture}[scale=0.3, baseline=(current bounding box.center)]
+\useasboundingbox (0,-3) rectangle (#1,3);
+			\draw[thick, rounded corners=3pt] (0,0) rectangle (#1,3);
+			\node at ({#1/2}, 1.5) {#2};
+;
+			    \end{tikzpicture}
+}
+    \begin{center}
+    \scalebox{1}{\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+        \node (root) at (0, 0) {\wordclass{8}{$(\varepsilon,\set{0,1},\set{11})$}};
+        \node (lvl_1_1) at (-4, -2.25) {\wordclass{8}{$(0,\set{0,1},\set{11})$}};
+        \node (lvl_1_2) at (0, -2.25) {\wordclass{8}{$\set{\varepsilon}$}};
+        \node (lvl_1_3) at (4, -2.25) {\wordclass{8}{$(1,\set{0,1},\set{11})$}};
+        \node (lvl_2_1) at (-6, -4.5) {\wordclass{8}{$\set{0}$}};
+        \node (lvl_2_2) at (-2, -4.5) {\wordclass{8}{$(\varepsilon,\set{0,1},\set{11})$}};
+        \node (lvl_2_3) at (1, -4.5) {\wordclass{8}{$\set{1}$}};
+        \node (lvl_2_4) at (4, -4.5) {\wordclass{8.5}{$(10,\set{0,1},\set{11})$}};
+        \node (lvl_2_5) at (7, -4.5) {\wordclass{8.5}{$(11,\set{0,1},\set{11})$}};
+        \node (lvl_3_1) at (2, -6.75) {\wordclass{8}{$\set{10}$}};
+        \node (lvl_3_2) at (6, -6.75) {\wordclass{8.5}{$(\varepsilon,\set{0,1},\set{11})$}};
+        \node (lvl_4_1) at (0, -9) {\wordclass{8}{$\set{1}$}};
+        \node (lvl_4_2) at (4, -9) {\wordclass{8}{$\set{0}$}};
+        \ptedge{(root)}{(-0.5,1.2)}{(lvl_1_1)}{(-0.5,1.3)}
+        \ptedge{(root)}{(-0.5,1.2)}{(lvl_1_2)}{(-0.5,1.3)}
+        \ptedge{(root)}{(-0.5,1.2)}{(lvl_1_3)}{(-0.5,1.3)}
+        \ptedge{(lvl_1_1)}{(-0.5,1.2)}{(lvl_2_1)}{(-0.5,1.3)}
+        \ptedge{(lvl_1_1)}{(-0.5,1.2)}{(lvl_2_2)}{(-0.5,1.3)}
+        \ptedge{(lvl_1_3)}{(-0.5,1.2)}{(lvl_2_3)}{(-0.5,1.3)}
+        \ptedge{(lvl_1_3)}{(-0.5,1.2)}{(lvl_2_4)}{(-0.5,1.3)}
+        \ptedge{(lvl_1_3)}{(-0.5,1.2)}{(lvl_2_5)}{(-0.5,1.3)}
+        \ptedge{(lvl_2_4)}{(-0.5,1.2)}{(lvl_3_1)}{(-0.5,1.3)}
+        \ptedge{(lvl_2_4)}{(-0.5,1.2)}{(lvl_3_2)}{(-0.5,1.3)}
+        \ptedge{(lvl_3_1)}{(-0.5,1.2)}{(lvl_4_1)}{(-0.5,1.3)}
+        \ptedge{(lvl_3_1)}{(-0.5,1.2)}{(lvl_4_2)}{(-0.5,1.3)}
+    \end{tikzpicture}}
+    \end{center}
+}

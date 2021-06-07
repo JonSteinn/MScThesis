@@ -2,7 +2,7 @@
 
 Given an object of a root class in a specification, we need a systematic way of breaking it down into objects of terminal classes and given such objects of terminal classes, a systematic way to reconstruct the object of the root class. The idea behind our bijection is fairly simple. We take an object belonging to the root of a specification, break it down and reconstruct it with a parallel specification.
 
-Let $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ be a specification. In order for us to achieve this bijection, every rule $L_i \cong R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$ must be accompanied by a bijection $\phi_i: L_i \mapsto R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$. A specification along with such a collection of bijections is said to be \emph{parsable}.
+Let $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ be a specification. In order for us to achieve this bijection, every rule $L_i \cong R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$ must be accompanied by a bijection between $L_i$ and $R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$. A specification along with such a collection of bijections is said to be \emph{parsable}.
 
 Take for example a rule $\mathcal{C} \cong \mathcal{C}^{(1)} \times \mathcal{C}^{(2)}$. Any bijection for this rule would map an object of $\mathcal{C}$ to a tuple of two objects $(c_1,c_2)$ with $c_1 \in \mathcal{C}^{(1)}$ and $c_2 \in \mathcal{C}^{(2)}$. It is not as simple for disjoint union as the object will belong to exactly one of the resulting classes. Suppose $\mathcal{C} \cong \mathcal{C}^{(1)} \sqcup \mathcal{C}^{(2)}$ and we have an object $c\in\mathcal{C}$ and a bijection $\phi$ for this rule, how does $\phi(c)$ look exactly? If this was just a typical set union, the bijection would be the identity map but there would be no information about which set the mapped element belongs to. Flajolet and Sedgewick \cite{flajolet:ac} use unique colors, $m_1$ and $m_2$, to mark the elements, that is
 \[
@@ -10,60 +10,213 @@ Take for example a rule $\mathcal{C} \cong \mathcal{C}^{(1)} \times \mathcal{C}^
 \]
 This way, $\phi(c)$ would be a tuple of a color and an element in $\mathcal{C}^{(1)} \cup \mathcal{C}^{(2)}$. We propose a slightly different approach, which ultimately achieves the same thing. Instead of marking with colors, we mark with edges from the specification graph. We further extend this marking for any constructor. The bijective nature of the map remains as the edges are uniquely determined but will need some trivial transformation for elements to belong to the original set.
 
-If we look at the specification for $\Av{132}$ with the specification graph from \FigureRef{fig:specgraph132}, then for example we have $\phi_1(\varepsilon) = (\varepsilon, 1)$, $\phi_1(321) = (321, 2)$ and 
+Given a specification $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ accompanied by a collection of bijection for each of its rules, we refer to $(\phi_1,\phi_2,\dotsc,\phi_k)$ as the its \emph{parser} where $\phi_i$ maps an element of $L_i$, to an element of $R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$, using the corresponding bijection extended with the corresponding edge label. If we look at the specification for $\Av{132}$ with the specification graph from \FigureRef{fig:specgraph132} and let $(\phi_1,\phi_2)$ be its parser, then we have $\phi_1(\varepsilon) = (\varepsilon, 1)$, $\phi_1(321) = (321, 2)$ and 
 \[
     \phi_2(534612) = ((\st{534},3), (\st{6},4), (\st{12},5)) = ((312,3), (1,4), (12,5)).
 \]
 
 \section{Object parsing}
-Given a parsable specification $\spec{C} = (L,O,R,D)$ with $k$ rules, its collection of bijections $(\phi_1,\phi_2,\dotsc,\phi_k)$, specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic segregation} of $c$ in $\spec{C}$ where \[
+% Unification otherway? 
+Given a parsable specification $\spec{C} = (L,O,R,D)$ with $k$ rules, parser $(\phi_1,\phi_2,\dotsc,\phi_k)$, specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic partitioning} of $c$ in $\spec{C}$ where \[
     \varphi_{\spec{C}}(c,p) = \begin{cases}
         \set{p} & \text{ if } \textsf{tail}(p) \text{ is a terminal class}\\
-        \bigcup_{i=1}^\ell\varphi_{\spec{C}}(c_i,p \oplus e_i) & \text{ if }
-        \textsf{tail}(p) = L_i \text{ and } \phi_i(c) = ((c_1,e_1),\dotsc,(c_\ell,e_\ell))
+        \bigcup_{j=1}^\ell\varphi_{\spec{C}}(c_j,p \oplus e_j) & \text{ if }
+        \textsf{tail}(p) = L_i \text{ and } \phi_j(c) = ((c_1,e_1),\dotsc,(c_\ell,e_\ell))
     \end{cases}
 \]
-\todo[inline]{JSE: Example, with fig}
-\todo[inline]{JSE: Use better symbols for everything}
-Given a set of terminal ending paths $S$ we define $A(S)$ as $\cset{(p,c)}{c \in \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $m(P)$ as the pair with the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define 
-\[
-    Q(P) = \cset{(e_1e_2 \dotsm e_{n-1} \oplus e', c) \in P}{m(P) = e_1e_2 \dotsm e_n}.
-\]
-This mapping is undefined for a singleton set where the only path is the empty one. Suppose $m(P) = (p \oplus e', c)$, $\src(e') = L_i$ and 
-\[
-    Q(P) = \set{((p \oplus q_1), c_1),\dotsc, ((p \oplus q_r), c_r)}
-\]
-where $q_1 < q_2 < \dotsm < q_r$, then
-\[
-    B(P) = \set{(p, \varphi^{-1}_i((c_1,q_1), (c_2,q_2), \dotsc, (c_r,q_r)))}.
-\]
-Note that the way edge labels are defined guarantees consistency between order of labels and the right hand side of rules.
 
-Given a set of terminal ending paths $Q$ we define 
-$\omega^{-1}_{\spec{C}}(Q) = f(A(Q))$ where 
+Let $\spec{C}$ be the aforementioned specification for $\Av{132}$ and using the specification graph in \FigureRef{fig:specgraph132} and starting with $\pi=3241 \in \Av{132}$ we have
+\begin{align*}
+    \omega_{\spec{C}}(\pi) &= \varphi_{\spec{C}}(3241,\varepsilon)
+    = \varphi_{\spec{C}}(3241, 2) \\
+    &= \varphi_{\spec{C}}(21,23) \cup \set{24} \cup \varphi_{\spec{C}}(1,25)
+    = \set{24} \cup \varphi_{\spec{C}}(21,232) \cup \varphi_{\spec{C}}(1,252) \\
+    &= \set{24, 2324, 2524} \cup \varphi_{\spec{C}}(\varepsilon,2323) \cup \varphi_{\spec{C}}(1,2325) \cup \varphi_{\spec{C}}(\varepsilon, 2523) \cup  \varphi_{\spec{C}}(\varepsilon, 2525) \\
+    &= \set{24, 2324, 2524, 23231, 25231, 25251} \cup \varphi_{\spec{C}}(1,2325) \\
+    &= \set{24, 2324, 2524, 23231, 25231, 25251, 232524} \cup \varphi_{\spec{C}}(\varepsilon,232523) \cup \varphi_{\spec{C}}(\varepsilon,232525) \\
+    &= \set{24, 2324, 2524, 23231, 25231, 25251, 232524,2325231,2325251}
+\end{align*}
+This is shown with a tree in \FigureRef{fig:atomic_partitioning}. Note that the image of this map is not all subset of the set of paths that end in terminal classes. The set $\set{24}$ is not the atomic partitioning of any object since it requires siblings that would not be generated. Since every step taken involves a bijective rule then $\omega_{\spec{C}}$ is a bijection between the objects of the root class and the possible atomic partitionings.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/atomic_partitioning}
+    \caption{The atomic partitioning of $3241$ for the specification graph in \FigureRef{fig:specgraph132}.}
+    \label{fig:atomic_partitioning}
+\end{figure}
+
+To define the inverse of $\omega_{\spec{C}}$ we start by providing a few supporting maps. Given a set of terminal ending paths $S$ we define $T(S) = \cset{(c,p)}{p \in S \text{ and } c \in \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $\textsf{nxt}(P)$ as the pair with the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define the next siblings as
 \[
-    f(P) = \begin{cases}
-        c & \text{if } |P| = 1 \text{ and } (\varepsilon, c) \in P\\
-        f(\left(P \setminus Q(P)\right) \cup B(P)) & \text{otherwise}
+    \textsf{sib}(P) = \cset{(c, e_1e_2 \dotsm e_{n-1} \oplus e') \in P}{\textsf{nxt}(P) = e_1e_2 \dotsm e_n}.
+\]
+This mapping is undefined for a singleton set where the only path is the empty one. Suppose $\textsf{nxt}(P) = (c, p \oplus e')$, $\src(e') = L_i$ and 
+\[
+    \textsf{sib}(P) = \set{(c_1, (p \oplus q_1)),\dotsc, (c_r, (p \oplus q_r))}
+\]
+where $q_1 < q_2 < \dotsm < q_r$, then the next parent is
+\[
+    \textsf{par}(P) = (\phi^{-1}_i((c_1,q_1), (c_2,q_2), \dotsc, (c_r,q_r)),p)
+\]
+if $\textsf{tail}(p) = L_i$. Note that the way edge labels are defined guarantees consistency between order of labels and the right hand side of rules.
+
+Given an atomic partitioning $Q$ we define $\omega^{-1}_{\spec{C}}(Q) = \vartheta(T(Q))$ where
+\[
+    \vartheta(P) = \begin{cases}
+        c & \text{if } |P| = 1 \text{ and } (c, \varepsilon) \in P\\
+        \vartheta(\left(P \setminus \textsf{sib}(P)\right) \cup \set{\textsf{par}(P)}) & \text{otherwise}
     \end{cases}
 \]
-\todo[inline]{JSE: example, visual}
 
-
-
+Suppose we start with the set of terminal endings from $\omega_{\spec{C}}(\pi)$ in the previous example. We start by extending the set to include the terminal classes, that is
+\begin{align*}
+    P = T(\omega_{\spec{C}}(\pi)) = \{&(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),\\ &(\varepsilon,25251), (1,232524), (\varepsilon,2325231), (\varepsilon,2325251)\}
+\end{align*}
+We have $\textsf{nxt}(P) = (\varepsilon,2325251)$ and it has no siblings and the current step in the algorithm will just replace $2325251$ with $232525$. The same applies for the next step, replacing $(\varepsilon,2325231)$ with $(\varepsilon,232523)$. At this point, we have
+\begin{align*}
+    P = \{&(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),\\ &(\varepsilon,25251), (1,232524), (\varepsilon,232523), (\varepsilon,232525)\}.
+\end{align*}
+Now $\textsf{nxt}(P) = (\varepsilon,232525)$ with siblings $\textsf{sib}(P) = \set{(1,232523), (\varepsilon,232524), (\varepsilon,232525)}$ and parent
+\[
+    \textsf{par}(P) = (\phi_2^{-1}((\varepsilon, 232523),(1, 232524),(\varepsilon, 232525)), 23252) = (1,23252).
+\]
+We replace the siblings with the parent and at that point we have
+\[
+    P = \{(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),(\varepsilon,25251), (1,23252)\}.
+\]
+For the next $4$ steps, $\textsf{sib}(P)$ will be singleton sets with no changes to the element itself and thus we can remove the last step of each of their path, arriving at
+\[
+    P = \{(1,24), (1,2324), (1,2524), (\varepsilon,2323), (\varepsilon,2523),(\varepsilon,2525), (1,2325)\}.
+\]
+Next we have $\textsf{sib}(P) = \set{(\varepsilon, 2323), (1, 2324), (1,2325)}$ with parent $(21,232)$ and after that, $\textsf{sib}(P) = \set{(\varepsilon, 2523), (1, 2524), (\varepsilon,2525)}$ with parent $(1,252)$. These two parents are next, with no siblings and parent $(21,23)$ and $(1,25)$ respectively and we arrive at 
+\[
+    P = \set{(21,23),(1,24),(1,25)}.
+\]
+Now we have
+\begin{align*}
+    \vartheta(P) &= \vartheta(P \setminus \set{(21,23),(1,24),(1,25)} \cup \set{\phi_2^{-1}((21,3),(1,4),(1,5))}, 2)\\
+    &= \vartheta(\set{(3241,2)}) = \vartheta(\set{(3241,\varepsilon)}) = 3241.
+\end{align*}
+Looking at \FigureRef{fig:atomic_partitioning}, what we are essentially doing is taking the longest path that ends in a terminal node and gathering all siblings required to map in the other direction and taking a step backward, repeating until we are back at the root.
 
 \section{Parallel bijections}
 \begin{definition}
-Let $\spec{C}$ and $\spec{D}$ be two parallel specifications with matching order $\Gamma$ and root classes $\mathcal{C}$ and $\mathcal{D}$, then their \emph{parallel map} is
+Let $\spec{C}$ and $\spec{D}$ be two parallel specifications with path matching order $\gamma_{\spec{D}}$ and root classes $\mathcal{C}$ and $\mathcal{D}$, then their \emph{parallel map} is
 $\mathfrak{P}: \mathcal{C} \mapsto \mathcal{D}$ where, for any $c \in \mathcal{C}$, we have
-$\mathfrak{P}(c) = \omega_{\spec{D}}^{-1}(\cset{\Gamma^+(p)}{p \in \omega_{\spec{C}}(c)})$.
+$\mathfrak{P}(c) = \omega_{\spec{D}}^{-1}(\cset{\gamma_{\spec{D}}(p)}{p \in \omega_{\spec{C}}(c)})$.
 \end{definition}
-\todo[inline]{JSE: Visual example}
+
+As an example we will look at the specifications $\spec{C}$ and $\spec{D}$ for $\mathcal{C}^{(1)} = \Av{231,321}$ and $\mathcal{D}^{(1)} = \Av{132,312}$, found by TileScope. The specifications can be described as
+\[
+    \spec{C} = \left(
+    \begin{pmatrix}
+        \mathcal{C}^{(1)}\\\mathcal{C}^{(2)}\\\mathcal{C}^{(3)}\\\mathcal{C}^{(4)}\\\mathcal{C}^{(5)}    
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        \sqcup\\
+        \mathbf{1}^\circ\\
+        \times\\
+        \sqcup\\
+        \times
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        \set{\varepsilon} & \mathcal{C}^{(2)} & \emptyset\\
+        \mathcal{C}^{(3)} & \emptyset & \emptyset\\
+        \mathcal{C}^{(1)} & \set{1} & \mathcal{C}^{(4)}\\
+        \set{\varepsilon} & \mathcal{C}^{(5)}  & \emptyset\\
+        \mathcal{C}^{(4)} & \set{1} & \emptyset
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        2\\1\\3\\2\\2
+    \end{pmatrix}
+    \right)
+\]
+and
+\[
+    \spec{D} = \left(
+    \begin{pmatrix}
+        \mathcal{D}^{(1)} \\\mathcal{D}^{(2)}\\\mathcal{D}^{(3)}\\\mathcal{D}^{(4)}\\\mathcal{D}^{(5)}    
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        \sqcup\\
+        \mathbf{1}^\circ\\
+        \times\\
+        \sqcup\\
+        \times
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        \set{\varepsilon} & \mathcal{D}^{(2)} & \emptyset\\
+        \mathcal{D}^{(3)} & \emptyset & \emptyset\\
+        \mathcal{D}^{(1)} & \set{1} & \mathcal{D}^{(4)}\\
+        \set{\varepsilon} & \mathcal{D}^{(5)} & \emptyset\\
+        \set{1} & \mathcal{D}^{(4)} & \emptyset
+    \end{pmatrix}
+    \begin{matrix}\\,\end{matrix}
+    \begin{pmatrix}
+        2\\1\\3\\2\\2
+    \end{pmatrix}
+    \right)
+\]
+where the rules in both are (in order) top most point placement, row and column separation, factoring, top most point placement and factoring. The classes are summarized in \TableRef{tab:parmapex}.
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/nonrootcls}
+    \caption{The non-root classes of specifications found for the permutation classes $\Av{231,321}$ and $\Av{132,312}$ by TileScope.}
+    \label{tab:parmapex}
+\end{table}
+
+The specification graphs for these two specifications are shown in \FigureRef{fig:avexspecgraphs}. Their matching order are shown in \TableRef{tab:avexmatchingorder}.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/av_spec_graphs}
+    \caption{The specification graphs of specifications found for the permutation classes $\Av{231,321}$ and $\Av{132,312}$ by TileScope.}
+    \label{fig:avexspecgraphs}
+\end{figure}
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/av_ex_matchingorder}
+    \caption{The matching order for the specifications found for the permutation classes $\Av{231,321}$ and $\Av{132,312}$ by TileScope.}
+    \label{tab:avexmatchingorder}
+\end{table}
+
+Since we are working with tilings, the objects we map are actually gridded permutations. The root classes only have a single cell so the bijection to permutation is trivial. Let $\pi=132^{(0,0)} \in \mathcal{C}^{(1)}$. As is shown in the upper tree of \FigureRef{fig:mapexap}, its atomic partitioning is 
+\[
+    \omega_{\spec{C}}(\pi) = \set{235, 236(10), 234235,236897,2342341,2342367}.
+\]
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/atom_part_132}
+    \caption{The parallel map of $132$ for the specifications found for the permutation classes $\Av{231,321}$ and $\Av{132,312}$ by TileScope.}
+    \label{fig:mapexap}
+\end{figure}
+
+The path matching of $236(10)$ in $\mathscr{P}(\spec{D})$ is
+\begin{align*}
+\gamma_{\spec{D}}(236(10)) &= \Psi_{\spec{D}}(236(10),\varepsilon) = \psi_{\spec{D}}(236(10), \varepsilon) \\
+&= \Psi_{\spec{D}}(36(10),2) = \psi_{\spec{D}}(6(10),23) \\
+&= \Psi_{\spec{D}}((10),236) = \psi_{\spec{D}}((10),236) \\
+&= \Psi{\spec{D}}(\varepsilon, 2369) = \psi_{\spec{D}}(\varepsilon, 2369) \\
+&= 2369.
+\end{align*}
+We do the same for the other paths and get
+\[
+    \cset{\gamma_{\spec{D}}(p)}{p \in \omega_{\spec{C}}(c)} = \set{235, 2369, 234235,2368(10)7,2342341,2342367}.
+\]
+We then extend this set to contain the tail of every path and work our way up to the root of $\spec{D}$, using the inverse of every rule's bijection, as is shown in \FigureRef{fig:mapexap} and end up with $\mathfrak{P}(132) = 231$.
+
 \begin{proposition}
 The parallel map is a bijection for parallel specifications.
 \end{proposition}
 \begin{proof}
-asdf
+The function $\mathfrak{P}$ is a composition of a bijection and a bijection lifted to a powerset.
 \end{proof}
 \begin{corollary}
 Let $\mathcal{C}$ and $\mathcal{D}$ be the root classes of two parallel specifications, then $\mathcal{C} \cong \mathcal{D}$.

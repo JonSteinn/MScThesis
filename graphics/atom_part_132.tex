@@ -1,0 +1,319 @@
+{
+\newcommand{\thisscale}{0.745}
+\newcommand{\neutral}{$\set{\varepsilon}$}
+\newcommand{\atom}{$\set{1^{(0,0)}}$}
+\newcommand{\defrad}{.45}
+\newcommand{\sep}{16}
+
+\newcommand{\nodifyC}[4]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.35) ellipse (#4 and \defrad);
+\node at (0,0) {$\mathcal{C}^{(#1)}$};
+\node at (0,-0.4) {\tiny #2};
+\node at (0,-0.8) {\tiny #3};
+\end{tikzpicture}}
+
+\newcommand{\nodifyD}[4]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.35) ellipse (#4 and \defrad);
+\node at (0,0) {$\mathcal{D}^{(#1)}$};
+\node at (0,-0.4) {\tiny #2};
+\node at (0,-0.8) {\tiny #3};
+\end{tikzpicture}}
+
+\newcommand{\nodifyA}[2]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.2) circle (\defrad);
+\node at (0,0) {#1};
+\node at (0,-0.5) {\tiny #2};
+\end{tikzpicture}}
+% Todo: use rects or ovals rather than circs to fit gridded perm
+\begin{tikzpicture}[vertex/.style = {shape=ellipse,draw,minimum width=.5em, minimum height=.5em},scale=\thisscale, every node/.style={scale=\thisscale}]
+    \node[vertex] (clvl0) at (0,0) {\nodifyC{1}{$132^{(0,0)}$}{$\varepsilon$}{.5}};
+    
+    \node[vertex] (clvl11) at (-2,-2) {\neutral};
+    \node[vertex] (clvl12) at (2,-2) {\nodifyC{2}{$1^{(0,0)}3^{(1,1)}2^{(2,0)}$}{$2$}{.8}};
+    
+    \node[vertex] (clvl21) at (0,-4) {\nodifyC{3}{$1^{(0,0)}3^{(1,2)}2^{(2,1)}$}{$23$}{.8}};
+    
+    \node[vertex] (clvl31) at (-2,-6) {\nodifyC{1}{$1^{(0,0)}$}{$234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl32) at (0,-6) {\nodifyA{\atom}{$235$}};
+    \node[vertex] (clvl33) at (2,-6) {\nodifyC{4}{$1^{(0,0)}$}{$236$}{\defrad}};
+    
+    \node[vertex] (clvl41) at (-3,-8) {\neutral};
+    \node[vertex] (clvl42) at (-1,-8) {\nodifyC{2}{$1^{(0,0)}$}{$2342$}{\defrad}};
+    \node[vertex] (clvl43) at (1,-8) {\neutral};
+    \node[vertex] (clvl44) at (3,-8) {\nodifyC{5}{$1^{(0,0)}$}{$2368$}{\defrad}};
+    
+    \node[vertex] (clvl51) at (-2,-10) {\nodifyC{3}{$1^{(0,0)}$}{$23423$}{\defrad}};
+    \node[vertex] (clvl52) at (2,-10) {\nodifyC{4}{$\varepsilon$}{$23689$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl53) at (4,-10) {\nodifyA{\atom}{$236(10)$}};
+    
+    \node[vertex] (clvl61) at (-4,-12) {\nodifyC{1}{$\varepsilon$}{$234234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl62) at (-2,-12) {\nodifyA{\atom}{$234235$}};
+    \node[vertex] (clvl63) at (0,-12) {\nodifyC{4}{$\varepsilon$}{$234236$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl64) at (2,-12) {\nodifyA{\neutral}{$236897$}};
+    \node[vertex] (clvl65) at (4,-12) {$\mathcal{C}^{(5)}$};
+    
+    \node[vertex,thick,fill=gray!10] (clvl71) at (-5,-14) {\nodifyA{\neutral}{$2342341$}};
+    \node[vertex] (clvl72) at (-3,-14) {$\mathcal{C}^{(2)}$};
+    \node[vertex,thick,fill=gray!10] (clvl73) at (-1,-14) {\nodifyA{\neutral}{$2342367$}};
+    \node[vertex] (clvl74) at (1,-14) {$\mathcal{C}^{(5)}$};
+    
+    \draw[->,dotted] (clvl0) -- (clvl11);
+    \draw[->] (clvl0) -- (clvl12) node[pos=.5,above right] {$2$};
+    \draw[->] (clvl12) -- (clvl21) node[pos=.5,above left] {$3$};
+    \draw[->] (clvl21) -- (clvl31) node[pos=.5,above left] {$4$};
+    \draw[->] (clvl21) -- (clvl32) node[pos=.5,left] {$5$};
+    \draw[->] (clvl21) -- (clvl33) node[pos=.5,above right] {$6$};
+    \draw[->, dotted] (clvl31) -- (clvl41);
+    \draw[->] (clvl31) -- (clvl42) node[pos=.5,above right] {$2$};
+    \draw[->, dotted] (clvl33) -- (clvl43);
+    \draw[->] (clvl33) -- (clvl44) node[pos=.5,above right] {$8$};
+    \draw[->] (clvl42) -- (clvl51) node[pos=.5,above left] {$3$};
+    \draw[->] (clvl44) -- (clvl52) node[pos=.5,above left] {$9$};
+    \draw[->] (clvl44) -- (clvl53) node[pos=.5,above right] {$10$};
+    \draw[->] (clvl51) -- (clvl61) node[pos=.5,above left] {$4$};
+    \draw[->] (clvl51) -- (clvl62) node[pos=.5,left] {$5$};
+    \draw[->] (clvl51) -- (clvl63) node[pos=.5,above right] {$6$};
+    \draw[->] (clvl52) -- (clvl64) node[pos=.5,left] {$7$};
+    \draw[->,dotted] (clvl52) -- (clvl65);
+    \draw[->] (clvl61) -- (clvl71) node[pos=.5,above left] {$1$};
+    \draw[->,dotted] (clvl61) -- (clvl72);
+    \draw[->] (clvl63) -- (clvl73) node[pos=.5,above left] {$7$};
+    \draw[->,dotted] (clvl63) -- (clvl74);
+    
+    \draw[dotted,thick] (-6,{-(14+\sep)*0.5}) -- (6,{-(14+\sep)*0.5});
+
+    \node[vertex] (dlvl0) at (0,-14-\sep) {\nodifyD{1}{$231^{(0,0)}$}{$\varepsilon$}{.5}};
+    
+    \node[vertex] (dlvl11) at (-2,-12-\sep) {\neutral};
+    \node[vertex] (dlvl12) at (2,-12-\sep) {\nodifyD{2}{$2^{(0,0)}3^{(1,1)}1^{(2,0)}$}{$2$}{.8}};
+    
+    \node[vertex] (dlvl21) at (0,-10-\sep) {\nodifyD{3}{$2^{(0,1)}3^{(1,2)}1^{(2,0)}$}{$23$}{.8}};
+    
+    \node[vertex] (dlvl31) at (-2,-8-\sep) {\nodifyD{1}{$1^{(0,0)}$}{$234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl32) at (0,-8-\sep) {\nodifyA{\atom}{$235$}};
+    \node[vertex] (dlvl33) at (2,-8-\sep) {\nodifyD{4}{$1^{(0,0)}$}{$236$}{\defrad}};
+    
+    \node[vertex] (dlvl41) at (-3,-6-\sep) {\neutral};
+    \node[vertex] (dlvl42) at (-1,-6-\sep) {\nodifyD{2}{$1^{(0,0)}$}{$2342$}{\defrad}};
+    \node[vertex] (dlvl43) at (1,-6-\sep) {\neutral};
+    \node[vertex] (dlvl44) at (3,-6-\sep) {\nodifyD{5}{$1^{(0,0)}$}{$2368$}{\defrad}};
+    
+    \node[vertex] (dlvl51) at (-2,-4-\sep) {\nodifyD{3}{$1^{(0,0)}$}{$23423$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl52) at (2,-4-\sep) {\nodifyA{\atom}{$2369$}};
+    \node[vertex] (dlvl53) at (4,-4-\sep) {\nodifyD{4}{$\varepsilon$}{$2368(10)$}{\defrad}};
+    
+    \node[vertex] (dlvl61) at (-4,-2-\sep) {\nodifyD{1}{$\varepsilon$}{$234234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl62) at (-2,-2-\sep) {\nodifyA{\atom}{$234235$}};
+    \node[vertex] (dlvl63) at (0,-2-\sep) {\nodifyD{4}{$\varepsilon$}{$234236$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl64) at (2,-2-\sep) {\nodifyA{\neutral}{$2368(10)7$}};
+    \node[vertex] (dlvl65) at (4,-2-\sep) {$\mathcal{D}^{(5)}$};
+    
+    \node[vertex,thick,fill=gray!10] (dlvl71) at (-5,0-\sep) {\nodifyA{\neutral}{$2342341$}};
+    \node[vertex] (dlvl72) at (-3,0-\sep) {$\mathcal{D}^{(2)}$};
+    \node[vertex,thick,fill=gray!10] (dlvl73) at (-1,0-\sep) {\nodifyA{\neutral}{$2342367$}};
+    \node[vertex] (dlvl74) at (1,0-\sep) {$\mathcal{D}^{(5)}$};
+    
+    \draw[<-,dotted] (dlvl0) -- (dlvl11);
+    \draw[<-] (dlvl0) -- (dlvl12) node[pos=.5,below right] {$2$};
+    \draw[<-] (dlvl12) -- (dlvl21) node[pos=.5,below left] {$3$};
+    \draw[<-] (dlvl21) -- (dlvl31) node[pos=.5,below left] {$4$};
+    \draw[<-] (dlvl21) -- (dlvl32) node[pos=.5,left] {$5$};
+    \draw[<-] (dlvl21) -- (dlvl33) node[pos=.5,below right] {$6$};
+    \draw[<-, dotted] (dlvl31) -- (dlvl41);
+    \draw[<-] (dlvl31) -- (dlvl42) node[pos=.5,below right] {$2$};
+    \draw[<-, dotted] (dlvl33) -- (dlvl43);
+    \draw[<-] (dlvl33) -- (dlvl44) node[pos=.5,below right] {$8$};
+    \draw[<-] (dlvl42) -- (dlvl51) node[pos=.5,below left] {$3$};
+    \draw[<-] (dlvl44) -- (dlvl52) node[pos=.5,below left] {$9$};
+    \draw[<-] (dlvl44) -- (dlvl53) node[pos=.5,below right] {$10$};
+    \draw[<-] (dlvl51) -- (dlvl61) node[pos=.5,below left] {$4$};
+    \draw[<-] (dlvl51) -- (dlvl62) node[pos=.5,left] {$5$};
+    \draw[<-] (dlvl51) -- (dlvl63) node[pos=.5,below right] {$6$};
+    \draw[<-] (dlvl53) -- (dlvl64) node[pos=.5,below left] {$7$};
+    \draw[<-,dotted] (dlvl53) -- (dlvl65);
+    \draw[<-] (dlvl61) -- (dlvl71) node[pos=.5,below left] {$1$};
+    \draw[<-,dotted] (dlvl61) -- (dlvl72);
+    \draw[<-] (dlvl63) -- (dlvl73) node[pos=.5,below left] {$7$};
+    \draw[<-,dotted] (dlvl63) -- (dlvl74);
+    
+    \draw [blue,dashed,thick,->] plot [smooth] coordinates {(clvl32.south) (.5,-10.5) (1.75,-13.5) (1.75,-16.5) (0.5,-19.5) (dlvl32.north)};
+    \draw[blue,dashed,thick,->] (clvl71) -- (dlvl71);
+    \draw[blue,dashed,thick,->] (clvl73) -- (dlvl73);
+    \draw[blue,dashed,thick,->] (clvl62) -- (dlvl62);
+    \draw[blue,dashed,thick,->] (clvl64) -- (dlvl64);
+    
+    \draw[blue,dashed,thick,->] plot [smooth] coordinates {(clvl53.south east) (5,-13) (5,-15) (3.5,-17.25) (dlvl52.75)};
+\end{tikzpicture}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
+{
+\newcommand{\thisscale}{0.8}
+\newcommand{\neutral}{$\set{\varepsilon}$}
+\newcommand{\atom}{$\set{1^{(0,0)}}$}
+\newcommand{\defrad}{.45}
+
+\newcommand{\nodifyC}[4]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.35) ellipse (#4 and \defrad);
+\node at (0,0) {$\mathcal{C}^{(#1)}$};
+\node at (0,-0.4) {\tiny #2};
+\node at (0,-0.8) {\tiny #3};
+\end{tikzpicture}}
+
+\newcommand{\nodifyA}[2]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.2) circle (\defrad);
+\node at (0,0) {#1};
+\node at (0,-0.5) {\tiny #2};
+\end{tikzpicture}}
+% Todo: use rects or ovals rather than circs to fit gridded perm
+\begin{tikzpicture}[vertex/.style = {shape=ellipse,draw,minimum width=.5em, minimum height=.5em},scale=\thisscale, every node/.style={scale=\thisscale}]
+    \node[vertex] (clvl0) at (0,0) {\nodifyC{1}{$132^{(0,0)}$}{$\varepsilon$}{.5}};
+    
+    \node[vertex] (clvl11) at (-2,-2) {\neutral};
+    \node[vertex] (clvl12) at (2,-2) {\nodifyC{2}{$1^{(0,0)}3^{(1,1)}2^{(2,0)}$}{$2$}{.8}};
+    
+    \node[vertex] (clvl21) at (0,-4) {\nodifyC{3}{$1^{(0,0)}3^{(1,2)}2^{(2,1)}$}{$23$}{.8}};
+    
+    \node[vertex] (clvl31) at (-2,-6) {\nodifyC{1}{$1^{(0,0)}$}{$234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl32) at (0,-6) {\nodifyA{\atom}{$235$}};
+    \node[vertex] (clvl33) at (2,-6) {\nodifyC{4}{$1^{(0,0)}$}{$236$}{\defrad}};
+    
+    \node[vertex] (clvl41) at (-3,-8) {\neutral};
+    \node[vertex] (clvl42) at (-1,-8) {\nodifyC{2}{$1^{(0,0)}$}{$2342$}{\defrad}};
+    \node[vertex] (clvl43) at (1,-8) {\neutral};
+    \node[vertex] (clvl44) at (3,-8) {\nodifyC{5}{$1^{(0,0)}$}{$2368$}{\defrad}};
+    
+    \node[vertex] (clvl51) at (-2,-10) {\nodifyC{3}{$1^{(0,0)}$}{$23423$}{\defrad}};
+    \node[vertex] (clvl52) at (2,-10) {\nodifyC{4}{$\varepsilon$}{$23689$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl53) at (4,-10) {\nodifyA{\atom}{$236(10)$}};
+    
+    \node[vertex] (clvl61) at (-4,-12) {\nodifyC{1}{$\varepsilon$}{$234234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl62) at (-2,-12) {\nodifyA{\atom}{$234235$}};
+    \node[vertex] (clvl63) at (0,-12) {\nodifyC{4}{$\varepsilon$}{$234236$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (clvl64) at (2,-12) {\nodifyA{\neutral}{$236897$}};
+    \node[vertex] (clvl65) at (4,-12) {$\mathcal{C}^{(5)}$};
+    
+    \node[vertex,thick,fill=gray!10] (clvl71) at (-5,-14) {\nodifyA{\neutral}{$2342341$}};
+    \node[vertex] (clvl72) at (-3,-14) {$\mathcal{C}^{(2)}$};
+    \node[vertex,thick,fill=gray!10] (clvl73) at (-1,-14) {\nodifyA{\neutral}{$2342367$}};
+    \node[vertex] (clvl74) at (1,-14) {$\mathcal{C}^{(5)}$};
+    
+    \draw[->,dotted] (clvl0) -- (clvl11);
+    \draw[->] (clvl0) -- (clvl12) node[pos=.5,above right] {$2$};
+    \draw[->] (clvl12) -- (clvl21) node[pos=.5,above left] {$3$};
+    \draw[->] (clvl21) -- (clvl31) node[pos=.5,above left] {$4$};
+    \draw[->] (clvl21) -- (clvl32) node[pos=.5,left] {$5$};
+    \draw[->] (clvl21) -- (clvl33) node[pos=.5,above right] {$6$};
+    \draw[->, dotted] (clvl31) -- (clvl41);
+    \draw[->] (clvl31) -- (clvl42) node[pos=.5,above right] {$2$};
+    \draw[->, dotted] (clvl33) -- (clvl43);
+    \draw[->] (clvl33) -- (clvl44) node[pos=.5,above right] {$8$};
+    \draw[->] (clvl42) -- (clvl51) node[pos=.5,above left] {$3$};
+    \draw[->] (clvl44) -- (clvl52) node[pos=.5,above left] {$9$};
+    \draw[->] (clvl44) -- (clvl53) node[pos=.5,above right] {$10$};
+    \draw[->] (clvl51) -- (clvl61) node[pos=.5,above left] {$4$};
+    \draw[->] (clvl51) -- (clvl62) node[pos=.5,left] {$5$};
+    \draw[->] (clvl51) -- (clvl63) node[pos=.5,above right] {$6$};
+    \draw[->] (clvl52) -- (clvl64) node[pos=.5,left] {$7$};
+    \draw[->,dotted] (clvl52) -- (clvl65);
+    \draw[->] (clvl61) -- (clvl71) node[pos=.5,above left] {$1$};
+    \draw[->,dotted] (clvl61) -- (clvl72);
+    \draw[->] (clvl63) -- (clvl73) node[pos=.5,above left] {$7$};
+    \draw[->,dotted] (clvl63) -- (clvl74);
+\end{tikzpicture}
+}
+\end{comment}
+\begin{comment}
+{
+\newcommand{\thisscale}{0.8}
+\newcommand{\neutral}{$\set{\varepsilon}$}
+\newcommand{\atom}{$\set{1^{(0,0)}}$}
+\newcommand{\defrad}{.45}
+\newcommand{\sep}{14}
+
+\newcommand{\nodifyD}[4]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.35) ellipse (#4 and \defrad);
+\node at (0,0) {$\mathcal{D}^{(#1)}$};
+\node at (0,-0.4) {\tiny #2};
+\node at (0,-0.8) {\tiny #3};
+\end{tikzpicture}}
+
+\newcommand{\nodifyA}[2]{\begin{tikzpicture}[node/.style = {shape=circle},scale=\thisscale, every node/.style={scale=\thisscale}]
+\useasboundingbox (0,-0.2) circle (\defrad);
+\node at (0,0) {#1};
+\node at (0,-0.5) {\tiny #2};
+\end{tikzpicture}}
+% Todo: use rects or ovals rather than circs to fit gridded perm
+\begin{tikzpicture}[vertex/.style = {shape=ellipse,draw,minimum width=.5em, minimum height=.5em},scale=\thisscale, every node/.style={scale=\thisscale}]
+    \node[vertex] (dlvl0) at (0,-14-\sep) {\nodifyD{1}{$231^{(0,0)}$}{$\varepsilon$}{.5}};
+    
+    \node[vertex] (dlvl11) at (-2,-12-\sep) {\neutral};
+    \node[vertex] (dlvl12) at (2,-12-\sep) {\nodifyD{2}{$2^{(0,0)}3^{(1,1)}1^{(2,0)}$}{$2$}{.8}};
+    
+    \node[vertex] (dlvl21) at (0,-10-\sep) {\nodifyD{3}{$2^{(0,1)}3^{(1,2)}1^{(2,0)}$}{$23$}{.8}};
+    
+    \node[vertex] (dlvl31) at (-2,-8-\sep) {\nodifyD{1}{$1^{(0,0)}$}{$234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl32) at (0,-8-\sep) {\nodifyA{\atom}{$235$}};
+    \node[vertex] (dlvl33) at (2,-8-\sep) {\nodifyD{4}{$1^{(0,0)}$}{$236$}{\defrad}};
+    
+    \node[vertex] (dlvl41) at (-3,-6-\sep) {\neutral};
+    \node[vertex] (dlvl42) at (-1,-6-\sep) {\nodifyD{2}{$1^{(0,0)}$}{$2342$}{\defrad}};
+    \node[vertex] (dlvl43) at (1,-6-\sep) {\neutral};
+    \node[vertex] (dlvl44) at (3,-6-\sep) {\nodifyD{5}{$1^{(0,0)}$}{$2368$}{\defrad}};
+    
+    \node[vertex] (dlvl51) at (-2,-4-\sep) {\nodifyD{3}{$1^{(0,0)}$}{$23423$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl52) at (2,-4-\sep) {\nodifyA{\atom}{$2369$}};
+    \node[vertex] (dlvl53) at (4,-4-\sep) {\nodifyD{4}{$\varepsilon$}{$2368(10)$}{\defrad}};
+    
+    \node[vertex] (dlvl61) at (-4,-2-\sep) {\nodifyD{1}{$\varepsilon$}{$234234$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl62) at (-2,-2-\sep) {\nodifyA{\atom}{$234235$}};
+    \node[vertex] (dlvl63) at (0,-2-\sep) {\nodifyD{4}{$\varepsilon$}{$234236$}{\defrad}};
+    \node[vertex,thick,fill=gray!10] (dlvl64) at (2,-2-\sep) {\nodifyA{\neutral}{$2368(10)7$}};
+    \node[vertex] (dlvl65) at (4,-2-\sep) {$\mathcal{D}^{(5)}$};
+    
+    \node[vertex,thick,fill=gray!10] (dlvl71) at (-5,0-\sep) {\nodifyA{\neutral}{$2342341$}};
+    \node[vertex] (dlvl72) at (-3,0-\sep) {$\mathcal{D}^{(2)}$};
+    \node[vertex,thick,fill=gray!10] (dlvl73) at (-1,0-\sep) {\nodifyA{\neutral}{$2342367$}};
+    \node[vertex] (dlvl74) at (1,0-\sep) {$\mathcal{D}^{(5)}$};
+    
+    \draw[<-,dotted] (dlvl0) -- (dlvl11);
+    \draw[<-] (dlvl0) -- (dlvl12) node[pos=.5,below right] {$2$};
+    \draw[<-] (dlvl12) -- (dlvl21) node[pos=.5,below left] {$3$};
+    \draw[<-] (dlvl21) -- (dlvl31) node[pos=.5,below left] {$4$};
+    \draw[<-] (dlvl21) -- (dlvl32) node[pos=.5,left] {$5$};
+    \draw[<-] (dlvl21) -- (dlvl33) node[pos=.5,below right] {$6$};
+    \draw[<-, dotted] (dlvl31) -- (dlvl41);
+    \draw[<-] (dlvl31) -- (dlvl42) node[pos=.5,below right] {$2$};
+    \draw[<-, dotted] (dlvl33) -- (dlvl43);
+    \draw[<-] (dlvl33) -- (dlvl44) node[pos=.5,below right] {$8$};
+    \draw[<-] (dlvl42) -- (dlvl51) node[pos=.5,below left] {$3$};
+    \draw[<-] (dlvl44) -- (dlvl52) node[pos=.5,below left] {$9$};
+    \draw[<-] (dlvl44) -- (dlvl53) node[pos=.5,below right] {$10$};
+    \draw[<-] (dlvl51) -- (dlvl61) node[pos=.5,below left] {$4$};
+    \draw[<-] (dlvl51) -- (dlvl62) node[pos=.5,left] {$5$};
+    \draw[<-] (dlvl51) -- (dlvl63) node[pos=.5,below right] {$6$};
+    \draw[<-] (dlvl53) -- (dlvl64) node[pos=.5,below left] {$7$};
+    \draw[<-,dotted] (dlvl53) -- (dlvl65);
+    \draw[<-] (dlvl61) -- (dlvl71) node[pos=.5,below left] {$1$};
+    \draw[<-,dotted] (dlvl61) -- (dlvl72);
+    \draw[<-] (dlvl63) -- (dlvl73) node[pos=.5,below left] {$7$};
+    \draw[<-,dotted] (dlvl63) -- (dlvl74);
+\end{tikzpicture}
+}
+\end{comment}
