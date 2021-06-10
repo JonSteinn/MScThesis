@@ -1,0 +1,35 @@
+\begin{algorithmic}[H]
+\State \textbf{Input}: A gridded permutation $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)} \cdots \pi_n^{(x_n,0)} \in \mathcal{G}^{(m,1)}_n$.
+\Procedure{slide}{$\pi$}
+    \If{$\cset{i}{x_i = 1} = \emptyset$}
+        \State \Return{$\pi_1^{(x_1+1-\textsf{sign}(x_1),0)}\pi_2^{(x_2+1-\textsf{sign}(x_2),0)} \cdots \pi_n^{(x_n+1-\textsf{sign}(x_n),0)}$}
+    \EndIf
+    
+    \For{$i \gets |\cset{j}{x_j < 2}| + 1, n$}
+        \State $x_i \gets x_i + 1$
+    \EndFor
+    
+    \While{$\cset{j}{x_j = 0} \neq \emptyset$}
+        \State $i \gets \max\cset{j}{x_j = 0}$
+        \State $A \gets \cset{j}{x_j = 1 \text{ and } \pi_j > \pi_i}$
+        \State $k \gets |\cset{j}{x_j < 2}|$
+        \If{$A = \emptyset$}
+            \State $x_k \gets 2$
+            \State $x_i \gets 1$
+        \Else
+            \State $j \gets \max(A)$
+            \State $\alpha \gets \pi_i$
+            \State $\beta \gets \pi_j$
+            \For{$z\gets i, j-1$}
+                \State $\pi_{z}^{(x_z,y_z)} \gets \pi_{z+1}^{(x_{z+1},y_{z+1})}$
+            \EndFor
+            \State $\pi_{j-1} \gets \alpha$
+            \For{$z\gets j, k - 1$}
+                \State $\pi_{z}^{(x_z,y_z)} \gets \pi_{z+1}^{(x_{z+1},y_{z+1})}$
+            \EndFor
+            \State $\pi_{k}^{(x_k,y_k)} \gets \beta^{(2,0)}$
+        \EndIf
+    \EndWhile
+    \State \Return{$\pi_1^{(x_1 - 1,0)}\pi_2^{(x_2 - 1,0)}\cdots\pi_n^{(x_n - 1,0)}$}
+\EndProcedure
+\end{algorithmic}

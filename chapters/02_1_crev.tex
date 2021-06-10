@@ -1,0 +1,52 @@
+\begin{definition}\label{def:rrgp}
+Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ and define its \emph{column reverse} for $(a,b)\in\N^2$ where $a\leq b$ as the mapping $\textsf{rev}_{[a,b]}$ that reverses the longest subsequence of $\pi$ who's columns all belong to $[a,b]$.
+\end{definition}
+
+The column reverse can be extended to tilings such that it is applied to all of its obstructions and requirements. Let $\pi = 5^{(0,1)}2^{(0,0)}4^{(1,1)}1^{(1,0)}6^{(2,2)}3^{(3,1)}$, then $\textsf{rev}_{[1,2]}(\pi) = 5^{(0,1)}2^{(0,0)}6^{(1,2)}1^{(2,0)}4^{(2,1)}3^{(3,1)}$, as shown in \FigureRef{fig:gp_col_rev}. An example for tilings can be seen in \FigureRef{fig:t_col_rev}.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/gp_col_rev}
+    \caption{The column reverse of a gridded permutation.}
+    \label{fig:gp_col_rev}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/t_col_rev}
+    \caption{The column reverse of a tiling.}
+    \label{fig:t_col_rev}
+\end{figure}
+
+\begin{lemma}\label{lem:crevcontain}
+Let $\pi, \sigma \in \mathcal{G}$ such that $\contains{\pi}{\sigma}$, then $\contains{\textsf{rev}_{[a,b]}(\pi)}{\textsf{rev}_{[a,b]}(\sigma)}$.
+\end{lemma}
+\begin{proof}
+If $\pi$ has no elements within the columns then neither does $\sigma$ and both are mapped to themselves. If $\sigma$ has no elements within the columns then the mapping has no effect on the pattern which remains in $\textsf{rev}_{[a,b]}(\pi)$. 
+
+Let $\set{i,i+1,\dotsc,i+k}$ be the indices of elements of $\pi$ within the columns. Let $\sigma = \st{\sseq{A_1\cup L \cup A_2}{\pi}}$ where $L \subseteq \set{i,i+1,\dotsc,i+k}$ and $A_1$ and $A_2$ are the indices in $\pi$ on either side of the columns.
+
+\begin{align*}
+    \textsf{rev}_{[a,b]}(\sigma) &= \st{\sseq{A_1}{\pi}\rev\left(\sseq{L}{\pi}\right)\sseq{A_2}{\pi}} \\
+    &= \st{\sseq{A_1}{\textsf{rev}_{[a,b]}(\pi)}\sseq{\cset{2i+k-\ell}{\ell \in L}}{\textsf{rev}_{[a,b]}(\pi)}\sseq{A_2}{\textsf{rev}_{[a,b]}(\pi)}}\\
+    &= \st{\sseq{A_1 \cup \cset{2i+k-\ell}{\ell \in L} \cup A_2}{\textsf{rev}_{[a,b]}(\pi)}}
+\end{align*}
+\end{proof}
+
+\begin{lemma}\label{lem:crevgrid}
+Let $\mathcal{T}$ be a tiling and $\pi \in \textsf{Grid}(\mathcal{T})$, then $\textsf{rev}_{[a,b]}(\pi)\in\textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))$.
+\end{lemma}
+\begin{proof}
+By Lemma \ref{lem:crevcontain} all occurrences of requirements are preserved so the only way that $\textsf{rev}_{[a,b]}(\pi)$ is not in $\textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))$ is if there exists an obstruction $o$ that is avoided by $\pi$ while $\textsf{rev}_{[a,b]}(\pi)$ contains $\textsf{rev}_{[a,b]}(o)$. Suppose that there is such an obstruction, then $\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(\pi)) = \pi$ must contain $\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(o)) = o$ which contradicts $\pi$ avoiding $o$.
+\end{proof}
+
+\begin{proposition}\label{prop:rrtil}
+Let $\mathcal{T}$ be a tiling, then $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ for all $n\in\N$.
+\end{proposition}
+\begin{proof}
+For any $\pi \in \textsf{Grid}_n(\mathcal{T})$ we have $(\textsf{rev}_{[a,b]} \circ \textsf{rev}_{[a,b]})(\pi) = \pi$ and therefore $\textsf{rev}_{[a,b]}$ is a bijection between $\textsf{Grid}_n(\mathcal{T})$ and $\cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\mathcal{T})}$ with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))$ by Lemma \ref{lem:crevgrid} and therefore $|\textsf{Grid}_n(\mathcal{T})| \leq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$. By the same argument there is a bijection between $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))$ and
+\[
+    \cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))}
+\]
+with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(\mathcal{T})))=\textsf{Grid}_n(\mathcal{T})$ and therefore $|\textsf{Grid}_b(\mathcal{T})| \geq |\textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ and thus $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))|$
+\end{proof}

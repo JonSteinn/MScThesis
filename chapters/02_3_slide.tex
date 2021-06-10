@@ -1,0 +1,466 @@
+Sliding is a generalization of the sliding lemma described in Babson and West \cite{slide}, adopted for tilings.
+
+\begin{definition}
+Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{(c,1)}_n$. We define \emph{sliding} as the map $\Upsilon: \mathcal{G}^{(c,1)}_n \to \mathcal{G}^{(c,1)}_n$ defined as follows.
+\begin{enumerate}[a)]
+    \item If $\pi$ has no elements in $(1,0)$, we move whatever is in $(0,0)$ to $(1,0)$ and we are done.
+    \item If $\pi$ has elements in $(1,0)$, we start by shifting all elements in $(2,0), (3,0), \dotsc, (c-1,0)$ one cell to the right and then we do the following until we have depleted $\pi$'s elements in $(0,0)$:
+    \begin{enumerate}[i.]
+        \item If the rightmost element in $(0,0)$ is larger than all elements in $(1,0)$, we move the rightmost element of $(1,0)$ to $(2,0)$ as the leftmost element and then we move the rightmost element of $(0,0)$ to $(1,0)$ as the leftmost element.
+        \item If the rightmost element in $(0,0)$ has a larger element in $(1,0)$, then we move the rightmost element of $(0,0)$ to the right of the smallest element in $(1,0)$ that is larger than it and that element is moved to be the leftmost element in $(2,0)$.
+    \end{enumerate}
+    Finally we shift all elements one cell to the left.
+\end{enumerate}
+\end{definition}
+
+This mapping is also outlined in Algorithm~\ref{alg:slidealg}. An example for $3594^{(0,0)}62^{(1,0)}718^{(2,0)}$ can be seen in \FigureRef{fig:slide_gp_example}.
+
+\begin{algorithm}
+\input{algs/slide}
+\caption{The sliding algorithm}
+\label{alg:slidealg}
+\end{algorithm}
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/slide_gp_example}
+    \caption{The sliding of $3594^{(0,0)}62^{(1,0)}718^{(2,0)}$.}
+    \label{fig:slide_gp_example}
+\end{figure}
+
+\begin{definition}\label{def:slidable}
+A pair of tilings
+\[
+    (\mathcal{T}_1,\mathcal{T}_2) = \left(\left((c,1), \mathcal{O}_1, \set{\mathcal{R}_1,\ldots,\mathcal{R}_k}\right), \left((c,1), \mathcal{O}_2, \set{\mathcal{R}_1,\ldots,\mathcal{R}_k}\right)\right)
+\]
+is \emph{slidable} if the following conditions are satisfied.
+\begin{itemize}
+    \item Every gridded permutation in $\mathcal{R}_1 \cup \cdots \cup \mathcal{R}_k$ has no positions in columns $0$ and $1$.
+    \item The obstructions $12\cdots n^{(0,0)}, 12\cdots (n-1)^{(0,0)}n^{(1,0)}$ and $12^{(1,0)}$ belong to $\mathcal{O}_1$, $12\cdots n^{(1,0)}, 1^{(0,0)}23\cdots n^{(1,0)}$ and $12^{(0,0)}$ belong to $\mathcal{O}_2$ and no other obstructions that are entirely within columns $0$ and $1$ belong to either $\mathcal{O}_1$ or $\mathcal{O}_2$.
+    \item For any obstruction $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{O}_1$ with at least one element outside columns $0$ and $1$ the subsequence $\sseq{\cset{i \in [n]}{x_i \in \set{0,1}}}{\pi}$ is either empty or in 
+    \[
+         \cset{k(k+1)^{(0,0)}, k^{(0,0)}(k+1)^{(1,0)}, k^{(0,0)},k^{(1,0)}}{k\in\Z^+}.
+    \]
+    Similarly, for $\mathcal{O}_2$, the subsequence must be either empty or in 
+    \[
+         \cset{k(k+1)^{(1,0)}, k^{(0,0)}(k+1)^{(1,0)}, k^{(0,0)},k^{(1,0)}}{k\in\Z^+}.
+    \]
+    \item Any obstruction entirely outside columns $0$ and $1$ in $\mathcal{O}_1$ must also exist in $\mathcal{O}_2$ and vice versa.
+    \item Let $o_1 = \pi_1^{(0,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ and $o_2 = \pi_1^{(1,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ where $x_2,s > 1$ then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_1 \in \mathcal{O}_2$ and $o_2 \in \mathcal{O}_2$ are equivalent.
+    \item Let \begin{align*}o_1 &= \pi_1^{(0,0)}\pi_2^{(0,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_2 &= \pi_1^{(0,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_3 &= \pi_1^{(1,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\end{align*} where $s > 2$ and $x_3 > 1$, then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_2$ and $o_3 \in \mathcal{O}_2$ are equivalent.
+\end{itemize}
+\end{definition}
+
+An example of two slidable tilings can be seen in \FigureRef{fig:slidable_tilings}.
+
+\begin{figure}[ht]
+    \centering
+    \input{graphics/slidable_tilings}
+    \caption{Slidable tilings.}
+    \label{fig:slidable_tilings}
+\end{figure}
+
+\begin{lemma}\label{lem:slidemap}
+Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$.
+\end{lemma}
+\begin{proof}
+The mapping does not affect anything that is outside the first two columns where the two tilings are identical, mapping those gridded permutations to themselves. If the gridded permutation has no elements in column 1, then the elements in column $0$ are simply moved into column 1 and since they are already avoiding $12\cdots n$ in column 0, it will also do so in column 1. Additionally since any crossing obstruction containing a single element in column $0$ must be identical but in with that element in column $1$ in $\mathcal{T}_2$, we continue to avoid any crossing obstructions.
+
+Now suppose we have a gridded permutation $\pi$ that has elements in column 1. By the end of the mapping all columns are shifted one to the left but we will refer to their index before that, in the mapped tiling. Note that the mapping is defined by placing elements in-order into column 1 so we will never form an increasing pattern there.
+
+Suppose after a single step in the map that we form the first $12\cdots n$ (spread in any way across the first 3 columns). Note that it can contain at most one point in column 1 as it is decreasing. If the $12\cdots n$ pattern does only contain the newly moved point in column 1 (not the one we just moved to column 2), than the pattern must have been there before the step was taken.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,1.25) -- (4.5,1.5) -- (7,2);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (3.5,2.5) circle (0.15);
+\fill[teal] (4.5,1.5) circle (0.15);
+\fill (5.5,0.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,1.25);
+\fill[purple] (6.5,1) circle (0.15);
+\draw (7,2) rectangle (8.5,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,1.25) -- (2.75,1.5) -- (7,2);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (3.5,2.5) circle (0.15);
+\fill[teal] (2.75,1.5) circle (0.15);
+\fill (5.5,0.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,1.25);
+\fill[purple] (5,1) circle (0.15);
+\draw (7,2) rectangle (8.5,2.75);
+\end{tikzpicture}
+\end{center}
+
+Suppose this pattern includes the newly moved element in column 2 and no elements in column 1 then the pattern must have existed before regardless of whether the new element in column 2 was the smallest element in column 1 before the move or not.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,0.75) -- (6.5,1) -- (7,2);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (3.5,2.5) circle (0.15);
+\fill[teal] (4.5,1.5) circle (0.15);
+\fill (5.5,0.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,0.75);
+\fill[purple] (6.5,1) circle (0.15);
+\draw (7,2) rectangle (8.5,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,0.75) -- (5,1) -- (7,2);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (3.5,2.5) circle (0.15);
+\fill[teal] (2.75,1.5) circle (0.15);
+\fill (5.5,0.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,0.75);
+\fill[purple] (5,1) circle (0.15);
+\draw (7,2) rectangle (8.5,2.75);
+\end{tikzpicture}
+\end{center}
+
+Finally suppose the pattern involves elements from both column 1 and 2. Here two scenario can arise. One were the pattern involves both moved elements and the other only the one moved to column 2. In the first one the pattern remains as we move both points together when we backtrack.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,0.75) -- (5,1) -- (6.5,1.75) -- (7,2.25);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (3.5,2.5) circle (0.15);
+\fill[teal] (5,1) circle (0.15);
+\fill (5.5,0.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,0.75);
+\fill[purple] (6.5,1.75) circle (0.15);
+\draw (7,2.25) rectangle (8.5,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,0.75) -- (2.75,1) -- (4.25,1.75) -- (7,2.25);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (3.5,2.5) circle (0.15);
+\fill[teal] (2.75,1) circle (0.15);
+\fill (5.5,0.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,0.75);
+\fill[purple] (4.25,1.75) circle (0.15);
+\draw (7,2.25) rectangle (8.5,2.75);
+\end{tikzpicture}
+\end{center}
+
+In the latter, there is a smaller element in column 1 then the moved one that belongs to the pattern. When we go back, the moved element goes back from column 1 to column 0 but that is between the element in column 1 that formed the pattern and the element that was moved to column 2, preserving the pattern.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,0.75) -- (5,1) -- (6.5,2) -- (7,2.25);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (5.5,0.5) circle (0.15);
+\fill (5,1) circle (0.15);
+\fill[teal] (4.5,1.5) circle (0.15);
+\fill[purple] (6.5,2) circle (0.15);
+\fill (3.5,2.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,0.75);
+\draw (7,2.25) rectangle (8.5,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+\draw (2.25,0.75) -- (2.75,1.5) -- (4,2) -- (7,2.25);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (5.5,0.5) circle (0.15);
+\fill (5,1) circle (0.15);
+\fill[teal] (2.75,1.5) circle (0.15);
+\fill[purple] (4,2) circle (0.15);
+\fill (3.5,2.5) circle (0.15);
+\draw (0.5,0.5) rectangle (2.25,0.75);
+\draw (7,2.25) rectangle (8.5,2.75);
+\end{tikzpicture}
+\end{center}
+
+In the case of a crossing obstructions forming with one element in the first 3 columns, then wherever that element was before must have been an occurrence of the pattern as well.
+
+Now suppose we form a crossing pattern with two adjacent elements in the first three columns for the first time. This can happen in several ways. Suppose the adjacent part in the first 3 columns occurs between the first two, then the pattern must have existed entirely in column 0 before.
+\begin{center}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (2.75,1);
+\coordinate (a3) at (4.5,1.5);
+\coordinate (a4) at (6.25,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a2) -- (a3) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill[teal] (a3) circle (0.15);
+\fill[purple] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (2.25,1);
+\coordinate (a3) at (2.75,1.5);
+\coordinate (a4) at (4,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a2) -- (a3) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill[teal] (a3) circle (0.15);
+\fill[purple] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\end{center}
+
+If the pattern occurs with the two adjacent in column 0 and 2, then it must have existed between column 0 and 1 before.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (2.75,1.5);
+\coordinate (a4) at (6.25,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill[teal] (a2) circle (0.15);
+\fill (a3) circle (0.15);
+\fill[purple] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (2.75,1);
+\coordinate (a3) at (2.25,1.5);
+\coordinate (a4) at (4,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill[teal] (a2) circle (0.15);
+\fill (a3) circle (0.15);
+\fill[purple] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\end{center}
+
+If the pattern occurs between column 1 and 2, then since they are adjacent and increasing, these must also be the two elements that were moved and therefore it must have been in columns 0 and 1 before.
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (4.5,1.5);
+\coordinate (a4) at (6.25,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill[teal] (a3) circle (0.15);
+\fill[purple] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (2.75,1.5);
+\coordinate (a4) at (4,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill[teal] (a3) circle (0.15);
+\fill[purple] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\end{center}
+
+If the pattern occurs with the adjacent elements entirely within column 2, then the pattern must have existed between columns 1 and 2 before.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (6.25,1.5);
+\coordinate (a4) at (6.75,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill[teal] (a2) circle (0.15);
+\fill[purple] (a3) circle (0.15);
+\fill (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.63]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (2.75,1);
+\coordinate (a3) at (4.5,1.5);
+\coordinate (a4) at (6.25,2);
+\coordinate (a5) at (3.5,2.5);
+\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\draw (9,0) rectangle (12,3);
+\fill (a1) circle (0.15);
+\fill[teal] (a2) circle (0.15);
+\fill[purple] (a3) circle (0.15);
+\fill (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\draw (9.25,0.25) rectangle (11.75,2.75);
+\end{tikzpicture}
+\end{center}
+
+The trivial bijection of shifting the entire gridded permutation one column to the left (with column $0$ being depleted after the mapping) will not create any of these patterns. Since no obstruction from $\mathcal{T}_2$ can occur, $\Upsilon(\pi)$ is in $\textsf{Grid}_i(\mathcal{T}_2)$.
+\end{proof}
+
+\begin{definition}
+Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{(c,1)}_n$. We define \emph{inverse sliding} as the map $\Upsilon^{-1}: \mathcal{G}^{(c,1)}_n \to \mathcal{G}^{(c,1)}_n$ defined as follows.
+\begin{enumerate}[a)]
+    \item If $\pi$ has no elements in $(0,0)$, we move whatever is in $(1,0)$ to $(0,0)$ and we are done.
+    \item If $\pi$ has elements in $(0,0)$, we start by shifting all elements one cell to the right and then we do the following until we have depleted $\pi$'s elements in $(2,0)$:
+    \begin{enumerate}[i.]
+        \item If the leftmost element in $(2,0)$ is smaller than all elements in $(1,0)$, we move the leftmost element of $(1,0)$ to $(0,0)$ as the rightmost element and then we move the leftmost element of $(2,0)$ to $(1,0)$ as the rightmost element.
+        \item If the leftmost element in $(2,0)$ has a smaller element in $(1,0)$, then we move the leftmost element in $(2,0)$ to the left of the largest element in $(1,0)$ that is smaller than it and that element is moved to be the rightmost element in $(0,0)$.
+    \end{enumerate}
+    Finally we shift all elements in $(3,0), (4,0), \ldots$ one cell to the left.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon^{-1}(\pi) \in \textsf{Grid}_i(\mathcal{T}_1)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_2)$.
+\end{lemma}
+\begin{proof}
+The argument when $(0,0)$ is empty is an analogy of the case in Lemma \ref{lem:slidemap} when $(1,0)$ is empty so we assume that $\pi$ has elements in $(0,0)$. The avoidance of $12\cdots n$ and any crossing obstruction is an analogy of that Lemma \ref{lem:slidemap}'s argument for the same, viewing the images from right to left instead.
+\end{proof}
+
+\begin{proposition}
+Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable, then $|\textsf{Grid}_i(\mathcal{T}_1)| = |\textsf{Grid}_i(\mathcal{T}_2)|$ for all $i\in\N$.
+\end{proposition}
+\begin{proof}
+Let $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$ and $\pi' \in \textsf{Grid}_i(\mathcal{T}_2)$. A step in $\Upsilon$ where we move an element larger than all the elements in $(1,0)$ is cancelled out by the corresponding move in $\Upsilon^{-1}$ and vice versa.
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (4.5,1.5);
+\coordinate (a4) at (4,2);
+\coordinate (a5) at (2.5,2.5);
+\draw[purple,->,thick] (a5) -- (3.5,2.5);
+\draw[teal,->,thick] (a1) -- (6.5,0.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill[teal] (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill (a3) circle (0.15);
+\fill (a4) circle (0.15);
+\fill[purple] (a5) circle (0.15);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+\coordinate (a1) at (6.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (4.5,1.5);
+\coordinate (a4) at (4,2);
+\coordinate (a5) at (3.5,2.5);
+\draw[purple,->,thick] (a5) -- (2.5,2.5);
+\draw[teal,->,thick] (a1) -- (5.5,0.5);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill[teal] (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill (a3) circle (0.15);
+\fill (a4) circle (0.15);
+\fill[purple] (a5) circle (0.15);
+\end{tikzpicture}
+\end{center}
+A step in $\Upsilon$ where we move an element not larger than all elements in $(1,0)$ is cancelled out by the corresponding move in $\Upsilon^{-1}$ and vice versa.
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (2.5,1.5);
+\coordinate (a4) at (4,2);
+\coordinate (a5) at (3.5,2.5);
+\draw[purple,->,thick] (a3) -- (4.5,1.5);
+\draw[teal,->,thick] (a4) -- (6.5,2);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill[purple] (a3) circle (0.15);
+\fill[teal] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.75]
+\coordinate (a1) at (5.5,0.5);
+\coordinate (a2) at (5,1);
+\coordinate (a3) at (4.5,1.5);
+\coordinate (a4) at (6.5,2);
+\coordinate (a5) at (3.5,2.5);
+\draw[purple,->,thick] (a3) -- (2.5,1.5);
+\draw[teal,->,thick] (a4) -- (4,2);
+\draw (0,0) rectangle (3,3);
+\draw (3,0) rectangle (6,3);
+\draw (6,0) rectangle (9,3);
+\fill (a1) circle (0.15);
+\fill (a2) circle (0.15);
+\fill[purple] (a3) circle (0.15);
+\fill[teal] (a4) circle (0.15);
+\fill (a5) circle (0.15);
+\end{tikzpicture}
+\end{center}
+Both maps move one point into and one out of $(1,0)$ at every step, so the number of elements in $(1,0)$ is fixed. Therefore the number of elements in the other column of the first two must also be fixed. When mapping $\pi$ with $\Upsilon$ we take a certain amount of steps and when we map back with $\Upsilon^{-1}$ we take the same amount of steps, each cancelling out the steps of $\Upsilon$ and therefore $\Upsilon^{-1}(\Upsilon(\pi)) = \pi$ and similarly $\Upsilon\left(\Upsilon^{-1}(\pi')\right) = \pi$ and thus, $\Upsilon$ is a bijection between $\textsf{Grid}_i(\mathcal{T}_1)$ and $\textsf{Grid}_i(\mathcal{T}_2)$.
+\end{proof}
+
+We can extend the Definition~\ref{def:slidable} of slidable tilings to use any columns $c_1$ and $c_2$ instead of just $0$ and $1$. The conditions would replace any constraints involving the first two columns with $c_1$ and $c_2$ and allow for subsequences on either side.
+
+\begin{proposition}
+Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable in columns $c_1$ and $c_2$, then $|\textsf{Grid}_i(\mathcal{T}_1)| = |\textsf{Grid}_i(\mathcal{T}_2)|$ for all $i\in\N$.
+\end{proposition}
+\begin{proof}
+Suppose the tilings have $c$ columns and let $\sigma = \sigma_1\sigma_2 \cdots \sigma_m \in \mathcal{S}_m$ where $\sigma_1 = c_1$ and $\sigma_2 = c_2$. We can permute the columns so $c_1$ and $c_2$ are the first two, slide them and permute back, that is we can use a composition of bijections, $C_{\sigma^{-1}} \circ \Upsilon \circ C_\sigma$, to map between the two.
+\end{proof}

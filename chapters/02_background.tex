@@ -266,7 +266,7 @@ where
 \[
     (c,r) \in \Z^+ \times \Z^+, \ \mathcal{O} \subseteq \mathcal{G}^{(c,r)} \text{ and } \mathcal{R}=\set{\mathcal{R}_1,\mathcal{R}_2,\dotsc,\mathcal{R}_k} \subseteq \left(\mathcal{G}^{(c,r)}\right)^k
 \]
-are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. A more detailed definition is given by Bean \cite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements blue. Positions with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point. \todo{JSE: black \& white - ify}
+are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. A more detailed definition is given by Bean \cite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements blue. Positions with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.
 
 \begin{figure}[ht!]
     \centering
@@ -293,38 +293,25 @@ This is a simple example but given different classes and constructors, we can en
     \label{fig:tiling132}
 \end{figure}
 
-\section{Combinatorial exploration}
-\todo[inline, caption={}]{
-\begin{itemize}
-    \item Explain css
-    \item cite repo
-    \item Explain universe
-    \item Explain css' search
-    \item Explain eq paths
-    \item Give an example
-\end{itemize}
-}
-\section{\texttt{Tilescope}}
-\todo[inline, caption={}]{
-\begin{itemize}
-    \item Explain tilescope
-    \item cite repo
-    \item cite permuta too
-    \item Give an overview of strategies
-    \item Give an example
-    \item Move to background?
-\end{itemize}
-}
+\section{Combinatorial Exploration}
+Combinatorial Exploration \cite{css} is a domain agnostic specification searcher. It uses strategies to generate rules for classes. Strategies are independent of classes and describe an action that may result in rules given an applicable class. 
 
-% In CB's phd: [mention and reference without further detail]
-% - {Insertion}
-% - {Placement}
-% - {Row and column separation}
-% - {Obstruction transitivity}
-% - {Symmetry}
-% - {Verification} 
-% - {Factor}
-% Not in CB's phd: [explain]
-% - {Sliding}
-% - {Fusion}
-% - {Assumption}
+The search method is done in a breadth-first manner from the root class. It uses a predefined set of strategies to generate rules for classes and expands a universe in the hope that it contains a specification.
+
+To avoid tautologies, the searcher gives classes equivalence labels and tracks rules in terms of parent and children pairs in term of their equivalence labels. The rules within a single equivalence label may or may not be equivalence rules. Any single child rule that could result in a tautology could be contained in an equivalence label with nonequivalent classes. When the specification is found and extracted from the universe, any sequence of equivalence rules is merged into a single rule.
+
+\todo[inline]{JSE: Mention types of: initial, inferral, expansion, ver, maybe mention base types of rules}
+
+\section{TileScope}
+TileScope \cite{tiling} is an implementation of Combinatorial Exploration for tilings. The root class usually has a single cell and no requirements and therefore a direct correspondence to a permutation class. The library also utilizes Permuta \cite{permuta}, a general permutation library. Most of the strategies TileScope uses can be found in Bean \cite{BeanPhd:phd}. We will explain those that are not.
+
+\subsection{Column reverse}
+\input{chapters/02_1_crev}
+\subsection{Column permutation}
+\input{chapters/02_2_cperm}
+\subsection{Sliding}
+\input{chapters/02_3_slide}
+\subsection{Assumptions}
+\input{chapters/02_4_assumption}
+\subsection{Fusion}
+\input{chapters/02_5_fusion}
