@@ -64,7 +64,7 @@ An example of two slidable tilings can be seen in \FigureRef{fig:slidable_tiling
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$.
 \end{lemma}
 \begin{proof}
-The mapping does not affect anything that is outside the first two columns where the two tilings are identical, mapping those gridded permutations to themselves. If the gridded permutation has no elements in column 1, then the elements in column $0$ are simply moved into column 1 and since they are already avoiding $12\cdots n$ in column 0, it will also do so in column 1. Additionally since any crossing obstruction containing a single element in column $0$ must be identical but in with that element in column $1$ in $\mathcal{T}_2$, we continue to avoid any crossing obstructions.
+The mapping does not affect anything that is outside the first two columns where the two tilings are identical, mapping those gridded permutations to themselves. If the gridded permutation has no elements in column 1, then the elements in column $0$ are simply moved into column 1 and since they are already avoiding $12\dotsm n$ in column 0, it will also do so in column 1 and in the case of a crossing obstruction with a single point in column $0$ then $\textsf{Grid}(\mathcal{T}_2)$ must contain the same permutation but with that single point in column $1$.
 
 Now suppose we have a gridded permutation $\pi$ that has elements in column 1. By the end of the mapping all columns are shifted one to the left but we will refer to their index before that, in the mapped tiling. Note that the mapping is defined by placing elements in-order into column 1 so we will never form an increasing pattern there.
 

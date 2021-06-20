@@ -429,7 +429,7 @@ to further expand. Since there are finite possible pairs from each class, we alw
 
 
 
-\section{The parallel algorithm}
+\section{The parallel algorithm}\label{sec:paralg}
 The parallel algorithm checks if two specifications are parallel and if so, returns the matching order. The graphs are expanded as trees simultaneously\footnote{Not concurrently.} and lineal descendants from the root form a path. At any node\footnote{We refer to vertices as nodes in algorithmic context.} in the tree will be the tail of the path taken. A node corresponding to the path $q$, is the parent of the nodes corresponding to the paths in $q^+$, which are called children. Matching orders are stored in a dictionary with class pairs keys. We alter the matching order such that both the domain and codomain are standardized, e.g., the $i^\text{th}$ largest edge label is replaced by $i$. If we can traverse the trees down to matched specification paths, we have parallel specifications.
 
 The algorithm uses dynamic programming to match pairs, remembering both successes and failures. The matching order is done with an iterative backtracking to avoid nesting recursions and fail as soon as possible. If we cannot match the first child to some child in the other node, there is no point trying to match the second child. Whether children 1 and 3 match for given nodes has nothing to do with what children were matched previously so we also remember child matching failures to limit each pair to a single attempt.

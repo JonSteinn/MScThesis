@@ -222,12 +222,92 @@ The function $\mathfrak{P}$ is a composition of a bijection and a bijection lift
 Let $\mathcal{C}$ and $\mathcal{D}$ be the root classes of two parallel specifications, then $\mathcal{C} \cong \mathcal{D}$.
 \end{corollary}
 
+\section{Nonbijective rules}
+There are rules that are not inherently bijective but still allows us to count the left hand side from the right hand side. We will discuss a solution to nonbijective rules where there is a map that is not injective. As an example we will look at fusion but this can be generalized beyond that.
+
+Suppose we have class $\mathcal{C}$ on the left hand side of a rule and that $\phi$ is a mapping of an element of $\mathcal{C}$ to an element of the rule's right hand side that is not injective. Define $\overline{c}$ as $\cset{c' \in \mathcal{C}}{\phi(c') = \phi(c)}$. 
+
+\begin{definition}
+A rule with a class $\mathcal{C}$ as its left hand side and a mapping $\phi$ from its left to its right hand side is \emph{indexable} if $\overline{c}$ is a strictly totally ordered finite set for every $c \in \mathcal{C}$ for some binary relation.
+\end{definition}
+
+Given an indexable rule with a map $\phi$ from $\mathcal{C}$ we can convert it into a bijection 
+$\hat{\phi}$ by extending the codomain to be the Cartesian product of itself and the natural numbers. Let $\hat{\phi}(c) = (\phi(c),i)$ if $c$ is the $i+1^\text{th}$ largest\footnote{The offset is done for zero based indexing.} element in $\overline{c}$. Its inverse, $\hat{\phi}^{-1}$, will map $(\phi(c),i)$ to $c_i$ if $\textsf{sort}(\overline{c}) = (c_1,c_2,\dotsc,c_n)$
+
+As an example we will look at the fusion rule in \FigureRef{fig:fusable} with tilings
+\[
+    \mathcal{T}_1 = ((2,1), \set{123^{(0,0)},12^{(0,0)}3^{(1,0)},1^{(0,0)}23^{(1,0)},123^{(1,0)}}, \emptyset)
+\]
+and
+\[
+    \mathcal{T}_2 = ((1,1),\set{123^{(0,0)}}, \emptyset).
+\]
+Any gridded permutation in $\textsf{Grid}(\mathcal{T}_1)$ is a permutation from $\Av{123}$ spread across the first two cell in all possible ways. They all map to their underlying permutation within the single cell of $\mathcal{T}_2$. The elements that map to the same element can be thought of as the underlying permutation with a vertical line drawn between its points in all possible way as demonstrate in \TableRef{tab:fuseline}. We can use the index of the line that splits them as a binary relation and that makes the set of elements that map to the same element a strictly totally ordered finite set for every all such sets within $\textsf{Grid}(\mathcal{T}_1)$.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|l}
+        $|\pi_1\pi_2\dotsm\pi_n$ & $\pi_1\pi_2\dotsm\pi_n^{(1,0)}$ \\
+        $\pi_1|\pi_2\dotsm\pi_n$ & $\pi_1^{(0,0)}\pi_2\dotsm\pi_n^{(1,0)}$ \\
+        $\vdots$ & \hspace{1cm}$\vdots$ \\
+        $\pi_1\pi_2\dotsm\pi_n|$ & $\pi_1\pi_2\dotsm\pi_n^{(0,0)}$ \\
+    \end{tabular}
+    \caption{Fusion's map interpreted with vertical splitting lines.}
+    \label{tab:fuseline}
+\end{table}
+
+Let $c = 1^{(0,0)}32^{(1,0)} \in \textsf{Grid}(\mathcal{T}_1)$, then
+\[
+    \overline{c} = \set{132^{(0,0)},13^{(0,0)}2^{(1,0)}, 1^{(0,0)}32^{(1,0)}, 132^{(1,0)}}
+\]
+and 
+\[
+    \textsf{sort}(\overline{c}) = \left(132^{(1,0)},1^{(0,0)}32^{(1,0)},13^{(0,0)}2^{(1,0)},132^{(0,0)}\right).
+\]
+The bijection from all elements in $\overline{c}$ are shown in \TableRef{tab:fuseidxmap}. These bijections would then be further extended by the edge label when used in a parallel bijection.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+        $c$ & $\phi(c)$ & $i$ & $\hat{\phi}(c)$ & $\hat{\phi}^{-1}(\phi(c),i)$\\
+        \hline
+        $132^{(1,0)}$ & $132^{(0,0)}$ & $0$ & $\left(132^{(0,0)}, 0\right)$ & $132^{(1,0)}$ \\
+        $1^{(0,0)}32^{(1,0)}$ & $132^{(0,0)}$ & $1$ & $\left(132^{(0,0)}, 1\right)$ & $1^{(0,0)}32^{(1,0)}$ \\
+        $13^{(0,0)}2^{(1,0)}$ & $132^{(0,0)}$ & $2$ & $\left(132^{(0,0)}, 2\right)$ & $13^{(0,0)}2^{(1,0)}$\\
+        $132^{(0,0)}$ & $132^{(0,0)}$ & $3$ & $\left(132^{(0,0)}, 3\right)$ & $132^{(0,0)}$
+    \end{tabular}
+    \caption{The indexed map for a fusion rule.}
+    \label{tab:fuseidxmap}
+\end{table}
+
+Suppose we have two indexable rules that are nonbijective from left hand sides $\mathcal{C}$ and $\mathcal{D}$. In order for them two be equivalent, they additionally need to satisfy an existance of a bijection between $\cset{\overline{c}}{c \in \mathcal{C}}$ and $\cset{\overline{d}}{d \in \mathcal{D}}$ that preserves cardinality.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/equiv_fusion_rules}
+    \caption{Two equivalent fusion rules.}
+    \label{fig:fuseq}
+\end{figure}
+
+The two fusion rules shown in \FigureRef{fig:fuseq} are an example of two equivalent nonbijective rules.  Combinatorial Exporation found the generating function of both right hand sides to be
+\[
+    T(x,y) = \frac{C(x)}{1-xyC(x)} \text{ where } C(x) = \frac{1-\sqrt{1-4x}}{2x}
+\]
+is the Catalan generating function. Let $T_1$ and $T_2$ be the generating functions for the upper and lower left hand sides respectively. The assumptions are identical in both so we have
+\[
+    T_1(x,y) = \frac{yT(x,y)-T(x,1)}{y-1} = T_2(x,y).
+\]
+Since the generating functions are identical for both right hand sides, then there are equally many gridded permutations of length $n$ with $k$ points in cell $(1,0)$. For each such gridded permutation in either class there are a total of $k+1$ corresponding gridded permutations in their respective left hand side that would map to it. Therefore there does exist a bijection the sets of elements that map to the same element in the two left hand sides. The rules are equivalent because the generating functions for the left hand side are the same (given that the right hand sides are) and this bijection exists.
+
 \section{The bijection algorithm}
-\todo[inline,caption={}]{
-\begin{itemize}
-    \item Explain in words
-    \item Provide pseudo
-    \item analyze complexity 
-    \item Example
-\end{itemize}
-}
+The actual map itself is implemented with a parse tree where the original object is broken down into atoms for the domain's specification. While doing so we follow along in the parallel specification and then build back up to the root in specifications that followed along. The matching order is used to pair the correct children.
+
+The algorithm can be seen in Algorithm~\ref{alg:parmap}. It uses the specifications as object and assumes it has access to its root rules and can find the rule of any of its classes. Any rule object knows its children and can map both forward and backward. The matching order will be a function that both filters out any empty classes and sorts a tuple of broken down objects and their corresponding classes by the matched order between the classes.
+
+Suppose we have an object of length $n$ and two parallel specifications where the one with more rules has $r$ rules. We will always reach an atom before exhausting every rule and thus reduce the object by at least one at that point. The worst time complexity of the map is therefore $\mathcal{O}(nr)$.
+
+\begin{algorithm}[ht!]
+\input{algs/map}
+\caption{The parallel bijection algorithm.}
+\label{alg:parmap}
+\end{algorithm}

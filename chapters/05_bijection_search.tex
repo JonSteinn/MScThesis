@@ -1,24 +1,24 @@
-
 \coverchapter{Bijection search}\label{ch:search}
-\todo[inline]{Some intro text}
-\section{The bijection search algorithm}
-\todo[inline, caption={}]{
-\begin{itemize}
-    \item Explain in words what the algorithm does and how it is build on top of css
-    \item Explain the two searches [gather matching info, construct spec]
-    \item Provide algorithms for the two searches
-    \item Analyze (big-0), although this is probably dominated by CSS' complexity
-    \item Reference minimal working example appendix
-    \item Give an example
-    \item Move to background?
-\end{itemize}
-}
+We already know how to check if two specifications are parallel and if so, how to map objects between them but now we turn our attention to searching for parallel specifications. This is done by using Combinatorial Exploration's search for specification with further steps taken once it has finished.
 
-\section{Nonbijective rules}
-\todo[inline,caption={}]{
-\begin{itemize}
-    \item Explain how we handle this with indexed maps
-    \item This will probably just be a discussion without theory
-    \item Give a detailed example of $\Av{132} \mapsto \Av{123}$.
-\end{itemize}
-}
+\section{The bijection search algorithm}
+When finding a bijection between classes we start by defining a pack of strategies for each and then expand universes of rules for both until they contain at least one specification each. We can expand further but usually universes will contain multiple specifications as soon as they contain one. Once that is done we preprocess the universe, gathering some information we need in our search.
+
+The universes will contain rules in the form of equivalence labels $(p, (c_1,c_2,\dotsc,c_n))$ where the $p$ is the equivalence label of the parent and $c_i$ is an equivalence label of child $i$. Any equivalence label $p$ can have multiple rules
+\begin{align*}
+    &\left(p, \left(c^{(1)}_1, c^{(1)}_2, \dotsc, c^{(1)}_{n_i}\right)\right)\\
+    &\left(p, \left(c^{(2)}_1, c^{(2)}_2, \dotsc, c^{(2)}_{n_2}\right)\right)\\
+    &\hspace{2.1cm}\vdots\\
+    &\left(p, \left(c^{(k)}_1, c^{(k)}_2, \dotsc, c^{(k)}_{n_k}\right)\right)
+\end{align*}
+in the universe. Depending on which one is looked at, there may be some equivalence rules needed to reach the children of that rule. That means we do not have to worry about equivalence rules in our search.
+
+The algorithm works similarly to the parallel algorithm in Section~\ref{sec:paralg}. The main difference is that we ignore equivalence rules and for any parent pair $p_1$ and $p_2$ from each universe, we gather every possible matching of their children. This is done since $p_1$ and $p_2$ can match with some specific children at one point while $p_1$ could match another equivalence label in the other universe later using another rule but our specifications need a single rule for any parent. The complexity of finding these matches is the same as for the parallel algorithm but now the number of rules is significantly larger. The complexity of the specification search dominates our algorithm so the complexity of the search itself is the same as that of the specification search.
+
+Once we have found all matched equivalence labels and assuming the roots have matched we start looking within them for specifications that are consistent in the sense that only a single rule is used for each equivalence label. This is done with backtracking starting from the two roots.
+
+If all of those stages are successful we pass the consistent rules (in terms of equivalence labels) to a specification extractor that handles creating any required path of equivalence rules. A minimal working example on how to use this search can be seen in Appendix~\ref{ch:minex}.
+
+
+\section{Fusion and assumptions}
+\todo[inline]{jse: specify what else was done for fusion}

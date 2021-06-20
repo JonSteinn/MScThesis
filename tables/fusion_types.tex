@@ -1,0 +1,70 @@
+{
+\newcommand{\myscale}{0.6}
+
+\newcommand{\twocell}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+        \def\xscale{1.0} % Horizontal scale factor
+        \def\yscale{1.0} % Vertical scale factor
+        \def\spnt{0.1} % Size of smaller points
+        \def\lpnt{0.125} % Size of larger points
+        \def\roundscale{0.5} % The rounding factor
+        \ifthenelse{\equal{#2}{0}}{
+            \fill[green!20,rounded corners=2ex*\roundscale] (0,0) rectangle (8.32*\xscale*0.5,3.76*\yscale);
+            \fill[green!20] (0.3*\xscale,0) rectangle (8.32*0.5*\xscale,3.76*\yscale);
+        }{
+            \ifthenelse{\equal{#2}{1}}{
+                \fill[green!20,rounded corners=2ex*\roundscale] (8.32*0.5*\xscale,0*\yscale) rectangle (8.32*\xscale,3.76*\yscale);
+                \fill[green!20] (8.32*0.5*\xscale,0*\yscale) rectangle (8.32*0.75*\xscale,3.76*\yscale);
+            }{
+                \fill[green!20,rounded corners=2ex*\roundscale] (0,0) rectangle (8.32*\xscale*0.5,3.76*\yscale);
+                \fill[green!20] (0.3*\xscale,0) rectangle (8.32*0.5*\xscale,3.76*\yscale);
+                \fill[blue!20,rounded corners=2ex*\roundscale] (8.32*0.5*\xscale,0*\yscale) rectangle (8.32*\xscale,3.76*\yscale);
+                \fill[blue!20] (8.32*0.5*\xscale,0*\yscale) rectangle (8.32*0.75*\xscale,3.76*\yscale);
+            }
+            
+        }
+        \draw[rounded corners=2ex*\roundscale] (0,0) rectangle (8.32*\xscale,3.76*\yscale);
+        \draw (4.16*\xscale, 3.76*\yscale) -- (4.16*\xscale, 0);
+        \fill[red] (0.6*\xscale, 0.88*\yscale) circle (\spnt);
+        \fill[red] (1.73*\xscale, 1.88*\yscale) circle (\spnt);
+        \fill[red] (3.05*\xscale, 3.06*\yscale) circle (\spnt);
+        \draw[red] (0.6*\xscale, 0.88*\yscale) -- (1.73*\xscale,1.88*\yscale) -- (3.05*\xscale,3.06*\yscale);
+        \fill[red] (2.13*\xscale, 0.9*\yscale) circle (\spnt);
+        \fill[red] (3.28*\xscale, 1.89*\yscale) circle (\spnt);
+        \fill[red] (4.64*\xscale, 3.1*\yscale) circle (\spnt);
+        \draw[red] (2.13*\xscale, 0.9*\yscale) -- (3.28*\xscale,1.89*\yscale) -- (4.64*\xscale,3.1*\yscale);
+        \fill[red] (3.75*\xscale, 0.93*\yscale) circle (\spnt);
+        \fill[red] (4.88*\xscale, 1.91*\yscale) circle (\spnt);
+        \fill[red] (6.17*\xscale, 3.08*\yscale) circle (\spnt);
+        \draw[red] (3.75*\xscale, 0.93*\yscale) -- (4.88*\xscale,1.91*\yscale) -- (6.17*\xscale,3.08*\yscale);
+        \fill[red] (5.3*\xscale, 0.9*\yscale) circle (\spnt);
+        \fill[red] (6.29*\xscale, 1.82*\yscale) circle (\spnt);
+        \fill[red] (7.56*\xscale, 3.06*\yscale) circle (\spnt);
+        \draw[red] (5.3*\xscale, 0.9*\yscale) -- (6.29*\xscale,1.82*\yscale) -- (7.56*\xscale,3.06*\yscale);
+\end{tikzpicture}}
+
+\newcommand{\singlecell}[1]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+        \def\xscale{1.0} % Horizontal scale factor
+        \def\yscale{1.0} % Vertical scale factor
+        \def\spnt{0.1} % Size of smaller points
+        \def\lpnt{0.125} % Size of larger points
+        \def\roundscale{0.5} % The rounding factor
+        \def\sh{0.35}
+        \fill[green!20, rounded corners=2ex*\roundscale] (0,0) rectangle (4.16*\xscale,3.76*\yscale);
+        \draw[rounded corners=2ex*\roundscale] (0,0) rectangle (4.16*\xscale,3.76*\yscale);
+        \fill[red] ({(\sh+0.6)*\xscale}, 0.88*\yscale) circle (\spnt);
+        \fill[red] ({(\sh+1.73)*\xscale}, 1.88*\yscale) circle (\spnt);
+        \fill[red] ({(\sh+3.05)*\xscale}, 3.06*\yscale) circle (\spnt);
+        \draw[red] ({(\sh+0.6)*\xscale}, 0.88*\yscale) -- ({(\sh+1.73)*\xscale},1.88*\yscale) -- ({(\sh+3.05)*\xscale},3.06*\yscale);
+\end{tikzpicture}}
+
+\newcommand{\cellwrap}[1]{\begin{tabular}{c}#1\end{tabular}}
+
+\begin{tabular}{c|c|c}
+    $\mathcal{T}_1$ & $\mathcal{T}_2$ & Rule \\
+    \hline & \\[-2ex]
+    \cellwrap{\twocell{\myscale}{0}} & \cellwrap{\singlecell{\myscale}} & \cellwrap{$T_1(x,y) = \frac{yT_2(x,y) - T_2(x,1)}{y-1}$} \\
+    \cellwrap{\twocell{\myscale}{1}} & \cellwrap{\singlecell{\myscale}} & \cellwrap{$T_1(x,y) = \frac{yT_2(x,y) - T_2(x,1)}{y-1}$} \\
+    \cellwrap{\twocell{\myscale}{2}} & \cellwrap{\singlecell{\myscale}} & \cellwrap{$T_1(x,y,z) = \frac{yT_2(x,y) - zT_2(y,z)}{y-z}$} \\
+\end{tabular}
+}
+

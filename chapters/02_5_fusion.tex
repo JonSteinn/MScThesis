@@ -1,27 +1,27 @@
+The fusion strategy tries to merge adjacent columns in a single row tiling (or rows in a single column tiling). It is possible to fuse columns $c$ and $c+1$ in a tiling $\mathcal{T}$ if for every gridded permutation
+\[
+\alpha \alpha_1^{(c,0)}\alpha_2^{(c,0)}\dotsm\alpha_i^{(c,0)}\beta_1^{(c+1,0)}\beta_2^{(c+1,0)}\dotsm\beta_j^{(c+1,0)} \beta 
+\]
+in $\textsf{Grid}(\mathcal{T})$ where the subsequences $\alpha$ and $\beta$ are outside of said columns the class $\textsf{Grid}(\mathcal{T})$ also contains
+\begin{align*}
+    &\alpha\alpha_1^{(c,0)}\alpha_2^{(c,0)}\dotsm\alpha_i^{(c,0)}\beta_1^{(c,0)}\beta_2^{(c,0)}\dotsm\beta_j^{(c,0)}\beta,\\
+    &\alpha\alpha_1^{(c,0)}\alpha_2^{(c,0)}\dotsm\alpha_i^{(c,0)}\beta_1^{(c,0)}\beta_2^{(c,0)}\dotsm\beta_j^{(c+1,0)}\beta,\\
+    &\hspace{2.5cm}\vdots\\
+    &\alpha\alpha_1^{(c+1,0)}\alpha_2^{(c+1,0)}\dotsm\alpha_i^{(c+1,0)}\beta_1^{(c+1,0)}\beta_2^{(c+1,0)}\dotsm\beta_j^{(c+1,0)}\beta.
+\end{align*}
+An example of a fusable tiling is seen in \FigureRef{fig:fusable}. The rules in terms of generating functions depend on the tiling's assumptions. Some common scenarios are shown in \TableRef{tab:fusegf}
 
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/fusion}
+    \caption{A tiling where the fusion strategy applies.}
+    \label{fig:fusable}
+\end{figure}
 
-\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
-        \def\xscale{1.0} % Horizontal scale factor
-        \def\yscale{1.0} % Vertical scale factor
-        \def\spnt{0.075} % Size of smaller points
-        \def\lpnt{0.125} % Size of larger points
-        \def\roundscale{0.5} % The rounding factor
-        \draw[rounded corners=2ex*\roundscale] (0,0) rectangle (8.32*\xscale,3.76*\yscale);
-        \draw (4.16*\xscale, 3.76*\yscale) -- (4.16*\xscale, 0);
-        \fill[red] (0.6*\xscale, 0.88*\yscale) circle (\spnt);
-        \fill[red] (1.73*\xscale, 1.88*\yscale) circle (\spnt);
-        \fill[red] (3.05*\xscale, 3.06*\yscale) circle (\spnt);
-        \draw[red] (0.6*\xscale, 0.88*\yscale) -- (1.73*\xscale,1.88*\yscale) -- (3.05*\xscale,3.06*\yscale);
-        \fill[red] (2.13*\xscale, 0.9*\yscale) circle (\spnt);
-        \fill[red] (3.28*\xscale, 1.89*\yscale) circle (\spnt);
-        \fill[red] (4.64*\xscale, 3.1*\yscale) circle (\spnt);
-        \draw[red] (2.13*\xscale, 0.9*\yscale) -- (3.28*\xscale,1.89*\yscale) -- (4.64*\xscale,3.1*\yscale);
-        \fill[red] (3.75*\xscale, 0.93*\yscale) circle (\spnt);
-        \fill[red] (4.88*\xscale, 1.91*\yscale) circle (\spnt);
-        \fill[red] (6.17*\xscale, 3.08*\yscale) circle (\spnt);
-        \draw[red] (3.75*\xscale, 0.93*\yscale) -- (4.88*\xscale,1.91*\yscale) -- (6.17*\xscale,3.08*\yscale);
-        \fill[red] (5.3*\xscale, 0.9*\yscale) circle (\spnt);
-        \fill[red] (6.29*\xscale, 1.82*\yscale) circle (\spnt);
-        \fill[red] (7.56*\xscale, 3.06*\yscale) circle (\spnt);
-        \draw[red] (5.3*\xscale, 0.9*\yscale) -- (6.29*\xscale,1.82*\yscale) -- (7.56*\xscale,3.06*\yscale);
-\end{tikzpicture}
+\begin{table}[ht!]
+    \centering
+    \input{tables/fusion_types}
+    \caption{The fusion rules for some common assumptions in terms of generating functions.}
+    \label{tab:fusegf}
+\end{table}
+

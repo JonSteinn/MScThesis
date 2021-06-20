@@ -1,5 +1,9 @@
-\begin{algorithmic}[H]
-\State \textbf{Input}: A gridded permutation $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)} \cdots \pi_n^{(x_n,0)} \in \mathcal{G}^{(m,1)}_n$.
+{
+\setphaserulewidth{.7pt}
+
+\begin{algorithmic}[1]
+\Statex \textbf{Input}: A gridded permutation $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)} \cdots \pi_n^{(x_n,0)} \in \mathcal{G}^{(m,1)}_n$.
+\Statex \textbf{Output}: A gridded permutation in $\mathcal{G}_n^{(m,1)}$ with $(0,0)$ slid through $(1,0)$.
 \Procedure{slide}{$\pi$}
     \If{$\cset{i}{x_i = 1} = \emptyset$}
         \State \Return{$\pi_1^{(x_1+1-\textsf{sign}(x_1),0)}\pi_2^{(x_2+1-\textsf{sign}(x_2),0)} \cdots \pi_n^{(x_n+1-\textsf{sign}(x_n),0)}$}
@@ -33,3 +37,5 @@
     \State \Return{$\pi_1^{(x_1 - 1,0)}\pi_2^{(x_2 - 1,0)}\cdots\pi_n^{(x_n - 1,0)}$}
 \EndProcedure
 \end{algorithmic}
+
+}
