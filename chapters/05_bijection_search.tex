@@ -21,4 +21,10 @@ If all of those stages are successful we pass the consistent rules (in terms of 
 
 
 \section{Fusion and assumptions}
-\todo[inline]{jse: specify what else was done for fusion}
+When dealing with universes constructed from packs involving fusion or assumption strategies we need some slight alterations to the base algorithms. 
+
+As already discussed, we need to extend fusion rule's map to include indices as the base map is not bijective. On top of that we can have matching rules where one has the fused assumption on the left while the other on the right in which case we reverse the indices in the second specification's backward map. If both reversing and not reversing are valid we track the assumptions down with breadth first search until we find the parents and decide on where they end up in the parents. This is done after the specifications have been constructed.
+
+In the search itself, fusion and assumptions rules may be within the same equivalence label. That is a systemic choice of Combinatorial Exploration to avoid tautologies. This will require us to extract the rules within each pair of matching equivalence labels given their children and grandparents and validate if the paths are in fact valid.
+
+In the case of multiple assumptions, it can matter which correspond to which in the other specification. This can not be done for the class they appear but instead we label assumptions as soon as they appear and make sure any atoms containing assumptions have the same label.

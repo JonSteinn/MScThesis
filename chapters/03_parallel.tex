@@ -76,7 +76,7 @@ and
 \]
 \end{definition}
 
-The edge labels are defined to share order with the lexicographical order of $\mathscr{D}(\spec{C})$. That is, edge $i$ will have a destination $R_{jk}$  where $(j,k)$ is the $i^\text{th}$ largest entry in $\mathscr{D}(\spec{C})$. The source and constructor for said edge would be the corresponding class in $L$ and constructor in $O$. An example for the aforementioned specification for $\Av{132}$ can be seen in \FigureRef{fig:specgraph132}. The destinations of labels are
+The edge labels are defined to share order with the lexicographical order of $\mathscr{D}(\spec{C})$. That is, edge $i$ will have a destination $R_{jk}$ if $(j,k)$ is the $i^\text{th}$ largest entry in $\mathscr{D}(\spec{C})$. The source and constructor for said edge would be the corresponding class in $L$ and constructor in $O$. An example for the aforementioned specification for $\Av{132}$ can be seen in \FigureRef{fig:specgraph132}. The destinations of labels are
 \[
     \begin{pmatrix}
         \dst(1) & \dst(2) & \emptyset\\
@@ -87,7 +87,7 @@ The edge labels are defined to share order with the lexicographical order of $\m
     \set{\varepsilon} & \textsf{Av}_{\geq1}(132) & \emptyset \\
     \Av{132} & \set{\point{0.1}} & \Av{132}
     \end{pmatrix}
-    \begin{matrix}\\.\end{matrix}
+    = R.
 \]
 
 \begin{figure}[ht!]
@@ -105,7 +105,7 @@ A path in a rooted multigraph can be described as a sequence of edges\footnote{U
 \begin{definition}
 Let $(V,E,r,\src,\dst,\op)$ be a specification graph. Given a finite rooted path $p$, its \emph{path expansion} is the set 
 \[
-    p^+ = \cset{p \oplus e'}{e' \in E, \ \dst(e') \neq \emptyset \text{ and } \src(e') = \textsf{tail}(p)}.
+    p^+ = \cset{p \oplus e}{e \in E, \ \dst(e) \neq \emptyset \text{ and } \src(e) = \textsf{tail}(p)}.
 \]
 \end{definition}
 If a path ends in a terminal class, its path expansion is the empty set. Note that we never expand to empty classes and that expansions only depend on the tail of the path. In the graph from \FigureRef{fig:specgraph132} we have $\varepsilon^+ = \set{1,2}$, $2^+ = \set{23,24,25}$, $24^+ = \emptyset$ and $2523^+ = \set{25231, 25232}$.
@@ -149,7 +149,7 @@ Two constructors $\circ_1$ and $\circ_2$ are equivalent, $\circ_1 \equiv \circ_2
 \[
     \sclsi{C}{1} \circ_1 \sclsi{C}{2} \circ_1 \dotsm \circ_1 \sclsi{C}{n} \cong \sclsi{D}{1} \circ_2 \sclsi{D}{2} \circ_2 \dotsm \circ_2 \sclsi{D}{n}
 \]
-are isomorphic for all classes $\sclsi{C}{1},\sclsi{C}{2},\dotsc,\sclsi{C}{n}$ and $\sclsi{D}{1},\sclsi{D}{2},\dotsc,\sclsi{D}{n}$ in the domain of $\circ_1$ and $\circ_2$ respectively, where $\sclsi{C}{i}\cong\sclsi{D}{i}$ for $i \in [n]$\footnote{For our purposes it would suffice to restrict the domains to classes of specifications.}.
+are isomorphic for all classes $\sclsi{C}{1},\sclsi{C}{2},\dotsc,\sclsi{C}{n}$ and $\sclsi{D}{1},\sclsi{D}{2},\dotsc,\sclsi{D}{n}$ in the domain of $\circ_1$ and $\circ_2$ respectively\footnote{For our purposes it would suffice to restrict the domains to classes of specifications.}, where there exists a permutation $\pi\in\mathcal{S}_n$ such that  $\sclsi{C}{i}\cong\sclsi{D}{\pi_i}$ for all $i\in[n]$.
 \end{definition}
 
 Before defining \emph{parallel specification paths} formally, we will give a brief informal description. Two specification paths in two different specifications are parallel if they have equivalent constructors at every step and end in either isomorphic terminal classes or a recursion at an equal distance, ignoring equivalence steps.
@@ -349,47 +349,48 @@ for a specification $\spec{C}$. These are the paths that do not have a tail on t
 
 Let $\alpha = a_1a_2 \dotsm a_n$ be a path in $\mathfrak{G}(\spec{C})$ and $\beta = \beta_1\beta_2\dotsm \beta_k$ in $\mathfrak{G}(\spec{D})$ where $\spec{C} \parallel \spec{D}$. Define
 \[
-    \Psi_{\spec{D}}(\alpha,\beta) = \psi_{\spec{D}}(\textsf{lstrip}(\alpha),\textsf{rextend}(\beta)) 
+    \Psi_{\spec{C},\spec{D}}(\alpha,\beta) = \psi_{\spec{C},\spec{D}}(\textsf{lstrip}(\alpha),\textsf{rextend}(\beta)) 
 \]
 where
 \[
-    \psi_{\spec{D}}(\alpha,\beta) = \begin{cases}
+    \psi_{\spec{C},\spec{D}}(\alpha,\beta) = \begin{cases}
         \beta & \text{ if } n = 0,\\
-        \Psi_{\spec{D}}(\alpha_2\alpha_3\dotsm\alpha_n, \beta \oplus \Gamma_{\src(\alpha_1),\textsf{tail}(\beta)}(\alpha_1)) & \text{ otherwise}.
+        \Psi_{\spec{C},\spec{D}}(\alpha_2\alpha_3\dotsm\alpha_n, \beta \oplus \Gamma_{\src(\alpha_1),\textsf{tail}(\beta)}(\alpha_1)) & \text{ otherwise}.
     \end{cases}
 \]
+For $\psi_{\spec{D},\spec{C}}$ we would replace $\Gamma$ with $\Gamma^{-1}$.
 
 \begin{definition}\label{def:pathmatch}
-Let $\spec{C}$ and $\spec{D}$ be parallel specifications and $p \in \mathscr{P}(\spec{C})$. The \emph{path matching} of $p$ in $\mathscr{P}(\spec{D})$ is $\gamma_{\spec{D}}(p) = \Psi_{\spec{D}}(p,\varepsilon)$.
+Let $\spec{C}$ and $\spec{D}$ be parallel specifications and $p \in \mathscr{P}(\spec{C})$. The \emph{path matching} of $p$ in $\mathscr{P}(\spec{D})$ is $\gamma_{\spec{C},\spec{D}}(p) = \Psi_{\spec{C},\spec{D}}(p,\varepsilon)$.
 \end{definition}
 
 As an example, consider the path $242523$ in $\mathscr{P}(\spec{C})$ in \FigureRef{fig:para_spec}. Its path matching in $\mathscr{P}(\spec{D})$ and its image's path matching in $\mathscr{P}(\spec{C})$ are
 \begin{alignat*}{3}
-    \gamma_{\spec{D}}(242523) &= \Psi_{\spec{D}}(242523, \varepsilon) &&= \psi_{\spec{D}}(242523, \varepsilon)\\
-    &= \Psi_{\spec{D}}(42523,1) &&= \psi_{\spec{D}}(42523,1)\\
-    &= \Psi_{\spec{D}}(2523,15) &&= \psi_{\spec{D}}(2523,15)\\
-    &= \Psi_{\spec{D}}(523,151) &&= \psi_{\spec{D}}(523,151)\\
-    &= \Psi_{\spec{D}}(23,1513) &&= \psi_{\spec{D}}(23,15136)\\
-    &= \Psi_{\spec{D}}(3,151368) &&= \psi_{\spec{D}}(3,151368)\\
-    &= \Psi_{\spec{D}}(\varepsilon,1513684) &&= \psi_{\spec{D}}(\varepsilon,1513684)\\
+    \gamma_{\spec{C},\spec{D}}(242523) &= \Psi_{\spec{C},\spec{D}}(242523, \varepsilon) &&= \psi_{\spec{C},\spec{D}}(242523, \varepsilon)\\
+    &= \Psi_{\spec{C},\spec{D}}(42523,1) &&= \psi_{\spec{C},\spec{D}}(42523,1)\\
+    &= \Psi_{\spec{C},\spec{D}}(2523,15) &&= \psi_{\spec{C},\spec{D}}(2523,15)\\
+    &= \Psi_{\spec{C},\spec{D}}(523,151) &&= \psi_{\spec{C},\spec{D}}(523,151)\\
+    &= \Psi_{\spec{C},\spec{D}}(23,1513) &&= \psi_{\spec{C},\spec{D}}(23,15136)\\
+    &= \Psi_{\spec{C},\spec{D}}(3,151368) &&= \psi_{\spec{C},\spec{D}}(3,151368)\\
+    &= \Psi_{\spec{C},\spec{D}}(\varepsilon,1513684) &&= \psi_{\spec{C},\spec{D}}(\varepsilon,1513684)\\
     &= 1513684
 \end{alignat*}
 and
 \begin{alignat*}{3}
-    \gamma_{\spec{C}}(1513684) &= \Psi_{\spec{C}}(1513684, \varepsilon) &&= \psi_{\spec{C}}(1513684, \varepsilon)\\
-    &= \Psi_{\spec{C}}(513684, 2) &&= \psi_{\spec{C}}(513684, 2)\\
-    &= \Psi_{\spec{C}}(13684, 24) &&= \psi_{\spec{C}}(13684, 24)\\
-    &= \Psi_{\spec{C}}(3684, 242) &&= \psi_{\spec{C}}(3684, 242)\\
-    &= \Psi_{\spec{C}}(684, 2425) &&= \psi_{\spec{C}}(84, 2425)\\
-    &= \Psi_{\spec{C}}(4, 24252) &&= \psi_{\spec{C}}(4, 24252)\\
-    &= \Psi_{\spec{C}}(\varepsilon, 242523) &&= \psi_{\spec{C}}(\varepsilon, 242523)\\
+    \gamma_{\spec{D},\spec{C}}(1513684) &= \Psi_{\spec{D},\spec{C}}(1513684, \varepsilon) &&= \psi_{\spec{D},\spec{C}}(1513684, \varepsilon)\\
+    &= \Psi_{\spec{D},\spec{C}}(513684, 2) &&= \psi_{\spec{D},\spec{C}}(513684, 2)\\
+    &= \Psi_{\spec{D},\spec{C}}(13684, 24) &&= \psi_{\spec{D},\spec{C}}(13684, 24)\\
+    &= \Psi_{\spec{D},\spec{C}}(3684, 242) &&= \psi_{\spec{D},\spec{C}}(3684, 242)\\
+    &= \Psi_{\spec{D},\spec{C}}(684, 2425) &&= \psi_{\spec{D},\spec{C}}(84, 2425)\\
+    &= \Psi_{\spec{D},\spec{C}}(4, 24252) &&= \psi_{\spec{D},\spec{C}}(4, 24252)\\
+    &= \Psi_{\spec{D},\spec{C}}(\varepsilon, 242523) &&= \psi_{\spec{D},\spec{C}}(\varepsilon, 242523)\\
     &= 242523.
 \end{alignat*}
 
-The matching order of any class pair will always relate a terminal class to another terminal such that they are isomorphic. Therefore the map $\gamma_{\spec{D}}$ will preserve terminal class tails in the sense that their tails are isomorphic terminal classes. For each nonequivalent step in a path $p$ in the domain of $\gamma_{\spec{D}}$ a nonequivalent step is constructed for $\gamma_{\spec{D}}(p)$. Any other steps added are equivalent steps. Therefore the number of nonequivalent steps is preserved.
+The matching order of any class pair will always relate a terminal class to another terminal such that they are isomorphic. Therefore the map $\gamma_{\spec{C},\spec{D}}$ will preserve terminal class tails in the sense that their tails are isomorphic terminal classes. For each nonequivalent step in a path $p$ in the domain of $\gamma_{\spec{C},\spec{D}}$ a nonequivalent step is constructed for $\gamma_{\spec{C},\spec{D}}(p)$. Any other steps added are equivalent steps. Therefore the number of nonequivalent steps is preserved.
 
 \begin{proposition}
-The mapping $\gamma_{\spec{D}}: \mathscr{P}(\spec{C}) \mapsto \mathscr{P}(\spec{D})$ is a bijection for parallel specifications $\spec{C}$ and $\spec{D}$ with $\gamma_{\spec{C}} = \gamma_{\spec{D}}^{-1}$.
+The mapping $\gamma_{\spec{C},\spec{D}}: \mathscr{P}(\spec{C}) \mapsto \mathscr{P}(\spec{D})$ is a bijection for parallel specifications $\spec{C}$ and $\spec{D}$ with $\gamma_{\spec{D},\spec{C}} = \gamma_{\spec{C},\spec{D}}^{-1}$.
 \end{proposition}
 \begin{proof}
 Let $(\alpha,\beta) = (\alpha_1\alpha_2\dotsm\alpha_a,\beta_1\beta_2\dotsm\beta_b)\in \mathscr{P}(\spec{C}) \times \mathscr{P}(\spec{D})$ such that
@@ -400,31 +401,31 @@ and
 \[
     \beta = B_1 \oplus \beta_{j_1} \oplus B_2 \oplus \beta_{j_2} \oplus \dotsm \oplus B_k \oplus \beta_{j_k} \oplus B_{k+1}
 \]
-where $\sort(\alpha^\ast) = (\alpha_{i_1},\alpha_{i_2},\dotsm,\alpha_{i_k})$ and $\sort(\beta^\st) = (\beta_{j_1},\beta_{j_2},\dotsc,\beta_{j_k})$ and $A_i$ and $B_i$ are paths containing only equivalent steps for $i \in [k+1]$. The equivalent steps are uniquely determined by the nonequivalent steps and the map will ignore them for elements in the domain and add them for elements in the codomain.
+where $\sort(\alpha^\ast) = (\alpha_{i_1},\alpha_{i_2},\dotsm,\alpha_{i_k})$ and $\sort(\beta^\ast) = (\beta_{j_1},\beta_{j_2},\dotsc,\beta_{j_k})$ and $A_i$ and $B_i$ are paths containing only equivalent steps for $i \in [k+1]$. The equivalent steps are uniquely determined by the nonequivalent steps and the map will ignore them for elements in the domain and add them for elements in the codomain.
 
-Suppose that $\gamma_{\spec{D}}(\alpha) = \beta$, then
+Suppose that $\gamma_{\spec{C},\spec{D}}(\alpha) = \beta$, then
 \[
     \Gamma_{\src(\alpha_{i_\ell}),\src(\beta_{j_\ell})}(\alpha_{i_\ell}) = \beta_{j_\ell} \text{ and }
     \Gamma_{\src(\alpha_{i_\ell}),\src(\beta_{j_\ell})}^{-1}(\beta_{j_\ell}) = \alpha_{i_\ell}
 \]
-for all $\ell \in [k]$. The map $\gamma_{\spec{C}}$ will ignore any equivalent steps in $\beta$ and convert $\beta_{j_\ell}$ to $\alpha_{i_\ell}$ for all $\ell \in [k]$. Since the equivalent steps in $\alpha$ are uniquely determined by the nonequivalent steps $\alpha_{i_1}$, $\alpha_{i_2}, \dotsc, \alpha_{i_k}$, the equivalent steps added by $\gamma_{\spec{C}}$ will be the same as in $\alpha$ and in the same positions, that is $\gamma_{\spec{C}}(\beta) = \alpha$.
+for all $\ell \in [k]$. The map $\gamma_{\spec{D},\spec{C}}$ will ignore any equivalent steps in $\beta$ and convert $\beta_{j_\ell}$ to $\alpha_{i_\ell}$ for all $\ell \in [k]$. Since the equivalent steps in $\alpha$ are uniquely determined by the nonequivalent steps $\alpha_{i_1}$, $\alpha_{i_2}, \dotsc, \alpha_{i_k}$, the equivalent steps added by $\gamma_{\spec{D},\spec{C}}$ will be the same as in $\alpha$ and in the same positions, that is $\gamma_{\spec{D},\spec{C}}(\beta) = \alpha$.
 
-Analogously, we have $\gamma_{\spec{D}}(\alpha) = \beta$ assuming $\gamma_{\spec{C}}(\beta) = \alpha$. Since $\gamma_{\spec{C}}(\gamma_{\spec{D}}(\alpha)) = \alpha$ and $\gamma_{\spec{D}}(\gamma_{\spec{C}}(\beta)) = \beta$ the map is a bijection.
+Analogously, we have $\gamma_{\spec{C},\spec{D}}(\alpha) = \beta$ assuming $\gamma_{\spec{D},\spec{C}}(\beta) = \alpha$. Since $\gamma_{\spec{D},\spec{C}}(\gamma_{\spec{C},\spec{D}}(\alpha)) = \alpha$ and $\gamma_{\spec{C},\spec{D}}(\gamma_{\spec{D},\spec{C}}(\beta)) = \beta$ the map is a bijection.
 \end{proof}
 
 \begin{proposition}
 The parallel relation for specifications is transitive.
 \end{proposition}
 \begin{proof}
-Let $\spec{A}$, $\spec{B}$ and $\spec{C}$ be specifications such that $\spec{A} \parallel\spec{B}$ and $\spec{B} \parallel \spec{C}$. Their empty rooted paths, $\varepsilon_{\spec{A}}$ and $\varepsilon_{\spec{C}}$, are matchable if $\textsf{rextend}(\varepsilon_{\spec{A}}) \parallel \textsf{rextend}(\varepsilon_{\spec{C}})$ or there exists a bijection
+Let $\spec{A}$, $\spec{B}$ and $\spec{C}$ be specifications such that $\spec{A} \parallel\spec{B}$ and $\spec{B} \parallel \spec{C}$. The empty rooted paths, $\varepsilon_{\spec{A}}$ and $\varepsilon_{\spec{C}}$, are matchable if $\textsf{rextend}(\varepsilon_{\spec{A}}) \parallel \textsf{rextend}(\varepsilon_{\spec{C}})$ or there exists a bijection
 \[
     \phi: \textsf{rextend}(\varepsilon_{\spec{A}})^+ \mapsto \textsf{rextend}(\varepsilon_{\spec{C}})^+
 \]
-such that $p \parallel \phi(p)$ for all $p \in \textsf{rextend}(\varepsilon_{\spec{A}})^+$. Suppose we arrive, via this expansion, at paths $a$ and $c$ in the specification graphs of $\spec{A}$ and $\spec{C}$ respectively. If the tail of either $\textsf{rextend}(a)$ or $\textsf{rextend}(c)$ is a terminal class then the tail of the other must be as well since $\gamma_{\spec{C}}(\gamma_{\spec{B}}(\textsf{rextend}(a))) = c$ and both maps preserve terminal classes. Furthermore they must be isomorphic and thus the paths are parallel. If they include a recursion at the same distance they are parallel but that is not implied as the parallel relation is not transitive for specification paths. Suppose the paths are not parallel, then we can use the bijection
+such that $p$ and $\phi(p)$ are matchable for all $p \in \textsf{rextend}(\varepsilon_{\spec{A}})^+$. Suppose we arrive, via this expansion, at paths $a$ and $c$ in the specification graphs of $\spec{A}$ and $\spec{C}$ respectively. If the tail of either $\textsf{rextend}(a)$ or $\textsf{rextend}(c)$ is a terminal class then the tail of the other must be as well since $\gamma_{\spec{B},\spec{C}}(\gamma_{\spec{A},\spec{B}}(\textsf{rextend}(a))) = c$ and both maps preserve terminal classes. Furthermore they must be isomorphic and thus the paths are parallel. If they include a recursion at the same distance they are parallel but that is not implied as the parallel relation is not transitive for specification paths. Suppose the paths are not parallel, then we can use the bijection
 \[
-    \gamma_{\spec{C}} \circ \gamma_{\spec{B}}: \textsf{rextend}(a)^+ \mapsto \textsf{rextend}(c)^+
+    \gamma_{\spec{B},\spec{C}} \circ \gamma_{\spec{A},\spec{B}}: \textsf{rextend}(a)^+ \mapsto \textsf{rextend}(c)^+
 \]
-to further expand. Since there are finite possible pairs from each class, we always end up with a recursion at an equal distance or in terminal classes.
+to expand further. Since there are finite possible pairs from each specification, we always end up with a recursion at an equal distance or in terminal classes.
 \end{proof}
 
 

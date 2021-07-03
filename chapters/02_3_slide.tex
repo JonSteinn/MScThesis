@@ -47,7 +47,7 @@ is \emph{slidable} if the following conditions are satisfied.
     \]
     \item Any obstruction entirely outside columns $0$ and $1$ in $\mathcal{O}_1$ must also exist in $\mathcal{O}_2$ and vice versa.
     \item Let $o_1 = \pi_1^{(0,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ and $o_2 = \pi_1^{(1,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ where $x_2,s > 1$ then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_1 \in \mathcal{O}_2$ and $o_2 \in \mathcal{O}_2$ are equivalent.
-    \item Let \begin{align*}o_1 &= \pi_1^{(0,0)}\pi_2^{(0,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_2 &= \pi_1^{(0,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_3 &= \pi_1^{(1,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\end{align*} where $s > 2$ and $x_3 > 1$, then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_2$ and $o_3 \in \mathcal{O}_2$ are equivalent.
+    \item Let \begin{align*}o_1 &= \pi_1^{(0,0)}\pi_2^{(0,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_2 &= \pi_1^{(0,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_3 &= \pi_1^{(1,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\end{align*} where $s > 2$, $x_3 > 1$ and $\pi_1 + 1 = \pi_2$, then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_2$ and $o_3 \in \mathcal{O}_2$ are equivalent.
 \end{itemize}
 \end{definition}
 
@@ -64,11 +64,13 @@ An example of two slidable tilings can be seen in \FigureRef{fig:slidable_tiling
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$.
 \end{lemma}
 \begin{proof}
-The mapping does not affect anything that is outside the first two columns where the two tilings are identical, mapping those gridded permutations to themselves. If the gridded permutation has no elements in column 1, then the elements in column $0$ are simply moved into column 1 and since they are already avoiding $12\dotsm n$ in column 0, it will also do so in column 1 and in the case of a crossing obstruction with a single point in column $0$ then $\textsf{Grid}(\mathcal{T}_2)$ must contain the same permutation but with that single point in column $1$.
+If $\pi$ contains no elements within the first two columns it is mapped to itself and since the tilings are identical outside the first two columns then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$. If $\pi$ contains no elements in column $1$ then whatever is in column $0$ is moved to column $1$. Since $\pi$ avoided $12\dotsm n$ in column $0$ it will also do so in column $1$ once moved and any crossing obstruction in $\mathcal{T}_2$ with one or two points in column $1$ will have existed with those points in column $0$ in $\mathcal{T}_1$ and therefore $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$.
 
-Now suppose we have a gridded permutation $\pi$ that has elements in column 1. By the end of the mapping all columns are shifted one to the left but we will refer to their index before that, in the mapped tiling. Note that the mapping is defined by placing elements in-order into column 1 so we will never form an increasing pattern there.
+Now suppose $\pi$ has elements in column $1$. By the end of the mapping all columns are shifted one to the left but we will refer to their indices before the shift in the mapped tiling. Note that the mapping is defined by placing elements in-order into column $1$ so we will never form an increasing pattern there. 
 
-Suppose after a single step in the map that we form the first $12\cdots n$ (spread in any way across the first 3 columns). Note that it can contain at most one point in column 1 as it is decreasing. If the $12\cdots n$ pattern does only contain the newly moved point in column 1 (not the one we just moved to column 2), than the pattern must have been there before the step was taken.
+Suppose after a single step in the map that we form the first $12\cdots n$ (spread in any way across the first $3$ columns). Note that it can contain at most one point in column $1$ as it is decreasing.
+
+If the $12\cdots n$ pattern does contain the newly moved point in column $1$ and not the one we just moved to column $2$, than the pattern must have been there before the step was taken.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -97,7 +99,7 @@ Suppose after a single step in the map that we form the first $12\cdots n$ (spre
 \end{tikzpicture}
 \end{center}
 
-Suppose this pattern includes the newly moved element in column 2 and no elements in column 1 then the pattern must have existed before regardless of whether the new element in column 2 was the smallest element in column 1 before the move or not.
+Suppose this pattern includes the newly moved element in column $2$ and no elements in column $1$ then the pattern must have existed before regardless of whether the new element in column $2$ was the smallest element in column $1$ before the move or not.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -126,7 +128,7 @@ Suppose this pattern includes the newly moved element in column 2 and no element
 \end{tikzpicture}
 \end{center}
 
-Finally suppose the pattern involves elements from both column 1 and 2. Here two scenario can arise. One were the pattern involves both moved elements and the other only the one moved to column 2. In the first one the pattern remains as we move both points together when we backtrack.
+Finally suppose the pattern involves elements from both column $1$ and $2$. Here two scenario can arise. One were the pattern involves both moved elements and the other only the one moved to column $2$. In the first one the pattern remains as we move both points together when we backtrack.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -155,7 +157,7 @@ Finally suppose the pattern involves elements from both column 1 and 2. Here two
 \end{tikzpicture}
 \end{center}
 
-In the latter, there is a smaller element in column 1 then the moved one that belongs to the pattern. When we go back, the moved element goes back from column 1 to column 0 but that is between the element in column 1 that formed the pattern and the element that was moved to column 2, preserving the pattern.
+In the latter, there is a smaller element in column $1$ then the moved one that belongs to the pattern. When we go back, the moved element goes back from column $1$ to column $0$ but that is between the element in column $1$ that formed the pattern and the element that was moved to column $2$, preserving the pattern.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -186,9 +188,11 @@ In the latter, there is a smaller element in column 1 then the moved one that be
 \end{tikzpicture}
 \end{center}
 
-In the case of a crossing obstructions forming with one element in the first 3 columns, then wherever that element was before must have been an occurrence of the pattern as well.
+In the case of the first crossing obstructions forming for the first time with one element in the first 3 columns and some outside, then wherever that element was before must have been an occurrence of that pattern as well in the context of viewing the first same three column as identical pattern wise.
 
-Now suppose we form a crossing pattern with two adjacent elements in the first three columns for the first time. This can happen in several ways. Suppose the adjacent part in the first 3 columns occurs between the first two, then the pattern must have existed entirely in column 0 before.
+Now suppose we form the crossing pattern with the elements $k(k+1)$ in the first three columns (spread in any way) for the first time. This can happen in several ways. Note that the two increasing elements can not both be in column $1$ as it is always decreasing.
+
+Suppose the $k(k+1)$ part in the first $3$ columns occurs between the first two, then the pattern must have existed before with $k(k+1)$ in column $0$.
 \begin{center}
 \begin{tikzpicture}[scale=0.63]
 \coordinate (a1) at (5.5,0.5);
@@ -228,7 +232,7 @@ Now suppose we form a crossing pattern with two adjacent elements in the first t
 \end{tikzpicture}
 \end{center}
 
-If the pattern occurs with the two adjacent in column 0 and 2, then it must have existed between column 0 and 1 before.
+If the pattern occurs with $k(k+1)$ in columns $0$ and $2$, then it must have existed with $k(k+1)$ in columns $0$ and $1$ before.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.63]
@@ -237,7 +241,7 @@ If the pattern occurs with the two adjacent in column 0 and 2, then it must have
 \coordinate (a3) at (2.75,1.5);
 \coordinate (a4) at (6.25,2);
 \coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (a3) -- (a4) -- (9.25,2);
 \draw (0,0) rectangle (3,3);
 \draw (3,0) rectangle (6,3);
 \draw (6,0) rectangle (9,3);
@@ -255,7 +259,7 @@ If the pattern occurs with the two adjacent in column 0 and 2, then it must have
 \coordinate (a3) at (2.25,1.5);
 \coordinate (a4) at (4,2);
 \coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (a3) -- (a4) -- (9.25,2);
 \draw (0,0) rectangle (3,3);
 \draw (3,0) rectangle (6,3);
 \draw (6,0) rectangle (9,3);
@@ -269,8 +273,7 @@ If the pattern occurs with the two adjacent in column 0 and 2, then it must have
 \end{tikzpicture}
 \end{center}
 
-If the pattern occurs between column 1 and 2, then since they are adjacent and increasing, these must also be the two elements that were moved and therefore it must have been in columns 0 and 1 before.
-
+If the pattern occurs with $k(k+1)$ in columns $1$ and $2$ then, since they are adjacent in value and increasing, these must also be the two elements that were moved and therefore the pattern must have existed with $k(k+1)$ in columns $0$ and $1$ before.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.63]
@@ -279,7 +282,7 @@ If the pattern occurs between column 1 and 2, then since they are adjacent and i
 \coordinate (a3) at (4.5,1.5);
 \coordinate (a4) at (6.25,2);
 \coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (a3) -- (a4) -- (9.25,2);
 \draw (0,0) rectangle (3,3);
 \draw (3,0) rectangle (6,3);
 \draw (6,0) rectangle (9,3);
@@ -297,7 +300,7 @@ If the pattern occurs between column 1 and 2, then since they are adjacent and i
 \coordinate (a3) at (2.75,1.5);
 \coordinate (a4) at (4,2);
 \coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,1.5);
+\draw (a3) -- (a4) -- (9.25,2);
 \draw (0,0) rectangle (3,3);
 \draw (3,0) rectangle (6,3);
 \draw (6,0) rectangle (9,3);
@@ -311,7 +314,7 @@ If the pattern occurs between column 1 and 2, then since they are adjacent and i
 \end{tikzpicture}
 \end{center}
 
-If the pattern occurs with the adjacent elements entirely within column 2, then the pattern must have existed between columns 1 and 2 before.
+If the pattern occurs with $k(k+1)$ entirely within column $2$, then the pattern must have existed with $k(k+1)$ in columns $1$ and $2$ before.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.63]
@@ -453,14 +456,14 @@ A step in $\Upsilon$ where we move an element not larger than all elements in $(
 \fill (a5) circle (0.15);
 \end{tikzpicture}
 \end{center}
-Both maps move one point into and one out of $(1,0)$ at every step, so the number of elements in $(1,0)$ is fixed. Therefore the number of elements in the other column of the first two must also be fixed. When mapping $\pi$ with $\Upsilon$ we take a certain amount of steps and when we map back with $\Upsilon^{-1}$ we take the same amount of steps, each cancelling out the steps of $\Upsilon$ and therefore $\Upsilon^{-1}(\Upsilon(\pi)) = \pi$ and similarly $\Upsilon\left(\Upsilon^{-1}(\pi')\right) = \pi$ and thus, $\Upsilon$ is a bijection between $\textsf{Grid}_i(\mathcal{T}_1)$ and $\textsf{Grid}_i(\mathcal{T}_2)$.
+Both maps move one point into and one out of $(1,0)$ at every step, so the number of elements in $(1,0)$ is fixed. Therefore the number of elements in the other column of the first two must also be fixed. When mapping $\pi$ with $\Upsilon$ we take a certain amount of steps and when we map back with $\Upsilon^{-1}$ we take the same amount of steps, each cancelling out the steps of $\Upsilon$ and therefore $\Upsilon^{-1}(\Upsilon(\pi)) = \pi$ and similarly $\Upsilon\left(\Upsilon^{-1}(\pi')\right) = \pi'$ and thus, $\Upsilon$ is a bijection between $\textsf{Grid}_i(\mathcal{T}_1)$ and $\textsf{Grid}_i(\mathcal{T}_2)$.
 \end{proof}
 
-We can extend the Definition~\ref{def:slidable} of slidable tilings to use any columns $c_1$ and $c_2$ instead of just $0$ and $1$. The conditions would replace any constraints involving the first two columns with $c_1$ and $c_2$ and allow for subsequences on either side.
+We can extend the Definition~\ref{def:slidable} of slidable tilings for any nonequal columns $c_1$ and $c_2$ instead of just $0$ and $1$. The conditions would replace any constraints involving the first two columns with $c_1$ and $c_2$ and allow for subsequences on either side and between.
 
 \begin{proposition}
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable in columns $c_1$ and $c_2$, then $|\textsf{Grid}_i(\mathcal{T}_1)| = |\textsf{Grid}_i(\mathcal{T}_2)|$ for all $i\in\N$.
 \end{proposition}
 \begin{proof}
-Suppose the tilings have $c$ columns and let $\sigma = \sigma_1\sigma_2 \cdots \sigma_m \in \mathcal{S}_m$ where $\sigma_1 = c_1$ and $\sigma_2 = c_2$. We can permute the columns so $c_1$ and $c_2$ are the first two, slide them and permute back, that is we can use a composition of bijections, $C_{\sigma^{-1}} \circ \Upsilon \circ C_\sigma$, to map between the two.
+Suppose the tilings have $c$ columns and let $\sigma = \sigma_1\sigma_2 \cdots \sigma_c \in \mathcal{S}_c$ where $\sigma_1 = c_1$ and $\sigma_2 = c_2$. We can permute the columns so $c_1$ and $c_2$ are the first two, slide them and permute back, that is we can use a composition of bijections, $C_{\sigma^{-1}} \circ \Upsilon \circ C_\sigma$, to map between the two.
 \end{proof}

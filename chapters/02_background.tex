@@ -15,7 +15,7 @@ A \emph{bijection} between sets $A$ and $B$ is an invertible function $f: A \map
     \label{fig:bijection_example}
 \end{figure}
 
-Given a bijection $\phi$ between two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$, we say that $\phi$ is \emph{length preserving} if $|c| = |\phi(c)|$ for all $c\in\mathcal{C}$. Suppose $\mathcal{C}$ is the set of binary strings that avoid consecutive 0's and $\mathcal{D}$ the set of binary strings that avoid consecutive 1's. The bijection that flips the bits in a binary string is a length preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. The bijection between binary strings and subsets we mentioned earlier is not length preserving if cardinality is used as a size function for subsets.
+Given a bijection $\phi$ between two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$, we say that $\phi$ is \emph{length preserving} if $|c| = |\phi(c)|$ for all $c\in\mathcal{C}$. Suppose $\mathcal{C}$ is the set of binary strings that avoid consecutive 0's and $\mathcal{D}$ the set of binary strings that avoid consecutive 1's. The bijection that flips the bits in a binary string is a length preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. The bijection between binary strings and subsets we mentioned earlier is not length preserving if cardinality is used as a size function for the subsets.
 
 For a combinatorial class $\mathcal{C}$, the infinite sequence 
 \[
@@ -25,9 +25,9 @@ where each term counts the number of elements of a fixed length is called the \e
 \[
     \sum_{i=0}^\infty |\mathcal{C}_i|z^i
 \]
-called a \emph{generating function} and famously described as a ``clothesline on which we hang up a sequence of numbers for display'' in Wilf \cite{wilf:gf}, referring to their refined closed form. For example the sequence of Fibonacci numbers $\left(f_i\right)_{i=0}^\infty$ has the generating function
+called a \emph{generating function} and famously described as a ``clothesline on which we hang up a sequence of numbers for display'' in Wilf \cite{wilf:gf}. For example the sequence of Fibonacci numbers $\left(f_i\right)_{i=0}^\infty$ has the generating function
 \[
-    \sum_{i=0}^\infty f_iz^i = 0 + z + z^2 + 2z^3 + 3z^4 + 5z^5 + 8z^6 + \dotsb = \frac{z}{1-z-z^2}.
+    \sum_{i=0}^\infty f_iz^i =  z + z^2 + 2z^3 + 3z^4 + 5z^5 + 8z^6 + \dotsb = \frac{z}{1-z-z^2}.
 \]
 
 If two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$ share a counting sequence we say they are \emph{isomorphic}, denoted $\mathcal{C} \cong \mathcal{D}$. This is equivalent to the existence of a length preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. Isomorphism is an equivalence relation on the set of all combinatorial classes. The equivalence class of a combinatorial class $\mathcal{C}$, for the set of all combinatorial classes and the isomorphism relation, is the set of all combinatorial classes that are isomorphic to $\mathcal{C}$.
@@ -59,9 +59,7 @@ We define $\circ$ as the operator that prepends a vertical slice to all grids in
 \[
 X \times Y = \cset{(x,y)}{x\in X \text{ and } y \in Y}
 \]
-and in terms of generating functions corresponds to multiplication.
-
-Now we have 
+and in terms of generating functions corresponds to multiplication. Now we have 
 \[
     A \cong \gridN \circ G, \ B \cong \gridU \circ D \text{ and } C \cong \gridD \circ E.
 \]
@@ -266,7 +264,7 @@ where
 \[
     (c,r) \in \Z^+ \times \Z^+, \ \mathcal{O} \subseteq \mathcal{G}^{(c,r)} \text{ and } \mathcal{R}=\set{\mathcal{R}_1,\mathcal{R}_2,\dotsc,\mathcal{R}_k} \subseteq \left(\mathcal{G}^{(c,r)}\right)^k
 \]
-are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. A more detailed definition is given by Bean \cite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements blue. Positions with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.
+are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. A more detailed definition is given by Bean \cite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements are blue. Cells with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.
 
 \begin{figure}[ht!]
     \centering
@@ -294,11 +292,9 @@ This is a simple example but given different classes and constructors, we can en
 \end{figure}
 
 \section{Combinatorial Exploration}
-Combinatorial Exploration \cite{css} is a domain agnostic specification searcher. It uses strategies to generate rules for classes. Strategies are independent of classes and describe an action that may result in rules given an applicable class. 
+Combinatorial Exploration \cite{css} is a domain agnostic specification searcher. It uses strategies to generate rules for classes. Strategies are independent of classes and describe an action that may result in rules given an applicable class. The search method is done in a breadth-first manner from the root class. When run, it uses a predefined set of strategies and expands a universe in hope of finding a specification within it.
 
-The search method is done in a breadth-first manner from the root class. It uses a predefined set of strategies to generate rules for classes and expands a universe in the hope that it contains a specification.
-
-To avoid tautologies, the searcher gives classes equivalence labels and tracks rules in terms of parent and children pairs in term of their equivalence labels. The rules within a single equivalence label may or may not be equivalence rules. Any single child rule that could result in a tautology could be contained in an equivalence label with nonequivalent classes. When the specification is found and extracted from the universe, any sequence of equivalence rules is merged into a single rule.
+To avoid tautologies, the searcher gives classes equivalence labels and tracks rules in terms of parent and children pairs as equivalence labels. The rules within a single equivalence label may or may not be equivalence rules. Any single child rule that could result in a tautology could be contained in an equivalence label with nonequivalent classes. When a specification is found and extracted from the universe, any sequence of equivalence rules is merged into a single rule.
 
 \section{TileScope}
 TileScope \cite{tiling} is an implementation of Combinatorial Exploration for tilings. The root class usually has a single cell and no requirements and therefore a direct correspondence to a permutation class. The library also utilizes Permuta \cite{permuta}, a general permutation library. Most of the strategies TileScope uses can be found in Bean \cite{BeanPhd:phd}. We will explain those that are not.

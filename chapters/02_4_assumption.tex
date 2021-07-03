@@ -1,6 +1,6 @@
-There are two strategies involving assumptions. One adds assumptions and the other rearranges them. Assumptions represent catalytic variable and are usually used to track number of points in cells. 
+There are two strategies involving assumptions. One adds assumptions and the other rearranges them. Assumptions represent catalytic variables and are usually used to track the number of points in cells. 
 
-Let $\mathcal{T}_1 = ((2,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},123^{(1,0)}},\emptyset)$ and suppose $\mathcal{T}_2$ is $\mathcal{T}_1$ with the assumption that we can count the number of points in $(0,0)$ as shown in \FigureRef{fig:addassumption}. Let $T_1(x)$ and $T_2(x,y)$ be the generating function for $\mathcal{T}_1$ is $\mathcal{T}_2$ respectively, then $T_1(x) = x^0 + 2x^1 + 5x^2 + 14x^3 + 42x^4 + \dotsm$ while $T_2(x,y)$ is
+Let $\mathcal{T}_1 = ((2,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},123^{(1,0)}},\emptyset)$ and suppose $\mathcal{T}_2$ is $\mathcal{T}_1$ with the assumption that we can count the number of points in $(0,0)$ as shown in \FigureRef{fig:addassumption}. Let $T_1(x)$ and $T_2(x,y)$ be the generating function for $\mathcal{T}_1$ and $\mathcal{T}_2$ respectively, then $T_1(x) = x^0 + 2x^1 + 5x^2 + 14x^3 + 42x^4 + \dotsm$ while $T_2(x,y)$ is
 \begin{align*}
     &\ x^0y^0\\
     + &\ x^1y^0 + x^1y^1\\
@@ -18,7 +18,7 @@ and $T_1(x) = T_2(x,1)$.
     \label{fig:addassumption}
 \end{figure}
 
-When the cells of one assumption is a subset of the cells of another we can rearrange them. This is demonstrated for tiling $((3,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},12^{(1,0)}3^{(2,0)}},\emptyset)$ in \FigureRef{fig:assrear} where the left one has $y$ as a catalytic variable for points in $(0,0)$ and $z$ for points in either $(0,0)$ or $(1,0)$ while in the right one $z$ only tracks those in $(1,0)$ after the assumptions have been rearranged. If $T_1(x,y,z)$ is the generating function before the arrangement and $T_2(x,y,z)$ after then $T_1(x,y,z) = T_2(x,yz,z)$.
+When the cells of one assumption is a subset of the cells of another we can rearrange them. This is demonstrated for the tiling $((3,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},12^{(1,0)}3^{(2,0)}},\emptyset)$ in \FigureRef{fig:assrear} where the left one has $y$ as a catalytic variable for points in $(0,0)$ and $z$ for points in either $(0,0)$ or $(1,0)$ while in the right one $z$ only tracks those in $(1,0)$ after the assumptions have been rearranged. If $T_1(x,y,z)$ is the generating function before the rearrangement and $T_2(x,y,z)$ after then $T_1(x,y,z) = T_2(x,yz,z)$.
 
 \begin{figure}[ht!]
     \centering
