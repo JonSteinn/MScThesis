@@ -1,50 +1,51 @@
 {
-\newcommand{\isatom}[1]{#1 is atom}
-\newcommand{\combclass}[1]{#1.cc}
+\newcommand{\isatom}[1]{#1 is a nonempty terminal class}
+\newcommand{\combclass}[1]{\textsf{lhs}(#1)}
 \newcommand{\minobj}[1]{minimum sized object of #1}
 \newcommand{\isequiv}[1]{#1 is an equivalence rule}
 \newcommand{\isnequiv}[1]{#1 is not an equivalence rule}
 \newcommand{\recurse}[3]{\Call{map}{#1,#2,#3}}
 \newcommand{\SReturn}[1]{\State \Return{#1}}
-\newcommand{\bmap}[2]{#1.bm(#2)}
-\newcommand{\fmap}[2]{#1.fm(#2)}
-\newcommand{\getrule}[2]{#1.gr(#2)}
-\newcommand{\childat}[2]{#1.c[#2]}
+\newcommand{\bmap}[2]{\phi^{-1}_{#1}(#2)}
+\newcommand{\fmap}[2]{\phi_{#1}(#2)}
+\newcommand{\getrule}[2]{\mathscr{R}_{#1}(#2)}
+\newcommand{\child}[2]{\textsf{rhs}(#1)}
+\newcommand{\childati}[2]{\textsf{rhs}(#1,#2)}
 
 \setphaserulewidth{.7pt}
 \begin{algorithmic}[1]
-\Statex \textbf{Input}: Two parallel specifications $s_1$ and $s_2$, their matching order $M$ and an object $x$ of the root of $s_1$.
+\Statex \textbf{Input}: Two parallel specifications $\spec{C}$ and $\spec{D}$, their matching order $M$ and an object $x$ of the root of $\spec{C}$.
 \Statex \textbf{Output}: The corresponding object in the codomain.
 \Procedure{map}{$o$, $r_1$, $r_2$}
-    \If{\isatom{$\combclass{r1}$}}
-        \SReturn{\minobj{$\combclass{r2}$}}
+    \If{\isatom{$\combclass{r_1}$}}
+        \SReturn{\minobj{$\combclass{r_2}$}}
     \EndIf
     \If{\isequiv{$r_2$}}
         \If{\isnequiv{$r_1$}}
-            \SReturn{$\bmap{r_2}{\recurse{o}{r_1}{\getrule{s_2}{\childat{r_2}{0}}}}$}
+            \SReturn{$\bmap{r_2}{\recurse{o}{r_1}{\getrule{2}{\child{r_2}}}}$}
         \EndIf
-        \SReturn{$\bmap{r_2}{\recurse{\fmap{r_1}{o}[0]}{\getrule{s_1}{\childat{r_1}{0}}}{\getrule{s_2}{\childat{r_2}{0}}}}$}
+        \SReturn{$\bmap{r_2}{\recurse{\fmap{r_1}{o}}{\getrule{1}{\child{r_1}}}{\getrule{2}{\child{r_2}}}}$}
     \EndIf
     \If{\isequiv{$r_1$}}
-        \SReturn{$\recurse{\fmap{r_1}{o}[0]}{\getrule{s_1}{\childat{r_1}{0}}}{r_2}$}
+        \SReturn{$\recurse{\fmap{r_1}{o}}{\getrule{1}{\child{r_1}}}{r_2}$}
     \EndIf
-    \State $(p,c_1) \gets M(\fmap{r_1}{o}, r_1.c)$
-    \State $i \gets 0$
-    \State $c_2 \gets []$
-    \For{$j\gets 0, |r_2.c|-1$}
-        \If{$\childat{r_2}{j} = \emptyset$}
-            \State $c2.append(null)$
+    \State $(p,c) \gets M(\fmap{r_1}{o},\textsf{rhs}(r_1))$ \Comment{list of objects and list of classes}
+    \State $i \gets 1$
+    \State $c' \gets [\ ]$
+    \For{$j\gets 1$, number of right hand side classes in $r_2$}
+        \If{$\childati{r_2}{j} = \emptyset$} \Comment{the $j^\text{th}$ rhs class}
+            \State $c' \gets c' + [\texttt{null}]$
         \Else
-            \If{$p[i] = null$}
-                \State $c2.append(null)$
+            \If{$p_i = null$}
+                \State $c' \gets c' + [\texttt{null}]$
             \Else
-                \State $c2.append(\recurse{p[i]}{c_1[i]}{\childat{r_2}{i}})$
+                \State $c' \gets c' + [\recurse{p_i}{\mathscr{R}_1(c_i)}{\mathscr{R}_2(\childati{r_2}{j})}]$
             \EndIf
-            $i \gets i + 1$
+            \State $i \gets i + 1$
         \EndIf
     \EndFor
-    \SReturn{$\bmap{r_2}{c_2}$}
+    \SReturn{$\bmap{r_2}{c'}$}
 \EndProcedure
-\State\Return{\Call{map}{$x$, $s_1.rr$, $s_2.rr$}}
+\State\Return{\Call{map}{$x$, $\mathscr{R}\left(\textsf{root}\left(\spec{C}\right)\right)$, $\mathscr{R}\left(\textsf{root}\left(\spec{D}\right)\right)$}}
 \end{algorithmic}
 }

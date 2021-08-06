@@ -1,0 +1,433 @@
+{
+\newcommand{\tablewrap}[1]{\begin{tabular}{c}#1\end{tabular}}
+\newcommand{\tablewraptwo}[2]{\begin{tabular}{c}#2\\#1\end{tabular}}
+
+% ROOT 
+
+\newcommand{\AONE}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (4.0*\xscale,4.0*\yscale);
+\fill[red] (1.01*\xscale, 1.03*\yscale) circle (\spnt);
+\fill[red] (2.05*\xscale, 2.01*\yscale) circle (\spnt);
+\fill[red] (3.02*\xscale, 2.93*\yscale) circle (\spnt);
+\draw[red] (1.01*\xscale, 1.03*\yscale) -- (2.05*\xscale,2.01*\yscale) -- (3.02*\xscale,2.93*\yscale);
+\end{tikzpicture}}
+
+\newcommand{\BONE}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (4.0*\xscale,4.0*\yscale);
+\fill[red] (0.8716573396242947*\xscale, 1.0019086145039522*\yscale) circle (\spnt);
+\fill[red] (2.165701642136188*\xscale, 3.0754616857922144*\yscale) circle (\spnt);
+\fill[red] (3.146447488953841*\xscale, 2.172826722776084*\yscale) circle (\spnt);
+\draw[red] (0.8716573396242947*\xscale, 1.0019086145039522*\yscale) -- (2.165701642136188*\xscale,3.0754616857922144*\yscale) -- (3.146447488953841*\xscale,2.172826722776084*\yscale);
+\end{tikzpicture}}
+
+% LVL 1
+
+\newcommand{\ATWO}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[red] (6.0*\xscale,6.0*\yscale) circle (\spnt);
+\fill[red] (10.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (2.0*\xscale,2.0*\yscale) circle (\spnt);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (12.0*\xscale,8.0*\yscale);
+\draw (4.0*\xscale, 8.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 8.0*\yscale) -- (8.0*\xscale, 0);
+\draw (0, 4.0*\yscale) -- (12.0*\xscale, 4.0*\yscale);
+\fill[red] (9.4*\xscale, 5.02*\yscale) circle (\spnt);
+\fill[red] (10.91*\xscale, 6.35*\yscale) circle (\spnt);
+\draw[red] (9.4*\xscale, 5.02*\yscale) -- (10.91*\xscale,6.35*\yscale);
+\fill[red] (1.05*\xscale, 4.49*\yscale) circle (\spnt);
+\fill[red] (2.24*\xscale, 5.14*\yscale) circle (\spnt);
+\fill[red] (3.4284957400417544*\xscale, 5.739789457224862*\yscale) circle (\spnt);
+\draw[red] (1.05*\xscale, 4.49*\yscale) -- (2.24*\xscale,5.14*\yscale) -- (3.4284957400417544*\xscale,5.739789457224862*\yscale);
+\fill[red] (0.81*\xscale, 5.92*\yscale) circle (\spnt);
+\fill[red] (3.09*\xscale, 6.32*\yscale) circle (\spnt);
+\fill[red] (9.549682814183685*\xscale, 7.419343648657292*\yscale) circle (\spnt);
+\draw[red] (0.81*\xscale, 5.92*\yscale) -- (3.09*\xscale,6.32*\yscale) -- (9.549682814183685*\xscale,7.419343648657292*\yscale);
+\fill (5.99*\xscale,1.96*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+\newcommand{\BTWO}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[red] (6.0*\xscale,6.0*\yscale) circle (\spnt);
+\fill[red] (10.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (2.0*\xscale,2.0*\yscale) circle (\spnt);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (12.0*\xscale,8.0*\yscale);
+\draw (4.0*\xscale, 8.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 8.0*\yscale) -- (8.0*\xscale, 0);
+\draw (0, 4.0*\yscale) -- (12.0*\xscale, 4.0*\yscale);
+\fill[red] (8.682948436047251*\xscale, 5.949925271773672*\yscale) circle (\spnt);
+\fill[red] (10.428201662843525*\xscale, 4.665194343339079*\yscale) circle (\spnt);
+\draw[red] (8.682948436047251*\xscale, 5.949925271773672*\yscale) -- (10.428201662843525*\xscale,4.665194343339079*\yscale);
+\fill[red] (0.51*\xscale, 5.31*\yscale) circle (\spnt);
+\fill[red] (1.26*\xscale, 6.95*\yscale) circle (\spnt);
+\fill[red] (2.21*\xscale, 6.21*\yscale) circle (\spnt);
+\draw[red] (0.51*\xscale, 5.31*\yscale) -- (1.26*\xscale,6.95*\yscale) -- (2.21*\xscale,6.21*\yscale);
+\fill[red] (2.2*\xscale, 4.62*\yscale) circle (\spnt);
+\fill[red] (3.39*\xscale, 7.41*\yscale) circle (\spnt);
+\fill[red] (10.68*\xscale, 6.19*\yscale) circle (\spnt);
+\draw[red] (2.2*\xscale, 4.62*\yscale) -- (3.39*\xscale,7.41*\yscale) -- (10.68*\xscale,6.19*\yscale);
+\fill (6.04*\xscale,1.97*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+% LVL 2
+
+\newcommand{\ATHREE}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (8.0*\xscale,4.0*\yscale);
+\draw (4.0*\xscale, 4.0*\yscale) -- (4.0*\xscale, 0);
+\fill[red] (5.598960089839087*\xscale, 0.9002276274053245*\yscale) circle (\spnt);
+\fill[red] (7.04*\xscale, 1.67*\yscale) circle (\spnt);
+\draw[red] (5.598960089839087*\xscale, 0.9002276274053245*\yscale) -- (7.04*\xscale,1.67*\yscale);
+\fill[red] (0.76*\xscale, 1.88*\yscale) circle (\spnt);
+\fill[red] (1.88*\xscale, 2.44*\yscale) circle (\spnt);
+\fill[red] (2.97*\xscale, 2.97*\yscale) circle (\spnt);
+\draw[red] (0.76*\xscale, 1.88*\yscale) -- (1.88*\xscale,2.44*\yscale) -- (2.97*\xscale,2.97*\yscale);
+\fill[red] (1.44*\xscale, 0.87*\yscale) circle (\spnt);
+\fill[red] (2.97*\xscale, 1.59*\yscale) circle (\spnt);
+\fill[red] (6.029333567440057*\xscale, 2.98047911380251*\yscale) circle (\spnt);
+\draw[red] (1.44*\xscale, 0.87*\yscale) -- (2.97*\xscale,1.59*\yscale) -- (6.029333567440057*\xscale,2.98047911380251*\yscale);
+\end{tikzpicture}}
+
+\newcommand{\BTHREE}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (8.0*\xscale,4.0*\yscale);
+\draw (4.0*\xscale, 4.0*\yscale) -- (4.0*\xscale, 0);
+\fill[red] (5.854277604508614*\xscale, 3.237297302338969*\yscale) circle (\spnt);
+\fill[red] (7.218773962502269*\xscale, 1.979962497743513*\yscale) circle (\spnt);
+\draw[red] (5.854277604508614*\xscale, 3.237297302338969*\yscale) -- (7.218773962502269*\xscale,1.979962497743513*\yscale);
+\fill[red] (0.7800987765155368*\xscale, 1.4844050917510438*\yscale) circle (\spnt);
+\fill[red] (1.514406103733271*\xscale, 3.2931924028795447*\yscale) circle (\spnt);
+\fill[red] (2.66*\xscale, 2.5*\yscale) circle (\spnt);
+\draw[red] (0.7800987765155368*\xscale, 1.4844050917510438*\yscale) -- (1.514406103733271*\xscale,3.2931924028795447*\yscale) -- (2.66*\xscale,2.5*\yscale);
+\fill[red] (2.56*\xscale, 0.99*\yscale) circle (\spnt);
+\fill[red] (3.58*\xscale, 3.04*\yscale) circle (\spnt);
+\fill[red] (5.77*\xscale, 1.6370373134954155*\yscale) circle (\spnt);
+\draw[red] (2.56*\xscale, 0.99*\yscale) -- (3.58*\xscale,3.04*\yscale) -- (5.77*\xscale,1.6370373134954155*\yscale);
+\end{tikzpicture}}
+
+% LVL 3
+
+\newcommand{\AFOUR}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[green!20,rounded corners=2ex*\roundscale] (4*\xscale,0) rectangle (8.0*\xscale,4.0*\yscale);
+\fill[green!20] (4*\xscale,0) rectangle (6*\xscale,4*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (8.0*\xscale,4.0*\yscale);
+\draw (4.0*\xscale, 4.0*\yscale) -- (4.0*\xscale, 0);
+\fill[red] (5.598960089839087*\xscale, 0.9002276274053245*\yscale) circle (\spnt);
+\fill[red] (7.04*\xscale, 1.67*\yscale) circle (\spnt);
+\draw[red] (5.598960089839087*\xscale, 0.9002276274053245*\yscale) -- (7.04*\xscale,1.67*\yscale);
+\fill[red] (0.76*\xscale, 1.88*\yscale) circle (\spnt);
+\fill[red] (1.88*\xscale, 2.44*\yscale) circle (\spnt);
+\fill[red] (2.97*\xscale, 2.97*\yscale) circle (\spnt);
+\draw[red] (0.76*\xscale, 1.88*\yscale) -- (1.88*\xscale,2.44*\yscale) -- (2.97*\xscale,2.97*\yscale);
+\fill[red] (1.44*\xscale, 0.87*\yscale) circle (\spnt);
+\fill[red] (2.97*\xscale, 1.59*\yscale) circle (\spnt);
+\fill[red] (6.029333567440057*\xscale, 2.98047911380251*\yscale) circle (\spnt);
+\draw[red] (1.44*\xscale, 0.87*\yscale) -- (2.97*\xscale,1.59*\yscale) -- (6.029333567440057*\xscale,2.98047911380251*\yscale);
+\end{tikzpicture}}
+
+\newcommand{\BFOUR}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[green!20,rounded corners=2ex*\roundscale] (4*\xscale,0) rectangle (8.0*\xscale,4.0*\yscale);
+\fill[green!20] (4*\xscale,0) rectangle (6*\xscale,4*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (8.0*\xscale,4.0*\yscale);
+\draw (4.0*\xscale, 4.0*\yscale) -- (4.0*\xscale, 0);
+\fill[red] (5.854277604508614*\xscale, 3.237297302338969*\yscale) circle (\spnt);
+\fill[red] (7.218773962502269*\xscale, 1.979962497743513*\yscale) circle (\spnt);
+\draw[red] (5.854277604508614*\xscale, 3.237297302338969*\yscale) -- (7.218773962502269*\xscale,1.979962497743513*\yscale);
+\fill[red] (0.7800987765155368*\xscale, 1.4844050917510438*\yscale) circle (\spnt);
+\fill[red] (1.514406103733271*\xscale, 3.2931924028795447*\yscale) circle (\spnt);
+\fill[red] (2.66*\xscale, 2.5*\yscale) circle (\spnt);
+\draw[red] (0.7800987765155368*\xscale, 1.4844050917510438*\yscale) -- (1.514406103733271*\xscale,3.2931924028795447*\yscale) -- (2.66*\xscale,2.5*\yscale);
+\fill[red] (2.56*\xscale, 0.99*\yscale) circle (\spnt);
+\fill[red] (3.58*\xscale, 3.04*\yscale) circle (\spnt);
+\fill[red] (5.77*\xscale, 1.6370373134954155*\yscale) circle (\spnt);
+\draw[red] (2.56*\xscale, 0.99*\yscale) -- (3.58*\xscale,3.04*\yscale) -- (5.77*\xscale,1.6370373134954155*\yscale);
+\end{tikzpicture}}
+
+% LVL 4 - 1
+
+\newcommand{\AFIVE}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[red] (6.0*\xscale,6.0*\yscale) circle (\spnt);
+\fill[red] (10.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (14.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (2.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[green!20, rounded corners=2ex*\roundscale] (12*\xscale,4*\yscale) rectangle (16.0*\xscale,8.0*\yscale);
+\fill[green!20] (12*\xscale,4*\yscale) rectangle (14.0*\xscale,8.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (16.0*\xscale,8.0*\yscale);
+\draw (4.0*\xscale, 8.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 8.0*\yscale) -- (8.0*\xscale, 0);
+\draw (12.0*\xscale, 8.0*\yscale) -- (12.0*\xscale, 0);
+\draw (0, 4.0*\yscale) -- (16.0*\xscale, 4.0*\yscale);
+\fill[red] (9.801112294950762*\xscale, 4.87433400586728*\yscale) circle (\spnt);
+\fill[red] (11.435748036487725*\xscale, 6.031005179302951*\yscale) circle (\spnt);
+\draw[red] (9.801112294950762*\xscale, 4.87433400586728*\yscale) -- (11.435748036487725*\xscale,6.031005179302951*\yscale);
+\fill[red] (10.625978487198118*\xscale, 4.71691728339242*\yscale) circle (\spnt);
+\fill[red] (14.204868883096946*\xscale, 6.149917253543268*\yscale) circle (\spnt);
+\draw[red] (10.625978487198118*\xscale, 4.71691728339242*\yscale) -- (14.204868883096946*\xscale,6.149917253543268*\yscale);
+\fill[red] (13.595631280437269*\xscale, 4.61944982640392*\yscale) circle (\spnt);
+\fill[red] (15.042199599259325*\xscale, 5.8848845525829105*\yscale) circle (\spnt);
+\draw[red] (13.595631280437269*\xscale, 4.61944982640392*\yscale) -- (15.042199599259325*\xscale,5.8848845525829105*\yscale);
+\fill[red] (0.82*\xscale, 5.85*\yscale) circle (\spnt);
+\fill[red] (1.87*\xscale, 6.66*\yscale) circle (\spnt);
+\fill[red] (3.038470356788786*\xscale, 7.538371658226805*\yscale) circle (\spnt);
+\draw[red] (0.82*\xscale, 5.85*\yscale) -- (1.87*\xscale,6.66*\yscale) -- (3.038470356788786*\xscale,7.538371658226805*\yscale);
+\fill[red] (2.18*\xscale, 4.69*\yscale) circle (\spnt);
+\fill[red] (3.47*\xscale, 4.93*\yscale) circle (\spnt);
+\fill[red] (9.53*\xscale, 6.06*\yscale) circle (\spnt);
+\draw[red] (2.18*\xscale, 4.69*\yscale) -- (3.47*\xscale,4.93*\yscale) -- (9.53*\xscale,6.06*\yscale);
+\fill[red] (2.2*\xscale, 6.06*\yscale) circle (\spnt);
+\fill[red] (3.39*\xscale, 6.2*\yscale) circle (\spnt);
+\fill[red] (13.98024739273349*\xscale, 7.380027548539661*\yscale) circle (\spnt);
+\draw[red] (2.2*\xscale, 6.06*\yscale) -- (3.39*\xscale,6.2*\yscale) -- (13.98024739273349*\xscale,7.380027548539661*\yscale);
+\fill (6.1*\xscale,1.94*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+\newcommand{\BFIVE}[2]{
+\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[red] (6.0*\xscale,6.0*\yscale) circle (\spnt);
+\fill[red] (10.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (14.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (2.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[green!20, rounded corners=2ex*\roundscale] (12*\xscale,4*\yscale) rectangle (16.0*\xscale,8.0*\yscale);
+\fill[green!20] (12*\xscale,4*\yscale) rectangle (14.0*\xscale,8.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (16.0*\xscale,8.0*\yscale);
+\draw (4.0*\xscale, 8.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 8.0*\yscale) -- (8.0*\xscale, 0);
+\draw (12.0*\xscale, 8.0*\yscale) -- (12.0*\xscale, 0);
+\draw (0, 4.0*\yscale) -- (16.0*\xscale, 4.0*\yscale);
+\fill[red] (10.12*\xscale, 7.4*\yscale) circle (\spnt);
+\fill[red] (10.96*\xscale, 6.23*\yscale) circle (\spnt);
+\draw[red] (10.12*\xscale, 7.4*\yscale) -- (10.96*\xscale,6.23*\yscale);
+\fill[red] (11.45*\xscale, 7.5*\yscale) circle (\spnt);
+\fill[red] (13.83*\xscale, 6.01*\yscale) circle (\spnt);
+\draw[red] (11.45*\xscale, 7.5*\yscale) -- (13.83*\xscale,6.01*\yscale);
+\fill[red] (14.49*\xscale, 7.45*\yscale) circle (\spnt);
+\fill[red] (15.341775454722875*\xscale, 6.279291533596879*\yscale) circle (\spnt);
+\draw[red] (14.49*\xscale, 7.45*\yscale) -- (15.341775454722875*\xscale,6.279291533596879*\yscale);
+\fill[red] (0.7*\xscale, 5.86*\yscale) circle (\spnt);
+\fill[red] (1.34*\xscale, 7.27*\yscale) circle (\spnt);
+\fill[red] (2.1*\xscale, 6.64*\yscale) circle (\spnt);
+\draw[red] (0.7*\xscale, 5.86*\yscale) -- (1.34*\xscale,7.27*\yscale) -- (2.1*\xscale,6.64*\yscale);
+\fill[red] (2.72*\xscale, 4.52*\yscale) circle (\spnt);
+\fill[red] (3.45*\xscale, 5.79*\yscale) circle (\spnt);
+\fill[red] (8.52*\xscale, 4.91*\yscale) circle (\spnt);
+\draw[red] (2.72*\xscale, 4.52*\yscale) -- (3.45*\xscale,5.79*\yscale) -- (8.52*\xscale,4.91*\yscale);
+\fill[red] (1.8062192976217373*\xscale, 4.668919054695671*\yscale) circle (\spnt);
+\fill[red] (3.199753219993414*\xscale, 6.868448702576094*\yscale) circle (\spnt);
+\fill[red] (12.53*\xscale, 5.3*\yscale) circle (\spnt);
+\draw[red] (1.8062192976217373*\xscale, 4.668919054695671*\yscale) -- (3.199753219993414*\xscale,6.868448702576094*\yscale) -- (12.53*\xscale,5.3*\yscale);
+\fill (5.97*\xscale,2.04*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+% LVL 4 - 2
+
+\newcommand{\ASIX}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[red] (6.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (10.0*\xscale,6.0*\yscale) circle (\spnt);
+\fill[red] (2.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[green!20,rounded corners=2ex*\roundscale] (8*\xscale,0) rectangle (12.0*\xscale,4.0*\yscale);
+\fill[green!20] (8*\xscale,0) rectangle (10.0*\xscale,4.0*\yscale);
+\fill[green!20] (4*\xscale,4*\yscale) rectangle (8.0*\xscale,8.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (12.0*\xscale,8.0*\yscale);
+\draw (4.0*\xscale, 8.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 8.0*\yscale) -- (8.0*\xscale, 0);
+\draw (0, 4.0*\yscale) -- (12.0*\xscale, 4.0*\yscale);
+\fill[red] (5.34854305480012*\xscale, 5.141934256406755*\yscale) circle (\spnt);
+\fill[red] (7.27*\xscale, 6.31*\yscale) circle (\spnt);
+\draw[red] (5.34854305480012*\xscale, 5.141934256406755*\yscale) -- (7.27*\xscale,6.31*\yscale);
+\fill[red] (1.0*\xscale, 5.95602761572349*\yscale) circle (\spnt);
+\fill[red] (2.07*\xscale, 6.49*\yscale) circle (\spnt);
+\fill[red] (3.236674307340645*\xscale, 7.080100135433983*\yscale) circle (\spnt);
+\draw[red] (1.0*\xscale, 5.95602761572349*\yscale) -- (2.07*\xscale,6.49*\yscale) -- (3.236674307340645*\xscale,7.080100135433983*\yscale);
+\fill[red] (1.87*\xscale, 5.12*\yscale) circle (\spnt);
+\fill[red] (3.21*\xscale, 5.8*\yscale) circle (\spnt);
+\fill[red] (5.08*\xscale, 6.74*\yscale) circle (\spnt);
+\draw[red] (1.87*\xscale, 5.12*\yscale) -- (3.21*\xscale,5.8*\yscale) -- (5.08*\xscale,6.74*\yscale);
+\fill (10.1*\xscale,2.12*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+\newcommand{\BSIX}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[red] (6.0*\xscale,6.0*\yscale) circle (\spnt);
+\fill[red] (10.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[red] (2.0*\xscale,2.0*\yscale) circle (\spnt);
+\fill[green!20,rounded corners=2ex*\roundscale] (8*\xscale,4*\yscale) rectangle (12.0*\xscale,8.0*\yscale);
+\fill[green!20] (8*\xscale,4*\yscale) rectangle (10.0*\xscale,8.0*\yscale);
+\fill[green!20] (4*\xscale,0) rectangle (8.0*\xscale,4.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (12.0*\xscale,8.0*\yscale);
+\draw (4.0*\xscale, 8.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 8.0*\yscale) -- (8.0*\xscale, 0);
+\draw (0, 4.0*\yscale) -- (12.0*\xscale, 4.0*\yscale);
+\fill[red] (8.682948436047251*\xscale, 5.949925271773672*\yscale) circle (\spnt);
+\fill[red] (10.428201662843525*\xscale, 4.665194343339079*\yscale) circle (\spnt);
+\draw[red] (8.682948436047251*\xscale, 5.949925271773672*\yscale) -- (10.428201662843525*\xscale,4.665194343339079*\yscale);
+\fill[red] (0.51*\xscale, 5.31*\yscale) circle (\spnt);
+\fill[red] (1.26*\xscale, 6.95*\yscale) circle (\spnt);
+\fill[red] (2.21*\xscale, 6.21*\yscale) circle (\spnt);
+\draw[red] (0.51*\xscale, 5.31*\yscale) -- (1.26*\xscale,6.95*\yscale) -- (2.21*\xscale,6.21*\yscale);
+\fill[red] (2.2*\xscale, 4.62*\yscale) circle (\spnt);
+\fill[red] (3.39*\xscale, 7.41*\yscale) circle (\spnt);
+\fill[red] (10.68*\xscale, 6.19*\yscale) circle (\spnt);
+\draw[red] (2.2*\xscale, 4.62*\yscale) -- (3.39*\xscale,7.41*\yscale) -- (10.68*\xscale,6.19*\yscale);
+\fill (6.04*\xscale,1.97*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+% LVL 5
+\newcommand{\ASEVEN}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[green!20, rounded corners=2ex*\roundscale] (8*\xscale,0) rectangle (12.0*\xscale,4.0*\yscale);
+\fill[green!20] (10*\xscale,0) rectangle (12.0*\xscale,4.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (12.0*\xscale,4.0*\yscale);
+\draw (4.0*\xscale, 4.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 4.0*\yscale) -- (8.0*\xscale, 0);
+\fill[red] (5.91*\xscale, 0.54*\yscale) circle (\spnt);
+\fill[red] (7.33*\xscale, 0.97*\yscale) circle (\spnt);
+\draw[red] (5.91*\xscale, 0.54*\yscale) -- (7.33*\xscale,0.97*\yscale);
+\fill[red] (6.89*\xscale, 1.31*\yscale) circle (\spnt);
+\fill[red] (8.89*\xscale, 1.93*\yscale) circle (\spnt);
+\draw[red] (6.89*\xscale, 1.31*\yscale) -- (8.89*\xscale,1.93*\yscale);
+\fill[red] (9.5*\xscale, 0.79*\yscale) circle (\spnt);
+\fill[red] (11.05*\xscale, 1.36*\yscale) circle (\spnt);
+\draw[red] (9.5*\xscale, 0.79*\yscale) -- (11.05*\xscale,1.36*\yscale);
+\fill[red] (0.67*\xscale, 2.33*\yscale) circle (\spnt);
+\fill[red] (1.91*\xscale, 2.72*\yscale) circle (\spnt);
+\fill[red] (3.15*\xscale, 3.09*\yscale) circle (\spnt);
+\draw[red] (0.67*\xscale, 2.33*\yscale) -- (1.91*\xscale,2.72*\yscale) -- (3.15*\xscale,3.09*\yscale);
+\fill[red] (1.31*\xscale, 1.63*\yscale) circle (\spnt);
+\fill[red] (3.29*\xscale, 2.1*\yscale) circle (\spnt);
+\fill[red] (6.46*\xscale, 2.85*\yscale) circle (\spnt);
+\draw[red] (1.31*\xscale, 1.63*\yscale) -- (3.29*\xscale,2.1*\yscale) -- (6.46*\xscale,2.85*\yscale);
+\fill[red] (2.02*\xscale, 1.1*\yscale) circle (\spnt);
+\fill[red] (3.33*\xscale, 1.4*\yscale) circle (\spnt);
+\fill[red] (10.33*\xscale, 2.97*\yscale) circle (\spnt);
+\draw[red] (2.02*\xscale, 1.1*\yscale) -- (3.33*\xscale,1.4*\yscale) -- (10.33*\xscale,2.97*\yscale);
+\end{tikzpicture}}
+
+\newcommand{\BSEVEN}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[green!20, rounded corners=2ex*\roundscale] (8*\xscale,0) rectangle (12.0*\xscale,4.0*\yscale);
+\fill[green!20] (10*\xscale,0) rectangle (12.0*\xscale,4.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (12.0*\xscale,4.0*\yscale);
+\draw (4.0*\xscale, 4.0*\yscale) -- (4.0*\xscale, 0);
+\draw (8.0*\xscale, 4.0*\yscale) -- (8.0*\xscale, 0);
+\fill[red] (5.75*\xscale, 1.24*\yscale) circle (\spnt);
+\fill[red] (7.01*\xscale, 0.84*\yscale) circle (\spnt);
+\draw[red] (5.75*\xscale, 1.24*\yscale) -- (7.01*\xscale,0.84*\yscale);
+\fill[red] (7.56*\xscale, 2.08*\yscale) circle (\spnt);
+\fill[red] (8.71*\xscale, 1.64*\yscale) circle (\spnt);
+\draw[red] (7.56*\xscale, 2.08*\yscale) -- (8.71*\xscale,1.64*\yscale);
+\fill[red] (9.79*\xscale, 2.04*\yscale) circle (\spnt);
+\fill[red] (11.19*\xscale, 1.52*\yscale) circle (\spnt);
+\draw[red] (9.79*\xscale, 2.04*\yscale) -- (11.19*\xscale,1.52*\yscale);
+\fill[red] (0.58*\xscale, 1.37*\yscale) circle (\spnt);
+\fill[red] (1.08*\xscale, 2.86*\yscale) circle (\spnt);
+\fill[red] (1.69*\xscale, 2.33*\yscale) circle (\spnt);
+\draw[red] (0.58*\xscale, 1.37*\yscale) -- (1.08*\xscale,2.86*\yscale) -- (1.69*\xscale,2.33*\yscale);
+\fill[red] (2.54*\xscale, 1.36*\yscale) circle (\spnt);
+\fill[red] (3.48*\xscale, 2.36*\yscale) circle (\spnt);
+\fill[red] (6.52*\xscale, 1.92*\yscale) circle (\spnt);
+\draw[red] (2.54*\xscale, 1.36*\yscale) -- (3.48*\xscale,2.36*\yscale) -- (6.52*\xscale,1.92*\yscale);
+\fill[red] (2.46*\xscale, 2.52*\yscale) circle (\spnt);
+\fill[red] (3.42*\xscale, 3.46*\yscale) circle (\spnt);
+\fill[red] (8.62*\xscale, 2.83*\yscale) circle (\spnt);
+\draw[red] (2.46*\xscale, 2.52*\yscale) -- (3.42*\xscale,3.46*\yscale) -- (8.62*\xscale,2.83*\yscale);
+\end{tikzpicture}}
+
+% Catalytic atom
+
+\newcommand{\AEIGHT}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[green!20,rounded corners=2ex*\roundscale] (0,0) rectangle (4.0*\xscale,4.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (4.0*\xscale,4.0*\yscale);
+\fill (2*\xscale,2*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+\newcommand{\BEIGHT}[2]{\begin{tikzpicture}[scale=#1, every node/.style={scale=#1}]
+\def\xscale{1.0} % Horizontal scale factor
+\def\yscale{1.0} % Vertical scale factor
+\def\spnt{0.075*#2} % Size of smaller points
+\def\lpnt{0.125*#2} % Size of larger points
+\def\roundscale{0.5} % The rounding factor
+\fill[green!20,rounded corners=2ex*\roundscale] (0,0) rectangle (4.0*\xscale,4.0*\yscale);
+\draw[rounded corners=2ex*\roundscale] (0,0) rectangle (4.0*\xscale,4.0*\yscale);
+\fill (2*\xscale,2*\yscale) circle (\lpnt);
+\end{tikzpicture}}
+
+\begin{tabular}{c|c}
+    \tablewrap{Specification for $\Av{123}$} & \tablewrap{Specification for $\Av{132}$}\\
+    \hline & \\[-1ex]
+    \tablewraptwo{\AONE{0.4}{1.5}}{$\mathcal{C}^{(1)}$} & \tablewraptwo{\BONE{0.4}{1.5}}{$\mathcal{D}^{(1)}$} \\
+    \tablewraptwo{\ATWO{0.3}{2}}{$\mathcal{C}^{(2)}$} & \tablewraptwo{\BTWO{0.3}{2}}{$\mathcal{D}^{(2)}$} \\
+    \tablewraptwo{\ATHREE{0.4}{1.7}}{$\mathcal{C}^{(3)}$} & \tablewraptwo{\BTHREE{0.4}{1.7}}{$\mathcal{D}^{(3)}$} \\
+    \tablewraptwo{\AFOUR{0.4}{1.7}}{$\mathcal{C}^{(4)}$} & \tablewraptwo{\BFOUR{0.4}{1.7}}{$\mathcal{D}^{(4)}$} \\
+    \tablewraptwo{\AFIVE{0.3}{2}}{$\mathcal{C}^{(5)}$} & \tablewraptwo{\BFIVE{0.3}{2}}{$\mathcal{D}^{(5)}$} \\
+    \tablewraptwo{\ASIX{0.3}{2}}{$\mathcal{C}^{(6)}$} & \tablewraptwo{\BSIX{0.3}{2}}{$\mathcal{D}^{(6)}$} \\
+    \tablewraptwo{\ASEVEN{0.4}{1.7}}{$\mathcal{C}^{(7)}$} & \tablewraptwo{\BSEVEN{0.4}{1.7}}{$\mathcal{D}^{(7)}$} \\
+    \tablewraptwo{\AEIGHT{0.4}{1.5}}{$\mathcal{C}^{(8)}$} & \tablewraptwo{\BEIGHT{0.4}{1.5}}{$\mathcal{D}^{(8)}$}
+\end{tabular}
+}

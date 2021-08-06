@@ -3,18 +3,25 @@
 \section{Future work}\label{s:fw}
 Many ideas on improvements and applications arose while working on this thesis and some could not be explored further due to time restrictions. We will go over some of the ideas that did not come to fruition. This will mostly be conveyed from the perspective of permutations but could be generalized for other domains.
 
-Further analysis of the resulting bijections could be insightful. We could compare them against previously known bijections, track permutation statistics preserved or even attempt to visualize them.
+Further analysis of the resulting bijections could be insightful. We could compare them to previously known bijections, track permutation statistics preserved or even attempt to visualize them.
 
 The current universe expansion will stop when any specification is found, for both root classes. Usually the universes contain multiple specifications at that point. A more elegant universe expansion halting is desirable, based on some criteria of parallel specifications.
 
 Instead of searching for specifications individually and then trying to find parallel specifications from the extended universe of those searches, it would be preferable to develop our own search method that is intended for finding parallel specifications. This would open the doors for parallel specification related heuristics, where the expansion of a class with a strategy could be evaluated against the other universe. We could even look into some domain specific machine learning related heuristics. 
 
-We might look to produce conjectures on equivalent tilings if we find a partial match. Suppose we know the root classes are isomorphic and at some point, in the trees, we can match all but one children pair. This pair could be isomorphic but we lack the strategies to match them. These would require humans to look at and try to prove but in return, could help formalize some theory about tiling equivalences, which would help find more specifications and bijections.
+We could produce conjectures on equivalent tilings if we find a partial match. Suppose we know the root classes are isomorphic and at some point, in the trees, we can match all but one children pair. This pair could be isomorphic but we lack the strategies to match them. These would require humans to look at and try to prove but in return, could help formalize some theory about tiling equivalences, which would help find more specifications and bijections.
+
+\subsection{Conjectures}
+\todo[inline]{talk about validating up to $n=10$}
+\begin{conjecture}
+The parallel bijection for the specifications in subsection \ref{ss:onexthree} 'matches' the Simion and Schmidt bijection in \cite{simionandschmidt}.
+\end{conjecture}
+
 
 \section{Concluding remarks}
 We believe this thesis presents the first ever fully automated way of constructing bijections between combinatorial classes. It is built on top of the specification search by Bean \cite{BeanPhd:phd}. The thesis contains both the theoretical and algorithmic foundations to find and create such a bijection and is accompanied by open source implementations.
 
-Unlike the translation method in Wood and Zeilberger \cite{wood_zeilberger}, our automated bijection does not require any previous mathematical work, e.g., algebraic proof. It only depends on sufficient implementations of strategies for domains.
+Unlike the translation method in Wood and Zeilberger \cite{wood_zeilberger}, our automated bijection does not require any previous mathematical work, e.g., algebraic proof. It only depends on sufficient implementation of strategies for domains.
 
 As we discussed in \SectionRef{s:fw}, the search is done from a universe that is expanded with a completely different goal in mind. We believe this to be a limiting factor of finding bijections. On the contrary, its strength is finding a bijection without any supplied information, given that a domain has adequate strategies.
 

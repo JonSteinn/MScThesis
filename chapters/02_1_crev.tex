@@ -1,5 +1,5 @@
 \begin{definition}\label{def:rrgp}
-Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ and define its \emph{column reverse} for $[a,b]$ where $a,b\in\N$ and $a\leq b$ as the mapping $\textsf{rev}_{[a,b]}$ where $\textsf{rev}_{[a,b]}(\pi)$ is $\pi$ where its longest subsequence who's columns all belong to interval
+Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ and define its \emph{column reverse} for $[a,b]$ where $a,b\in\N$ and $a\leq b$ as the mapping $\textsf{rev}_{[a,b]}$ where $\textsf{rev}_{[a,b]}(\pi)$ is $\pi$ where its longest subsequence whose columns all belong to interval
 \[
 \pi_{i}^{(x_i,y_i)}\pi_{i+1}^{(x_{i+1},y_{i+1})}\dotsm\pi_{i+k}^{(x_{i+k},y_{i+k})}
 \]
@@ -35,7 +35,7 @@ Let $\pi, \sigma \in \mathcal{G}$ such that $\contains{\pi}{\sigma}$, then $\con
 \begin{proof}
 If $\pi$ has no elements within the columns then neither does $\sigma$ and both are mapped to themselves. If $\sigma$ has no elements within the columns then the mapping has no effect on the pattern which remains in $\textsf{rev}_{[a,b]}(\pi)$. 
 
-Let $\set{i,i+1,\dotsc,i+k}$ be the indices of elements of $\pi$ with columns in $[a,b]$. Let $\sigma = \st{\sseq{A_1\cup L \cup A_2}{\pi}}$ where $L \subseteq \set{i,i+1,\dotsc,i+k}$ and $A_1$ and $A_2$ are the indices in $\pi$ on either side of the columns, then
+Let $\set{i,i+1,\dotsc,i+k}$ be the indices of elements of $\pi$ with columns in $[a,b]$. Let $\sigma = \st{\sseq{A_1\cup L \cup A_2}{\pi}}$ where $L \subseteq \set{i,i+1,\dotsc,i+k}$ and $A_1$ and $A_2$ are the indices in $\pi$ on either side of the columns corresponding to the occurrence of $\sigma$, then
 \begin{align*}
     \textsf{rev}_{[a,b]}(\sigma) &= \textsf{rev}_{[a,b]}\left(\st{\sseq{A_1\cup L \cup A_2}{\pi}}\right)\\ 
     &= \st{\textsf{rev}_{[a,b]}\left(\sseq{A_1\cup L \cup A_2}{\pi}\right)}\\
@@ -45,6 +45,7 @@ Let $\set{i,i+1,\dotsc,i+k}$ be the indices of elements of $\pi$ with columns in
     &= \st{\sseq{A_1}{\textsf{rev}_{[a,b]}(\pi)}\sseq{\cset{2i+k-\ell}{\ell \in L}}{\textsf{rev}_{[a,b]}(\pi)}\sseq{A_2}{\textsf{rev}_{[a,b]}(\pi)}}\\
     &= \st{\sseq{A_1 \cup \cset{2i+k-\ell}{\ell \in L} \cup A_2}{\textsf{rev}_{[a,b]}(\pi)}}
 \end{align*}
+which shows that $\textsf{rev}_{[a,b]}(\sigma)$ is the standardization of a subsequence of $\textsf{rev}_{[a,b]}(\pi)$.
 \end{proof}
 
 \begin{lemma}\label{lem:crevgrid}

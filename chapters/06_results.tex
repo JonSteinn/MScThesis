@@ -1,9 +1,9 @@
 
 \coverchapter{Results}\label{ch:results}
-The search method we have developed and the resulting bijections work between different domains. The problem, however, is the lack of maintained implementations of domains using \css{}. With \css{} being a product of a research group that is mainly interested in permutation patterns, unsurprisingly the most supported domain are permutations with \tsc{}. As a consequence, we will mostly demonstrate bijections found between permutation classes.
+The search method we have developed and the resulting bijections work between different domains. The problem, however, is the lack of maintained implementations of domains using \css{}. With \css{} being a product of a research group that is mainly interested in permutation patterns, unsurprisingly, the most supported domain is permutations with \tsc{}. As a consequence, we will mostly demonstrate bijections found between permutation classes.
 
 \section{Cross-domain successes}
-There is a very simple example for words provided in repository for \css{}. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in a word is another word that occurs as a consecutive subsequence. This class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive 1's, that is
+There is a very simple example implementation of words provided in repository for \css{}. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in a word is another word that occurs as a consecutive subsequence. This class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive 1's, that is
 \[
     (\varepsilon, \set{0,1}, \set{11}) = \set{\varepsilon, 0, 1, 00, 01, 10, 000, 001, 010, 100, 101, \dotsc}.
 \]
@@ -11,7 +11,7 @@ There is a very simple example for words provided in repository for \css{}. A wo
 
 The bijection search will easily find bijections between sets such as $(\varepsilon, \set{0,1}, \set{11})$ and $(\varepsilon, \set{a,b}, \set{bb})$, that are identical given a bijection of the letters of the alphabet. The same goes for the trivial sets $(\epsilon, \set{0}, \emptyset)$ and $\Av{12}$, where there is only a single element of each length. The implementation for words has few strategies and limited effort was allocated to finding bijections between words and permutation classes. We will demonstrate two such bijections in greater detail but there is a caveat that needs to be addressed.
 
-Take, e.g., the class $\mathcal{W} = (\varepsilon, \set{a,b}, \emptyset)$. For any fixed length $n$, there are $2^n$ unique words as we have a choice between two letters for each position in any sequence. This produces the sequence $1, 2, 4, 8, 16, 32, 64, \dotsc$ while the permutation class, $\Av{231,321}$, has the sequence $1, 1, 2, 4, 8, 16, 32, \dotsc$ which is off by one. We could use $\textsf{Av}_{\geq1}(231,312)$ instead, which shares this sequence with the words if we start from $n=1$, but that brings another problem. Words of length $n$ would map to permutations of length $n+1$ while parallel specifications require atoms to match. What we can do instead, is place the top point of $\textsf{Av}_{\geq1}(231,312)$ and factor it out. That leaves us with a tiling root $\mathcal{T}$ where
+Take, e.g., the class $\mathcal{W} = (\varepsilon, \set{a,b}, \emptyset)$. For any fixed length $n$, there are $2^n$ unique words as we have a choice between two letters for each position in any sequence. This produces the sequence $1, 2, 4, 8, 16, 32, 64, \dotsc$ while the permutation class, $\Av{231,321}$, has the sequence $1, 1, 2, 4, 8, 16, 32, \dotsc$ which is off by one. We could use $\textsf{Av}_{\geq1}(231,312)$ instead, which shares this sequence with the words if we start from $n=1$, but that brings another problem. Words of length $n$ would map to permutations of length $n+1$ while parallel specifications require atoms to match. What we can do instead is place the top point of $\textsf{Av}_{\geq1}(231,312)$ and factor it out. That leaves us with a tiling root $\mathcal{T}$ where
 \begin{align*}
     \Av{231,312} &\cong \set{\varepsilon} \sqcup \textsf{Av}_{\geq1}(231,312),\\
     \textsf{Av}_{\geq1}(231,312) &\cong \set{\point{0.1}}\times \textsf{Grid}(\mathcal{T}).
@@ -20,7 +20,7 @@ The tiling in question here is
 \[
     \mathcal{T} = \left((2,1), \set{2^{(0,0)}1^{(1,0)}, 21^{(1,0)}, 231^{(0,0)}, 321^{(0,0)}},\emptyset\right).
 \]
-Now we can find and construct bijections between $\mathcal{W}$ and $\textsf{Grid}(\mathcal{T})$. It will map the words to gridded permutations in $\mathcal{G}^{(2,1)}$ instead of $\mathcal{G}^{(1,1)}$, but there is a trivial bijection from these gridded permutations to permutations.
+Now we can find and construct bijections between $\mathcal{W}$ and $\textsf{Grid}(\mathcal{T})$. It will map the words to gridded permutations in $\mathcal{G}^{(2,1)}$ instead of $\mathcal{G}^{(1,1)}$ but there is a trivial bijection from these gridded permutations to permutations.
 
 The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \set{11})$ and $\Av{231,312,321}$. These are counted by the Fibonacci numbers but here we have the same issue as before, with one sequence being off by one. We remedy this in the same way as before, leaving us with a tiling root that can be seen in \FigureRef{fig:fibpermoffbyone}. This tiling can have at most a single point in cell $(1,0)$ and if it includes one, it must be greater than all the points in cell $(0,0)$. We can map any such gridded permutation to a permutation with a trivial bijection. Given a gridded permutation of length $n$ that contains no point in cell $(1,0)$ we append $n+1$ to the underlying permutation. If it contains a point in $(1,0)$ we place $n+1$ immediately prior to the last element.
 
@@ -29,7 +29,7 @@ The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \s
 \begin{figure}[ht!]
     \centering
     \input{graphics/fibperm_offbyone}
-    \caption{The tiling used instead of $\Av{231,312,321}$, to deal with the sequence offset of binary strings with no consecutive 1's.}
+    \caption{The tiling used instead of $\Av{231,312,321}$ to deal with the sequence offset of binary strings with no consecutive 1's.}
     \label{fig:fibpermoffbyone}
 \end{figure}
 
@@ -56,14 +56,841 @@ The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \s
 \end{figure}
 
 \section{Permutation classes}
-\todo[inline,caption={}]{
-\begin{itemize}
-    \item Talk about symmetries and that we don't bother with them
-    \item Maybe add a section on symmetries in background?
-    \item Start by crossing of articles (can subsection on them)
-    \item Simion\&Schmidt, etc [todo: find more]
-    \item Dump remaining 
-    \item Could maybe visualize the group of classes as graphs [at least one example]
-    \item Deal with Av(very long list of patterns) in some sensible way
-\end{itemize}
-}
+The experiments we carried out can be separated into known Wilf classes and \emph{experimental classes}. An experimental class is a collection of permutation classes that share the first $n$ terms in their counting sequence for a fixed $n$.
+
+The experiments for known Wilf classes includes bijections found for all the permutation classes that Simion and Schmidt gave bijections for in \cite{simionandschmidt}, excluding symmetries.
+
+For the experimental classes we focused on classes avoiding patterns of length $4$. We started with those avoiding eleven patterns and worked our way downwards. Symmetries and classes with a regular insertion encoding\todo{add to background} were disregarded. 
+
+
+\subsection{Avoiding one pattern of length 3}\label{ss:onexthree}
+The parallel specification we found for $\Av{123}$ and $\Av{132}$ are quite similar and even use the exact same rules. They are 
+\begin{align*}
+    \spec{C} = \left(
+        \begin{pmatrix}
+            \mathcal{C}^{(1)}\\
+            \mathcal{C}^{(2)}\\
+            \mathcal{C}^{(3)}\\
+            \mathcal{C}^{(4)}\\
+            \mathcal{C}^{(5)}\\
+            \mathcal{C}^{(6)}\\
+            \mathcal{C}^{(7)}
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            o_1\\
+            o_2\\
+            o_3\\
+            o_4\\
+            o_5\\
+            o_6\\
+            o_7
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            \set{\varepsilon} & \mathcal{C}^{(2)} & \emptyset\\
+            \mathcal{C}^{(3)} & \set{1} & \emptyset\\
+            \mathcal{C}^{(4)} & \emptyset & \emptyset\\
+            \set{\varepsilon} & \mathcal{C}^{(5)} & \mathcal{C}^{(6)}\\
+            \mathcal{C}^{(7)} & \set{1} & \emptyset\\
+            \mathcal{C}^{(4)} & \mathcal{C}^{(8)} & \emptyset\\
+            \mathcal{C}^{(4)} & \emptyset & \emptyset
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+        2\\
+        2\\
+        1\\
+        3\\
+        2\\
+        2\\
+        1
+        \end{pmatrix}
+    \right)
+\end{align*}
+and
+\begin{align*}
+    \spec{D} = \left(
+        \begin{pmatrix}
+            \mathcal{D}^{(1)}\\
+            \mathcal{D}^{(2)}\\
+            \mathcal{D}^{(3)}\\
+            \mathcal{D}^{(4)}\\
+            \mathcal{D}^{(5)}\\
+            \mathcal{D}^{(6)}\\
+            \mathcal{D}^{(7)}
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            o_1\\
+            o_2\\
+            o_3\\
+            o_4\\
+            o_5\\
+            o_6\\
+            o_7
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            \set{\varepsilon} & \mathcal{D}^{(2)} & \emptyset\\
+            \mathcal{D}^{(3)} & \set{1} & \emptyset\\
+            \mathcal{D}^{(4)} & \emptyset & \emptyset\\
+            \set{\varepsilon} & \mathcal{D}^{(5)} & \mathcal{D}^{(6)}\\
+            \mathcal{D}^{(7)} & \set{1} & \emptyset\\
+            \mathcal{D}^{(4)} & \mathcal{D}^{(8)} & \emptyset\\
+            \mathcal{D}^{(4)} & \emptyset & \emptyset
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+        2\\
+        2\\
+        1\\
+        3\\
+        2\\
+        2\\
+        1
+        \end{pmatrix}
+    \right)
+\end{align*}
+where the constructor's rules can be seen in \TableRef{tab:av123av132constructors} and the classes are listed in \TableRef{tab:ssclasses} in matched pairs.
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/av123av132rules}
+    \caption{Rules for the parallel specifications of $\Av{123}$ and $\Av{132}$.}
+    \label{tab:av123av132constructors}
+\end{table}
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/SimionSchmidtClasses}
+    \caption{The classes and their matching for the parallel specifications of $\Av{123}$ and $\Av{132}$.}
+    \label{tab:ssclasses}
+\end{table}
+
+\subsection{Avoiding two patterns of length 3}
+The only Wilf class with more than one permutation class (ignoring symmetries) is the class consisting of $\Av{123,132}$, $\Av{132,213}$ and $\Av{132,231}$. The bijection we found can be seen in XXXXXXX.
+
+\begin{figure}[ht!]
+    \centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},scale=0.75, every node/.style={scale=0.75}]
+    \node[vertex] (a) at (0,1) {$\Av{123,132}$};
+    \node[vertex] (b) at (-4,0) {$\Av{132,213}$};
+    \node[vertex] (c) at (4,0) {$\Av{132,231}$};
+    \draw (a) to (b);
+    \draw (a) to (c);
+\end{tikzpicture}
+    \caption{Caption}
+    \label{fig:2x3bi}
+\end{figure}
+
+\subsection{Avoiding three patterns of length 3}
+The bijections found can be seen in XXXXXXX. 
+\begin{figure}[ht!]
+    \centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (a) at (-6,0) {$\Av{123, 132, 231}$};
+    \node[vertex] (b) at (0,1) {$\Av{132, 213, 231}$};
+    \node[vertex] (c) at (6,0) {$\Av{123, 231, 312}$};
+    \draw (a) to (b);
+    \draw (b) to (c);
+\end{tikzpicture}
+    \caption{Caption}
+    \label{fig:3x3bi}
+\end{figure}
+
+
+\subsection{Avoiding one pattern of length 3 and one of length 4}
+There are two Wilf classes with more than one permutation class and their bijections can be seen in XXXXXXX and XXXXXXXX.
+
+\begin{figure}[ht!]
+    \centering
+    \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (a) at (0,0) {$\Av{132, 4312}$};
+    \node[vertex] (b) at (4,0) {$\Av{132, 4231}$};
+    \draw (a) -- (b);
+    \end{tikzpicture}
+    \caption{Caption}
+    \label{fig:1x31x4bi_1}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (a) at (-12,0) {$\Av{321, 2341}$};%0-a
+    \node[vertex] (b) at (4,0) {$\Av{321, 3412}$};%1-b
+    \node[vertex] (c) at (6,4) {$\Av{321, 3142}$};%2-c
+    \node[vertex] (d) at (-4,0) {$\Av{132, 1234}$};%3-d
+    \node[vertex] (e) at (-8,4) {$\Av{132, 4213}$};%4-e
+    \node[vertex] (f) at (0,2) {$\Av{132, 4123}$};%5-f
+    \node[vertex] (g) at (-8,0) {$\Av{132, 3124}$};%6-g
+    \node[vertex] (h) at (-8,-4) {$\Av{132, 2134}$};%7-h
+    \node[vertex] (i) at (0,-2) {$\Av{132, 3412}$};%8-i
+    \draw (a) -- (e);
+    \draw (d) -- (e);
+    \draw (d) -- (f);
+    \draw (d) -- (g);
+    \draw (d) -- (h);
+    \draw (b) -- (f);
+    \draw (b) -- (c);
+    \draw (b) -- (i);
+    \end{tikzpicture}
+    \caption{Caption}
+    \label{fig:1x31x4bi_2}
+\end{figure}
+
+\subsection{Avoiding one pattern of length 4}
+There are two Wilf classes with more than one permutation class. We did not manage to find bijections between $\Av{1342}$ and $\Av{2413}$ which make up one of those Wilf classes. The other consists of $\Av{1234}$, $\Av{1243}$, $\Av{1432}$ and $\Av{2143}$. TileScope lacks the strategies to solve $\Av{2143}$ so that was out of reach while the bijections found for the others are shown in XXXXX.
+
+\begin{figure}[ht!]
+    \centering
+    \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (a) at (0,0) {$\Av{1234}$};
+    \node[vertex] (b) at (4,0) {$\Av{1243}$};
+    \node[vertex] (c) at (-4,0) {$\Av{1432}$};
+    \node[vertex] (d) at (8,0) {$\Av{2143}$};
+    \draw (a) -- (b);
+    \draw (a) -- (c);
+    \end{tikzpicture}
+    \caption{Caption}
+    \label{fig:1x4bi}
+\end{figure}
+
+\subsection{Experimental classes}
+The experimental classes we ran our bijection searcher for can be seen in Appendix \ref{ch:expcls}. They are grouped with Roman numerals and figures will contain their list indices. Every experimental class was confirmed to be a Wilf class with the exception of experimental class III where we failed to find a bijection between
+\[
+    \Av{1243,1342,1423,1432,2143,2413,3142,3412,4231}
+\]
+and any other class.
+
+
+% experimental class 1
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (5,-3) {$2$};
+\node[vertex] (c3) at (8,-2) {$3$};
+\node[vertex] (c4) at (3,-2) {$4$};
+\node[vertex] (c5) at (7,0) {$5$};
+\node[vertex] (c6) at (-5,0) {$6$};
+\node[vertex] (c7) at (-2,-3) {$7$};
+\node[vertex] (c8) at (6,4) {$8$};
+\node[vertex] (c9) at (-7,0) {$9$};
+\node[vertex] (c10) at (-4,4) {$10$};
+\node[vertex] (c11) at (-5,-3) {$11$};
+\node[vertex] (c12) at (0,-2) {$12$};
+\node[vertex] (c13) at (-1,3) {$13$};
+\node[vertex] (c14) at (3,4) {$14$};
+\node[vertex] (c15) at (-6,3) {$15$};
+\node[vertex] (c16) at (9,4) {$16$};
+\node[vertex] (c17) at (5,0) {$17$};
+\node[vertex] (c18) at (7,2) {$18$};
+\node[vertex] (c19) at (-3,1) {$19$};
+\node[vertex] (c20) at (-3,-2) {$20$};
+\node[vertex] (c21) at (1,2) {$21$};
+\draw (c1) -- (c4);
+\draw (c1) -- (c6);
+\draw (c1) -- (c8);
+\draw (c1) -- (c13);
+\draw (c1) -- (c16);
+\draw (c1) -- (c17);
+\draw (c2) -- (c4);
+\draw (c5) -- (c18);
+\draw (c6) -- (c12);
+\draw (c6) -- (c15);
+\draw (c7) -- (c11);
+\draw (c7) -- (c12);
+\draw (c7) -- (c20);
+\draw (c9) -- (c11);
+\draw (c13) -- (c14);
+\draw (c13) -- (c21);
+\draw (c15) -- (c19);
+\draw (c17) -- (c18);
+\draw (c1) -- (c3);
+\draw (c1) -- (c10);
+\end{tikzpicture}
+\caption{Bijections for experimental class I}
+\label{fig:expgrp_I}
+\end{figure}
+
+
+% experimental class 2
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (-6,0) {$2$};
+\node[vertex] (c3) at (3,0) {$3$};
+\node[vertex] (c4) at (1,3) {$4$};
+\node[vertex] (c5) at (5,3) {$5$};
+\node[vertex] (c6) at (6,0) {$6$};
+\node[vertex] (c7) at (3,2) {$7$};
+\node[vertex] (c8) at (-5,3) {$8$};
+\node[vertex] (c9) at (-2,3) {$9$};
+\node[vertex] (c10) at (7,2) {$10$};
+\draw (c1) -- (c2);
+\draw (c1) -- (c3);
+\draw (c1) -- (c4);
+\draw (c1) -- (c8);
+\draw (c1) -- (c9);
+\draw (c3) -- (c6);
+\draw (c3) -- (c7);
+\draw (c5) -- (c6);
+\draw (c5) -- (c10);
+\end{tikzpicture}
+\caption{Bijections for experimental class II}
+\label{fig:expgrp_II}
+\end{figure}
+
+
+% experimental class 3
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (-3,3) {$1$};
+\node[vertex] (c2) at (0,0) {$2$};
+\node[vertex] (c3) at (0,3) {$3$};
+\node[vertex] (c4) at (3,0) {$4$};
+\node[vertex] (c5) at (3,3) {$5$};
+\node[vertex] (c6) at (-3,0) {$6$};
+\draw (c2) -- (c3);
+\draw (c2) -- (c4);
+\draw (c2) -- (c6);
+\draw (c4) -- (c5);
+\end{tikzpicture}
+\caption{Bijections for experimental class III}
+\label{fig:expgrp_III}
+\end{figure}
+
+
+% experimental class 4
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (-3,3) {$2$};
+\node[vertex] (c3) at (9,2) {$3$};
+\node[vertex] (c4) at (-4,2) {$4$};
+\node[vertex] (c5) at (5,1) {$5$};
+\node[vertex] (c6) at (-4,-1) {$6$};
+\node[vertex] (c7) at (6,-1) {$7$};
+\node[vertex] (c8) at (5,3) {$8$};
+\node[vertex] (c9) at (3,-1) {$9$};
+\node[vertex] (c10) at (1,-2) {$10$};
+\node[vertex] (c11) at (0,3) {$11$};
+\node[vertex] (c12) at (9,0) {$12$};
+\node[vertex] (c13) at (9,-2) {$13$};
+\node[vertex] (c14) at (6,-3) {$14$};
+\node[vertex] (c15) at (4,-3) {$15$};
+\node[vertex] (c16) at (-1,-3) {$16$};
+\draw (c1) -- (c2);
+\draw (c1) -- (c4);
+\draw (c1) -- (c5);
+\draw (c1) -- (c10);
+\draw (c1) -- (c11);
+\draw (c1) -- (c16);
+\draw (c3) -- (c12);
+\draw (c7) -- (c9);
+\draw (c7) -- (c13);
+\draw (c7) -- (c14);
+\draw (c7) -- (c15);
+\draw (c10) -- (c15);
+\draw (c1) -- (c6);
+\draw (c1) -- (c8);
+\draw (c3) -- (c5);
+\end{tikzpicture}
+\caption{Bijections for experimental class IV}
+\label{fig:expgrp_IV}
+\end{figure}
+
+
+% experimental class 5
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (8,2) {$2$};
+\node[vertex] (c3) at (0,5) {$3$};
+\node[vertex] (c4) at (0,-3) {$4$};
+\node[vertex] (c5) at (-6,0) {$5$};
+\node[vertex] (c6) at (6,0) {$6$};
+\node[vertex] (c7) at (4,-1) {$7$};
+\node[vertex] (c8) at (5,3) {$8$};
+\node[vertex] (c9) at (4,1) {$9$};
+\node[vertex] (c10) at (4,5) {$10$};
+\node[vertex] (c11) at (10,-2) {$11$};
+\node[vertex] (c12) at (6,-3) {$12$};
+\node[vertex] (c13) at (8,0) {$13$};
+\node[vertex] (c14) at (-3,-1) {$14$};
+\node[vertex] (c15) at (2,-3) {$15$};
+\node[vertex] (c16) at (-5,2) {$16$};
+\node[vertex] (c17) at (-6,5) {$17$};
+\node[vertex] (c18) at (-7,2) {$18$};
+\node[vertex] (c19) at (-3,5) {$19$};
+\node[vertex] (c20) at (-2,2) {$20$};
+\node[vertex] (c21) at (10,5) {$21$};
+\node[vertex] (c22) at (6,5) {$22$};
+\node[vertex] (c23) at (2,4) {$23$};
+\node[vertex] (c24) at (-3,-3) {$24$};
+\node[vertex] (c25) at (-3,3) {$25$};
+\node[vertex] (c26) at (10,2) {$26$};
+\node[vertex] (c27) at (-6,-3) {$27$};
+\draw (c1) -- (c3);
+\draw (c1) -- (c4);
+\draw (c1) -- (c7);
+\draw (c1) -- (c20);
+\draw (c1) -- (c22);
+\draw (c1) -- (c23);
+\draw (c1) -- (c24);
+\draw (c2) -- (c21);
+\draw (c3) -- (c10);
+\draw (c3) -- (c25);
+\draw (c6) -- (c9);
+\draw (c6) -- (c12);
+\draw (c11) -- (c26);
+\draw (c12) -- (c13);
+\draw (c14) -- (c27);
+\draw (c17) -- (c18);
+\draw (c17) -- (c19);
+\draw (c21) -- (c22);
+\draw (c21) -- (c26);
+\draw (c24) -- (c27);
+\draw (c1) -- (c5);
+\draw (c2) -- (c6);
+\draw (c5) -- (c17);
+\draw (c6) -- (c8);
+\draw (c7) -- (c15);
+\draw (c16) -- (c17);
+\end{tikzpicture}
+\caption{Bijections for experimental class V}
+\label{fig:expgrp_V}
+\end{figure}
+
+
+% experimental class 6
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class VI}
+\label{fig:expgrp_VI}
+\end{figure}
+
+
+% experimental class 7
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class VII}
+\label{fig:expgrp_VII}
+\end{figure}
+
+
+% experimental class 8
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class VIII}
+\label{fig:expgrp_VIII}
+\end{figure}
+
+
+% experimental class 9
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,-2) {$2$};
+\node[vertex] (c3) at (7,3) {$3$};
+\node[vertex] (c4) at (6,2) {$4$};
+\node[vertex] (c5) at (10,-2) {$5$};
+\node[vertex] (c6) at (2,2) {$6$};
+\node[vertex] (c7) at (4,0) {$7$};
+\node[vertex] (c8) at (9,3) {$8$};
+\node[vertex] (c9) at (0,-2) {$9$};
+\node[vertex] (c10) at (0,3) {$10$};
+\node[vertex] (c11) at (-2,0) {$11$};
+\draw (c1) -- (c7);
+\draw (c3) -- (c5);
+\draw (c3) -- (c6);
+\draw (c3) -- (c10);
+\draw (c4) -- (c7);
+\draw (c5) -- (c7);
+\draw (c10) -- (c11);
+\draw (c1) -- (c9);
+\draw (c3) -- (c8);
+\draw (c2) -- (c1);
+\end{tikzpicture}
+\caption{Bijections for experimental class IX}
+\label{fig:expgrp_IX}
+\end{figure}
+
+
+% experimental class 10
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (-2,2) {$1$};
+\node[vertex] (c2) at (-7,4) {$2$};
+\node[vertex] (c3) at (-10,4) {$3$};
+\node[vertex] (c4) at (-1,4) {$4$};
+\node[vertex] (c5) at (-11,2) {$5$};
+\node[vertex] (c6) at (-4,4) {$6$};
+\node[vertex] (c7) at (-8,2) {$7$};
+\node[vertex] (c8) at (-5,2) {$8$};
+\node[vertex] (c9) at (1,2) {$9$};
+\draw (c1) -- (c9);
+\draw (c2) -- (c3);
+\draw (c2) -- (c5);
+\draw (c2) -- (c6);
+\draw (c2) -- (c7);
+\draw (c4) -- (c6);
+\draw (c1) -- (c8);
+\draw (c4) -- (c9);
+\end{tikzpicture}
+\caption{Bijections for experimental class X}
+\label{fig:expgrp_X}
+\end{figure}
+
+
+% experimental class 11
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (8,0) {$2$};
+\node[vertex] (c3) at (4,0) {$3$};
+\draw (c2) -- (c3);
+\draw (c1) -- (c3);
+\end{tikzpicture}
+\caption{Bijections for experimental class XI}
+\label{fig:expgrp_XI}
+\end{figure}
+
+
+% experimental class 12
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class XII}
+\label{fig:expgrp_XII}
+\end{figure}
+
+
+% experimental class 13
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (3,0) {$1$};
+\node[vertex] (c2) at (2,-2) {$2$};
+\node[vertex] (c3) at (-6,-2) {$3$};
+\node[vertex] (c4) at (0,0) {$4$};
+\node[vertex] (c5) at (-3,0) {$5$};
+\node[vertex] (c6) at (-2,-2) {$6$};
+\node[vertex] (c7) at (-6,0) {$7$};
+\draw (c1) -- (c4);
+\draw (c2) -- (c6);
+\draw (c5) -- (c7);
+\draw (c2) -- (c4);
+\draw (c4) -- (c5);
+\draw (c3) -- (c6);
+\end{tikzpicture}
+\caption{Bijections for experimental class XIII}
+\label{fig:expgrp_XIII}
+\end{figure}
+
+
+% experimental class 14
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (-2,0) {$1$};
+\node[vertex] (c2) at (-6,0) {$2$};
+\node[vertex] (c3) at (2,0) {$3$};
+\node[vertex] (c4) at (6,0) {$4$};
+\draw (c1) -- (c2);
+\draw (c1) -- (c3);
+\draw (c3) -- (c4);
+\end{tikzpicture}
+\caption{Bijections for experimental class XIV}
+\label{fig:expgrp_XIV}
+\end{figure}
+
+
+% experimental class 15
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (-6,0) {$1$};
+\node[vertex] (c2) at (-2,0) {$2$};
+\node[vertex] (c3) at (6,0) {$3$};
+\node[vertex] (c4) at (2,0) {$4$};
+\draw (c1) -- (c2);
+\draw (c3) -- (c4);
+\draw (c2) -- (c4);
+\end{tikzpicture}
+\caption{Bijections for experimental class XV}
+\label{fig:expgrp_XV}
+\end{figure}
+
+
+% experimental class 16
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class XVI}
+\label{fig:expgrp_XVI}
+\end{figure}
+
+
+% experimental class 17
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (7,0) {$1$};
+\node[vertex] (c2) at (3,0) {$2$};
+\node[vertex] (c3) at (-7,5) {$3$};
+\node[vertex] (c4) at (-7,0) {$4$};
+\node[vertex] (c5) at (-2,5) {$5$};
+\node[vertex] (c6) at (-5,1) {$6$};
+\node[vertex] (c7) at (7,3) {$7$};
+\node[vertex] (c8) at (4,3) {$8$};
+\node[vertex] (c9) at (7,5) {$9$};
+\node[vertex] (c10) at (-3,0) {$10$};
+\node[vertex] (c11) at (-5,3) {$11$};
+\node[vertex] (c12) at (0,0) {$12$};
+\node[vertex] (c13) at (2,2) {$13$};
+\node[vertex] (c14) at (5,4) {$14$};
+\node[vertex] (c15) at (-5,5) {$15$};
+\draw (c1) -- (c2);
+\draw (c3) -- (c4);
+\draw (c5) -- (c6);
+\draw (c7) -- (c8);
+\draw (c4) -- (c6);
+\draw (c1) -- (c8);
+\draw (c5) -- (c8);
+\draw (c5) -- (c9);
+\draw (c5) -- (c10);
+\draw (c5) -- (c11);
+\draw (c5) -- (c12);
+\draw (c5) -- (c13);
+\draw (c5) -- (c14);
+\draw (c5) -- (c15);
+\end{tikzpicture}
+\caption{Bijections for experimental class XVII}
+\label{fig:expgrp_XVII}
+\end{figure}
+
+
+% experimental class 18
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\node[vertex] (c3) at (8,0) {$3$};
+\draw (c2) -- (c3);
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class XVIII}
+\label{fig:expgrp_XVIII}
+\end{figure}
+
+
+% experimental class 19
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (-8,3) {$1$};
+\node[vertex] (c2) at (-3,6) {$2$};
+\node[vertex] (c3) at (6,6) {$3$};
+\node[vertex] (c4) at (6,1) {$4$};
+\node[vertex] (c5) at (-2,3) {$5$};
+\node[vertex] (c6) at (-8,1) {$6$};
+\node[vertex] (c7) at (6,3) {$7$};
+\node[vertex] (c8) at (-6,6) {$8$};
+\node[vertex] (c9) at (-1,1) {$9$};
+\node[vertex] (c10) at (-5,1) {$10$};
+\node[vertex] (c11) at (1,1) {$11$};
+\node[vertex] (c12) at (-3,1) {$12$};
+\node[vertex] (c13) at (-8,6) {$13$};
+\node[vertex] (c14) at (0,6) {$14$};
+\node[vertex] (c15) at (3,3) {$15$};
+\node[vertex] (c16) at (3,6) {$16$};
+\node[vertex] (c17) at (3,1) {$17$};
+\draw (c10) -- (c12);
+\draw (c3) -- (c15);
+\draw (c11) -- (c17);
+\draw (c5) -- (c13);
+\draw (c2) -- (c14);
+\draw (c5) -- (c15);
+\draw (c9) -- (c11);
+\draw (c8) -- (c15);
+\draw (c9) -- (c12);
+\draw (c15) -- (c17);
+\draw (c7) -- (c15);
+\draw (c6) -- (c1);
+\draw (c4) -- (c15);
+\draw (c14) -- (c15);
+\draw (c15) -- (c16);
+\draw (c1) -- (c5);
+\end{tikzpicture}
+\caption{Bijections for experimental class XIX}
+\label{fig:expgrp_XIX}
+\end{figure}
+
+
+% experimental class 20
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (-3,0) {$2$};
+\node[vertex] (c3) at (3,0) {$3$};
+\node[vertex] (c4) at (-9,0) {$4$};
+\node[vertex] (c5) at (-6,0) {$5$};
+\draw (c1) -- (c2);
+\draw (c1) -- (c3);
+\draw (c4) -- (c5);
+\draw (c2) -- (c5);
+\end{tikzpicture}
+\caption{Bijections for experimental class XX}
+\label{fig:expgrp_XX}
+\end{figure}
+
+
+% experimental class 21
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,2) {$1$};
+\node[vertex] (c2) at (-3,2) {$2$};
+\node[vertex] (c3) at (4,0) {$3$};
+\node[vertex] (c4) at (1,0) {$4$};
+\node[vertex] (c5) at (-2,0) {$5$};
+\node[vertex] (c6) at (6,2) {$6$};
+\node[vertex] (c7) at (3,2) {$7$};
+\draw (c1) -- (c2);
+\draw (c3) -- (c4);
+\draw (c4) -- (c5);
+\draw (c6) -- (c7);
+\draw (c1) -- (c7);
+\draw (c1) -- (c5);
+\end{tikzpicture}
+\caption{Bijections for experimental class XXI}
+\label{fig:expgrp_XXI}
+\end{figure}
+
+
+% experimental class 22
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (0,3) {$2$};
+\node[vertex] (c3) at (6,3) {$3$};
+\node[vertex] (c4) at (6,0) {$4$};
+\node[vertex] (c5) at (3,0) {$5$};
+\node[vertex] (c6) at (-3,0) {$6$};
+\node[vertex] (c7) at (3,3) {$7$};
+\node[vertex] (c8) at (-6,3) {$8$};
+\draw (c4) -- (c5);
+\draw (c1) -- (c5);
+\draw (c3) -- (c4);
+\draw (c6) -- (c8);
+\draw (c7) -- (c3);
+\draw (c6) -- (c1);
+\draw (c2) -- (c1);
+\end{tikzpicture}
+\caption{Bijections for experimental class XXII}
+\label{fig:expgrp_XXII}
+\end{figure}
+
+
+% experimental class 23
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\node[vertex] (c3) at (-2,2) {$3$};
+\node[vertex] (c4) at (2,2) {$4$};
+\node[vertex] (c5) at (-4,0) {$5$};
+\draw (c1) -- (c2);
+\draw (c3) -- (c4);
+\draw (c1) -- (c4);
+\draw (c1) -- (c5);
+\end{tikzpicture}
+\caption{Bijections for experimental class XXIII}
+\label{fig:expgrp_XXIII}
+\end{figure}
+
+
+% experimental class 24
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c2) -- (c1);
+\end{tikzpicture}
+\caption{Bijections for experimental class XXIV}
+\label{fig:expgrp_XXIV}
+\end{figure}
+
+
+% experimental class 25
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,0) {$1$};
+\node[vertex] (c2) at (4,0) {$2$};
+\draw (c1) -- (c2);
+\end{tikzpicture}
+\caption{Bijections for experimental class XXV}
+\label{fig:expgrp_XXV}
+\end{figure}
+
+
+% experimental class 26
+\begin{figure}[ht!]
+\centering
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+\node[vertex] (c1) at (0,3) {$1$};
+\node[vertex] (c2) at (-8,3) {$2$};
+\node[vertex] (c3) at (-6,0) {$3$};
+\node[vertex] (c4) at (-2,0) {$4$};
+\node[vertex] (c5) at (4,3) {$5$};
+\node[vertex] (c6) at (2,0) {$6$};
+\node[vertex] (c7) at (-4,3) {$7$};
+\draw (c6) -- (c7);
+\draw (c5) -- (c6);
+\draw (c4) -- (c6);
+\draw (c3) -- (c4);
+\draw (c2) -- (c7);
+\draw (c1) -- (c7);
+\end{tikzpicture}
+\caption{Bijections for experimental class XXVI}
+\label{fig:expgrp_XXVI}
+\end{figure}
+

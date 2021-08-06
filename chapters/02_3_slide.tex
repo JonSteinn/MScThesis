@@ -1,4 +1,4 @@
-Sliding is a generalization of the sliding lemma described in Babson and West \cite{slide}, adopted for tilings.
+Sliding is a generalization of the sliding lemma described in Babson and West \cite{slide}, to the settings of tilings.
 
 \begin{definition}
 Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{(c,1)}_n$. We define \emph{sliding} as the map $\Upsilon: \mathcal{G}^{(c,1)}_n \to \mathcal{G}^{(c,1)}_n$ defined as follows.
@@ -13,7 +13,7 @@ Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{
 \end{enumerate}
 \end{definition}
 
-This mapping is also outlined in Algorithm~\ref{alg:slidealg}. An example for $3594^{(0,0)}62^{(1,0)}718^{(2,0)}$ can be seen in \FigureRef{fig:slide_gp_example}.
+An example for $3594^{(0,0)}62^{(1,0)}718^{(2,0)}$ can be seen in \FigureRef{fig:slide_gp_example}. This mapping is also outlined in Algorithm~\ref{alg:slidealg}.
 
 \begin{algorithm}
 \input{algs/slide}
@@ -31,23 +31,24 @@ This mapping is also outlined in Algorithm~\ref{alg:slidealg}. An example for $3
 \begin{definition}\label{def:slidable}
 A pair of tilings
 \[
-    (\mathcal{T}_1,\mathcal{T}_2) = \left(\left((c,1), \mathcal{O}_1, \set{\mathcal{R}_1,\ldots,\mathcal{R}_k}\right), \left((c,1), \mathcal{O}_2, \set{\mathcal{R}_1,\ldots,\mathcal{R}_k}\right)\right)
+    (\mathcal{T}_1,\mathcal{T}_2) = \left(\left((c,1), \mathcal{O}_1, \set{\mathcal{R}_1,\ldots,\mathcal{R}_k}\right), \left((c,1), \mathcal{O}_2, \set{\mathcal{R}'_1,\ldots,\mathcal{R}'_k}\right)\right)
 \]
 is \emph{slidable} if the following conditions are satisfied.
 \begin{itemize}
-    \item Every gridded permutation in $\mathcal{R}_1 \cup \cdots \cup \mathcal{R}_k$ has no positions in columns $0$ and $1$.
-    \item The obstructions $12\cdots n^{(0,0)}, 12\cdots (n-1)^{(0,0)}n^{(1,0)}$ and $12^{(1,0)}$ belong to $\mathcal{O}_1$, $12\cdots n^{(1,0)}, 1^{(0,0)}23\cdots n^{(1,0)}$ and $12^{(0,0)}$ belong to $\mathcal{O}_2$ and no other obstructions that are entirely within columns $0$ and $1$ belong to either $\mathcal{O}_1$ or $\mathcal{O}_2$.
-    \item For any obstruction $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{O}_1$ with at least one element outside columns $0$ and $1$ the subsequence $\sseq{\cset{i \in [n]}{x_i \in \set{0,1}}}{\pi}$ is either empty or in 
+    \item The tilings share requirements, that is $\set{\mathcal{R}_1,\ldots,\mathcal{R}_k}=\set{\mathcal{R}'_1,\ldots,\mathcal{R}'_k}$.
+    \item No gridded permutation in $\mathcal{R}_1 \cup \cdots \cup \mathcal{R}_k$ has positions in columns $0$ and $1$.
+    \item There exists $n>1$ such that the obstructions $12\cdots n^{(0,0)}, 12\cdots (n-1)^{(0,0)}n^{(1,0)}$ and $12^{(1,0)}$ belong to $\mathcal{O}_1$, $12\cdots n^{(1,0)}, 1^{(0,0)}23\cdots n^{(1,0)}$ and $12^{(0,0)}$ belong to $\mathcal{O}_2$ and no other obstructions that are entirely within columns $0$ and $1$ belong to either $\mathcal{O}_1$ or $\mathcal{O}_2$.
+    \item For any obstruction $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_w,0)} \in \mathcal{O}_1$ with at least one element outside columns $0$ and $1$ the subsequence $\sseq{\cset{i \in [w]}{x_i \in \set{0,1}}}{\pi}$ is either empty or in 
     \[
-         \cset{k(k+1)^{(0,0)}, k^{(0,0)}(k+1)^{(1,0)}, k^{(0,0)},k^{(1,0)}}{k\in\Z^+}.
+         \cset{j(j+1)^{(0,0)}, j^{(0,0)}(j+1)^{(1,0)}, j^{(0,0)},j^{(1,0)}}{j\in\Z^+}.
     \]
     Similarly, for $\mathcal{O}_2$, the subsequence must be either empty or in 
     \[
-         \cset{k(k+1)^{(1,0)}, k^{(0,0)}(k+1)^{(1,0)}, k^{(0,0)},k^{(1,0)}}{k\in\Z^+}.
+         \cset{j(j+1)^{(1,0)}, j^{(0,0)}(j+1)^{(1,0)}, j^{(0,0)},j^{(1,0)}}{j\in\Z^+}.
     \]
     \item Any obstruction entirely outside columns $0$ and $1$ in $\mathcal{O}_1$ must also exist in $\mathcal{O}_2$ and vice versa.
-    \item Let $o_1 = \pi_1^{(0,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ and $o_2 = \pi_1^{(1,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ where $x_2,s > 1$ then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_1 \in \mathcal{O}_2$ and $o_2 \in \mathcal{O}_2$ are equivalent.
-    \item Let \begin{align*}o_1 &= \pi_1^{(0,0)}\pi_2^{(0,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_2 &= \pi_1^{(0,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_3 &= \pi_1^{(1,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\end{align*} where $s > 2$, $x_3 > 1$ and $\pi_1 + 1 = \pi_2$, then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_2$ and $o_3 \in \mathcal{O}_2$ are equivalent.
+    \item Let $o_1 = \pi_1^{(0,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ and $o_2 = \pi_1^{(1,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ where $x_2,s > 1$ then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_1 \in \mathcal{O}_2$ and $o_2 \in \mathcal{O}_2$ are equivalent. That is, any crossing obstruction with one point in the first two columns must exist in both tilings and with that point in both columns.
+    \item Let \begin{align*}o_1 &= \pi_1^{(0,0)}\pi_2^{(0,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_2 &= \pi_1^{(0,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_3 &= \pi_1^{(1,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\end{align*} where $s > 2$, $x_3 > 1$ and $\pi_1 + 1 = \pi_2$, then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_2$ and $o_3 \in \mathcal{O}_2$ are equivalent. That is, any crossing obstruction with $j(j+1)$ in the first two columns (and at least one point outside of those columns) must exists in both tilings where $j(j+1)$ has been spread between the first two columns in all possible ways, excluding the one that collides with the $12$ obstruction.
 \end{itemize}
 \end{definition}
 
@@ -56,7 +57,7 @@ An example of two slidable tilings can be seen in \FigureRef{fig:slidable_tiling
 \begin{figure}[ht]
     \centering
     \input{graphics/slidable_tilings}
-    \caption{Slidable tilings.}
+    \caption{Typical slidable tilings.}
     \label{fig:slidable_tilings}
 \end{figure}
 
@@ -64,13 +65,13 @@ An example of two slidable tilings can be seen in \FigureRef{fig:slidable_tiling
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$.
 \end{lemma}
 \begin{proof}
-If $\pi$ contains no elements within the first two columns it is mapped to itself and since the tilings are identical outside the first two columns then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$. If $\pi$ contains no elements in column $1$ then whatever is in column $0$ is moved to column $1$. Since $\pi$ avoided $12\dotsm n$ in column $0$ it will also do so in column $1$ once moved and any crossing obstruction in $\mathcal{T}_2$ with one or two points in column $1$ will have existed with those points in column $0$ in $\mathcal{T}_1$ and therefore $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$.
+If $\pi$ contains no elements within the first two columns it is mapped to itself and since the tilings are identical outside the first two columns then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$. If $\pi$ contains no elements in column $1$ then whatever is in column $0$ is moved to column $1$. Since $\pi$ avoided $12\dotsm n$ in column $0$ it will also do so in column $1$ once moved and any crossing obstruction in $\mathcal{T}_2$ with one or two points in column $1$ would have existed with those points in column $0$ in $\mathcal{T}_1$ and therefore $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$.
 
 Now suppose $\pi$ has elements in column $1$. By the end of the mapping all columns are shifted one to the left but we will refer to their indices before the shift in the mapped tiling. Note that the mapping is defined by placing elements in-order into column $1$ so we will never form an increasing pattern there. 
 
-Suppose after a single step in the map that we form the first $12\cdots n$ (spread in any way across the first $3$ columns). Note that it can contain at most one point in column $1$ as it is decreasing.
+Suppose after a single step in the map that we form the first $12\cdots n$ (spread in any way across the first $3$ columns). Note that it can contain at most one point in column $1$ as that column is decreasing.
 
-If the $12\cdots n$ pattern does contain the newly moved point in column $1$ and not the one we just moved to column $2$, than the pattern must have been there before the step was taken.
+If the $12\cdots n$ pattern does contain the newly moved point in column $1$ and not the one we just moved to column $2$, then the pattern must have been there before the step was taken.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -128,7 +129,7 @@ Suppose this pattern includes the newly moved element in column $2$ and no eleme
 \end{tikzpicture}
 \end{center}
 
-Finally suppose the pattern involves elements from both column $1$ and $2$. Here two scenario can arise. One were the pattern involves both moved elements and the other only the one moved to column $2$. In the first one the pattern remains as we move both points together when we backtrack.
+Finally suppose the pattern involves elements from both columns $1$ and $2$. Here two scenario can arise. One were the pattern involves both moved elements and the other only the one moved to column $2$. In the first one the pattern remains as we move both points together when we backtrack.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -157,7 +158,7 @@ Finally suppose the pattern involves elements from both column $1$ and $2$. Here
 \end{tikzpicture}
 \end{center}
 
-In the latter, there is a smaller element in column $1$ then the moved one that belongs to the pattern. When we go back, the moved element goes back from column $1$ to column $0$ but that is between the element in column $1$ that formed the pattern and the element that was moved to column $2$, preserving the pattern.
+In the latter, there is a smaller element in column $1$ than the moved one that belongs to the pattern. When we go back, the moved element goes back from column $1$ to column $0$ but that is between the element in column $1$ that formed the pattern and the element that was moved to column $2$, preserving the pattern.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -188,7 +189,7 @@ In the latter, there is a smaller element in column $1$ then the moved one that 
 \end{tikzpicture}
 \end{center}
 
-In the case of the first crossing obstructions forming for the first time with one element in the first 3 columns and some outside, then wherever that element was before must have been an occurrence of that pattern as well in the context of viewing the first same three column as identical pattern wise.
+In the case of the first crossing obstructions forming for the first time with one element in the first 3 columns and some outside, then wherever that element was before must have been an occurrence of that pattern as well.
 
 Now suppose we form the crossing pattern with the elements $k(k+1)$ in the first three columns (spread in any way) for the first time. This can happen in several ways. Note that the two increasing elements can not both be in column $1$ as it is always decreasing.
 
@@ -362,7 +363,7 @@ The trivial bijection of shifting the entire gridded permutation one column to t
 Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{(c,1)}_n$. We define \emph{inverse sliding} as the map $\Upsilon^{-1}: \mathcal{G}^{(c,1)}_n \to \mathcal{G}^{(c,1)}_n$ defined as follows.
 \begin{enumerate}[a)]
     \item If $\pi$ has no elements in $(0,0)$, we move whatever is in $(1,0)$ to $(0,0)$ and we are done.
-    \item If $\pi$ has elements in $(0,0)$, we start by shifting all elements one cell to the right and then we do the following until we have depleted $\pi$'s elements in $(2,0)$:
+    \item If $\pi$ has elements in $(0,0)$, we start by shifting all elements one cell to the right and then we do the following until we have depleted the elements of $\pi$ in $(2,0)$:
     \begin{enumerate}[i.]
         \item If the leftmost element in $(2,0)$ is smaller than all elements in $(1,0)$, we move the leftmost element of $(1,0)$ to $(0,0)$ as the rightmost element and then we move the leftmost element of $(2,0)$ to $(1,0)$ as the rightmost element.
         \item If the leftmost element in $(2,0)$ has a smaller element in $(1,0)$, then we move the leftmost element in $(2,0)$ to the left of the largest element in $(1,0)$ that is smaller than it and that element is moved to be the rightmost element in $(0,0)$.
@@ -375,7 +376,7 @@ Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon^{-1}(\pi) \in \textsf{Grid}_i(\mathcal{T}_1)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_2)$.
 \end{lemma}
 \begin{proof}
-The argument when $(0,0)$ is empty is an analogy of the case in Lemma \ref{lem:slidemap} when $(1,0)$ is empty so we assume that $\pi$ has elements in $(0,0)$. The avoidance of $12\cdots n$ and any crossing obstruction is an analogy of that Lemma \ref{lem:slidemap}'s argument for the same, viewing the images from right to left instead.
+The argument when $(0,0)$ is empty is an analog of the case in Lemma \ref{lem:slidemap} when $(1,0)$ is empty so we assume that $\pi$ has elements in $(0,0)$. The avoidance of $12\cdots n$ and any crossing obstruction is an analog of that Lemma \ref{lem:slidemap}'s argument for the same, viewing the images from right to left instead.
 \end{proof}
 
 \begin{proposition}
@@ -467,3 +468,5 @@ Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable in columns $c_1$ and $c_2$, then
 \begin{proof}
 Suppose the tilings have $c$ columns and let $\sigma = \sigma_1\sigma_2 \cdots \sigma_c \in \mathcal{S}_c$ where $\sigma_1 = c_1$ and $\sigma_2 = c_2$. We can permute the columns so $c_1$ and $c_2$ are the first two, slide them and permute back, that is we can use a composition of bijections, $C_{\sigma^{-1}} \circ \Upsilon \circ C_\sigma$, to map between the two.
 \end{proof}
+
+The sliding strategy enabled TileScope to discover a specification for $\Av{1432}$.
