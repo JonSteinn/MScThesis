@@ -1,9 +1,9 @@
 
 \coverchapter{Results}\label{ch:results}
-The search method we have developed and the resulting bijections work between different domains. The problem, however, is the lack of maintained implementations of domains using \css{}. With \css{} being a product of a research group that is mainly interested in permutation patterns, unsurprisingly, the most supported domain is permutations with \tsc{}. As a consequence, we will mostly demonstrate bijections found between permutation classes.
+The search method we have developed and the resulting bijections work between different domains. The problem, however, is the lack of maintained implementations of domains using Combinatorial Exploration. With Combinatorial Exploration being a product of a research group that is mainly interested in permutation patterns, unsurprisingly, the most supported domain is permutations with \tsc{}. As a consequence, we will mostly demonstrate bijections found between permutation classes.
 
 \section{Cross-domain successes}
-There is a very simple example implementation of words provided in repository for \css{}. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in a word is another word that occurs as a consecutive subsequence. This class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive 1's, that is
+There is a very simple example implementation of words provided in repository for Combinatorial Exploration. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in a word is another word that occurs as a consecutive subsequence. This class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive 1's, that is
 \[
     (\varepsilon, \set{0,1}, \set{11}) = \set{\varepsilon, 0, 1, 00, 01, 10, 000, 001, 010, 100, 101, \dotsc}.
 \]
@@ -60,7 +60,7 @@ The experiments we carried out can be separated into known Wilf classes and \emp
 
 The experiments for known Wilf classes includes bijections found for all the permutation classes that Simion and Schmidt gave bijections for in \cite{simionandschmidt}, excluding symmetries.
 
-For the experimental classes we focused on classes avoiding patterns of length $4$. We started with those avoiding eleven patterns and worked our way downwards. Symmetries and classes with a regular insertion encoding\todo{add to background} were disregarded. 
+For the experimental classes we focused on classes avoiding patterns of length $4$. We started with those avoiding eleven patterns and worked our way downwards. Symmetries and classes with a regular insertion encoding were omitted. 
 
 
 \subsection{Avoiding one pattern of length 3}\label{ss:onexthree}
@@ -168,8 +168,34 @@ where the constructor's rules can be seen in \TableRef{tab:av123av132constructor
     \label{tab:ssclasses}
 \end{table}
 
+The bijection is shown for length $4$ in \TableRef{tab:ssexamp}.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c}
+        $\textsf{Av}_4(123)$ & $\textsf{Av}_4(132)$\\
+        \hline
+        $4321$ & $4321$\\
+        $3421$ & $3421$\\
+        $3241$ & $3241$\\
+        $4231$ & $4231$\\
+        $2431$ & $2341$\\
+        $3214$ & $3214$\\
+        $4213$ & $4213$\\
+        $2413$ & $2314$\\
+        $4312$ & $4312$\\
+        $3412$ & $3412$\\
+        $2143$ & $2134$\\
+        $3142$ & $3124$\\
+        $4132$ & $4123$\\
+        $1432$ & $1234$\\
+    \end{tabular}
+    \caption{The automated bijection between $123$ and $132$ avoiding permutations shown for length $4$.}
+    \label{tab:ssexamp}
+\end{table}
+
 \subsection{Avoiding two patterns of length 3}
-The only Wilf class with more than one permutation class (ignoring symmetries) is the class consisting of $\Av{123,132}$, $\Av{132,213}$ and $\Av{132,231}$. The bijection we found can be seen in XXXXXXX.
+The only Wilf class with more than one permutation class (ignoring symmetries) is the class consisting of $\Av{123,132}$, $\Av{132,213}$ and $\Av{132,231}$. The bijections we found can be seen in \FigureRef{fig:2x3bi}.
 
 \begin{figure}[ht!]
     \centering
@@ -180,12 +206,12 @@ The only Wilf class with more than one permutation class (ignoring symmetries) i
     \draw (a) to (b);
     \draw (a) to (c);
 \end{tikzpicture}
-    \caption{Caption}
+    \caption{Bijections for classes avoiding two patterns of length $3$.}
     \label{fig:2x3bi}
 \end{figure}
 
 \subsection{Avoiding three patterns of length 3}
-The bijections found can be seen in XXXXXXX. 
+The bijections found can be seen in \FigureRef{fig:3x3bi}. 
 \begin{figure}[ht!]
     \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},scale=0.65, every node/.style={scale=0.65}]
@@ -195,13 +221,13 @@ The bijections found can be seen in XXXXXXX.
     \draw (a) to (b);
     \draw (b) to (c);
 \end{tikzpicture}
-    \caption{Caption}
+    \caption{Bijections for classes avoiding three patterns of length $3$.}
     \label{fig:3x3bi}
 \end{figure}
 
 
 \subsection{Avoiding one pattern of length 3 and one of length 4}
-There are two Wilf classes with more than one permutation class and their bijections can be seen in XXXXXXX and XXXXXXXX.
+There are two Wilf classes with more than one permutation class and their bijections can be seen in \FigureRef{fig:1x31x4bi_1} and \FigureRef{fig:1x31x4bi_2}.
 
 \begin{figure}[ht!]
     \centering
@@ -210,7 +236,7 @@ There are two Wilf classes with more than one permutation class and their biject
     \node[vertex] (b) at (4,0) {$\Av{132, 4231}$};
     \draw (a) -- (b);
     \end{tikzpicture}
-    \caption{Caption}
+    \caption{The bijection for the first Wilf class of permutations avoiding one pattern of length 3 and one of length 4.}
     \label{fig:1x31x4bi_1}
 \end{figure}
 
@@ -235,12 +261,12 @@ There are two Wilf classes with more than one permutation class and their biject
     \draw (b) -- (c);
     \draw (b) -- (i);
     \end{tikzpicture}
-    \caption{Caption}
+    \caption{Bijections for the second Wilf class of permutations avoiding one pattern of length 3 and one of length 4.}
     \label{fig:1x31x4bi_2}
 \end{figure}
 
 \subsection{Avoiding one pattern of length 4}
-There are two Wilf classes with more than one permutation class. We did not manage to find bijections between $\Av{1342}$ and $\Av{2413}$ which make up one of those Wilf classes. The other consists of $\Av{1234}$, $\Av{1243}$, $\Av{1432}$ and $\Av{2143}$. TileScope lacks the strategies to solve $\Av{2143}$ so that was out of reach while the bijections found for the others are shown in XXXXX.
+There are two Wilf classes with more than one permutation class. We did not manage to find bijections between $\Av{1342}$ and $\Av{2413}$ which make up one of those Wilf classes. That is because TileScope requires another technique to find their specifications which is not compatible with our bijection searcher. The other consists of $\Av{1234}$, $\Av{1243}$, $\Av{1432}$ and $\Av{2143}$. TileScope lacks the strategies to solve $\Av{2143}$ so that was out of reach while the bijections found for the others are shown in \FigureRef{fig:1x4bi}.
 
 \begin{figure}[ht!]
     \centering
@@ -252,16 +278,20 @@ There are two Wilf classes with more than one permutation class. We did not mana
     \draw (a) -- (b);
     \draw (a) -- (c);
     \end{tikzpicture}
-    \caption{Caption}
+    \caption{Bijections found for the Wilf class of $\Av{1234}$, $\Av{1243}$, $\Av{1432}$ and $\Av{2143}$.}
     \label{fig:1x4bi}
 \end{figure}
 
 \subsection{Experimental classes}
-The experimental classes we ran our bijection searcher for can be seen in Appendix \ref{ch:expcls}. They are grouped with Roman numerals and figures will contain their list indices. Every experimental class was confirmed to be a Wilf class with the exception of experimental class III where we failed to find a bijection between
+The experimental classes we ran our bijection searcher for can be seen in Appendix \ref{ch:expcls}. They are grouped by Roman numerals and figures will contain their list indices.
+
+The experiments were carried out by comparing the first class against all others, then the second to all but the first and so on. A disjoint-set data structure was used to keep track of confirmed equivalences. As a consequence, the experiments favored lower numbers to have higher degrees. The setup for the experiments can be seen in Appendix \ref{ch:expsetup}.
+
+Every experimental class was confirmed to be a Wilf class with the exception of experimental class III where we failed to find a bijection between
 \[
     \Av{1243,1342,1423,1432,2143,2413,3142,3412,4231}
 \]
-and any other class.
+and any other class. The bijections found for each experimental class can be seen in XXXXXX\todo{How to ref so many pics?}. Experimental classes with only two permutation classes are omitted since all of them were successfully shown to be Wilf classes and no information is contained in their figure.
 
 
 % experimental class 1
@@ -469,6 +499,7 @@ and any other class.
 
 
 % experimental class 6
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -479,9 +510,11 @@ and any other class.
 \caption{Bijections for experimental class VI}
 \label{fig:expgrp_VI}
 \end{figure}
+\end{comment}
 
 
 % experimental class 7
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -492,9 +525,11 @@ and any other class.
 \caption{Bijections for experimental class VII}
 \label{fig:expgrp_VII}
 \end{figure}
+\end{comment}
 
 
 % experimental class 8
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -505,6 +540,7 @@ and any other class.
 \caption{Bijections for experimental class VIII}
 \label{fig:expgrp_VIII}
 \end{figure}
+\end{comment}
 
 
 % experimental class 9
@@ -581,6 +617,7 @@ and any other class.
 
 
 % experimental class 12
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -591,6 +628,7 @@ and any other class.
 \caption{Bijections for experimental class XII}
 \label{fig:expgrp_XII}
 \end{figure}
+\end{comment}
 
 
 % experimental class 13
@@ -621,8 +659,8 @@ and any other class.
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
 \node[vertex] (c1) at (-2,0) {$1$};
-\node[vertex] (c2) at (-6,0) {$2$};
-\node[vertex] (c3) at (2,0) {$3$};
+\node[vertex] (c2) at (-6,0) {$3$};
+\node[vertex] (c3) at (2,0) {$2$};
 \node[vertex] (c4) at (6,0) {$4$};
 \draw (c1) -- (c2);
 \draw (c1) -- (c3);
@@ -651,6 +689,7 @@ and any other class.
 
 
 % experimental class 16
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -661,6 +700,7 @@ and any other class.
 \caption{Bijections for experimental class XVI}
 \label{fig:expgrp_XVI}
 \end{figure}
+\end{comment}
 
 
 % experimental class 17
@@ -847,6 +887,7 @@ and any other class.
 
 
 % experimental class 24
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -857,9 +898,11 @@ and any other class.
 \caption{Bijections for experimental class XXIV}
 \label{fig:expgrp_XXIV}
 \end{figure}
+\end{comment}
 
 
 % experimental class 25
+\begin{comment}
 \begin{figure}[ht!]
 \centering
 \begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
@@ -870,6 +913,7 @@ and any other class.
 \caption{Bijections for experimental class XXV}
 \label{fig:expgrp_XXV}
 \end{figure}
+\end{comment}
 
 
 % experimental class 26

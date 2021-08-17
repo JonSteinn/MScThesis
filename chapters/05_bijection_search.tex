@@ -2,7 +2,7 @@
 We already know how to check if two specifications are parallel and if so, how to map objects between them but now we turn our attention to searching for parallel specifications. This is done by using Combinatorial Exploration's search for specification with further steps taken once it has finished.
 
 \section{The bijection search algorithm}
-When finding a bijection between classes we start by defining a pack of strategies for each and then expand universes of rules for both until they contain at least one specification each. We can expand further but usually universes will contain multiple specifications as soon as they contain one. Once that is done we preprocess the universe, gathering information we need in our search.
+When finding a bijection between classes we expand universes\footnote{Strategies used to expand universes are defined in packs prior to expanding.} of rules for both until they contain at least one specification each. We can expand further but usually universes will contain multiple specifications as soon as they contain one. Once that is done we gather the information we need in our search and store in better suited data structures.
 
 The universes will contain rules in the form of equivalence labels $(p, (c_1,c_2,\dotsc,c_n))$ where the $p$ is the equivalence label of the parent and $c_i$ is an equivalence label of child $i$. Any equivalence label $p$ can have multiple rules
 \begin{align*}
@@ -15,7 +15,7 @@ in the universe. Depending on which one is looked at, there may be some equivale
 
 The algorithm works similarly to the parallel algorithm in Section~\ref{sec:paralg}. The main difference is that we ignore equivalence rules and for any parent pair $p_1$ and $p_2$ from each universe, we gather every possible matching of their children. This is done since $p_1$ and $p_2$ can match with some specific children at one point while $p_1$ could match another equivalence label in the other universe later using another rule but our specifications need a single rule for any parent. The complexity of finding these matches is the same as for the parallel algorithm but now the number of rules is significantly larger. The complexity of the specification search dominates our algorithm so the complexity of the search itself is the same as that of the specification search.
 
-Once we have found all matched equivalence labels and assuming the roots have matched we start looking within them for specifications that are consistent in the sense that only a single rule is used for each equivalence label. This is done with backtracking starting from the two roots. This stage will also guard against any false positives from recursion as shown in \FigureRef{fig:recfalsepos}.
+Once we have found all matched equivalence labels and assuming the roots have matched we start looking within the collection of matched labels for specifications that are consistent in the sense that only a single rule is used for each equivalence label. This is done with backtracking starting from the two roots. This stage will also guard against any false positives from recursion as shown in \FigureRef{fig:recfalsepos}.
 
 \begin{figure}[ht!]
     \centering

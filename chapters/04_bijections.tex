@@ -10,14 +10,14 @@ Take for example a rule $\mathcal{C} \cong \mathcal{C}^{(1)} \times \mathcal{C}^
 \]
 This way, $\phi(c)$ would be a tuple of a color and an element in $\mathcal{C}^{(1)} \cup \mathcal{C}^{(2)}$. We propose a slightly different approach, which ultimately achieves the same thing. Instead of marking with colors, we mark with edges from the specification graph. We further extend this marking for any constructor. The bijective nature of the map remains as the edges are uniquely determined but will need some trivial transformation for elements to belong to the original set.
 
-Given a specification $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ accompanied by a collection of bijection for each of its rules, we refer to $(\phi_1,\phi_2,\dotsc,\phi_k)$ as its \emph{parser} where $\phi_i$ maps an element of $L_i$, to an element of $R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$, using the corresponding bijection extended with the corresponding edge labels. If we look at the specification for $\Av{132}$ with the specification graph from \FigureRef{fig:specgraph132} and let $(\phi_1,\phi_2)$ be its parser, then we have $\phi_1(\varepsilon) = (\varepsilon, 1)$, $\phi_1(321) = (321, 2)$ and 
+Given a specification $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ accompanied by a collection of bijections for each of its rules, we refer to $(\phi_1,\phi_2,\dotsc,\phi_k)$ as its \emph{parser} where $\phi_i$ maps an element of $L_i$, to an element of $R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$, using the corresponding bijection extended with the corresponding edge labels. If we look at the specification for $\Av{132}$ with the specification graph from \FigureRef{fig:specgraph132} and let $(\phi_1,\phi_2)$ be its parser, then we have $\phi_1(\varepsilon) = (\varepsilon, 1)$, $\phi_1(321) = (321, 2)$ and 
 \[
     \phi_2(534612) = ((\st{534},3), (\st{6},4), (\st{12},5)) = ((312,3), (1,4), (12,5)).
 \]
 
 \section{Object parsing}
 % Unification otherway? 
-Given a parsable specification $\spec{C} = (L,O,R,D)$ with $k$ rules, parser $(\phi_1,\phi_2,\dotsc,\phi_k)$, specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic partitioning} of $c$ in $\spec{C}$ where \[
+Let $\spec{C} = (L,O,R,D)$ be a parsable specification with $k$ rules, parser $(\phi_1,\phi_2,\dotsc,\phi_k)$, specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic partitioning} of $c$ in $\spec{C}$ where \[
     \varphi_{\spec{C}}(c,p) = \begin{cases}
         \set{p} & \text{ if } \textsf{tail}(p) \text{ is a terminal class}\\
         \bigcup_{j=1}^\ell\varphi_{\spec{C}}(c_j,p \oplus e_j) & \text{ if }
@@ -36,24 +36,24 @@ Let $\spec{C}$ be the aforementioned specification for $\Av{132}$ and using the 
     &= \set{24, 2324, 2524, 23231, 25231, 25251, 232524} \cup \varphi_{\spec{C}}(\varepsilon,232523) \cup \varphi_{\spec{C}}(\varepsilon,232525) \\
     &= \set{24, 2324, 2524, 23231, 25231, 25251, 232524,2325231,2325251}
 \end{align*}
-This is shown with a tree in \FigureRef{fig:atomic_partitioning}. Note that the image of this map is not all subset of the set of paths that end in terminal classes. The set $\set{24}$ is not the atomic partitioning of any object since it requires siblings that would not be generated. Since every step taken involves a bijective rule then $\omega_{\spec{C}}$ is a bijection between the objects of the root class and the possible atomic partitionings.
+This is shown with a tree in \FigureRef{fig:atomic_partitioning}. Note that the image of this map is not all subsets of the set of paths that end in terminal classes. The set $\set{24}$ is not the atomic partitioning of any object since it requires siblings that would not be generated. Since every step taken involves a bijective rule then $\omega_{\spec{C}}$ is a bijection between the objects of the root class and the possible atomic partitionings.
 
 \begin{figure}[ht!]
     \centering
     \input{graphics/atomic_partitioning}
-    \caption{The atomic partitioning of $3241$ for the specification graph in \FigureRef{fig:specgraph132}.}
+    \caption{The atomic partitioning of $3241$ for the specification graph in \FigureRef{fig:specgraph132}. Double underlining is used to highlight paths to terminal classes.}
     \label{fig:atomic_partitioning}
 \end{figure}
 
-To define the inverse of $\omega_{\spec{C}}$ we start by providing a few supporting maps. Given a set of terminal ending paths $S$ we define $T(S) = \cset{(c,p)}{p \in S \text{ and } c \in \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $\textsf{nxt}(P)$ as the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define the next siblings as
+To define the inverse of $\omega_{\spec{C}}$ we start by providing a few supporting maps. Given a set of terminal ending paths $S$ we define $T(S) = \cset{(c,p)}{p \in S \text{ and } c \in \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $\textsf{nxt}(P)$ as the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define the \emph{next siblings} as
 \[
     \textsf{sib}(P) = \cset{(c, e_1e_2 \dotsm e_{n-1} \oplus e') \in P}{\textsf{nxt}(P) = e_1e_2 \dotsm e_n}.
 \]
-This mapping is undefined for a singleton set where the only path is the empty one. Suppose $\textsf{nxt}(P) = (c, p \oplus e')$, $\src(e') = L_i$ and 
+This mapping is undefined for a singleton set where the only path is the empty one. Suppose
 \[
     \textsf{sib}(P) = \set{(c_1, (p \oplus q_1)),\dotsc, (c_r, (p \oplus q_r))}
 \]
-where $q_1 < q_2 < \dotsm < q_r$, then the next parent is
+where $q_1 < q_2 < \dotsm < q_r$, then the \emph{next parent} is
 \[
     \textsf{par}(P) = (\phi^{-1}_i((c_1,q_1), (c_2,q_2), \dotsc, (c_r,q_r)),p)
 \]
@@ -71,11 +71,11 @@ Suppose we start with the set of terminal endings from $\omega_{\spec{C}}(\pi)$ 
 \begin{align*}
     P = T(\omega_{\spec{C}}(\pi)) = \{&(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),\\ &(\varepsilon,25251), (1,232524), (\varepsilon,2325231), (\varepsilon,2325251)\}.
 \end{align*}
-At this point we have $\textsf{sib}(P) = \set{(\varepsilon,2325251)}$ and the next step in the algorithm will just replace $(\varepsilon,2325251)$ with $(\varepsilon,232525)$. The same applies for the next step, replacing $(\varepsilon,2325231)$ with $(\varepsilon,232523)$. At this point, we have
+Now we have $\textsf{sib}(P) = \set{(\varepsilon,2325251)}$ and the next step in the algorithm will just replace $(\varepsilon,2325251)$ with $(\varepsilon,232525)$. The same applies for the next step, replacing $(\varepsilon,2325231)$ with $(\varepsilon,232523)$. At this point we have
 \begin{align*}
     P = \{&(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),\\ &(\varepsilon,25251), (1,232524), (\varepsilon,232523), (\varepsilon,232525)\}.
 \end{align*}
-Now we have $\textsf{sib}(P) = \set{(1,232523), (\varepsilon,232524), (\varepsilon,232525)}$ and parent
+Now we have $\textsf{sib}(P) = \set{(1,232523), (\varepsilon,232524), (\varepsilon,232525)}$ and next parent
 \[
     \textsf{par}(P) = (\phi_2^{-1}((\varepsilon, 232523),(1, 232524),(\varepsilon, 232525)), 23252) = (1,23252).
 \]
@@ -83,7 +83,7 @@ We replace the siblings with the parent and get
 \[
     P = \{(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),(\varepsilon,25251), (1,23252)\}.
 \]
-For the next $4$ steps, $\textsf{sib}(P)$ will be singleton sets with no changes to the element itself and thus we can remove the last step of each of their path, arriving at
+For the next four steps, $\textsf{sib}(P)$ will be a singleton set with no changes to the object itself and thus we can remove the last step of each of their path, arriving at
 \[
     P = \{(1,24), (1,2324), (1,2524), (\varepsilon,2323), (\varepsilon,2523),(\varepsilon,2525), (1,2325)\}.
 \]
@@ -96,11 +96,11 @@ Now we have
     \vartheta(P) &= \vartheta(P \setminus \set{(21,23),(1,24),(1,25)} \cup \set{\phi_2^{-1}((21,3),(1,4),(1,5))}, 2)\\
     &= \vartheta(\set{(3241,2)}) = \vartheta(\set{(3241,\varepsilon)}) = 3241.
 \end{align*}
-Looking at \FigureRef{fig:atomic_partitioning}, what we are essentially doing is taking the longest path that ends in a terminal node and gathering all siblings required to map in the other direction and taking a step backward, repeating until we are back at the root.
+Looking at \FigureRef{fig:atomic_partitioning}, what we are essentially doing is taking the longest path that ends in a terminal class and gathering all siblings required to map in the other direction and taking a step backward, repeating until we are back at the root.
 
 \section{Parallel bijections}
 \begin{definition}
-Let $\spec{C}$ and $\spec{D}$ be two parallel specifications with path matching $\gamma_{\spec{C},\spec{D}}$ and root classes $\mathcal{C}$ and $\mathcal{D}$, then their \emph{parallel map} is
+If $\spec{C}$ and $\spec{D}$ be two parallel specifications with path matching $\gamma_{\spec{C},\spec{D}}$ and root classes $\mathcal{C}$ and $\mathcal{D}$, then their \emph{parallel map} is
 $\mathfrak{P}: \mathcal{C} \mapsto \mathcal{D}$ where, for any $c \in \mathcal{C}$, we have
 $\mathfrak{P}(c) = \omega_{\spec{D}}^{-1}(\cset{\gamma_{\spec{C},\spec{D}}(p)}{p \in \omega_{\spec{C}}(c)})$.
 \end{definition}
@@ -170,7 +170,7 @@ where the rules in both are (in order) top most point placement, row and column 
     \label{tab:parmapex}
 \end{table}
 
-The specification graphs for these two specifications are shown in \FigureRef{fig:avexspecgraphs}. Their matching order are shown in \TableRef{tab:avexmatchingorder}.
+The specification graphs for these two specifications are shown in \FigureRef{fig:avexspecgraphs}. Their matching order are shown in \TableRef{tab:avexmatchingorder}. Parallel specifications are usually not this similar when the specification contains more classes but for demonstrational purposes we chose specifications with few classes which are most often quite similar.
 
 \begin{figure}[ht!]
     \centering
@@ -223,7 +223,7 @@ Let $\mathcal{C}$ and $\mathcal{D}$ be the root classes of two parallel specific
 \end{corollary}
 
 \section{Nonbijective rules}
-There are rules that are not inherently bijective but still allows us to count the left hand side from the right hand side. We will discuss a solution to nonbijective rules where there is a map that is not injective. As an example we will look at fusion but this can be generalized beyond that.
+There are rules that are not inherently bijective but still allow us to count a left hand side from the right hand side. We will discuss a solution to nonbijective rules where there is a map that is not injective. As an example we will look at fusion but this can be generalized beyond that.
 
 Suppose we have class $\mathcal{C}$ on the left hand side of a rule and that $\phi$ is a mapping of an element of $\mathcal{C}$ to an element of the rule's right hand side that is not injective. Define $\overline{c}$ as $\cset{c' \in \mathcal{C}}{\phi(c') = \phi(c)}$. 
 
@@ -252,7 +252,7 @@ Any gridded permutation in $\textsf{Grid}(\mathcal{T}_1)$ is a permutation from 
         $\vdots$ & \hspace{1cm}$\vdots$ \\
         $\pi_1\pi_2\dotsm\pi_n|$ & $\pi_1\pi_2\dotsm\pi_n^{(0,0)}$ \\
     \end{tabular}
-    \caption{Fusion's map interpreted with vertical splitting lines.}
+    \caption{The map for Fusion interpreted with vertical splitting lines.}
     \label{tab:fuseline}
 \end{table}
 
@@ -289,20 +289,20 @@ Suppose we have two indexable rules that are nonbijective from left hand sides $
     \label{fig:fuseq}
 \end{figure}
 
-The two fusion rules shown in \FigureRef{fig:fuseq} are an example of two equivalent nonbijective rules.  Combinatorial Exporation found the generating function of both right hand sides to be
+The two fusion rules shown in \FigureRef{fig:fuseq} are an example of two equivalent rules that are nonbijective.  Combinatorial Exporation found the generating function of both right hand sides to be
 \[
-    T(x,y) = \frac{C(x)}{1-xyC(x)} \text{ where } C(x) = \frac{1-\sqrt{1-4x}}{2x}
+    T(x,y) = \frac{C(x)}{1-xyC(x)}\quad\text{where } C(x) = \frac{1-\sqrt{1-4x}}{2x}
 \]
 is the Catalan generating function. Let $T_1$ and $T_2$ be the generating functions for the upper and lower left hand sides respectively. The assumptions are identical in both so we have
 \[
     T_1(x,y) = \frac{yT(x,y)-T(x,1)}{y-1} = T_2(x,y).
 \]
-Since the generating functions are identical for both right hand sides, then there are equally many gridded permutations of length $n$ with $k$ points in cell $(1,0)$. For each such gridded permutation in either class there are a total of $k+1$ corresponding gridded permutations in their respective left hand side that would map to it. Therefore a bijection does exist between the sets of elements that map to the same element in the two left hand sides. The rules are equivalent because the generating functions for the left hand sides are the same (given that the right hand sides are) and this bijection exists.
+Since the generating functions are identical for both right hand sides, then there are equally many gridded permutations of length $n$ with $k$ points in cell $(1,0)$. For each such gridded permutation in either class there are a total of $k+1$ corresponding gridded permutations in their respective left hand sides that would map to it. Therefore a bijection does exist between the sets of elements that map to the same element in the two left hand sides. The rules are equivalent because the generating functions for the left hand sides are the same (given that the right hand sides are) and this bijection exists.
 
 \section{The parallel bijection algorithm}
 The parallel map is implemented with a parse tree where the original object is broken down into atoms for the domain's specification. While doing so we follow along in the codomain's specification and then build back up to the root in the codomain's specifications. The matching order is used to pair the correct children.
 
-The algorithm can be seen in Algorithm~\ref{alg:parmap}. It uses the specifications as object and assumes they have access to their root classes and rule look ups $\mathscr{R}_1$ and $\mathscr{R}_2$, respectively, from their left hand side classes. Any rule object knows its classes and can map both forward ($\phi$) and backward ($\phi^{-1}$). The matching order will be a function that both filters out any empty classes and sorts a tuple of broken down objects and their corresponding classes by the matched order between the classes. In the case where a forward map only maps to a subset of its right hand side classes (e.g. disjoint union) then the objects for the classes that are not being used is set to \texttt{null}.
+The algorithm can be seen in Algorithm~\ref{alg:parmap}. It uses the specifications as objects and assumes they have access to their root classes and rule look-ups $\mathscr{R}_1$ and $\mathscr{R}_2$, respectively, from their left hand side classes. Any rule object knows its classes and can map both forward ($\phi$) and backward ($\phi^{-1}$). The matching order will be a function that both filters out any empty classes and sorts a tuple of broken down objects and their corresponding classes by the matched order between the classes. In the case where a forward map only maps to a subset of its right hand side classes (e.g., disjoint union) then the objects for the classes that are not being used is set to \texttt{null}.
 
 Suppose we have an object of length $n$ and two parallel specifications where the one with more rules has $r$ rules. We will always reach an atom before exhausting every rule and thus reduce the object by at least one at that point. The worst time complexity of the map is therefore $\mathcal{O}(nr)$.
 

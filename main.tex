@@ -1,5 +1,5 @@
 % Modes: draft/proof/final % Optional: debug, online
-\documentclass[online,masters,deptscs,forcegraphics,final]{ruthesis}
+\documentclass[masters,deptscs,forcegraphics,final]{ruthesis}
 
 \usepackage[backend=biber,bibencoding=utf8,style=ieee]{biblatex}
 \addbibresource{references.bib}
@@ -78,20 +78,21 @@ I dedicate this thesis to my wife, Sólborg Erla Ingvarsdóttir, and our sons,\\
 
 \clearpage
 
-\input{chapters/01_introduction}\clearpage
-\input{chapters/02_background}\clearpage
-\input{chapters/03_parallel}\clearpage
-\input{chapters/04_bijections}\clearpage
-\input{chapters/05_bijection_search}\clearpage
-\input{chapters/06_results}\clearpage
-\input{chapters/07_cremark}\clearpage
+\input{chapters/01_introduction}
+\input{chapters/02_background}
+\input{chapters/03_parallel}
+\input{chapters/04_bijections}
+\input{chapters/05_bijection_search}
+\input{chapters/06_results}
+\input{chapters/07_cremark}
 
 % TODO: check page number 
 \printbibliography{}
 
 \begin{appendices}
-\input{chapters/A_min_example}\clearpage
+\input{chapters/A_min_example}
 \input{chapters/B_exp_classes}
+\input{chapters/C_exp_setup}
 \end{appendices}
 
 \clearforchapter{}
