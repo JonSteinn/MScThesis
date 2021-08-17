@@ -74,119 +74,25 @@ Suppose after a single step in the map that we form the first $12\cdots n$ (spre
 If the $12\cdots n$ pattern does contain the newly moved point in column $1$ and not the one we just moved to column $2$, then the pattern must have been there before the step was taken.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,1.25) -- (4.5,1.5) -- (7,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (3.5,2.5) circle (0.15);
-\fill[teal] (4.5,1.5) circle (0.15);
-\fill (5.5,0.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,1.25);
-\fill[purple] (6.5,1) circle (0.15);
-\draw (7,2) rectangle (8.5,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,1.25) -- (2.75,1.5) -- (7,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (3.5,2.5) circle (0.15);
-\fill[teal] (2.75,1.5) circle (0.15);
-\fill (5.5,0.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,1.25);
-\fill[purple] (5,1) circle (0.15);
-\draw (7,2) rectangle (8.5,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof1}
 \end{center}
 
 Suppose this pattern includes the newly moved element in column $2$ and no elements in column $1$ then the pattern must have existed before regardless of whether the new element in column $2$ was the smallest element in column $1$ before the move or not.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,0.75) -- (6.5,1) -- (7,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (3.5,2.5) circle (0.15);
-\fill[teal] (4.5,1.5) circle (0.15);
-\fill (5.5,0.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,0.75);
-\fill[purple] (6.5,1) circle (0.15);
-\draw (7,2) rectangle (8.5,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,0.75) -- (5,1) -- (7,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (3.5,2.5) circle (0.15);
-\fill[teal] (2.75,1.5) circle (0.15);
-\fill (5.5,0.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,0.75);
-\fill[purple] (5,1) circle (0.15);
-\draw (7,2) rectangle (8.5,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof2}
 \end{center}
 
 Finally suppose the pattern involves elements from both columns $1$ and $2$. Here two scenario can arise. One were the pattern involves both moved elements and the other only the one moved to column $2$. In the first one the pattern remains as we move both points together when we backtrack.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,0.75) -- (5,1) -- (6.5,1.75) -- (7,2.25);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (3.5,2.5) circle (0.15);
-\fill[teal] (5,1) circle (0.15);
-\fill (5.5,0.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,0.75);
-\fill[purple] (6.5,1.75) circle (0.15);
-\draw (7,2.25) rectangle (8.5,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,0.75) -- (2.75,1) -- (4.25,1.75) -- (7,2.25);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (3.5,2.5) circle (0.15);
-\fill[teal] (2.75,1) circle (0.15);
-\fill (5.5,0.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,0.75);
-\fill[purple] (4.25,1.75) circle (0.15);
-\draw (7,2.25) rectangle (8.5,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof3}
 \end{center}
 
 In the latter, there is a smaller element in column $1$ than the moved one that belongs to the pattern. When we go back, the moved element goes back from column $1$ to column $0$ but that is between the element in column $1$ that formed the pattern and the element that was moved to column $2$, preserving the pattern.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,0.75) -- (5,1) -- (6.5,2) -- (7,2.25);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (5.5,0.5) circle (0.15);
-\fill (5,1) circle (0.15);
-\fill[teal] (4.5,1.5) circle (0.15);
-\fill[purple] (6.5,2) circle (0.15);
-\fill (3.5,2.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,0.75);
-\draw (7,2.25) rectangle (8.5,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.75]
-\draw (2.25,0.75) -- (2.75,1.5) -- (4,2) -- (7,2.25);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (5.5,0.5) circle (0.15);
-\fill (5,1) circle (0.15);
-\fill[teal] (2.75,1.5) circle (0.15);
-\fill[purple] (4,2) circle (0.15);
-\fill (3.5,2.5) circle (0.15);
-\draw (0.5,0.5) rectangle (2.25,0.75);
-\draw (7,2.25) rectangle (8.5,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof4}
 \end{center}
 
 In the case of the first crossing obstructions forming for the first time with one element in the first 3 columns and some outside, then wherever that element was before must have been an occurrence of that pattern as well.
@@ -194,166 +100,27 @@ In the case of the first crossing obstructions forming for the first time with o
 Now suppose we form the crossing pattern with the elements $k(k+1)$ in the first three columns (spread in any way) for the first time. This can happen in several ways. Note that the two increasing elements can not both be in column $1$ as it is always decreasing.
 
 Suppose the $k(k+1)$ part in the first $3$ columns occurs between the first two, then the pattern must have existed before with $k(k+1)$ in column $0$.
+
 \begin{center}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (2.75,1);
-\coordinate (a3) at (4.5,1.5);
-\coordinate (a4) at (6.25,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a2) -- (a3) -- (9.25,1.5);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill[teal] (a3) circle (0.15);
-\fill[purple] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (2.25,1);
-\coordinate (a3) at (2.75,1.5);
-\coordinate (a4) at (4,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a2) -- (a3) -- (9.25,1.5);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill[teal] (a3) circle (0.15);
-\fill[purple] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof5}
 \end{center}
 
 If the pattern occurs with $k(k+1)$ in columns $0$ and $2$, then it must have existed with $k(k+1)$ in columns $0$ and $1$ before.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (2.75,1.5);
-\coordinate (a4) at (6.25,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill[teal] (a2) circle (0.15);
-\fill (a3) circle (0.15);
-\fill[purple] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (2.75,1);
-\coordinate (a3) at (2.25,1.5);
-\coordinate (a4) at (4,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill[teal] (a2) circle (0.15);
-\fill (a3) circle (0.15);
-\fill[purple] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof6}
 \end{center}
 
 If the pattern occurs with $k(k+1)$ in columns $1$ and $2$ then, since they are adjacent in value and increasing, these must also be the two elements that were moved and therefore the pattern must have existed with $k(k+1)$ in columns $0$ and $1$ before.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (4.5,1.5);
-\coordinate (a4) at (6.25,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill[teal] (a3) circle (0.15);
-\fill[purple] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (2.75,1.5);
-\coordinate (a4) at (4,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill[teal] (a3) circle (0.15);
-\fill[purple] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof7}
 \end{center}
 
 If the pattern occurs with $k(k+1)$ entirely within column $2$, then the pattern must have existed with $k(k+1)$ in columns $1$ and $2$ before.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (6.25,1.5);
-\coordinate (a4) at (6.75,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,1.5);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill[teal] (a2) circle (0.15);
-\fill[purple] (a3) circle (0.15);
-\fill (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.63]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (2.75,1);
-\coordinate (a3) at (4.5,1.5);
-\coordinate (a4) at (6.25,2);
-\coordinate (a5) at (3.5,2.5);
-\draw (a3) -- (a4) -- (9.25,1.5);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\draw (9,0) rectangle (12,3);
-\fill (a1) circle (0.15);
-\fill[teal] (a2) circle (0.15);
-\fill[purple] (a3) circle (0.15);
-\fill (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\draw (9.25,0.25) rectangle (11.75,2.75);
-\end{tikzpicture}
+\input{graphics/slideproof8}
 \end{center}
 
 The trivial bijection of shifting the entire gridded permutation one column to the left (with column $0$ being depleted after the mapping) will not create any of these patterns. Since no obstruction from $\mathcal{T}_2$ can occur, $\Upsilon(\pi)$ is in $\textsf{Grid}_i(\mathcal{T}_2)$.
@@ -384,79 +151,17 @@ Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable, then $|\textsf{Grid}_i(\mathcal
 \end{proposition}
 \begin{proof}
 Let $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$ and $\pi' \in \textsf{Grid}_i(\mathcal{T}_2)$. A step in $\Upsilon$ where we move an element larger than all the elements in $(1,0)$ is cancelled out by the corresponding move in $\Upsilon^{-1}$ and vice versa.
+
 \begin{center}
-\begin{tikzpicture}[scale=0.75]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (4.5,1.5);
-\coordinate (a4) at (4,2);
-\coordinate (a5) at (2.5,2.5);
-\draw[purple,->,thick] (a5) -- (3.5,2.5);
-\draw[teal,->,thick] (a1) -- (6.5,0.5);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill[teal] (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill (a3) circle (0.15);
-\fill (a4) circle (0.15);
-\fill[purple] (a5) circle (0.15);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.75]
-\coordinate (a1) at (6.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (4.5,1.5);
-\coordinate (a4) at (4,2);
-\coordinate (a5) at (3.5,2.5);
-\draw[purple,->,thick] (a5) -- (2.5,2.5);
-\draw[teal,->,thick] (a1) -- (5.5,0.5);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill[teal] (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill (a3) circle (0.15);
-\fill (a4) circle (0.15);
-\fill[purple] (a5) circle (0.15);
-\end{tikzpicture}
+\input{graphics/slidableproof1}
 \end{center}
+
 A step in $\Upsilon$ where we move an element not larger than all elements in $(1,0)$ is cancelled out by the corresponding move in $\Upsilon^{-1}$ and vice versa.
+
 \begin{center}
-\begin{tikzpicture}[scale=0.75]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (2.5,1.5);
-\coordinate (a4) at (4,2);
-\coordinate (a5) at (3.5,2.5);
-\draw[purple,->,thick] (a3) -- (4.5,1.5);
-\draw[teal,->,thick] (a4) -- (6.5,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill[purple] (a3) circle (0.15);
-\fill[teal] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.75]
-\coordinate (a1) at (5.5,0.5);
-\coordinate (a2) at (5,1);
-\coordinate (a3) at (4.5,1.5);
-\coordinate (a4) at (6.5,2);
-\coordinate (a5) at (3.5,2.5);
-\draw[purple,->,thick] (a3) -- (2.5,1.5);
-\draw[teal,->,thick] (a4) -- (4,2);
-\draw (0,0) rectangle (3,3);
-\draw (3,0) rectangle (6,3);
-\draw (6,0) rectangle (9,3);
-\fill (a1) circle (0.15);
-\fill (a2) circle (0.15);
-\fill[purple] (a3) circle (0.15);
-\fill[teal] (a4) circle (0.15);
-\fill (a5) circle (0.15);
-\end{tikzpicture}
+\input{graphics/slidableproof2}
 \end{center}
+
 Both maps move one point into and one out of $(1,0)$ at every step, so the number of elements in $(1,0)$ is fixed. Therefore the number of elements in the other column of the first two must also be fixed. When mapping $\pi$ with $\Upsilon$ we take a certain amount of steps and when we map back with $\Upsilon^{-1}$ we take the same amount of steps, each cancelling out the steps of $\Upsilon$ and therefore $\Upsilon^{-1}(\Upsilon(\pi)) = \pi$ and similarly $\Upsilon\left(\Upsilon^{-1}(\pi')\right) = \pi'$ and thus, $\Upsilon$ is a bijection between $\textsf{Grid}_i(\mathcal{T}_1)$ and $\textsf{Grid}_i(\mathcal{T}_2)$.
 \end{proof}
 

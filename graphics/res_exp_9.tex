@@ -1,0 +1,23 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (c1) at (0,0) {$1$};
+    \node[vertex] (c2) at (4,-2) {$2$};
+    \node[vertex] (c3) at (7,3) {$3$};
+    \node[vertex] (c4) at (6,2) {$4$};
+    \node[vertex] (c5) at (10,-2) {$5$};
+    \node[vertex] (c6) at (2,2) {$6$};
+    \node[vertex] (c7) at (4,0) {$7$};
+    \node[vertex] (c8) at (9,3) {$8$};
+    \node[vertex] (c9) at (0,-2) {$9$};
+    \node[vertex] (c10) at (0,3) {$10$};
+    \node[vertex] (c11) at (-2,0) {$11$};
+    \draw (c1) -- (c7);
+    \draw (c3) -- (c5);
+    \draw (c3) -- (c6);
+    \draw (c3) -- (c10);
+    \draw (c4) -- (c7);
+    \draw (c5) -- (c7);
+    \draw (c10) -- (c11);
+    \draw (c1) -- (c9);
+    \draw (c3) -- (c8);
+    \draw (c2) -- (c1);
+\end{tikzpicture}

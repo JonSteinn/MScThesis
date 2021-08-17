@@ -1,0 +1,31 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (c1) at (7,0) {$1$};
+    \node[vertex] (c2) at (3,0) {$2$};
+    \node[vertex] (c3) at (-7,5) {$3$};
+    \node[vertex] (c4) at (-7,0) {$4$};
+    \node[vertex] (c5) at (-2,5) {$5$};
+    \node[vertex] (c6) at (-5,1) {$6$};
+    \node[vertex] (c7) at (7,3) {$7$};
+    \node[vertex] (c8) at (4,3) {$8$};
+    \node[vertex] (c9) at (7,5) {$9$};
+    \node[vertex] (c10) at (-3,0) {$10$};
+    \node[vertex] (c11) at (-5,3) {$11$};
+    \node[vertex] (c12) at (0,0) {$12$};
+    \node[vertex] (c13) at (2,2) {$13$};
+    \node[vertex] (c14) at (5,4) {$14$};
+    \node[vertex] (c15) at (-5,5) {$15$};
+    \draw (c1) -- (c2);
+    \draw (c3) -- (c4);
+    \draw (c5) -- (c6);
+    \draw (c7) -- (c8);
+    \draw (c4) -- (c6);
+    \draw (c1) -- (c8);
+    \draw (c5) -- (c8);
+    \draw (c5) -- (c9);
+    \draw (c5) -- (c10);
+    \draw (c5) -- (c11);
+    \draw (c5) -- (c12);
+    \draw (c5) -- (c13);
+    \draw (c5) -- (c14);
+    \draw (c5) -- (c15);
+\end{tikzpicture}

@@ -198,45 +198,30 @@ For any basis $\mathcal{B}$, the \emph{symmetry class} of $\Av{\mathcal{B}}$ is 
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{c|c}
-        Wilf class & Counting sequence\\
-        \hline
-        $\begin{matrix}\Av{1234}\\\Av{1243}\\\Av{1432}\\\Av{2143}\end{matrix}$ & $1, 2, 6, 23, 103, 513, 2761, 15767, \dotsc$ \\
-        \hline
-        $\begin{matrix}\Av{1324}\end{matrix}$ & $1, 2, 6, 23, 103, 513, 2762, 15793,\dotsc$\\
-        \hline
-        $\begin{matrix}\Av{1342}\\\Av{2413}\end{matrix}$ & $1, 2, 6, 23, 103, 512, 2740, 15485,\dotsc$
-    \end{tabular}
+    \input{tables/1x4wilf}
     \caption{The seven lexicographically minimal representations of symmetry classes of permutation classes avoiding a single classical pattern of length $4$. They are grouped into three Wilf classes.}
     \label{tab:wilfcls4}
 \end{table}
 
-Starting from the empty permutation we can generate any permutation by inserting a new maximum element. This procedure is called the \emph{evolution} of a permutation. One way of achieving this is with \emph{insertion encoding}. We can restrict where our new maximum element can be inserted with \emph{slots} marked by $\slot$. We can transition from a sequence containing slots to another with one of the transitions shown in \TableRef{tab:ietrans}.\todo{use better diamonds}
+Starting from the empty permutation we can generate any permutation by inserting a new maximum element. This procedure is called the \emph{evolution} of a permutation. One way of achieving this is with \emph{insertion encoding}. We can restrict where our new maximum element can be inserted with \emph{slots} marked by $\slot$. We can transition from a sequence containing slots to another with one of the transitions shown in \TableRef{tab:ietrans}.
 
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{c|c}
-        Token & Transition\\
-        \hline
-        $\mathbf{m}$ & $\slot \ietrans \slot m \slot$\\
-        $\mathbf{r}$ & $\slot \ietrans \slot m$\\
-        $\mathbf{l}$ & $\slot \ietrans m \slot$\\
-        $\mathbf{f}$ & $\slot \ietrans m$
-    \end{tabular}
-    \caption{The insertion encoding transitions for a new maximum element $m$.}
+    \input{tables/insertionencoding}
+    \caption{The insertion encoding transitions for a new maximum element $n$.}
     \label{tab:ietrans}
 \end{table}
 
 The insertion encoding of the permutation $615234$ is $\mathbf{m}_1\mathbf{m}_2\mathbf{l}_3\mathbf{f}_3\mathbf{f}_2\mathbf{f}_1$ since its evolution is
 \begin{align*}
-    \slot &\iestep{m}{1} \slot 1 \slot\\
-    &\iestep{m}{2} \slot 1 \slot 2 \slot\\
-    &\iestep{l}{3} \slot 1 \slot 2 3 \slot\\
-    &\iestep{f}{3} \slot 1 \slot 234\\
-    &\iestep{f}{2} \slot 15234\\
-    &\iestep{f}{1} 615234.
+    \slot &\iestep{m}{1} \slot\,1\:\slot\\
+    &\iestep{m}{2} \slot\,1\slot\,2\:\slot\\
+    &\iestep{l}{3} \slot\,1\slot\,2\,3\:\slot\\
+    &\iestep{f}{3} \slot\,1\slot\,2\,3\,4\\
+    &\iestep{f}{2} \slot\,1\,5\,2\,3\,4\\
+    &\iestep{f}{1} 6\,1\,5\,2\,3\,4.
 \end{align*}
-A more detailed definition can be found in \authcite{albert2005insertion}. Given a permutation class $\Av{\mathcal{B}}$, the set of insertion encodings of all its permutation make up the language of the class. If said language is regular\footnote{Recognized by a finite automaton.} we say that the class is \emph{regular insertion encodable}. TileScope was shown to be able to find specifications for all regular insertion encodable classes by \citeauthor{BeanPhd:phd} \cite[Theorem  5.1.3]{BeanPhd:phd}.
+A more detailed definition can be found in \authcite{albert2005insertion}. Given a permutation class $\Av{\mathcal{B}}$, the set of insertion encodings of all its permutation make up the language of the class. If this language is regular\footnote{Recognized by a finite automaton.} we say that the class is \emph{regular insertion encodable}. TileScope was shown to be able to find specifications for all regular insertion encodable classes by \citeauthor{BeanPhd:phd} \cite[Theorem  5.1.3]{BeanPhd:phd}.
 
 
 \section{Gridded permutations\label{sec:griddedpermutations}}
@@ -244,7 +229,7 @@ A \emph{cell} $(a,b) \in \N^2$ is the region within $[0,\infty)^2$ defined by $[
 \[
     (\pi,P) = (\perm{\pi}{n}, ((a_1,b_1),(a_2,b_2),\dotsc,(a_n,b_n)))
 \]
-where $P$ is an $n$-tuple of cells and $\pi$ is a permutation is called a \emph{gridded permutation} of length $n$ if for all $i,j \in [n]$, $i<j$ implies $a_i \leq a_j$ and $\pi_i < \pi_j$ implies $b_i \leq b_j$. A more detailed definition is given by \citeauthor{albert2012geometric} \cite{albert2012geometric}. We refer to $P$ as the \emph{positions} of the gridded permutation and $\pi$ as the \emph{underlying permutation}. We use a one line notation for gridded permutations 
+where $P$ is an $n$-tuple of cells and $\pi$ is a permutation is called a \emph{gridded permutation} of length $n$ if for all $i,j \in [n]$, $i<j$ implies $a_i \leq a_j$ and $\pi_i < \pi_j$ implies $b_i \leq b_j$. A more detailed definition is given by \authcite{albert2012geometric}. We refer to $P$ as the \emph{positions} of the gridded permutation and $\pi$ as the \emph{underlying permutation}. We use a one line notation for gridded permutations 
 \[
     \pi = \pi_1^{(a_1,b_1)}\pi_2^{(a_2,b_2)}\dotsb\pi_n^{(a_n,b_n)}
 \]
@@ -289,7 +274,7 @@ where
 \[
     (c,r) \in \Z^+ \times \Z^+, \ \mathcal{O} \subseteq \mathcal{G}^{(c,r)} \text{ and } \mathcal{R}=\set{\mathcal{R}_1,\mathcal{R}_2,\dotsc,\mathcal{R}_k} \subseteq \left(\mathcal{G}^{(c,r)}\right)^k
 \]
-are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. A more detailed definition is given by Bean \cite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements are blue. Cells with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.
+are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. A more detailed definition is given by \authcite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements are blue. Cells with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.
 
 \begin{figure}[ht!]
     \centering
