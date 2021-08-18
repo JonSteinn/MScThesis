@@ -1,3 +1,9 @@
+{
+% rect
+%\newcommand{\reqpnt}[3]{\fill[blue] (#1-#3,#2-#3) rectangle (#1+#3,#2+#3);}
+% donut
+%\newcommand{\reqpnt}[3]{\fill[blue] (#1,#2) circle (#3); \fill[white] (#1,#2) circle (#3 * 0.5);}
+% diamond
 \begin{tikzpicture}[scale=0.75, every node/.style={scale=0.75}]
     \def\spnt{0.075} % Size of smaller points
     \def\lpnt{0.125} % Size of larger points
@@ -14,4 +20,7 @@
     \fill[blue] (4.75, 3.15) circle (\spnt);
     \fill[blue] (5.5, 1) circle (\spnt);
     \draw[blue] (4.75, 3.15) -- (5.5,1);
+    %\reqpnt{4.75}{3.15}{\spnt*1.2}
+    %\reqpnt{5.5}{1}{\spnt*1.2}
 \end{tikzpicture}
+}

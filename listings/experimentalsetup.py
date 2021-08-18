@@ -6,7 +6,7 @@ from tilings.strategies import BasicVerificationStrategy
 
 
 def class_bijections(bases, packs):
-    uf = UnionFind(4)
+    uf = UnionFind(len(bases))
     connections = []
     for packs in itertools.product(packs, packs):
         for idx1, basis1 in enumerate(bases):

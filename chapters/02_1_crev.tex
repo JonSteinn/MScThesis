@@ -1,5 +1,5 @@
 \begin{definition}\label{def:rrgp}
-Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ and define its \emph{column reverse} for $[a,b]$ where $a,b\in\N$ and $a\leq b$ as the mapping $\textsf{rev}_{[a,b]}$ where $\textsf{rev}_{[a,b]}(\pi)$ is $\pi$ where its longest subsequence whose columns all belong to interval
+Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ and define its \emph{column reverse} for $[a,b]$, where $a,b\in\N$ and $a\leq b$, as the mapping $\textsf{rev}_{[a,b]}$ where $\textsf{rev}_{[a,b]}(\pi)$ is $\pi$ where its longest subsequence whose columns all belong to interval
 \[
 \pi_{i}^{(x_i,y_i)}\pi_{i+1}^{(x_{i+1},y_{i+1})}\dotsm\pi_{i+k}^{(x_{i+k},y_{i+k})}
 \]
@@ -59,13 +59,13 @@ By Lemma \ref{lem:crevcontain} all occurrences of requirements are preserved so 
 Let $\mathcal{T}$ be a tiling, then $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ for all $n\in\N$.
 \end{proposition}
 \begin{proof}
-With $\textsf{rev}_{[a,b]}$ being its own inverse it is a bijection between $\textsf{Grid}_n(\mathcal{T})$ and
+With $\textsf{rev}_{[a,b]}$ being its own inverse it is a bijection between
 \[
-\cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\mathcal{T})}
+\textsf{Grid}_n(\mathcal{T}) \text{ and } \cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\mathcal{T})}
 \]
-with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))$ by Lemma \ref{lem:crevgrid} and therefore we have $|\textsf{Grid}_n(\mathcal{T})| \leq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$. By the same argument there is a bijection between $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))$ and
+with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))$ by Lemma \ref{lem:crevgrid} and therefore we have $|\textsf{Grid}_n(\mathcal{T})| \leq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$. By the same argument there is a bijection between
 \[
-    \cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))}
+    \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T})) \text{ and } \cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))}
 \]
-with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(\mathcal{T})))=\textsf{Grid}_n(\mathcal{T})$ and therefore $|\textsf{Grid}_n(\mathcal{T})| \geq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ and thus $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$
+with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(\mathcal{T})))=\textsf{Grid}_n(\mathcal{T})$ and therefore $|\textsf{Grid}_n(\mathcal{T})| \geq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ which shows that $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$.
 \end{proof}
