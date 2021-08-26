@@ -1,5 +1,6 @@
 {
 \setphaserulewidth{.7pt}
+\algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
 
 \begin{algorithmic}[1]
 \Statex \textbf{Input}: A gridded permutation $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)} \cdots \pi_n^{(x_n,0)} \in \mathcal{G}^{(m,1)}_n$.
@@ -8,11 +9,11 @@
     \If{$\cset{i}{x_i = 1} = \emptyset$}
         \State \Return{$\pi_1^{(x_1+1-\textsf{sign}(x_1),0)}\pi_2^{(x_2+1-\textsf{sign}(x_2),0)} \cdots \pi_n^{(x_n+1-\textsf{sign}(x_n),0)}$} \Comment{shift column $0$}
     \EndIf
-    
+    \LineComment Shift elements that are not in the first two columns
     \For{$i \gets |\cset{j}{x_j < 2}| + 1, n$}
         \State $x_i \gets x_i + 1$
     \EndFor
-    
+    \LineComment Deplete the elements in $(0,0)$
     \While{$\cset{j}{x_j = 0} \neq \emptyset$}
         \State $i \gets \max\cset{j}{x_j = 0}$
         \State $A \gets \cset{j}{x_j = 1 \text{ and } \pi_j > \pi_i}$

@@ -8,7 +8,7 @@ is finite. We refer to an element of a combinatorial class, $c\in\mathcal{C}$, a
 
 A \emph{bijection} between sets $A$ and $B$ is an invertible function $f: A \mapsto B$ such that $a=f^{-1}(f(a))$ and $b=f(f^{-1}(b))$ for all $a\in A$ and $b \in B$. The existance of a bijection between sets $A$ and $B$ implies $|A|=|B|$. Suppose $A$ is the set of binary strings of length $n$ avoiding consecutive 1's and $B$ the set of subsets of $\setn$ containing no consecutive numbers. By mapping each binary string $\wordseq{b}{n} \in A$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/bijection_example}
     \caption{A bijection between binary strings of length 3 avoiding consecutive 1's and subsets of $\set{1,2,3}$ containing no consecutive numbers.}
@@ -36,7 +36,7 @@ The \emph{symbolic method} in \authcite{flajolet:ac} describes how combinatorial
 
 Consider a $2 \times n$ grid where each square can be raised or not as shown in \FigureRef{fig:raised_grid}. How many unique grids exist such that one can pass from left to right?
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/raised_grid}
     \caption{A grid of length $5$ with three raised squares and a path from left to right.}
@@ -73,7 +73,7 @@ and symmetrically we have
 \]
 Now we have our specification, a system of rules with each class on the left at most once, defining an unambiguous formal grammar as shown in \FigureRef{fig:gridtree}.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/tree_example}
     \caption{The grammar for passable $2\times n$ grids.}
@@ -103,7 +103,7 @@ In the context of this thesis, we will usually refer to combinatorial classes as
 \section{Permutations\label{sec:permutations}}
 A \emph{permutation} $\pi$ is a bijection between a set and itself. In our context, the set in question is $[n] = \setn$. We adopt a one line notation for permutations, $\pi = \perm{\pi}{n}$ where $\pi_i = j$ if $i$ maps to $j$. The permutation $1423$ maps $\{1,2,3,4\}$ to itself. This correspondence can be seen in \FigureRef{fig:perm_example} as well as a geometric representation of the permutation which displays the points $\cset{(i,\pi(i))}{i \in [n]}$ in the Cartesian plane.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/perm_example}
     \caption{The mapping and graphical representation of the permutation $1423$.}
@@ -126,7 +126,7 @@ and its \emph{inverse} is
 \]
 where $\pi_{i_j} = k$ if $\pi_k = j$. The reverse of $132$ is $231$ and the inverse of $51324$ is $24351$. The reverse and inverse functions generate the dihedral group $D_4$, that is the symmetries of a square using the graphical representation of a permutation. We define these eight symmetry maps as $\sym_1,\sym_2,\dotsc,\sym_8$ as is shown in \TableRef{tab:permsym} which also includes an example for the permutation $1423$.
 
-\begin{table}[ht!]
+\begin{table}[htbp]
     \centering
     \input{tables/permsym}
     \caption{The eight symmetry maps for permutations interpreted with reverse and inverse, dihedral group $D_4$ and an example for $\pi=1423$.}
@@ -155,7 +155,7 @@ It, however, avoids the pattern $1432$ since
 \]
 An occurrence of $4213$ in $356214$ can be seen in \FigureRef{fig:pattern_containment}.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/pattern_containment}
     \caption{The permutation $356214$ with an occurrence of $4213$ circled.}
@@ -196,7 +196,7 @@ and
 \]
 For any basis $\mathcal{B}$, the \emph{symmetry class} of $\Av{\mathcal{B}}$ is $\cset{\Av{B}}{B \in \sym(\mathcal{B})}$. The symmetry class of any permutation class is a subset of its Wilf class. As symmetries are considered trivial bijections we usually only concern ourselves with the lexicographically minimal representation of each symmetry class. For example, there are seven symmetry classes and three Wilf classes for singleton bases in $\mathcal{S}_4$. They are shown in \TableRef{tab:wilfcls4}.
 
-\begin{table}[ht!]
+\begin{table}[htbp]
     \centering
     \input{tables/1x4wilf}
     \caption{The seven lexicographically minimal representations of symmetry classes of permutation classes avoiding a single classical pattern of length $4$. They are grouped into three Wilf classes.}
@@ -205,7 +205,7 @@ For any basis $\mathcal{B}$, the \emph{symmetry class} of $\Av{\mathcal{B}}$ is 
 
 Starting from the empty permutation we can generate any permutation by inserting a new maximum element. This procedure is called the \emph{evolution} of a permutation. One way of achieving this is with \emph{insertion encoding} where we restrict where our new maximum element can be inserted with \emph{slots} marked by $\slot$ and transition from a sequence containing slots to another with one of the transitions shown in \TableRef{tab:ietrans}.
 
-\begin{table}[ht!]
+\begin{table}[htbp]
     \centering
     \input{tables/insertionencoding}
     \caption{The insertion encoding transitions for a new maximum element $n$.}
@@ -235,7 +235,7 @@ where $P$ is an $n$-tuple of cells and $\pi$ is a permutation is called a \emph{
 \]
 where we can exclude all but the last position of consecutive occurrences of the same position. The gridded permutation $87^{(0,2)}1^{(1,0)}6^{(1,2)}2^{(1,0)}4^{(3,1)}3^{(3,0)}5^{(4,2)}$ can be seen in \FigureRef{fig:gridded_perm}.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/gridded_perm}
     \caption{The gridded permutation $87^{(0,2)}1^{(1,0)}6^{(1,2)}2^{(1,0)}4^{(3,1)}3^{(3,0)}5^{(4,2)}$.}
@@ -274,9 +274,9 @@ where
 \[
     (c,r) \in \Z^+ \times \Z^+, \ \mathcal{O} \subseteq \mathcal{G}^{(c,r)} \text{ and } \mathcal{R}=\set{\mathcal{R}_1,\mathcal{R}_2,\dotsc,\mathcal{R}_k} \subseteq \left(\mathcal{G}^{(c,r)}\right)^k
 \]
-are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. Define $\textsf{Grid}_n(\mathcal{T}) = \cset{\pi \in \textsf{Grid}(\mathcal{T})}{|\pi| = n}$. A more detailed definition of tilings is given by \authcite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements are blue. Cells with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.\todo{black and white, update all}
+are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respectively. The gridded permutations in $\textsf{Av}^{(c,r)}\left(\mathcal{O}\right)$ that contain $\mathcal{R}_1,\dotsc,\mathcal{R}_k$ make up the combinatorial class $\textsf{Grid}(\mathcal{T})$. Define $\textsf{Grid}_n(\mathcal{T}) = \cset{\pi \in \textsf{Grid}(\mathcal{T})}{|\pi| = n}$. A more detailed definition of tilings is given by \authcite{BeanPhd:phd}. An example of a tiling can be seen in \FigureRef{fig:tiling_example} where obstructions are red and requirements are blue. Cells with $12$ and $21$ obstruction and a $1$ requirement are represented with a larger black point.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/tiling}
     \caption{A $3 \times 2$ tiling with $\mathcal{O} = \set{1^{(0,0)},12^{(1,1)},21^{(1,1)},3^{(0,1)}1^{(1,0)}2^{(2,1)}}$ and $\mathcal{R} = \set{\set{1^{(1,1)}},\set{2^{(1,1)}1^{(2,0)}}}$.}
@@ -294,7 +294,7 @@ and a generating function, obtained by solving the system of equations derived f
 \]
 This is a simple example but given different classes and constructors, we can end up with classes that are difficult to describe rigorously. The purpose of tilings is to provide a sort of language to describe classes with more complicated permutation constraints or limited parts of permutations, e.g., we can describe $\textsf{Av}_{\geq1}(132)$ with the tiling seen in \FigureRef{fig:tiling132}.
 
-\begin{figure}[ht!]
+\begin{figure}[htbp]
     \centering
     \input{graphics/tiling_132_notempty}
     \caption{A tiling $\mathcal{T}$ with $\textsf{Grid}(\mathcal{T})$ isomorphic to $\textsf{Av}_{\geq1}(132)$.}

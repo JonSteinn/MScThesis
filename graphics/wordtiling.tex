@@ -1,0 +1,23 @@
+\begin{tikzpicture}[scale=0.5, every node/.style={scale=0.5}]
+        \def\xscale{1.0} % Horizontal scale factor
+        \def\yscale{1.0} % Vertical scale factor
+        \def\spnt{0.1} % Size of smaller points
+        \def\lpnt{0.125} % Size of larger points
+        \def\roundscale{0.75} % The rounding factor
+        \draw[rounded corners=2ex*\roundscale] (0,0) rectangle (11.09*\xscale,5.28*\yscale);
+        \draw (5.545*\xscale, 5.28*\yscale) -- (5.545*\xscale, 0);
+        \fill[red] (8.18*\xscale, 2.2*\yscale) circle (\spnt);
+        \fill[red] (9.96*\xscale, 3.98*\yscale) circle (\spnt);
+        \draw[red] (8.18*\xscale, 2.2*\yscale) -- (9.96*\xscale,3.98*\yscale);
+        \fill[red] (4.34*\xscale, 4.66*\yscale) circle (\spnt);
+        \fill[red] (6.84*\xscale, 0.85*\yscale) circle (\spnt);
+        \draw[red] (4.34*\xscale, 4.66*\yscale) -- (6.84*\xscale,0.85*\yscale);
+        \fill[red] (1.47*\xscale, 3.86*\yscale) circle (\spnt);
+        \fill[red] (2.67*\xscale, 4.64*\yscale) circle (\spnt);
+        \fill[red] (4.43*\xscale, 2.04*\yscale) circle (\spnt);
+        \draw[red] (1.47*\xscale, 3.86*\yscale) -- (2.67*\xscale,4.64*\yscale) -- (4.43*\xscale,2.04*\yscale);
+        \fill[red] (1.05*\xscale, 3.61*\yscale) circle (\spnt);
+        \fill[red] (2.75*\xscale, 0.93*\yscale) circle (\spnt);
+        \fill[red] (3.97*\xscale, 1.78*\yscale) circle (\spnt);
+        \draw[red] (1.05*\xscale, 3.61*\yscale) -- (2.75*\xscale,0.93*\yscale) -- (3.97*\xscale,1.78*\yscale);
+\end{tikzpicture}
