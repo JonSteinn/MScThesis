@@ -17,7 +17,6 @@
 \setTitle{\MLTitle}{\MLTITLE}
 
 \author{J\'{o}n~Steinn~El\'{i}asson}
-
 \ects{30}
 
 % \MLSeniorProfessor \MLProfessor \MLAssociateProfessor \MLAdjunctProfessor \MLEmeritusProfessor \Iceland \MLReykjavikUniversity \MLUniversityIceland
@@ -41,44 +40,32 @@
 \usepackage[hidelinks]{hyperref} 
 
 
-
-%\usepackage{lineno}
-%\linenumbers
-\definecolor{todocolor}{RGB}{205,235,139}
-\definecolor{todo-idea}{RGB}{120,180,255}
-\definecolor{todo-error}{RGB}{208,31,60}
-\definecolor{todo-question}{RGB}{255,255,136}
-\usepackage[colorinlistoftodos, color=todocolor, textsize=small]{todonotes}
-
 \input{macros}
 \patchcmd{\listof}{1.5em}{0pt}{}{}
 
 \counterwithin{algorithm}{chapter}
+
+
+%%%%%%%%%%%%%%%%
+% Start of doc %
+%%%%%%%%%%%%%%%%
 \begin{document}
 \frontmatter{}
 \frontrequiredpages{}
-
 \begin{dedications}
 I dedicate this thesis to my wife, Sólborg Erla Ingvarsdóttir, and our sons,\\ Ingvar Sölvi Jónsson and Þorkell Ari Jónsson.
 \end{dedications}
-
 \enableindents{}
-
 \input{chapters/00_C_acknowledgements}
-
-\starttables{}% setup formatting
-
+\starttables{}
 \tableofcontents{}\clearpage
 \listoffigures{}\clearpage
 \listoftables{}\clearpage
 \addcontentsline{toc}{chapter}{List of Algorithms}
 \listofalgorithms{}\clearpage
 \listoffixmes{}
-
 \starttext{}
-
 \clearpage
-
 \input{chapters/01_introduction}
 \input{chapters/02_background}
 \input{chapters/03_parallel}
@@ -86,16 +73,10 @@ I dedicate this thesis to my wife, Sólborg Erla Ingvarsdóttir, and our sons,\\
 \input{chapters/05_bijection_search}
 \input{chapters/06_results}
 \input{chapters/07_cremark}
-
-% TODO: check page number 
 \printbibliography{}
-
 \begin{appendices}
 \input{chapters/A_min_example}
 \input{chapters/B_exp_classes}
 \input{chapters/C_exp_setup}
 \end{appendices}
-
-%\clearforchapter{}
-
 \end{document}

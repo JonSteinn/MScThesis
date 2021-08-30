@@ -5,9 +5,45 @@
   title     = "Combinatory Analysis",
   author    = "MacMahon, P.A.",
   year      = 1916,
-  publisher = {London: Cambridge University Press},
-  % TODO, find page number, 
-  % Volume 1, section III, chapter V
+  publisher = {London: Cambridge University Press}
+}
+
+@book{knuth:aocp1,
+  author    = {Knuth, Donald E.},
+  publisher = {Addison-Wesley Publishing Co., Reading,
+                   Mass.-London-Don Mills, Ont},
+  title     = {The Art of Computer Programming. Vol. 1: Fundamental
+                   Algorithms},
+  year      = {1969}
+}
+
+@article{simionandschmidt,
+    title={Restricted Permutations},
+    author={R. Simion and F.W. Schmidt},
+    year={1985},
+    journal={European Journal of Combinatorics},
+    volume={6},
+    pages={383-406}
+}
+
+@article{Zeilberger1998EnumerationSA,
+  title={Enumeration Schemes and, more importantly, their automatic generation},
+  author={D. Zeilberger},
+  journal={Annals of Combinatorics},
+  year={1998},
+  volume={2},
+  pages={185-195}
+}
+
+@article{vatter_2008, 
+    title={Enumeration Schemes for Restricted Permutations}, 
+    volume={17},
+    number={1}, 
+    journal={Combinatorics, Probability and Computing}, 
+    publisher={Cambridge University Press}, 
+    author={Vatter, Vincent},
+    year={2008}, 
+    pages={137–159}
 }
 
 @phdthesis{BeanPhd:phd,
@@ -17,24 +53,16 @@
 	Year   = {2018},
 	url    = {https://opinvisindi.is/bitstream/handle/20.500.11815/1184/phd-bean-2018.pdf}
 }
-@book{knuth:aocp1,
-  author    = {Knuth, Donald E.},
-  %pages     = {xxi+634}, % update for what I use
-  publisher = {Addison-Wesley Publishing Co., Reading,
-                   Mass.-London-Don Mills, Ont},
-  title     = {The Art of Computer Programming. Vol. 1: Fundamental
-                   Algorithms},
-  year      = {1969}
-}
 
-@book{flajolet:ac,
-  address   = {Cambridge},
-  author    = {Flajolet, Philippe and Sedgewick, Robert},
-  %pages     = {xiv+810}, TODO UPDATE
-  publisher = {Cambridge University Press},
-  title     = {Analytic combinatorics},
-  year      = {2009},
-  isbn      = {978-0-521-89806-5}
+@article{wood_zeilberger, 
+    title={A translation method for finding combinatorial bijections}, 
+    volume={13}, 
+    number={3}, 
+    journal={Annals of Combinatorics}, 
+    publisher={Birkhäuser Verlag Basel/Switzerland 2009}, 
+    author={Philip Matchett Wood and Doron Zeilberger},
+    year={2009}, 
+    pages={383–402}
 }
 
 @Book{wilf:gf,
@@ -43,22 +71,23 @@
   year      = {1994},
   author    = {Herbert Wilf},
   edition   = {second},
-  note      = {Freely available from \url{http://www.math.upenn.edu/~wilf/DownldGF.html}},
-  comment   = {Online book on using generating functions for almost every combinatorial problem.},
-  owner     = {Sebastian},
-  timestamp = {2008.06.18},
 }
 
-%%%%%%%%%%%%%
-% Validated %
-%%%%%%%%%%%%%
-@article{Zeilberger1998EnumerationSA,
-  title={Enumeration Schemes and, more importantly, their automatic generation},
-  author={D. Zeilberger},
-  journal={Annals of Combinatorics},
-  year={1998},
-  volume={2},
-  pages={185-195}
+@book{flajolet:ac,
+  author    = {Flajolet, Philippe and Sedgewick, Robert},
+  publisher = {Cambridge University Press},
+  title     = {Analytic combinatorics},
+  year      = {2009},
+}
+
+@article{albert2005insertion,
+  title={The insertion encoding of permutations},
+  author={Albert, Michael H and Linton, Steve and Ru{\v{s}}kuc, Nik},
+  journal={The Electronic Journal of Combinatorics},
+  volume={12},
+  number={1},
+  pages={R47},
+  year={2005}
 }
 
 @article{albert2012geometric,
@@ -69,41 +98,6 @@
   number={11},
   pages={5859--5881},
   year={2013}
-}
-
-% TODO: double check if this is correct
-@article{simionandschmidt,
-    title={Restricted Permutations},
-    author={R. Simion and F.W. Schmidt},
-    year={1985},
-    journal={European Journal of Combinatorics},
-    volume={6},
-    pages={383-406}
-}
-
-@article{vatter_2008, 
-    title={Enumeration Schemes for Restricted Permutations}, 
-    volume={17}, 
-    %DOI={10.1017/S0963548307008516}, 
-    number={1}, 
-    journal={Combinatorics, Probability and Computing}, 
-    publisher={Cambridge University Press}, 
-    author={Vatter, Vincent},
-    year={2008}, 
-    pages={137–159}
-}
-
-
-@article{wood_zeilberger, 
-    title={A translation method for finding combinatorial bijections}, 
-    volume={13}, 
-    DOI={10.1007/s00026-009-0024-y}, 
-    number={3}, 
-    journal={Annals of Combinatorics}, 
-    publisher={Birkhäuser Verlag Basel/Switzerland 2009}, 
-    author={Philip Matchett Wood and Doron Zeilberger},
-    year={2009}, 
-    pages={383–402}
 }
 
 @software{permuta,
@@ -159,36 +153,25 @@
   url          = {https://doi.org/10.5281/zenodo.4946832}
 }
 
-@article{slide,
-author = {Babson, Eric and West, Julian},
-year = {2000},
-month = {12},
-pages = {},
-title = {The Permutations 123p 4…p m and 321p 4…p m are Wilf-Equivalent},
-volume = {16},
-journal = {Graphs and Combinatorics},
-doi = {10.1007/s003730070001}
-}
 
 @article{adjacentperm,
- ISSN = {00255718, 10886842},
- URL = {http://www.jstor.org/stable/2003846},
- author = {Selmer M. Johnson},
- journal = {Mathematics of Computation},
- number = {83},
- pages = {282--285},
- publisher = {American Mathematical Society},
- title = {Generation of Permutations by Adjacent Transposition},
- volume = {17},
- year = {1963}
+    author = {Selmer M. Johnson},
+    journal = {Mathematics of Computation},
+    number = {83},
+    pages = {282--285},
+    publisher = {American Mathematical Society},
+    title = {Generation of Permutations by Adjacent Transposition},
+    volume = {17},
+    year = {1963}
 }
 
-@article{albert2005insertion,
-  title={The insertion encoding of permutations},
-  author={Albert, Michael H and Linton, Steve and Ru{\v{s}}kuc, Nik},
-  journal={The Electronic Journal of Combinatorics},
-  volume={12},
-  number={1},
-  pages={R47},
-  year={2005}
+@article{slide,
+  title={The Permutations 123 p 4… pm and 321 p 4… pm are Wilf-Equivalent},
+  author={Babson, Eric and West, Julian},
+  journal={Graphs and Combinatorics},
+  volume={16},
+  number={4},
+  pages={373--380},
+  year={2000},
+  publisher={Springer}
 }
