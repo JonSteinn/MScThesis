@@ -145,11 +145,11 @@ In the graph from \FigureRef{fig:noneqsteps} we have $\textsf{lstrip}(356) = 56$
 
 \section{Parallel specifications}
 \begin{definition}
-Two constructors $\circ_1$ and $\circ_2$ are equivalent, $\circ_1 \equiv \circ_2$, if there exists a $\pi\in\mathcal{S}_n$ such that
+Two constructors $\circ_1$ and $\circ_2$ are equivalent, $\circ_1 \equiv \circ_2$, if
 \[
     \sclsi{C}{1} \circ_1 \sclsi{C}{2} \circ_1 \dotsm \circ_1 \sclsi{C}{n} \cong \sclsi{D}{1} \circ_2 \sclsi{D}{2} \circ_2 \dotsm \circ_2 \sclsi{D}{n}
 \]
-are isomorphic for all classes $\sclsi{C}{1},\sclsi{C}{2},\dotsc,\sclsi{C}{n}$ and $\sclsi{D}{1},\sclsi{D}{2},\dotsc,\sclsi{D}{n}$ in the domain of $\circ_1$ and $\circ_2$ respectively\footnote{For our purposes it would suffice to restrict the domains to classes of specifications.} where $\sclsi{C}{i}\cong\sclsi{D}{\pi_i}$ for all $i\in[n]$.
+for all classes $\sclsi{C}{1},\sclsi{C}{2},\dotsc,\sclsi{C}{n}$ and $\sclsi{D}{1},\sclsi{D}{2},\dotsc,\sclsi{D}{n}$ in the domain of $\circ_1$ and $\circ_2$ respectively\footnote{For our purposes it would suffice to restrict the domains to classes of specifications.} where there exists a $\pi\in\mathcal{S}_n$ such that $\sclsi{C}{i}\cong\sclsi{D}{\pi_i}$ for all $i\in[n]$.
 \end{definition}
 
 Before defining \emph{parallel specification paths} formally, we will give a brief informal description. Two specification paths in two different specifications are parallel if they have equivalent constructors at every step and end in either isomorphic terminal classes or a recursion at an equal distance, ignoring equivalence steps.
