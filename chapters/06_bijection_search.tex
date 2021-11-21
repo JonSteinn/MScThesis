@@ -1,5 +1,5 @@
 \coverchapter{Bijection search}\label{ch:search}
-We already know how to check if two specifications are parallel and if so, how to map objects between them but now we turn our attention to searching for parallel specifications. This is done by using Combinatorial Exploration's search for specification with further steps taken once it has finished.
+We know how to check if two specifications are parallel and if so, how to map objects between them but now we turn our attention to searching for parallel specifications. This is done by using Combinatorial Exploration's search for specification with further steps taken once it has finished.
 
 \section{The bijection search algorithm}
 When finding a bijection between classes we expand universes\footnote{Strategies used to expand universes are defined in packs prior to expanding.} of rules for both until they contain at least one specification each. We can expand further but usually universes will contain multiple specifications as soon as they contain one. Once that is done we gather the information we need in our search and store in better suited data structures.
@@ -15,7 +15,7 @@ in the universe. Depending on which one is looked at, there may be some equivale
 
 The algorithm works similarly to the parallel algorithm in Section~\ref{sec:paralg}. The main difference is that we ignore equivalence rules and for any parent pair $p_1$ and $p_2$ from each universe, we gather every possible matching of their children. This is done since $p_1$ and $p_2$ can match with some specific children at one point while $p_1$ could match another equivalence label in the other universe later using another rule but our specifications need a single rule for any parent. The complexity of finding these matches is the same as for the parallel algorithm but now the number of rules is significantly larger. The complexity of the specification search dominates our algorithm so the complexity of the search itself is the same as that of the specification search.
 
-Once we have found all matched equivalence labels and assuming the roots have matched we start looking within the collection of matched labels for specifications that are consistent in the sense that only a single rule is used for each equivalence label. This is done with backtracking starting from the two roots. This stage will also guard against any false positives from recursion as shown in \FigureRef{fig:recfalsepos}.
+Once we have found all matched equivalence labels and assuming the roots have matched we start looking within the collection of matched labels for specifications that are consistent in the sense that only a single rule contains any equivalence label as its left hand side. This is done with backtracking starting from the two roots. This stage will guard against any false positives from recursion as shown in \FigureRef{fig:recfalsepos}.
 
 \begin{figure}[ht!]
     \centering
@@ -30,7 +30,7 @@ If all of those stages are successful we pass the rules (in terms of equivalence
 \section{Fusion and assumptions}
 When dealing with universes constructed from packs involving fusion or assumption strategies we need some slight alterations to the base algorithms. 
 
-As already discussed, we need to extend the map for fusion rules to include indices as the base map is not bijective. On top of that we can have matching rules where one has the fused assumption on the left while the other on the right in which case we reverse the indices in the second specification's backward map. If there are assumptions on both sides we track the assumptions down with breadth first search until we find the parents and decide whether to reverse the indices based on where they end up in the parents. This is done after the specifications have been constructed.
+As discussed, we need to extend the map for fusion rules to include indices as the base map is not bijective. On top of that we can have matching rules where one has the fused assumption on the left while the other on the right in which case we reverse the indices in the second specification's backward map. If there are assumptions on both sides we track the assumptions down with breadth first search until we find the parents and decide whether to reverse the indices based on where they end up in the parents. This is done after the specifications have been constructed.
 
 In the search itself, fusion and assumptions rules may be within the same equivalence label. That is a systemic choice of Combinatorial Exploration to avoid tautologies. This will require us to extract the rules within each pair of matching equivalence labels given their children and grandparents and validate if the paths are in fact valid.
 

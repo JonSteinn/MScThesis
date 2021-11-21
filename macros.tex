@@ -13,6 +13,31 @@
 \newcommand{\gridN}{\raisebox{-2pt}{\tikz{\draw[step=0.2] (0,0) grid (.2,.4);}}}
 \newcommand{\gridD}{\raisebox{-2pt}{\tikz{\fill[gray!50] (0,0) rectangle (0.2,0.2);\draw[step=0.2] (0,0) grid (.2,.4);}}}
 \newcommand{\gridU}{\raisebox{-2pt}{\tikz{\fill[gray!50] (0,0.2) rectangle (0.2,0.4);\draw[step=0.2] (0,0) grid (.2,.4);}}}
+\newcommand{\gridNSet}{%
+    \{\,%
+    \begin{tikzpicture}
+        \useasboundingbox (0,0.1) rectangle (0.2,0.3);
+        \draw[step=0.2] (0,0) grid (.2,.4);
+    \end{tikzpicture}
+    \,\}
+}
+\newcommand{\gridDSet}{%
+    \{\,%
+    \begin{tikzpicture}
+    \useasboundingbox (0,0.1) rectangle (0.2,0.3);
+    \fill[gray!50] (0,0) rectangle (0.2,0.2);
+    \draw[step=0.2] (0,0) grid (.2,.4);
+    \end{tikzpicture}
+    \,\}
+}
+\newcommand{\gridUSet}{%
+    \{\,%
+    \begin{tikzpicture}
+        \useasboundingbox (0,0.1) rectangle (0.2,0.3);
+        \fill[gray!50] (0,0.2) rectangle (0.2,0.4);\draw[step=0.2] (0,0) grid (.2,.4);
+    \end{tikzpicture}
+    \,\}
+}
 
 \newcommand\ptedge[4]{
   \draw ($#1 + (0.5, -1.3) + #2$)..%
@@ -65,3 +90,9 @@
 \newcommand{\iestep}[2]{\stackrel{\mathbf{#1}_{#2}}{\ietrans}}
 
 \newcommand{\authcite}[1]{\citeauthor{#1} \cite{#1}}
+
+%\newcommand{\idop}{\mathbf{1}^\circ}% <-- old, replaced
+\DeclareFontFamily{U}{FdSymbolA}{}
+\DeclareFontShape{U}{FdSymbolA}{m}{n}{<-> s * FdSymbolA-Book}{}
+\DeclareSymbolFont{fdsymb}{U}{FdSymbolA}{m}{n}
+\DeclareMathSymbol{\idop}{\mathrel}{fdsymb}{"6E}

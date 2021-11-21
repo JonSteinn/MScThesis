@@ -1,0 +1,18 @@
+\coverchapter{Strategies for TileScope}\label{ch:strats}
+This chapter introduces three new strategies for TileScope, column reverse, column permutation and sliding. The first two, although perfectly valid strategies on their own, are used to extend sliding to any columns. The sliding strategy, as previously mentioned, allowed for the first discovery of a specification for $\Av{1432}$ by TileScope. 
+
+Using a specification for $\Av{1234}$ discovered by TileScope and applying the same strategies at every step starting with $\Av{1432}$, we had a matching tree except for one tiling that we failed to expand in the same manner as the one for $\Av{1234}$. By looking at the tree we had created from the $\Av{1432}$ root, we could see what tiling was needed instead of the one we failed to expand in order to complete the specification in the same way. This pair of tilings, seen in \FigureRef{fig:slidepair}, whose inconspicuous equivalence we failed to disprove, is the motivation for the sliding strategy. The process of applying the same strategies to another root further motivated the automated bijection search in Chapters \ref{ch:parallel}, \ref{ch:pbijection} and \ref{ch:search}.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/slidepair}
+    \caption{The pair of tilings that motivated the sliding strategy. The one above is the one encountered when mimicking the strategies of a specification for $\Av{1234}$ to a $\Av{1432}$ root while the one below is the one we needed to have identical specification in terms of strategies and structure.}
+    \label{fig:slidepair}
+\end{figure}
+
+\section{Column reverse}
+\input{chapters/03_1_crev}
+\section{Column permutation}
+\input{chapters/03_2_cperm}
+\section{Sliding}
+\input{chapters/03_3_slide}

@@ -1,14 +1,14 @@
 \coverchapter{Parallel bijections}\label{ch:pbijection}
 
-Given an object of a root class in a specification, we need a systematic way of breaking it down into objects of terminal classes and given such objects of terminal classes, a systematic way to reconstruct the object of the root class. The idea behind our bijection is fairly simple. We take an object belonging to the root of a specification, break it down and reconstruct it with a parallel specification.
+Given an object of a root class in a specification, we need a systematic way of breaking it down into objects of terminal classes and given such objects of terminal classes, a systematic way to reconstruct the object of the root class. The idea behind our bijection is simple. We take an object belonging to the root of a specification, break it down and reconstruct it with a parallel specification.
 
 Let $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ be a specification. In order for us to achieve this bijection, every rule $L_i \cong R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$ must be accompanied by a bijection between $L_i$ and $R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$. A specification along with such a collection of bijections is said to be \emph{parsable}.
 
-Take for example a rule $\mathcal{C} \cong \mathcal{C}^{(1)} \times \mathcal{C}^{(2)}$. Any bijection for this rule would map an object of $\mathcal{C}$ to a pair of objects $(c_1,c_2)$ with $c_1 \in \mathcal{C}^{(1)}$ and $c_2 \in \mathcal{C}^{(2)}$. It is not as simple for disjoint union as the object will belong to exactly one of the resulting classes. Suppose $\mathcal{C} \cong \mathcal{C}^{(1)} \sqcup \mathcal{C}^{(2)}$ and we have an object $c\in\mathcal{C}$ and a bijection $\phi$ for this rule, how does $\phi(c)$ look exactly? If this was just a typical set union, the bijection would be the identity map but there would be no information about which set the mapped element belongs to. Unique colors, $m_1$ and $m_2$, are used to mark the elements in \authcite{flajolet:ac}, that is
+Take for example a rule $\mathcal{C} \cong \mathcal{C}^{(1)} \times \mathcal{C}^{(2)}$. Any bijection for this rule would map an object of $\mathcal{C}$ to a pair of objects $(c_1,c_2)$ with $c_1 \in \mathcal{C}^{(1)}$ and $c_2 \in \mathcal{C}^{(2)}$. It is not as simple for disjoint union as the object will belong to exactly one of the resulting classes. Suppose $\mathcal{C} \cong \mathcal{C}^{(1)} \sqcup \mathcal{C}^{(2)}$ and we have an object $c\in\mathcal{C}$ and a bijection $\phi$ for this rule, how does $\phi(c)$ look exactly? If this was set union, the bijection would be the identity map but there would be no information about which set the mapped element belongs to. Unique colors, $m_1$ and $m_2$, are used to mark the elements in \authcite{flajolet:ac}, that is
 \[
     \mathcal{C}^{(1)} \sqcup \mathcal{C}^{(2)} = \left(\set{m_1} \times \mathcal{C}^{(1)}\right) \cup \left(\set{m_2} \times \mathcal{C}^{(2)}\right).
 \]
-This way, $\phi(c)$ would be a pair of a color and an element in $\mathcal{C}^{(1)} \cup \mathcal{C}^{(2)}$. We propose a slightly different approach, which ultimately achieves the same thing. Instead of marking with colors, we mark with edges from the specification graph. We further extend this marking to any constructor. The bijective nature of the map remains as the edges are uniquely determined but will need some trivial transformation for elements to belong to the original set.
+This way, $\phi(c)$ would be a pair of a color and an element in $\mathcal{C}^{(1)} \cup \mathcal{C}^{(2)}$. We propose a different approach, which ultimately achieves the same thing. Instead of marking with colors, we mark with edges from the specification graph. We further extend this marking to any constructor. The bijective nature of the map remains as the edges are uniquely determined but will need some trivial transformation for elements to belong to the original set.
 
 Given a specification $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ accompanied by a collection of bijections for each of its rules, we refer to $(\phi_1,\phi_2,\dotsc,\phi_k)$ as its \emph{parser} where $\phi_i$ maps an element of $L_i$, to an element of $R_{i1} \circ_i R_{i2} \circ_i \dotsm \circ_i R_{iD_i}$, using the corresponding bijection extended with the corresponding edge labels. If we look at the specification for $\Av{132}$ with the specification graph from \FigureRef{fig:specgraph132} and let $(\phi_1,\phi_2)$ be its parser, then we have $\phi_1(\varepsilon) = (\varepsilon, 1)$, $\phi_1(321) = (321, 2)$ and 
 \[
@@ -71,7 +71,7 @@ Suppose we start with the set of terminal endings from $\omega_{\spec{C}}(\pi)$ 
 \begin{align*}
     P = T(\omega_{\spec{C}}(\pi)) = \{&(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),\\ &(\varepsilon,25251), (1,232524), (\varepsilon,2325231), (\varepsilon,2325251)\}.
 \end{align*}
-Now we have $\textsf{sib}(P) = \set{(\varepsilon,2325251)}$ and the next step in the algorithm will just replace $(\varepsilon,2325251)$ with $(\varepsilon,232525)$. The same applies for the next step, replacing $(\varepsilon,2325231)$ with $(\varepsilon,232523)$. At this point we have
+Now we have $\textsf{sib}(P) = \set{(\varepsilon,2325251)}$ and the next step in the algorithm will replace $(\varepsilon,2325251)$ with $(\varepsilon,232525)$. The same applies for the next step, replacing $(\varepsilon,2325231)$ with $(\varepsilon,232523)$. At this point we have
 \begin{align*}
     P = \{&(1,24), (1,2324), (1,2524), (\varepsilon,23231), (\varepsilon,25231),\\ &(\varepsilon,25251), (1,232524), (\varepsilon,232523), (\varepsilon,232525)\}.
 \end{align*}
@@ -114,7 +114,7 @@ As an example we will look at the specifications $\spec{C}$ and $\spec{D}$ for $
     \begin{matrix}\\ \\ \\ \\,\end{matrix}
     \begin{pmatrix}
         \sqcup\\
-        \mathbf{1}^\circ\\
+        \idop\\
         \times\\
         \sqcup\\
         \times
@@ -142,7 +142,7 @@ and
     \begin{matrix}\\ \\ \\ \\,\end{matrix}
     \begin{pmatrix}
         \sqcup\\
-        \mathbf{1}^\circ\\
+        \idop\\
         \times\\
         \sqcup\\
         \times
@@ -170,7 +170,7 @@ where the rules in both are (in order) top most point placement, row and column 
     \label{tab:parmapex}
 \end{table}
 
-The specification graphs for these two specifications are shown in \FigureRef{fig:avexspecgraphs}. Their matching order are shown in \TableRef{tab:avexmatchingorder}. Parallel specifications are usually not this similar when the specification contains more classes but for demonstrational purposes we chose specifications with few classes which are most often quite similar.
+The specification graphs for these two specifications are shown in \FigureRef{fig:avexspecgraphs}. Their matching order are shown in \TableRef{tab:avexmatchingorder}. Parallel specifications can be dissimilar in structure when the number of classes grows. For demonstrational purposes we chose specifications with few classes that are prone to result in similarly structured specifications.
 
 \begin{figure}[ht!]
     \centering
@@ -186,7 +186,7 @@ The specification graphs for these two specifications are shown in \FigureRef{fi
     \label{tab:avexmatchingorder}
 \end{table}
 
-Since we are working with tilings, the objects we map are gridded permutations. The root classes only have a single cell so the bijection to permutation is trivial. Let $\pi=132^{(0,0)} \in \mathcal{C}^{(1)}$. As can be seen in the upper tree of \FigureRef{fig:mapexap}, its atomic partitioning is 
+Since we are working with tilings, the objects we map are gridded permutations. The root classes only have a single cell so the bijection to permutations is trivial. Let $\pi=132^{(0,0)} \in \mathcal{C}^{(1)}$. As can be seen in the upper tree of \FigureRef{fig:mapexap}, its atomic partitioning is 
 \[
     \omega_{\spec{C}}(\pi) = \set{235, 236(10), 234235,236897,2342341,2342367}.
 \]
@@ -242,7 +242,7 @@ and
 \[
     \mathcal{T}_2 = ((1,1),\set{123^{(0,0)}}, \emptyset).
 \]
-Any gridded permutation in $\textsf{Grid}(\mathcal{T}_1)$ is a permutation from $\Av{123}$ spread across the first two cells in all possible ways. They all map to their underlying permutation within the single cell of $\mathcal{T}_2$. The elements that map to the same element can be thought of as the underlying permutation with a vertical line drawn between its points in all possible ways as demonstrate in \TableRef{tab:fuseline}. We can use the index of the line that splits them and $<$ as a binary relation and that makes the set of elements that map to the same element a strictly totally ordered finite set for all such sets within $\textsf{Grid}(\mathcal{T}_1)$.
+Any gridded permutation in $\textsf{Grid}(\mathcal{T}_1)$ is a permutation from $\Av{123}$ spread across the first two cells in all possible ways. They all map to their underlying permutation within the single cell of $\mathcal{T}_2$. The elements that map to the same element can be thought of as the underlying permutation with a vertical line drawn between its points in all possible ways as demonstrated in \TableRef{tab:fuseline}. We can use the index of the line that splits them and $<$ as a binary relation and that makes the set of elements that map to the same element a strictly totally ordered finite set for all such sets within $\textsf{Grid}(\mathcal{T}_1)$.
 
 \begin{table}[ht!]
     \centering
@@ -297,14 +297,14 @@ is the Catalan generating function. Let $T_1$ and $T_2$ be the generating functi
 \[
     T_1(x,y) = \frac{yT(x,y)-T(x,1)}{y-1} = T_2(x,y).
 \]
-Since the generating functions are identical for both right hand sides, then there are equally many gridded permutations of length $n$ with $k$ points in cell $(1,0)$. For each such gridded permutation in either class there are a total of $k+1$ corresponding gridded permutations in their respective left hand sides that would map to it. Therefore a bijection does exist between the sets of elements that map to the same element in the two left hand sides. The rules are equivalent because the generating functions for the left hand sides are the same (given that the right hand sides are) and this bijection exists.
+Since the generating functions are identical for both right hand sides, then there are equally many gridded permutations of size $n$ with $k$ points in cell $(1,0)$. For each such gridded permutation in either class there are a total of $k+1$ corresponding gridded permutations in their respective left hand sides that would map to it. Therefore a bijection does exist between the sets of elements that map to the same element in the two left hand sides. The rules are equivalent because the generating functions for the left hand sides are the same (given that the right hand sides are) and this bijection exists.
 
 \section{The parallel bijection algorithm}
 The parallel map is implemented with a parse tree where the original object is broken down into atoms for the domain's specification. While doing so we follow along in the codomain's specification and then build back up to the root in the codomain's specifications. The matching order is used to pair the correct children.
 
 The algorithm can be seen in Algorithm~\ref{alg:parmap}. It uses the specifications as objects and assumes they have access to their root classes and rule look-ups $\mathscr{R}_1$ and $\mathscr{R}_2$, respectively, from their left hand side classes. Any rule object knows its classes and can map both forward ($\phi$) and backward ($\phi^{-1}$). The matching order will be a function that both filters out any empty classes and sorts a tuple of broken down objects and their corresponding classes by the matched order between the classes. In the case where a forward map only maps to a subset of its right hand side classes (e.g., disjoint union) then the objects for the classes that are not being used is set to \texttt{null}.
 
-Suppose we have an object of length $n$ and two parallel specifications where the one with more rules has $r$ rules. We will always reach an atom before exhausting every rule and thus reduce the object by at least one at that point. The worst time complexity of the map is therefore $\mathcal{O}(nr)$.
+Suppose we have an object of size $n$ and two parallel specifications where the one with more rules has $r$ rules. We will always reach an atom before exhausting every rule and thus reduce the object by at least one at that point. The worst time complexity of the map is therefore $\mathcal{O}(nr)$.
 
 \begin{algorithm}[ht!]
 \input{algs/map}

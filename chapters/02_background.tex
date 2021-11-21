@@ -4,24 +4,24 @@ A \emph{combinatorial class} is a set $\mathcal{C}$ and a size function $\mathca
 \[
     \mathcal{C}_n = \cset{c \in \mathcal{C}}{\text{size of $c$ is $n$}}
 \]
-is finite. We refer to an element of a combinatorial class, $c\in\mathcal{C}$, as a \emph{combinatorial object} and its size (or length) is denoted by $|c|$. The set of words over a finite alphabet is an example of a combinatorial class where the number of characters in the word serves as a size function.
+is finite. We refer to an element of a combinatorial class, $c\in\mathcal{C}$, as a \emph{combinatorial object} and its size is denoted by $|c|$. The set of words over a finite alphabet is an example of a combinatorial class where the number of characters in the word serves as a size function.
 
-A \emph{bijection} between sets $A$ and $B$ is an invertible function $f: A \mapsto B$ such that $a=f^{-1}(f(a))$ and $b=f(f^{-1}(b))$ for all $a\in A$ and $b \in B$. The existance of a bijection between sets $A$ and $B$ implies $|A|=|B|$. Suppose $A$ is the set of binary strings of length $n$ avoiding consecutive 1's and $B$ the set of subsets of $\setn$ containing no consecutive numbers. By mapping each binary string $\wordseq{b}{n} \in A$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
+A \emph{bijection} between sets $A$ and $B$ is an invertible function $f: A \mapsto B$ such that $a=f^{-1}(f(a))$ and $b=f(f^{-1}(b))$ for all $a\in A$ and $b \in B$. The existance of a bijection between sets $A$ and $B$ implies $|A|=|B|$. Suppose $A$ is the set of binary strings of size $n$ avoiding consecutive 1's and $B$ the set of subsets of $\setn$ containing no consecutive numbers. By mapping each binary string $\wordseq{b}{n} \in A$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
 
 \begin{figure}[htbp]
     \centering
     \input{graphics/bijection_example}
-    \caption{A bijection between binary strings of length 3 avoiding consecutive 1's and subsets of $\set{1,2,3}$ containing no consecutive numbers.}
+    \caption{A bijection between binary strings of size 3 avoiding consecutive 1's and subsets of $\set{1,2,3}$ containing no consecutive numbers.}
     \label{fig:bijection_example}
 \end{figure}
 
-Given a bijection $\phi$ between two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$, we say that $\phi$ is \emph{length preserving} if $|c| = |\phi(c)|$ for all $c\in\mathcal{C}$. Suppose $\mathcal{C}$ is the set of binary strings that avoid consecutive 0's and $\mathcal{D}$ the set of binary strings that avoid consecutive 1's. The bijection that flips the bits in a binary string is a length preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. The bijection between the binary strings and subsets we mentioned earlier is not length preserving if cardinality is used as a size function for the subsets.
+Given a bijection $\phi$ between two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$, we say that $\phi$ is \emph{size preserving} if $|c| = |\phi(c)|$ for all $c\in\mathcal{C}$. Suppose $\mathcal{C}$ is the set of binary strings that avoid consecutive 0's and $\mathcal{D}$ the set of binary strings that avoid consecutive 1's. The bijection that flips the bits in a binary string is a size preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. 
 
 For a combinatorial class $\mathcal{C}$, the infinite sequence 
 \[
     |\mathcal{C}_0|, |\mathcal{C}_1|, |\mathcal{C}_2|,\dotsc,|\mathcal{C}_n|,\dotsc
 \]
-where each term counts the number of elements of a fixed length is called the \emph{counting seqeuence} of $\mathcal{C}$. It is the focal point of enumerative combinatorics. We might look for a formula for the terms, a recurrence relation, or an asymptotic equivalence. Another way to present the counting sequence is with a power series
+where each term counts the number of elements of a fixed size is called the \emph{counting seqeuence} of $\mathcal{C}$. It is the focal point of enumerative combinatorics. We might look for a formula for the terms, a recurrence relation, or an asymptotic equivalence. Another way to present the counting sequence is with a power series
 \[
     \sum_{i=0}^\infty |\mathcal{C}_i|z^i
 \]
@@ -30,28 +30,28 @@ called a \emph{generating function} and famously described as a ``clothesline on
     \sum_{i=0}^\infty f_iz^i =  z + z^2 + 2z^3 + 3z^4 + 5z^5 + 8z^6 + \dotsb = \frac{z}{1-z-z^2}.
 \]
 
-If two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$ share a counting sequence we say they are \emph{isomorphic}, denoted $\mathcal{C} \cong \mathcal{D}$. This is equivalent to the existence of a length preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. Isomorphism is an equivalence relation on the set of all combinatorial classes.
+If two combinatorial classes $\mathcal{C}$ and $\mathcal{D}$ share a counting sequence we say they are \emph{isomorphic}, denoted $\mathcal{C} \cong \mathcal{D}$. This is equivalent to the existence of a size preserving bijection between $\mathcal{C}$ and $\mathcal{D}$. The isomorphic relation is an equivalence relation on the set of all combinatorial classes.
 
-The \emph{symbolic method} in \authcite{flajolet:ac} describes how combinatorial classes can be constructed. To that end, they define \emph{constructors}, \emph{combinatorial rules} and \emph{combinatorial specifications}. We will demonstrate these concepts with an example. 
+The \emph{symbolic method} in \authcite{flajolet:ac} describes how combinatorial classes can be constructed. To that end, they define \emph{atoms}, \emph{constructors} and \emph{combinatorial specifications}. We will demonstrate these concepts, along with \emph{combinatorial rules}, with an example. 
 
-Consider a $2 \times n$ grid where each square can be raised or not as shown in \FigureRef{fig:raised_grid}. How many unique grids exist such that one can pass from left to right?
+Consider a $2 \times n$ with the latter number as its size, where each square can be raised or not, as shown in \FigureRef{fig:raised_grid}. How many unique grids exist such that one can pass from left to right?
 
 \begin{figure}[htbp]
     \centering
     \input{graphics/raised_grid}
-    \caption{A grid of length $5$ with three raised squares and a path from left to right.}
+    \caption{A grid of size $5$ with three raised squares and a path from left to right.}
     \label{fig:raised_grid}
 \end{figure}
 
-Let $G$ be the combinatorial class for passable grids. It is either the empty grid or contains at least one vertical slice. This is described by the admissible constructor disjoint union where a combinatorial class is split into nonintersecting parts. Now we have a combinatorial rule 
+Let $G$ be the combinatorial class for passable grids. It is either the empty grid or contains at least one vertical slice. This is described by the admissible constructor disjoint union where a combinatorial class is split into disjoint sets. Now we have a combinatorial rule 
 \[
     G \cong \set{\varepsilon} \sqcup G_{\geq 1},
 \]
-where $\varepsilon$ is the empty grid and $G_{\geq 1}$ is the set of passable grid with a positive length. In terms of generating functions this corresponds to addition, that is 
+where $\varepsilon$ is the empty grid and $G_{\geq 1}$ is the set of passable grid with a positive size. In terms of generating functions this corresponds to addition, that is 
 \[
     G(z) = 1 + G_{\geq1}(z).
 \] 
-Any valid grid consists of a combination of the vertical slices \gridN, \gridU\ and \gridD\ as one with both raised would block the path. We refer to a combinatorial object of length 1 as an \emph{atom}. The generating functions of the empty object and an atom are $1$ and $z$ respectively. Let $A$, $B$ and $C$ be the classes of passable grids starting with \gridN, \gridU\ and \gridD\ respectively and $D$ and $E$ the classes that can follow \gridU\ and \gridD\ respectively. Again we have a disjoint union 
+Any valid grid consists of a combination of the vertical slices \gridN, \gridU\ and \gridD\ as one with both raised would block the path. We refer to a combinatorial object of size 1 as an \emph{atom}. The generating functions of the empty object and an atom are $1$ and $z$ respectively. Let $A$, $B$ and $C$ be the classes of passable grids starting with \gridN, \gridU\ and \gridD\ respectively. Again we have a disjoint union 
 \[
     G_{\geq1} \cong A \sqcup B \sqcup C.
 \]
@@ -59,9 +59,9 @@ We define $\circ$ as the operator that prepends a vertical slice to all grids in
 \[
 X \times Y = \cset{(x,y)}{x\in X \text{ and } y \in Y}
 \]
-and in terms of generating functions corresponds to multiplication. Now we have 
+and in terms of generating functions corresponds to multiplication. Any passable grid can follow a vertical slice with neither square raised. Let $D$ and $E$ the classes that can follow \gridU\ and \gridD\ respectively. Now we have 
 \[
-    A \cong \gridN \circ G, \ B \cong \gridU \circ D \text{ and } C \cong \gridD \circ E.
+    A \cong \gridNSet \circ G, \ B \cong \gridUSet \circ D \text{ and } C \cong \gridDSet \circ E.
 \]
 Following \gridU\ can be anything that does not start by blocking the lower square, that is 
 \[
@@ -71,20 +71,20 @@ and symmetrically we have
 \[
     E \cong \set{\varepsilon} \sqcup C \sqcup A.
 \]
-Now we have our specification, a system of rules with each class on the left at most once, defining an unambiguous formal grammar as shown in \FigureRef{fig:gridtree}.
+Now we have our specification, a system of rules with each class on the left at most once, defining an unambiguous formal grammar as shown with a tree representation in \FigureRef{fig:gridtree}.
 
 \begin{figure}[htbp]
     \centering
     \input{graphics/tree_example}
-    \caption{The grammar for passable $2\times n$ grids.}
+    \caption{A tree representation of a formal grammar for passable $2\times n$ grids.}
     \label{fig:gridtree}
 \end{figure}
 
-This system of rules when interpreted with generating functions is a set of equations with functions as its unknowns. In our example we have
+This system of rules implies the set of equations on the generating functions. Solving
 \[
     \systeme*{G(z) = 1 + G_{\geq1}(z), G_{\geq1}(z) = A(z) + B(z) + C(z),A(z) = zG(z), B(z) = zD(z), C(z) = zE(z), D(z) = 1+B(z)+A(z), E(z) = 1+C(z)+A(z)}
 \]
-and solving for $G(z)$ gives 
+for $G(z)$ gives 
 \[
     G(z) = \frac{1+z}{1-2z-z^2}.
 \]
@@ -98,10 +98,10 @@ which corresponds to the number of grids for each size, e.g., there are 17 and 9
 \]
 This is not always the case and depends on the type of generating function we have.
 
-In the context of this thesis, we will usually refer to combinatorial classes as just classes and the same goes for combinatorial specifications and rules. We also assume all constructors to be admissible and all rules to entail isomorphism. 
+In the context of this thesis, we will refer to combinatorial classes as classes and the same goes for combinatorial specifications and rules. We also assume all constructors to be admissible and all rules to entail isomorphism. 
 
 \section{Permutations\label{sec:permutations}}
-A \emph{permutation} $\pi$ is a bijection between a set and itself. In our context, the set in question is $[n] = \setn$. We adopt a one line notation for permutations, $\pi = \perm{\pi}{n}$ where $\pi_i = j$ if $i$ maps to $j$. The permutation $1423$ maps $\{1,2,3,4\}$ to itself. This correspondence can be seen in \FigureRef{fig:perm_example} as well as a geometric representation of the permutation which displays the points $\cset{(i,\pi(i))}{i \in [n]}$ in the Cartesian plane.
+A \emph{permutation} $\pi$ is a bijection between a set and itself. In our context, the set in question is $[n] = \setn$. We adopt a one line notation for permutations, $\pi = \perm{\pi}{n}$ where $\pi_i = j$ if $i$ maps to $j$. This correspondence for the permutation $1423$ can be seen in \FigureRef{fig:perm_example} as well as its geometric representation which displays the points $\cset{(i,\pi(i))}{i \in [n]}$ in the Cartesian plane.
 
 \begin{figure}[htbp]
     \centering
@@ -110,11 +110,11 @@ A \emph{permutation} $\pi$ is a bijection between a set and itself. In our conte
     \label{fig:perm_example}
 \end{figure}
 
-A permutation on $[n]$ is said to be of length $n$ and $\mathcal{S}_n$ is the set of all permutations of length $n$. The set of permutations of length 3 is 
+A permutation on $[n]$ is said to be of size $n$ and $\mathcal{S}_n$ is the set of all permutations of size $n$. The set of permutations of size 3 is 
 \[
     \mathcal{S}_3 = \{123,132,213,231,312,321\}.
 \]
-There is a permutation of length $0$, namely the empty permutation, denoted $\varepsilon$. This is the unique map from $\emptyset$ to $\emptyset$. The set of all permutations is denoted by $\mathcal{S}$. It is a combinatorial class since $\mathcal{S}_n$ is finite for all $n\in\N$, containing $n!$ elements.
+There is a permutation of size $0$, namely the empty permutation, denoted $\varepsilon$. This is the unique map from $\emptyset$ to $\emptyset$. The set of all permutations is denoted by $\mathcal{S}$. It is a combinatorial class since $\mathcal{S}_n$ is finite for all $n\in\N$, containing $n!$ elements.
 
 Given a permutation $\pi = \perm{\pi}{n}$, its \emph{reverse} is
 \[
@@ -124,7 +124,7 @@ and its \emph{inverse} is
 \[
     \inv(\pi) = \pi^{-1} = \wordidx{\pi}{i}{n}
 \]
-where $\pi_{i_j} = k$ if $\pi_k = j$. The reverse of $132$ is $231$ and the inverse of $51324$ is $24351$. The reverse and inverse functions generate the dihedral group $D_4$, that is the symmetries of a square using the graphical representation of a permutation. We define these eight symmetry maps as $\sym_1,\sym_2,\dotsc,\sym_8$ as is shown in \TableRef{tab:permsym} which also includes an example for the permutation $1423$.
+where $\pi_{i_j} = k$ if $\pi_k = j$. The reverse of $132$ is $231$ and the inverse of $51324$ is $24351$. The reverse and inverse functions generate the dihedral group $D_4$, that is the symmetries of a square using the graphical representation of a permutation. We define these eight symmetry maps as $\sym_1,\sym_2,\dotsc,\sym_8$ as is shown in \TableRef{tab:permsym} which includes an example for the permutation $1423$ and its symmetries.
 
 \begin{table}[htbp]
     \centering
@@ -145,7 +145,7 @@ if $x_{i_1} < x_{i_2} < \dotsm < x_{i_n}$. Suppose $M=\set{1,5,2}$, then $\sort(
 \]
 if $\sort(S) = (i_1,i_2,\dotsc,i_{|S|})$. Given an indexed subsequence $\gamma$ of a permutation $\pi \in \mathcal{S}_n$, its \emph{standardization}, $\st{\gamma}$, is the sequence where the $i^\text{th}$ largest entry has been replaced by $i$. Let $\pi = 41253 \in \mathcal{S}_5$ and $S=\{1,3,4\}$, then $\st{\sseq{S}{\pi}} = \st{425} = 213$.
 
-Given two permutations $\pi \in \mathcal{S}_n$ and $\sigma \in \mathcal{S}_k$ we say that $\pi$ \emph{contains} $\sigma$, denoted $\contains{\pi}{\sigma}$, if there exists a subset $S \subseteq [n]$ such that $\st{\sseq{S}{\pi}} = \sigma$. If $\pi$ does not contain $\sigma$, it \emph{avoids} it. In the context of containment, we usually refer to the contained permutation as a (\emph{classical}\footnote{There are other types of patterns that we do not concern ourselves with in this thesis.}) \emph{pattern} and that permutations contain or avoid a pattern. The permutation $356214$ contains the pattern $4213$ since
+Given two permutations $\pi \in \mathcal{S}_n$ and $\sigma \in \mathcal{S}_k$ we say that $\pi$ \emph{contains} $\sigma$, denoted $\contains{\pi}{\sigma}$, if there exists a subset $S \subseteq [n]$ such that $\st{\sseq{S}{\pi}} = \sigma$. If $\pi$ does not contain $\sigma$, it \emph{avoids} it. In the context of containment, we refer to the contained permutation as a (\emph{classical}\footnote{There are other types of patterns that we do not concern ourselves with in this thesis.}) \emph{pattern} and that permutations contain or avoid a pattern. The permutation $356214$ contains the pattern $4213$ since
 \[
     \st{\sseq{\{2, 4, 5, 6\}}{356214}} = \st{5214} = 4213.
 \]
@@ -166,13 +166,13 @@ A set of permutations $\Pi$ is \emph{closed downwards} with respect to containme
 \[
     \bigcup_{\pi \in \Pi}\cset{\sigma}{\contains{\pi}{\sigma}} \subseteq \Pi.
 \]
-A set of permutations that is closed downwards is called a \emph{permutation class}. The set $\{\varepsilon, 1, 12, 123\}$ is closed downwards since all patterns contained in any of its elements belong to the set. We can extend this set to include all increasing permutations, $\set{\varepsilon, 1, 12, 123, 1234, \dotsc}$ and it is still closed downwards. Both sets are therefore permutation classes. Isorphism between permutation classes is often called \emph{Wilf equivalence} and their equivalence classes are called \emph{Wilf classes}. 
+A set of permutations that is closed downwards is called a \emph{permutation class}. The set $\{\varepsilon, 1, 12, 123\}$ is closed downwards since all patterns contained in any of its elements belong to the set. We can extend this set to include all increasing permutations, $\set{\varepsilon, 1, 12, 123, 1234, \dotsc}$ and it is still closed downwards. Both sets are therefore permutation classes. Isomorphic permutation classes are said to be \emph{Wilf equivalent} and their equivalence classes are called \emph{Wilf classes}.
 
 A permutation $\pi$ \emph{avoids} a set of permutations $\Pi$ if it avoids every $\sigma \in \Pi$. It \emph{contains} $\Pi$ if it does not avoid it, that is, it contains at least one permutation of $\Pi$. Let 
 \[
     \Av{\Pi} = \cset{\pi \in \mathcal{S}}{\pi \text{ avoids } \Pi}.
 \]
-We may abuse this notation by omitting set brackets, writing $\Av{\sigma_1,\sigma_2}$ instead of $\Av{\set{\sigma_1,\sigma_2}}$. Define \[
+We simplify this notation by omitting set brackets, writing $\Av{\sigma_1,\sigma_2}$ instead of $\Av{\set{\sigma_1,\sigma_2}}$. Define \[
     \Avn{n}{\Pi} = \cset{\pi \in \Av{\Pi}}{|\pi| = n}
 \]
 for $n\in\N$.
@@ -194,15 +194,19 @@ and
 \[
     \sym(\mathcal{B}) = \cset{\sym_i(\mathcal{B})}{i \in [8]}.
 \]
-For any basis $\mathcal{B}$, the \emph{symmetry class} of $\Av{\mathcal{B}}$ is $\cset{\Av{B}}{B \in \sym(\mathcal{B})}$. The symmetry class of any permutation class is a subset of its Wilf class. As symmetries are considered trivial bijections we usually only concern ourselves with the lexicographically minimal representation of each symmetry class. For example, there are seven symmetry classes and three Wilf classes for singleton bases in $\mathcal{S}_4$. They are shown in \TableRef{tab:wilfcls4}.
+For any basis $\mathcal{B}$, the \emph{symmetry class} of $\Av{\mathcal{B}}$ is $\cset{\Av{B}}{B \in \sym(\mathcal{B})}$. The symmetry class of any permutation class is a subset of its Wilf class. As symmetries are considered trivial bijections we only concern ourselves with the lexicographically minimal representation of each symmetry class. For example, there are seven symmetry classes and three Wilf classes for singleton bases in $\mathcal{S}_4$. They are shown in \TableRef{tab:wilfcls4}.
 
 \begin{table}[htbp]
     \centering
     \input{tables/1x4wilf}
-    \caption{The seven lexicographically minimal representations of symmetry classes of permutation classes avoiding a single classical pattern of length $4$. They are grouped into three Wilf classes.}
+    \caption{The seven lexicographically minimal representations of symmetry classes of permutation classes avoiding a single classical pattern of size $4$. They are grouped into three Wilf classes.}
     \label{tab:wilfcls4}
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% OMITTED SECTION ON INSERTION ENCODING %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
 Starting from the empty permutation we can generate any permutation by inserting a new maximum element. This procedure is called the \emph{evolution} of a permutation. One way of achieving this is with \emph{insertion encoding} where we restrict where our new maximum element can be inserted with \emph{slots} marked by $\slot$ and transition from a sequence containing slots to another with one of the transitions shown in \TableRef{tab:ietrans}.
 
 \begin{table}[htbp]
@@ -221,7 +225,9 @@ The insertion encoding of the permutation $615234$ is $\mathbf{m}_1\mathbf{m}_2\
     &\iestep{f}{2} \slot\,1\,5\,2\,3\,4\\
     &\iestep{f}{1} 6\,1\,5\,2\,3\,4.
 \end{align*}
-A more detailed definition can be found in \authcite{albert2005insertion}. Given a permutation class $\Av{\mathcal{B}}$, the set of insertion encodings of all its permutation make up the language of the class. If this language is regular\footnote{Recognized by a finite automaton.} we say that the class is \emph{regular insertion encodable}. TileScope was shown to be able to find specifications for all regular insertion encodable classes by \citeauthor{BeanPhd:phd} \cite[Theorem  5.1.3]{BeanPhd:phd}.
+A more detailed definition can be found in . Given a permutation class $\Av{\mathcal{B}}$, the set of insertion encodings of all its permutation make up the language of the class. If this language is regular\footnote{Recognized by a finite automaton.} we say that the class is \emph{regular insertion encodable}. TileScope was shown to be able to find specifications for all regular insertion encodable classes by \citeauthor{BeanPhd:phd} \cite[Theorem  5.1.3]{BeanPhd:phd}.
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Gridded permutations\label{sec:griddedpermutations}}
@@ -229,7 +235,7 @@ A \emph{cell} $(a,b) \in \N^2$ is the region within $[0,\infty)^2$ defined by $[
 \[
     (\pi,P) = (\perm{\pi}{n}, ((a_1,b_1),(a_2,b_2),\dotsc,(a_n,b_n)))
 \]
-where $P$ is an $n$-tuple of cells and $\pi$ is a permutation is called a \emph{gridded permutation} of length $n$ if for all $i,j \in [n]$, $i<j$ implies $a_i \leq a_j$ and $\pi_i < \pi_j$ implies $b_i \leq b_j$. A more detailed definition is given by \authcite{albert2012geometric}. We refer to $P$ as the \emph{positions} of the gridded permutation and $\pi$ as the \emph{underlying permutation}. We use a one line notation for gridded permutations 
+where $P$ is an $n$-tuple of cells and $\pi$ is a permutation is called a \emph{gridded permutation} of size $n$ if for all $i,j \in [n]$, $i<j$ implies $a_i \leq a_j$ and $\pi_i < \pi_j$ implies $b_i \leq b_j$. A more detailed definition is given by \authcite{albert2012geometric}. We refer to $P$ as the \emph{positions} of the gridded permutation and $\pi$ as the \emph{underlying permutation}. We use a one line notation for gridded permutations 
 \[
     \pi = \pi_1^{(a_1,b_1)}\pi_2^{(a_2,b_2)}\dotsb\pi_n^{(a_n,b_n)}
 \]
@@ -242,13 +248,13 @@ where we can exclude all but the last position of consecutive occurrences of the
     \label{fig:gridded_perm}
 \end{figure}
 
-We extend the definition of indexed subsequences to gridded permutations so the sequence produced, $\sseq{S}{\pi}$, contains elements of the underlying permutation and positions. Given this extension, we can also extend the standardization of an indexed subsequence of a gridded permutation to be applied only to the underlying permutation. For example, given a gridded permutation $\pi = 1^{(0,0)}5^{(1,2)}2^{(2,0)}43^{(2,1)}$ and $S=\set{1,2,5}$ we have
+We extend the definition of indexed subsequences to gridded permutations so the sequence produced, $\sseq{S}{\pi}$, contains elements of the underlying permutation and positions. Given this extension, we can extend the standardization of an indexed subsequence of a gridded permutation to be applied only to the underlying permutation. For example, given a gridded permutation $\pi = 1^{(0,0)}5^{(1,2)}2^{(2,0)}43^{(2,1)}$ and $S=\set{1,2,5}$ we have
 \[
 \st{\sseq{S}{\pi}} = \st{1^{(0,0)}5^{(1,2)}3^{(2,1)}} = 1^{(0,0)}3^{(1,2)}2^{(2,1)}.
 \]
 Using the extended definition of standardization we extend containment and avoidance to gridded permutations, for both individual and sets of gridded permutations. For example, the gridded permutation $1^{(0,0)}5^{(1,2)}2^{(2,0)}43^{(2,1)}$ contains $1^{(0,0)}2^{(2,0)}3^{(2,1)}$ but avoids $1^{(0,0)}23^{(2,1)}$.
 
-Let $\mathcal{G}$ be the set of all gridded permutations and $\mathcal{G}_n$ its subset with only gridded permutations of length $n$. The set $\mathcal{G}$ is not a combinatorial class since $\mathcal{G}_n$ is infinite for all $n \in \Z^+$, having infinitely many cells to choose as positions. If we restrict the choice of cells to be finite, then so are the gridded permutations we can form. Let $\mathcal{G}^{(c,r)}$ be the set of gridded permutation with positions in 
+Let $\mathcal{G}$ be the set of all gridded permutations and $\mathcal{G}_n$ be the set of gridded permutations of size $n$. The set $\mathcal{G}$ is not a combinatorial class since $\mathcal{G}_n$ is infinite for all $n \in \Z^+$, as there are infinitely many cells to choose as positions. If we restrict the choice of cells to be finite, then so are the gridded permutations we can form. Let $\mathcal{G}^{(c,r)}$ be the set of gridded permutation with positions in 
 \[
 \{0,1,\dotsc,c-1\} \times \{0,1,\dotsc,r-1\}
 \]
@@ -283,7 +289,7 @@ are called \emph{dimension}, \emph{obstructions} and \emph{requirements} respect
     \label{fig:tiling_example}
 \end{figure}
 
-Typically, when we want to enumerate $\Av{132}$ we start with a disjoint union constructor since a permutation in $\Av{132}$ is either empty or contains a largest point. If it contains a largest point, it must still avoid 132 on either side. Furthermore, the elements to the left of the largest point must be greater than those to its right or you have an occurrence of $132$ with the largest point. This is important since it allows us to uniquely map the (standardized) elements to the right of the largest point from the rule. Now we have a specification
+Typically, when we want to enumerate $\Av{132}$ we start with a disjoint union constructor since a permutation in $\Av{132}$ is either empty or contains a topmost point. If it contains a topmost point, it must still avoid 132 on either side. Furthermore, the elements to the left of the topmost point must be greater than those to its right or you have an occurrence of $132$ with the topmost point. This is important since it allows us to uniquely map the (standardized) elements to the right of the topmost point from the rule. Now we have a specification
 \begin{align*}
 \Av{132} &\cong \set{\varepsilon} \sqcup \textsf{Av}_{\geq1}(132)\\
 \textsf{Av}_{\geq1}(132) &\cong \Av{132} \times \set{\point{0.1}} \times \Av{132}
@@ -307,15 +313,66 @@ Combinatorial Exploration \cite{css} is a domain agnostic specification searcher
 To avoid tautologies, the searcher gives classes equivalence labels and tracks rules in terms of parent and children pairs as equivalence labels. The rules within a single equivalence label may or may not be equivalence rules. Any rule with a single class on its right hand side that can result in a tautology may be contained in an equivalence label with nonequivalent classes. When a specification is found and extracted from the universe, any sequence of equivalence rules is merged into a single rule.
 
 \section{TileScope}
-TileScope \cite{tiling} is an implementation of Combinatorial Exploration for tilings. The root class usually has a single cell and no requirements and therefore a direct correspondence to a permutation class. The library also utilizes Permuta \cite{permuta}, a general permutation library. Most of the strategies TileScope uses can be found in \authcite{BeanPhd:phd}. We will explain those that are not.
+TileScope \cite{tiling} is an implementation of Combinatorial Exploration for tilings. A root class with a single cell and no requirements is in direct correspondence to a permutation class. The library utilizes Permuta \cite{permuta}, a general permutation library. Most of the strategies TileScope uses can be found in \authcite{BeanPhd:phd}. We will give a brief explanation of those that are not as well as introduce new strategies in Chapter~\ref{ch:strats}. The strategies introduced in this thesis enabled TileScope to discover a specification for $\Av{1432}$.
 
-\subsection{Column reverse}
-\input{chapters/02_1_crev}
-\subsection{Column permutation}
-\input{chapters/02_2_cperm}
-\subsection{Sliding}
-\input{chapters/02_3_slide}
+
 \subsection{Assumptions}
-\input{chapters/02_4_assumption}
+There are two strategies involving assumptions. One adds assumptions and the other rearranges them. Assumptions represent catalytic variables and are used to track the number of points in cells. 
+
+Let $\mathcal{T}_1 = ((2,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},123^{(1,0)}},\emptyset)$ and suppose $\mathcal{T}_2$ is $\mathcal{T}_1$ with the assumption that we can count the number of points in $(0,0)$ as shown in \FigureRef{fig:addassumption}. Let $T_1(x)$ and $T_2(x,y)$ be the generating function for $\mathcal{T}_1$ and $\mathcal{T}_2$ respectively, then $T_1(x) = x^0 + 2x^1 + 5x^2 + 14x^3 + 42x^4 + \dotsm$ while $T_2(x,y)$ is
+\begin{align*}
+    &\ x^0y^0\\
+    + &\ x^1y^0 + x^1y^1\\
+    + &\ 2x^2y^0 + 2x^2y^1 + x^2y^2\\
+    + &\ 5x^3y^0 + 5x^3y^1 + 3x^3y^2 + x^3y^3\\
+    + &\ 14x^4y^0 + 14x^4y^1 + 9x^4y^2 + 4x^4y^3 + x^4y^4\\
+    + &\ \dotsm  
+\end{align*}
+and $T_1(x) = T_2(x,1)$.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/addass}
+    \caption{The tiling $((2,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},123^{(1,0)}},\emptyset)$ with and without an assumption.}
+    \label{fig:addassumption}
+\end{figure}
+
+When the set of cells of one assumption is a subset of the set of cells of another we can rearrange them. \FigureRef{fig:assrear} demonstrates assumption rearrangement for the tiling $((3,1),\set{12^{(0,0)},1^{(0,0)}23^{(1,0)},12^{(1,0)}3^{(2,0)}},\emptyset)$ where the left one has $y$ as a catalytic variable for points in $(0,0)$ and $z$ for points in either $(0,0)$ or $(1,0)$ while in the right one $z$ only tracks those in $(1,0)$ after the assumptions have been rearranged. If $T_1(x,y,z)$ is the generating function before the rearrangement and $T_2(x,y,z)$ after then $T_1(x,y,z) = T_2(x,yz,z)$.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/reaass}
+    \caption{By rearranging the assumptions on the left we get the assumptions on the right.}
+    \label{fig:assrear}
+\end{figure}
+
+
 \subsection{Fusion}
-\input{chapters/02_5_fusion}
+The fusion strategy tries to merge adjacent columns or rows in a tiling. To simplify our explanation we will look at how it works for a single row (or a single column) tiling as they are the most common scenario where fusion is applied. It is possible to fuse columns $c$ and $c+1$ in a tiling $\mathcal{T}$ if for every gridded permutation
+\[
+\alpha \alpha_1^{(c,0)}\alpha_2^{(c,0)}\dotsm\alpha_i^{(c,0)}\beta_1^{(c+1,0)}\beta_2^{(c+1,0)}\dotsm\beta_j^{(c+1,0)} \beta 
+\]
+in $\textsf{Grid}(\mathcal{T})$, where the subsequences $\alpha$ and $\beta$ are outside of said columns, the class $\textsf{Grid}(\mathcal{T})$ also contains
+\begin{align*}
+    &\alpha\alpha_1^{(c,0)}\alpha_2^{(c,0)}\dotsm\alpha_i^{(c,0)}\beta_1^{(c,0)}\beta_2^{(c,0)}\dotsm\beta_j^{(c,0)}\beta,\\
+    &\alpha\alpha_1^{(c,0)}\alpha_2^{(c,0)}\dotsm\alpha_i^{(c,0)}\beta_1^{(c,0)}\beta_2^{(c,0)}\dotsm\beta_j^{(c+1,0)}\beta,\\
+    &\hspace{2.5cm}\vdots\\
+    &\alpha\alpha_1^{(c+1,0)}\alpha_2^{(c+1,0)}\dotsm\alpha_i^{(c+1,0)}\beta_1^{(c+1,0)}\beta_2^{(c+1,0)}\dotsm\beta_j^{(c+1,0)}\beta.
+\end{align*}
+An example of a fusable tiling is seen in \FigureRef{fig:fusable}. The rules, in terms of generating functions, depend on the tiling's assumptions. Some common scenarios are shown in \TableRef{tab:fusegf}
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/fusion}
+    \caption{A tiling where the fusion strategy applies.}
+    \label{fig:fusable}
+\end{figure}
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/fusion_types}
+    \caption{The fusion rules for some common assumptions in terms of generating functions.}
+    \label{tab:fusegf}
+\end{table}
+
+TileScope requires the fusion strategy to find specifications for multiple classes, e.g., $\Av{123}$, $\Av{1234}$, $\Av{1243}$ and $\Av{1432}$.

@@ -1,5 +1,5 @@
 \begin{definition}\label{def:rrgp}
-Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ and define its \emph{column reverse} for $[a,b]$, where $a,b\in\N$ and $a\leq b$, as the mapping $\textsf{rev}_{[a,b]}$ where $\textsf{rev}_{[a,b]}(\pi)$ is $\pi$ where its longest subsequence whose columns all belong to interval
+For a gridded permutation $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n$ define its \emph{column reverse} for $[a,b]$, where $a,b\in\N$ and $a\leq b$, as the mapping $\textsf{rev}_{[a,b]}$ where $\textsf{rev}_{[a,b]}(\pi)$ is $\pi$ where its longest subsequence whose columns all belong to interval
 \[
 \pi_{i}^{(x_i,y_i)}\pi_{i+1}^{(x_{i+1},y_{i+1})}\dotsm\pi_{i+k}^{(x_{i+k},y_{i+k})}
 \]
@@ -48,6 +48,10 @@ Let $\set{i,i+1,\dotsc,i+k}$ be the indices of elements of $\pi$ with columns in
 which shows that $\textsf{rev}_{[a,b]}(\sigma)$ is the standardization of a subsequence of $\textsf{rev}_{[a,b]}(\pi)$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OLD WAY - split into lem&prop %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
 \begin{lemma}\label{lem:crevgrid}
 Let $\mathcal{T}$ be a tiling and $\pi \in \textsf{Grid}(\mathcal{T})$, then $\textsf{rev}_{[a,b]}(\pi)\in\textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))$.
 \end{lemma}
@@ -68,4 +72,23 @@ with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal
     \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T})) \text{ and } \cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))}
 \]
 with the latter being a subset of $\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(\mathcal{T})))=\textsf{Grid}_n(\mathcal{T})$ and therefore $|\textsf{Grid}_n(\mathcal{T})| \geq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ which shows that $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$.
+\end{proof}
+\end{comment}
+%%%%%%%%%%%%%%%%%%
+% END OF OLD WAY %
+%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%
+%% New way %%
+%%%%%%%%%%%%%
+\begin{proposition}\label{prop:rrtil}
+Let $\mathcal{T}$ be a tiling, then $|\textsf{Grid}_n(\mathcal{T})| = |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$ for all $n\in\N$.
+\end{proposition}
+\begin{proof}
+By Lemma \ref{lem:crevcontain} all occurrences of requirements are preserved so the only way that $\textsf{rev}_{[a,b]}(\pi)$ is not in $\textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))$ is if there exists an obstruction $o$ that is avoided by $\pi$ while $\textsf{rev}_{[a,b]}(\pi)$ contains $\textsf{rev}_{[a,b]}(o)$. Suppose that there is such an obstruction, then $\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(\pi)) = \pi$ must contain $\textsf{rev}_{[a,b]}(\textsf{rev}_{[a,b]}(o)) = o$ which contradicts $\pi$ avoiding $o$. Therefore $\pi \in \textsf{Grid}(\mathcal{T})$ implies $\textsf{rev}_{[a,b]}(\pi) \in \textsf{Grid}(\textsf{rev}_{[a,b]}(\mathcal{T}))$. With $\textsf{rev}_{[a,b]}$ being its own inverse it is a bijection between
+\[
+\textsf{Grid}_n(\mathcal{T}) \text{ and } \cset{\textsf{rev}_{[a,b]}(\pi)}{\pi \in \textsf{Grid}_n(\mathcal{T})} \subseteq \textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))
+\]
+and thus $|\textsf{Grid}_n(\mathcal{T})| \leq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$. Analogously, in the other direction, we have $|\textsf{Grid}_n(\mathcal{T})| \geq |\textsf{Grid}_n(\textsf{rev}_{[a,b]}(\mathcal{T}))|$.
 \end{proof}

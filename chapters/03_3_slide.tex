@@ -13,7 +13,7 @@ Let $\pi = \pi_1^{(x_1,0)}\pi_2^{(x_2,0)}\cdots\pi_n^{(x_n,0)} \in \mathcal{G}^{
 \end{enumerate}
 \end{definition}
 
-This mapping is also outlined in Algorithm~\ref{alg:slidealg}\footnote{Every algorithm in this thesis is accompanied by a Python implementation that can be found in the appropriate repository at \texttt{\href{https://github.com/PermutaTriangle}{https://github.com/PermutaTriangle}}.}. An example for $3594^{(0,0)}62^{(1,0)}718^{(2,0)}$ can be seen in \FigureRef{fig:slide_gp_example}.
+This mapping is outlined in Algorithm~\ref{alg:slidealg}\footnote{Every algorithm in this thesis is accompanied by a Python implementation that can be found in the appropriate repository at \texttt{\href{https://github.com/PermutaTriangle}{https://github.com/PermutaTriangle}}.}. An example for $3594^{(0,0)}62^{(1,0)}718^{(2,0)}$ can be seen in \FigureRef{fig:slide_gp_example}.
 
 \begin{algorithm}
 \input{algs/slide}
@@ -46,7 +46,7 @@ is \emph{slidable} if the following conditions are satisfied.
     \[
          \cset{j(j+1)^{(1,0)}, j^{(0,0)}(j+1)^{(1,0)}, j^{(0,0)},j^{(1,0)}}{j\in\Z^+}.
     \]
-    \item Any obstruction entirely outside columns $0$ and $1$ in $\mathcal{O}_1$ must also exist in $\mathcal{O}_2$ and vice versa.
+    \item Any obstruction entirely outside columns $0$ and $1$ in $\mathcal{O}_1$ must exist in $\mathcal{O}_2$ and vice versa.
     \item Let $o_1 = \pi_1^{(0,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ and $o_2 = \pi_1^{(1,0)}\pi_2^{(x_2,0)}\cdots\pi_s^{(x_s,0)}$ where $x_2,s > 1$ then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_1 \in \mathcal{O}_2$ and $o_2 \in \mathcal{O}_2$ are equivalent. That is, any crossing obstruction with one point in the first two columns must exist in both tilings and with that point in both columns.
     \item Let \begin{align*}o_1 &= \pi_1^{(0,0)}\pi_2^{(0,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_2 &= \pi_1^{(0,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\\o_3 &= \pi_1^{(1,0)}\pi_2^{(1,0)}\pi_3^{(x_3,0)}\cdots\pi_s^{(x_s,0)}\end{align*} where $s > 2$, $x_3 > 1$ and $\pi_1 + 1 = \pi_2$, then $o_1 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_1$, $o_2 \in \mathcal{O}_2$ and $o_3 \in \mathcal{O}_2$ are equivalent. That is, any crossing obstruction with $j(j+1)$ in the first two columns (and at least one point outside of those columns) must exists in both tilings where $j(j+1)$ has been spread between the first two columns in all possible ways, excluding the one that collides with the $12$ obstruction.
 \end{itemize}
@@ -65,13 +65,13 @@ An example of two slidable tilings can be seen in \FigureRef{fig:slidable_tiling
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable and $i \in \N$, then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$ for every $\pi \in \textsf{Grid}_i(\mathcal{T}_1)$.
 \end{lemma}
 \begin{proof}
-If $\pi$ contains no elements within the first two columns it is mapped to itself and since the tilings share requirements and are identical outside the first two columns then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$. If $\pi$ contains no elements in column $1$ then whatever is in column $0$ is moved to column $1$. Since $\pi$ avoided $12\dotsm n$ in column $0$ it will also do so in column $1$ once moved and any crossing obstruction in $\mathcal{T}_2$ with one or two points in column $1$ would have existed with those points in column $0$ in $\mathcal{T}_1$ and therefore $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$.
+If $\pi$ contains no elements within the first two columns it is mapped to itself and since the tilings share requirements and are identical outside the first two columns then $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$. If $\pi$ contains no elements in column $1$ then whatever is in column $0$ is moved to column $1$. Since $\pi$ avoided $12\dotsm n$ in column $0$ then $\Upsilon(\pi)$ will avoid $12\dotsm n$ in column $1$ and any crossing obstruction in $\mathcal{T}_2$ with one or two points in column $1$ would have existed with those points in column $0$ in $\mathcal{T}_1$ and therefore $\Upsilon(\pi) \in \textsf{Grid}_i(\mathcal{T}_2)$.
 
 Now suppose $\pi$ has elements in column $1$. By the end of the mapping all columns are shifted one to the left but we will refer to their indices before the shift in the mapped tiling. Note that the mapping is defined by placing elements in-order into column $1$ so we will never form an increasing pattern there. 
 
 Suppose after a single step in the map that we form the first $12\cdots n$ (spread in any way across the first $3$ columns). Note that it can contain at most one point in column $1$ as that column is decreasing.
 
-If the $12\cdots n$ pattern does contain the newly moved point in column $1$ and not the one we just moved to column $2$, then the pattern must have been there before the step was taken.
+If the $12\cdots n$ pattern does contain the newly moved point in column $1$ and not the one we moved to column $2$, then the pattern must have been there before the step was taken.
 
 \begin{center}
 \input{graphics/slideproof1}
@@ -111,7 +111,7 @@ If the pattern occurs with $k(k+1)$ in columns $0$ and $2$, then it must have ex
 \input{graphics/slideproof6}
 \end{center}
 
-If the pattern occurs with $k(k+1)$ in columns $1$ and $2$ then, since they are adjacent in value and increasing, these must also be the two elements that were moved and therefore the pattern must have existed with $k(k+1)$ in columns $0$ and $1$ before.
+If the pattern occurs with $k(k+1)$ in columns $1$ and $2$ they must be the two elements that were moved since they are adjacent in value and increasing and therefore the pattern must have existed with $k(k+1)$ in columns $0$ and $1$ before.
 
 \begin{center}
 \input{graphics/slideproof7}
@@ -162,10 +162,10 @@ A step in $\Upsilon$ where we move an element not larger than all elements in $(
 \input{graphics/slidableproof2}
 \end{center}
 
-Both maps move one point into and one out of $(1,0)$ at every step, so the number of elements in $(1,0)$ is fixed. Therefore the number of elements in the other column of the first two must also be fixed. When mapping $\pi$ with $\Upsilon$ we take a certain amount of steps and when we map back with $\Upsilon^{-1}$ we take the same amount of steps, each cancelling out the steps of $\Upsilon$ and therefore $\Upsilon^{-1}(\Upsilon(\pi)) = \pi$ and similarly $\Upsilon\left(\Upsilon^{-1}(\pi')\right) = \pi'$ and thus, $\Upsilon$ is a bijection between $\textsf{Grid}_i(\mathcal{T}_1)$ and $\textsf{Grid}_i(\mathcal{T}_2)$.
+Both maps move one point into and one out of $(1,0)$ at every step, so the number of elements in $(1,0)$ is fixed. Therefore the number of elements in the other column of the first two must be fixed. When mapping $\pi$ with $\Upsilon$ we take a certain amount of steps and when we map back with $\Upsilon^{-1}$ we take the same amount of steps, each cancelling out the steps of $\Upsilon$ and therefore $\Upsilon^{-1}(\Upsilon(\pi)) = \pi$ and similarly $\Upsilon\left(\Upsilon^{-1}(\pi')\right) = \pi'$ and thus, $\Upsilon$ is a bijection between $\textsf{Grid}_i(\mathcal{T}_1)$ and $\textsf{Grid}_i(\mathcal{T}_2)$.
 \end{proof}
 
-We can extend the Definition~\ref{def:slidable} of slidable tilings to any nonequal columns $c_1$ and $c_2$ instead of just $0$ and $1$. The conditions would replace any constraints involving the first two columns with $c_1$ and $c_2$ and allow for subsequences on either side and between.
+We can extend the Definition~\ref{def:slidable} of slidable tilings to any nonequal columns $c_1$ and $c_2$ instead of $0$ and $1$. The conditions would replace any constraints involving the first two columns with $c_1$ and $c_2$ and allow for subsequences on either side and between.
 
 \begin{proposition}
 Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable in columns $c_1$ and $c_2$, then $|\textsf{Grid}_i(\mathcal{T}_1)| = |\textsf{Grid}_i(\mathcal{T}_2)|$ for all $i\in\N$.
@@ -173,5 +173,3 @@ Let $(\mathcal{T}_1,\mathcal{T}_2)$ be slidable in columns $c_1$ and $c_2$, then
 \begin{proof}
 Suppose the tilings have $c$ columns and let $\sigma = \sigma_1\sigma_2 \cdots \sigma_c \in \mathcal{S}_c$ where $\sigma_1 = c_1$ and $\sigma_2 = c_2$. We can permute the columns so $c_1$ and $c_2$ are the first two, slide them and permute back, that is we can use a composition of bijections, $C_{\sigma^{-1}} \circ \Upsilon \circ C_\sigma$, to map between the two.
 \end{proof}
-
-The sliding strategy enabled TileScope to discover a specification for $\Av{1432}$.

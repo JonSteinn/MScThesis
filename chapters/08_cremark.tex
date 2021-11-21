@@ -1,18 +1,18 @@
 \coverchapter{Conclusion}\label{ch:conclusion}
 
 \section{Future work}\label{s:fw}
-The experiment for experimental classes was concluded after bases containing nine patterns of length $4$. Combinatorial Exploration can solve them quite fast and all the experiments were performed on a local machine. A dedicated machine is needed to continue this experiment.
+The experiment for experimental classes was concluded after bases containing nine patterns of size $4$. Combinatorial Exploration can solve them quickly and all the experiments were performed on a local machine. A dedicated machine is needed to continue this experiment.
 
 Many ideas on improvements and applications arose while working on this thesis and some could not be explored further due to time restrictions. We will go over some of the ideas that did not come to fruition. This will mostly be conveyed from the perspective of permutations but could be generalized for other domains.
 
 Further analysis of the resulting bijections could be insightful. We could compare them to previously known bijections, track permutation statistics preserved or even attempt to visualize them. Matched non-root tilings are equinumerous and could inspire more rules about tilings.
 
-Instead of searching for specifications individually and then trying to find parallel specifications from the extended universe of those searches, it would be preferable to develop our own search method that is intended for finding parallel specifications. This would open the doors for parallel specification related heuristics, where the expansion of a class with a strategy could be evaluated against the other universe. We could even look into some domain specific machine learning related heuristics. This would also allow us to find bijections without having specifications where equal classes in each universe can be paired without expansion where the identity map would be applied.
+Instead of searching for specifications individually and then trying to find parallel specifications from the extended universe of those searches, it would be preferable to develop our own search method that is intended for finding parallel specifications. This would open the doors for parallel specification related heuristics, where the expansion of a class with a strategy could be evaluated against the other universe. We could even look into some domain specific machine learning related heuristics. This would allow us to find bijections without having specifications where equal classes in each universe can be paired without expansion where the identity map would be applied.
 
 We could produce conjectures on equivalent tilings if we find a partial match. Suppose we know the root classes are isomorphic and at some point, in the trees, we can match all but one children pair. This pair could be isomorphic but we lack the strategies to match them. These would require humans to look at and try to prove but in return, could help formalize some theory about tiling equivalences, which would help find more specifications and bijections.
 
 \section{Open problems}
-As mentioned earlier, the bijection found between $\Av{123}$ and $\Av{132}$ seems to agree with the \citeauthor{simionandschmidt} bijection in \cite{simionandschmidt}. This has been confirmed for lengths $n \leq 10$ but no effort went into finding a proof and we leave it as a conjecture.
+As mentioned earlier, the bijection found between $\Av{123}$ and $\Av{132}$ seems to agree with the \citeauthor{simionandschmidt} bijection in \cite{simionandschmidt}. This has been confirmed for sizes $n \leq 10$ but no effort went into finding a proof and we leave it as a conjecture.
 \begin{conjecture}\label{con:ss}
 The parallel bijection for the specifications in subsection \ref{ss:onexthree} agrees with the Simion and Schmidt bijection in \cite{simionandschmidt}.
 \end{conjecture}
@@ -39,6 +39,6 @@ Unlike the translation method in \authcite{wood_zeilberger}, our automated bijec
 
 As we discussed in \SectionRef{s:fw}, the search is done from a universe that is expanded with a completely different goal in mind. We believe this to be a limiting factor of finding bijections. In contrast, its strength is finding a bijection without any supplied information, given that a domain has adequate strategies.
 
-A plethora of articles have been written about bijections between sets. Some articles might even just contain a single one. This process has now been entirely automated. Nothing will ever replace the art of a human constructed bijection or the structural insight they might provide, nor do we intend to. However, combinatorial classes can become immensely complex and tedious to work with by hand. Others might be of limited interest. The automated bijection can replace the human mind in those cases. There are after all infinite bases for which we can define permutaion classes. It could also provide some insight into how one might go about constructing a bijection by hand.
+A plethora of articles have been written about bijections between sets. This process has now been entirely automated. Nothing will ever replace the art of a human constructed bijection or the structural insight they might provide, nor do we intend to. However, combinatorial classes can become immensely complex and tedious to work with by hand. Others might be of limited interest. The automated bijection can replace the human mind in those cases. There are after all infinite bases for which we can define permutaion classes. It could provide some insight into how one might go about constructing a bijection by hand.
 
 To demonstrate the potential of our automated bijections we have connected numerous permutation classes with bijections, paying homage to \authcite{simionandschmidt}. Our hope is that this work will encourage others to extend Combinatorial Exploration into more domains and continue this work, or inspire different approaches to fully automated bijections.

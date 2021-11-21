@@ -2,14 +2,14 @@ Let $\pi=\pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{
 \[
 \chi_{1}\left(1^{(0,0)}3^{(2,3)}2^{(5,2)}\right) = 1^{(1,0)}3^{(1,3)}2^{(1,2)}.
 \]
-This can also be extended to subsequences of gridded permutations.
+We extend this map to subsequences of gridded permutations.
 
 \begin{definition}
 Let $\pi = \pi_1^{(x_1,y_1)}\pi_2^{(x_2,y_2)}\dotsm\pi_n^{(x_n,y_n)} \in \mathcal{G}_n^{(c,r)}$ and $\sigma \in \mathcal{S}_k$ for $k \geq c$. The \emph{column permutation} $\sigma$ of $\pi$ is 
 \[
     C_\sigma(\pi) = \chi_0(\sseq{A_{\sigma_1}}{\pi})\chi_1(\sseq{A_{\sigma_2}}{\pi}) \dotsm \chi_{k-1}(\sseq{A_{\sigma_k}}{\pi})
 \]
-where $A_i = \cset{j \in [n]}{x_j = i - 1}$ for $i \in [k]$.
+where $A_i = \cset{j \in [n]}{x_j = i - 1}$ for $i \in [k]$ are the sets of indices in column $i$.
 \end{definition}
 
 Note that $A_1,A_2,\dotsc,A_k$ can include empty sets and $\sigma$ can be larger than the number of columns the gridded permutation spans, but not vice versa. We extend this definition to tilings such that it is applied to all of its obstructions and requirements. Let $\sigma = 4312$ and
@@ -40,7 +40,7 @@ as is shown in \FigureRef{fig:gp_col_perm}. An example for tilings can be seen i
     \label{fig:t_col_perm}
 \end{figure}
 
-Let $\pi=\pi_1\pi_2 \dotsm \pi_n \in\mathcal{S}_n$ and $A = (i_1, i_2,\dotsc,i_k)$ a finite sequence of length $k$ containing elements from $[n-1]$ and define the \emph{adjacent swap} of $\pi$ (relative to $A$) as
+Let $\pi=\pi_1\pi_2 \dotsm \pi_n \in\mathcal{S}_n$ and $A = (i_1, i_2,\dotsc,i_k)$ a finite sequence of size $k$ containing elements from $[n-1]$ and define the \emph{adjacent swap} of $\pi$ (relative to $A$) as
 \[
 \textsf{AdjSwap}_{A}(\pi) = \begin{cases}
 \pi_1\pi_2 \dotsm \pi_{i_1-1}\pi_{i_1+1}\pi_{i_1}\pi_{i_1+2}\pi_{i_1+3} \dotsm \pi_n & \mbox{ if } k = 1,\\
@@ -63,7 +63,7 @@ Suppose we can generate $\mathcal{S}_{n-1}$ this way from the permutation in $\t
 \begin{align*}
     \textsf{AdjSwap}_{(i_1,i_2,\dotsc,i_k, n-1, n-2,\dotsc,j)}(12\dotsm n) = \pi
 \end{align*}
-and since this holds for a base case, it holds for all lengths $n\in\N$.
+and since this holds for a base case, it holds for all sizes $n\in\N$.
 \end{proof}\end{comment}
 
 \begin{proposition}

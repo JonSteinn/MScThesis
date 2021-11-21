@@ -1,0 +1,244 @@
+\coverchapter{Results}\label{ch:results}
+
+The search method we have developed and the resulting bijections work between different domains. The problem, however, is the lack of existing implementations of domains using Combinatorial Exploration. With Combinatorial Exploration being a product of a research group that is mainly interested in permutation patterns, unsurprisingly, the most supported domain is permutations with \tsc{}. As a consequence, we will mostly demonstrate bijections found between permutation classes.
+
+\section{Cross-domain successes}
+There is a simple example implementation of words provided in the repository for Combinatorial Exploration. A word over an alphabet $\Sigma$ is any sequence of elements from $\Sigma$. A pattern in a word is another word that occurs as a consecutive subsequence. A class can be described as a triple $\mathcal{W} = (p, \Sigma, A)$, where $p$ is a required prefix, $\Sigma$ is the alphabet and $A$ is the set of patterns to avoid. For example $(\varepsilon, \set{0,1}, \set{11})$ is the set of binary strings that avoid consecutive 1's, that is
+\[
+    (\varepsilon, \set{0,1}, \set{11}) = \set{\varepsilon, 0, 1, 00, 01, 10, 000, 001, 010, 100, 101, \dotsc}.
+\]
+
+
+The bijection search will easily find bijections between sets such as $(\varepsilon, \set{0,1}, \set{11})$ and $(\varepsilon, \set{a,b}, \set{bb})$, that are identical given a bijection of the letters of the alphabet. The same goes for the trivial sets $(\epsilon, \set{0}, \emptyset)$ and $\Av{12}$, where there is only a single element of each size. The implementation for words has few strategies and limited effort was allocated to finding bijections between words and permutation classes. We will demonstrate two such bijections in greater detail but there is a caveat that needs to be addressed.
+
+Consider the class $\mathcal{W} = (\varepsilon, \set{a,b}, \emptyset)$. For any fixed size $n$, there are $2^n$ unique words as we have a choice between two letters for each position in any sequence. This produces the counting sequence $1, 2, 4, 8, 16, 32, 64, \dotsc$ while the permutation class we want to match with, $\Av{231,321}$, has the counting sequence $1, 1, 2, 4, 8, 16, 32, \dotsc$ which is off by one. We could use $\textsf{Av}_{\geq1}(231,312)$ instead, which shares this sequence with the words if we start from $n=1$, but that brings another problem. Words of size $n$ would map to permutations of size $n+1$ while parallel specifications require atoms to match. What we can do instead is place the topmost point of $\textsf{Av}_{\geq1}(231,312)$ and factor it out. That leaves us with a tiling root $\mathcal{T}$ where
+\begin{align*}
+    \Av{231,312} &\cong \set{\varepsilon} \sqcup \textsf{Av}_{\geq1}(231,312),\\
+    \textsf{Av}_{\geq1}(231,312) &\cong \set{\point{0.1}}\times \textsf{Grid}(\mathcal{T}).
+\end{align*}
+The tiling in question here is
+\[
+    \mathcal{T} = \left((2,1), \set{2^{(0,0)}1^{(1,0)}, 21^{(1,0)}, 231^{(0,0)}, 321^{(0,0)}},\emptyset\right),
+\]
+seen in \FigureRef{fig:wordtiling}.
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/wordtiling}
+    \caption{The tiling used instead of $\Av{231,312}$ to deal with the sequence offset of binary strings.}
+    \label{fig:wordtiling}
+\end{figure}
+Now we can find and construct bijections between $\mathcal{W}$ and $\textsf{Grid}(\mathcal{T})$. It will map the words to gridded permutations in $\mathcal{G}^{(2,1)}$ instead of $\mathcal{G}^{(1,1)}$ but there is a trivial bijection from these gridded permutations to permutations.
+
+The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \set{11})$ and $\Av{231,312,321}$. These are counted by the Fibonacci numbers but here we have the same issue as before, with one sequence being off by one. We remedy this in the same way as before, leaving us with a tiling root that can be seen in \FigureRef{fig:fibpermoffbyone}. This tiling can have at most a single point in cell $(1,0)$ and if it includes one, it must be greater than all the points in cell $(0,0)$. We can map any such gridded permutation to a permutation with a trivial bijection. Given a gridded permutation of size $n$ that contains no point in cell $(1,0)$ we append $n+1$ to the underlying permutation. If it contains a point in $(1,0)$ we place $n+1$ immediately prior to the last element.
+
+\begin{figure}[!htbp]
+    \centering
+    \input{graphics/fibperm_offbyone}
+    \caption{The tiling used instead of $\Av{231,312,321}$ to deal with the sequence offset of binary strings with no consecutive 1's.}
+    \label{fig:fibpermoffbyone}
+\end{figure}
+
+\FigureRef{fig:fibwordtree} and \FigureRef{fig:fibpermtree} show the two parallel specifications that were found. Note that there is an empty class in the specification for words. \TableRef{tab:wordtilmap} shows the inputs and outputs up to size $3$ for the bijection constructed and corresponding permutation with the mapping described above. 
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/bin2perm_map}
+    \caption{The inputs and outputs up to size $3$ of an automated bijection between binary strings avoiding consecutive 1's and $\textsf{Grid}(\mathcal{T})$, where $\mathcal{T}$ is the tiling for $\textsf{Av}_{\geq1}(231,312,321)$ after placing and factoring out the top point. The corresponding permutation is also shown.}
+    \label{tab:wordtilmap}
+\end{table}
+
+\begin{figure}
+    \centering
+    \input{graphics/fibwordtree}
+    \vspace*{-12.5mm}
+    \caption{The tree representation of the formal grammar of the specification found for binary strings avoiding consecutive 1's.}
+    \label{fig:fibwordtree}
+\end{figure}
+\begin{figure}
+    \centering
+    \input{graphics/fibpermtree}
+    \vspace*{-14mm}
+    \caption{The tree representation of the formal grammar of the specification found for $\textsf{Av}_{\geq1}(231,312,321)$ after placing and factoring out the top point.}
+    \label{fig:fibpermtree}
+\end{figure}
+
+\section{Permutation classes}
+The experiments we carried out can be separated into known Wilf classes and \emph{experimental classes}.
+
+The experiments for known Wilf classes includes bijections found for all the permutation classes shown to be Wilf classes with bijections in \authcite{simionandschmidt}, excluding symmetries. These classes are split over the next five subsections.
+
+An experimental class is a collection of permutation classes that share the first $12$ terms in their counting sequence. For the experimental classes we focused on classes avoiding patterns of size $4$. We started with those avoiding eleven patterns and worked our way downwards. Symmetries and classes with a \emph{regular insertion encoding}, defined in \authcite{albert2005insertion}, were omitted.
+
+
+\subsection{Avoiding one pattern of size 3}\label{ss:onexthree}
+The parallel specification we found for $\Av{123}$ and $\Av{132}$ have an identical tree structure and even share strategies. They are 
+\begin{align*}
+    \spec{C} = \left(
+        \begin{pmatrix}
+            \mathcal{C}^{(1)}\\
+            \mathcal{C}^{(2)}\\
+            \mathcal{C}^{(3)}\\
+            \mathcal{C}^{(4)}\\
+            \mathcal{C}^{(5)}\\
+            \mathcal{C}^{(6)}\\
+            \mathcal{C}^{(7)}
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            o_1\\
+            o_2\\
+            o_3\\
+            o_4\\
+            o_5\\
+            o_6\\
+            o_7
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            \set{\varepsilon} & \mathcal{C}^{(2)} & \emptyset\\
+            \mathcal{C}^{(3)} & \set{1} & \emptyset\\
+            \mathcal{C}^{(4)} & \emptyset & \emptyset\\
+            \set{\varepsilon} & \mathcal{C}^{(5)} & \mathcal{C}^{(6)}\\
+            \mathcal{C}^{(7)} & \set{1} & \emptyset\\
+            \mathcal{C}^{(4)} & \mathcal{C}^{(8)} & \emptyset\\
+            \mathcal{C}^{(4)} & \emptyset & \emptyset
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+        2\\
+        2\\
+        1\\
+        3\\
+        2\\
+        2\\
+        1
+        \end{pmatrix}
+    \right)
+\end{align*}
+and
+\begin{align*}
+    \spec{D} = \left(
+        \begin{pmatrix}
+            \mathcal{D}^{(1)}\\
+            \mathcal{D}^{(2)}\\
+            \mathcal{D}^{(3)}\\
+            \mathcal{D}^{(4)}\\
+            \mathcal{D}^{(5)}\\
+            \mathcal{D}^{(6)}\\
+            \mathcal{D}^{(7)}
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            o_1\\
+            o_2\\
+            o_3\\
+            o_4\\
+            o_5\\
+            o_6\\
+            o_7
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+            \set{\varepsilon} & \mathcal{D}^{(2)} & \emptyset\\
+            \mathcal{D}^{(3)} & \set{1} & \emptyset\\
+            \mathcal{D}^{(4)} & \emptyset & \emptyset\\
+            \set{\varepsilon} & \mathcal{D}^{(5)} & \mathcal{D}^{(6)}\\
+            \mathcal{D}^{(7)} & \set{1} & \emptyset\\
+            \mathcal{D}^{(4)} & \mathcal{D}^{(8)} & \emptyset\\
+            \mathcal{D}^{(4)} & \emptyset & \emptyset
+        \end{pmatrix}
+        \begin{matrix}\\ \\ \\ \\ \\ \\ ,\end{matrix}
+        \begin{pmatrix}
+        2\\
+        2\\
+        1\\
+        3\\
+        2\\
+        2\\
+        1
+        \end{pmatrix}
+    \right)
+\end{align*}
+where classes are listed in \TableRef{tab:ssclasses} in matched pairs and the constructor's rules can be seen in \TableRef{tab:av123av132constructors}.
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/SimionSchmidtClasses}
+    \caption{The classes and their matching for the parallel specifications of $\Av{123}$ and $\Av{132}$.}
+    \label{tab:ssclasses}
+\end{table}
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/av123av132rules}
+    \caption{Rules for the parallel specifications of $\Av{123}$ and $\Av{132}$.}
+    \label{tab:av123av132constructors}
+\end{table}
+
+The inputs and outputs of size $4$ for the bijection are shown in \TableRef{tab:ssexamp} and it seems to agree with the \citeauthor{simionandschmidt} bijection in \cite{simionandschmidt} which we leave as an open problem in Conjecture~\ref{con:ss}.
+
+\begin{table}[ht!]
+    \centering
+    \input{tables/ssmap}
+    \caption{The inputs and outputs of size $4$ for the bijection between $123$ and $132$ avoiding permutations.}
+    \label{tab:ssexamp}
+\end{table}
+
+\subsection{Avoiding two patterns of size 3}
+The only Wilf class with more than one permutation class is the class consisting of $\Av{123,132}$, $\Av{132,213}$ and $\Av{132,231}$. The connections created by bijections found can be seen in \FigureRef{fig:2x3bi}.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/res_2x3}
+    \caption{The connections created by bijections found for classes avoiding two patterns of size $3$.}
+    \label{fig:2x3bi}
+\end{figure}
+
+\subsection{Avoiding three patterns of size 3}
+The connections created by bijections found for the only Wilf class (containing more than one permutation class) can be seen in \FigureRef{fig:3x3bi}. 
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/res_3x3}
+    \caption{The connections created by bijections found for classes avoiding three patterns of size $3$.}
+    \label{fig:3x3bi}
+\end{figure}
+
+
+\subsection{Avoiding one pattern of size 3 and one of size 4}
+There are two Wilf classes with more than one permutation class. The first consists of $\Av{132,4312}$ and $\Av{132,4231}$ which we found a bijection between and the connections created by bijections found for the second can be seen in \FigureRef{fig:1x31x4bi_2}.
+
+%\begin{figure}[ht!]
+%    \centering
+%    \input{graphics/res_3and4_1}
+%    \caption{The bijection for the first Wilf class of permutations avoiding one pattern of size 3 and one of size 4.}
+%    \label{fig:1x31x4bi_1}
+%\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/res_3and4_2}
+    \caption{The connections created by bijections found for the second Wilf class of permutations avoiding one pattern of size 3 and one of size 4.}
+    \label{fig:1x31x4bi_2}
+\end{figure}
+
+\subsection{Avoiding one pattern of size 4}
+There are two Wilf classes with more than one permutation class. We did not manage to find bijections between $\Av{1342}$ and $\Av{2413}$ which make up one of those Wilf classes. That is because TileScope requires another technique\footnote{The technique is called the \emph{table method} which allows some rules in the universe to be used backwards.} to enumerate them which is not compatible with our bijection searcher. The other consists of $\Av{1234}$, $\Av{1243}$, $\Av{1432}$ and $\Av{2143}$. TileScope lacks the strategies to solve $\Av{2143}$ so that was out of reach while the connections created by bijections found for the others are shown in \FigureRef{fig:1x4bi}.
+
+\begin{figure}[ht!]
+    \centering
+    \input{graphics/res_1x4}
+    \caption{The connections created by bijections found for the Wilf class of $\Av{1234}$, $\Av{1243}$, $\Av{1432}$ and $\Av{2143}$.}
+    \label{fig:1x4bi}
+\end{figure}
+
+\subsection{Experimental classes}
+The experimental classes we ran our bijection searcher for can be seen in Appendix \ref{ch:expcls}. They are grouped by Roman numerals and figures contain their list indices.
+
+The experiments were carried out by comparing the first class against all others, then the second to all but the first and so on. A disjoint-set data structure was used to keep track of confirmed equivalences. As a consequence, the experiments favored lower numbers to have higher degrees. The setup for the experiments can be seen in Appendix \ref{ch:expsetup}.
+
+Every experimental class was confirmed to be a Wilf class with the exception of experimental class III where we failed to find a bijection between
+\[
+    \Av{1243,1342,1423,1432,2143,2413,3142,3412,4231}
+\]
+and any other class. We leave that as an open problem. The connections created by bijections found for each experimental class can be seen in Figures~\ref{fig:expgrp_I}-\ref{fig:expgrp_XXVI} in Appendix \ref{ch:conclusion}. Experimental classes with only two permutation classes are omitted since all of them were successfully shown to be Wilf classes and no information is contained in their figure.
+
