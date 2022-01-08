@@ -1,0 +1,12 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=2.25em},scale=0.65, every node/.style={scale=0.65}]
+    \node[vertex] (c1) at (-3,3) {$1$};
+    \node[vertex] (c2) at (0,0) {$2$};
+    \node[vertex] (c3) at (0,3) {$3$};
+    \node[vertex] (c4) at (3,0) {$4$};
+    \node[vertex] (c5) at (3,3) {$5$};
+    \node[vertex] (c6) at (-3,0) {$6$};
+    \draw (c2) -- (c3);
+    \draw (c2) -- (c4);
+    \draw (c2) -- (c6);
+    \draw (c4) -- (c5);
+\end{tikzpicture}

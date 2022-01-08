@@ -1,0 +1,10 @@
+\begin{tikzpicture}[yscale=0.955,xscale=1.275]
+    \foreach \x in {0,2,...,10} {%
+        \foreach \y in {0,2,...,10} {%
+            \draw (\x,0)  to [bend right] (0,\y);
+            \draw (\x,10) to [bend left] (0,10-\y);
+            \draw (\x,10) to [bend right] (10,10-\y);
+            \draw (10-\x,0) to[bend left] (10,10-\y);
+        }
+    }
+\end{tikzpicture}

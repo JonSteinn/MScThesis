@@ -1,0 +1,14 @@
+\begin{frame}{Parallel specifications}
+    \begin{block}{Definition}
+        Two specifications $\spec{C}$ and $\spec{D}$ are \emph{parallel} if the empty rooted paths in their respective specification graphs are matchable.
+    \end{block}
+    \onslide<2->{
+    Two specifications are parallel if (recursively from the root) every class pair $\mathcal{C}$ and $\mathcal{D}$
+    \begin{itemize}
+        \item Both contain a single object which are equal in size.
+        \item There is a recursion at an equal distance to an ancestor for both.
+        \item Their constructors are equivalent and there is a bijection between their children such that we can match them this way.
+    \end{itemize}
+    Special attention to equivalence rules, $\mathcal{C}^{(1)} \cong \mathcal{C}^{(2)}$.
+    }
+\end{frame}

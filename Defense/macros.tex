@@ -1,0 +1,86 @@
+\newcommand{\Av}[1]{\textsf{Av}\left(#1\right)}
+\newcommand{\Avn}[2]{\textsf{Av}_{#1}\left(#2\right)}
+\newcommand{\Co}[1]{\textsf{Co}\left(#1\right)}
+\newcommand{\contains}[2]{#2 \preceq #1}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\cset}[2]{\left\{#1 \mid #2\right\}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand\at[2]{\left.#1\right|_{#2}}
+\newcommand{\gridN}{\raisebox{-2pt}{\tikz{\draw[step=0.2] (0,0) grid (.2,.4);}}}
+\newcommand{\gridD}{\raisebox{-2pt}{\tikz{\fill[gray!50] (0,0) rectangle (0.2,0.2);\draw[step=0.2] (0,0) grid (.2,.4);}}}
+\newcommand{\gridU}{\raisebox{-2pt}{\tikz{\fill[gray!50] (0,0.2) rectangle (0.2,0.4);\draw[step=0.2] (0,0) grid (.2,.4);}}}
+
+\newcommand{\point}[1]{%
+    \begin{tikzpicture}
+        \filldraw (0, 0) circle (#1);
+    \end{tikzpicture}
+}
+
+\newcommand\ptedge[4]{
+  ($#1 + (0.5, -1.3) + #2$)..%
+  controls ($#1 + #2 + (0.5, -1.3) + (0, -1)$)%
+  and ($#3 + #4 + (0, 1) + (0.5, -0.3)$)..%
+  ($#3 + #4 + (0.5, -0.3)$)
+}
+
+% Paper notation : Change here should change everything in paper
+\newcommand{\st}[1]{\textsf{st}\left(#1\right)}
+\newcommand{\sseq}[2]{\Xi(#1,#2)}
+\newcommand{\spec}[1]{\check{\mathcal{#1}}}
+\newcommand{\specset}{\mathfrak{A}}
+\newcommand{\specg}[1]{\mathfrak{G}\left(\check{\mathcal{#1}}\right)}
+\newcommand{\sclsi}[2]{\mathcal{#1}^{\left(#2\right)}}
+\newcommand{\src}{\textsf{src}}
+\newcommand{\dst}{\textsf{dst}}
+\newcommand{\op}{\textsf{op}}
+
+\newcommand{\css}{\texttt{CombSpecSearcher}}
+\newcommand{\tsc}{TileScope}
+
+\newcommand{\sym}{\textsf{sym}}
+
+\newcommand{\rev}{\textsf{r}}
+\newcommand{\inv}{\textsf{i}}
+
+\newcommand{\wordseq}[2]{#1_1 #1_2 \dotsm #1_{#2}}
+\newcommand{\wordrev}[2]{#1_{#2} #1_{#2 - 1} \dotsm #1_1}
+\newcommand{\wordidx}[3]{#1_{#2_1} #1_{#2_2} \dotsm #1_{#2_{#3}}}
+\newcommand{\perm}[2]{\wordseq{#1}{#2}}
+\newcommand{\setn}{\set{1,2,\dotsc,n}}
+\newcommand{\idxset}[2]{\set{#1_1,#1_2,\dotsc,#1_{#2}}}
+\newcommand{\idxord}[2]{#1_1 < #1_2 < \dotsm < #1_{#2}}
+
+\newcommand{\sort}{\textsf{sort}}
+
+\newcommand{\slot}{\diamond}
+\newcommand{\ietrans}{\longrightarrow}
+\newcommand{\iestep}[2]{\stackrel{\mathbf{#1}_{#2}}{\ietrans}}
+
+\newcommand{\authcite}[1]{\citeauthor{#1} \cite{#1}}
+
+\definecolor{brownish}{RGB}{59,42,35}
+\definecolor{slideback}{RGB}{250,250,250}
+
+\newcommand{\subitems}[1]{%
+\setbeamertemplate{itemize items}[default]
+\begin{itemize}
+    #1
+\end{itemize}
+\setbeamertemplate{itemize items}[square]
+}
+\newcommand{\subsubitems}[1]{%
+\setbeamertemplate{itemize items}[circle]
+\begin{itemize}
+    #1
+\end{itemize}
+\setbeamertemplate{itemize items}[square]
+}
+
+
+\newcommand{\viewborder}{\draw [blue] (current bounding box.north west) rectangle (current bounding box.south east);}
+
+\newcommand{\circover}[4]{\fill<#4>[white] (#1) circle (#2); \draw<#4> (#1) circle (#2) node {#3};}

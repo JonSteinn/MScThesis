@@ -1,0 +1,58 @@
+{
+
+\newcommand{\binroot}{(0\,|\,10)\!\ast(1\,|\,\varepsilon)}
+
+\newcommand{\binsize}{\fontsize{7pt}{7pt}}
+
+\begin{tikzpicture}
+    \draw [black,opacity=0]  (-3.2,-6.87) rectangle (2.8,0.60);
+    %\viewborder
+    
+    \node (rootA) at (0,0) {\binsize$\binroot$};
+    
+    \node<1,3-7,13-> (lvl11A) at (-1.75,-1.75) {\binsize$1|(01\binroot)$};
+    \node<1,3-6,8,12-> (lvl12A) at (0,-1.75) {\binsize$\varepsilon$};
+    \node<1,3-6,9-> (lvl13A) at (1.25,-1.75) {\binsize$0\binroot$};
+    \draw<1,3-7,13->\ptedge{(rootA.south)}{(-0.5,1.4)}{(lvl11A)}{(0,0.55)};
+    \draw<1,3-6,8,12->\ptedge{(rootA.south)}{(-0.5,1.4)}{(lvl12A)}{(-0.5,0.55)};
+    \draw<1,3-6,9->\ptedge{(rootA.south)}{(-0.5,1.4)}{(lvl13A)}{(-0.5,0.55)};
+    \circover{0,-0.4}{0.13}{\tiny $\sqcup$}{1,3-}
+    
+    \draw<4>[orange] (lvl11A.south west) rectangle (lvl13A.north east);
+    
+    \draw<5> (-1.75, -3.5) node {$\mathcal{D}$};
+    \draw<5> (lvl11A.south) -- (-1.75,-3.25);
+    \circover{-1.75,-2.2}{0.13}{\tiny $\cong$}{5}
+    \draw<5> [orange] (-1.75-0.25,-3.5-0.25) rectangle (-1.75+.25,-3.5+.25);
+    \draw<5>[orange] ([yshift=-0.05cm,xshift=-.05cm]lvl12A.south west) rectangle (lvl13A.north east);
+    
+    \node<1,7,13-> (lvl21A) at (-1.75-0.75,-3.5) {\binsize$1$};
+    \node<1,7,13-> (lvl22A) at (-1.75+0.75,-3.5) {\binsize$10\binroot$};
+    \draw<1,7,13->\ptedge{(lvl11A.south)}{(-0.5,1.4)}{(lvl21A)}{(-0.5,0.55)};
+    \draw<1,7,13->\ptedge{(lvl11A.south)}{(-0.5,1.4)}{(lvl22A)}{(-0.5,0.55)};
+    \circover{-1.75,-2.15}{0.13}{\tiny $\sqcup$}{1,7,13-}
+    
+    \node<1,9-> (lvl23A) at (1.25-0.6,-3.5) {\binsize$0$};
+    \node<1,9,11-> (lvl24A) at (1.25+0.6,-3.5) {\binsize$\binroot$};
+    \draw<10> (1.25+0.6,-3.5) node {$\mathcal{A}$};
+    \draw<10>[-] (1.25+0.6,-3.8) -- (1.25+0.6,-4.8);
+    \circover{1.25+0.6,-4.05}{0.13}{\tiny $\cong$}{10}
+    \draw<10> (1.25+0.6,-5) node {\binsize$\binroot$};
+    
+    \draw<1,9->\ptedge{(lvl13A.south)}{(-0.5,1.4)}{(lvl23A)}{(-0.5,0.55)};
+    \draw<1,9->\ptedge{(lvl13A.south)}{(-0.5,1.4)}{(lvl24A)}{(-0.5,0.55)};
+    \circover{1.25,-2.15}{0.13}{\tiny $\times$}{1,9-}
+    
+    \node<1,14-> (lvl31A) at (-1.75+0.75-1,-5.25) {\binsize$10$};
+    \node<1,14-> (lvl32A) at (-1.75+0.75+1,-5.25) {\binsize$\binroot$};
+    \draw<1,14->\ptedge{(lvl22A.south)}{(-0.5,1.4)}{(lvl31A)}{(-0.5,0.55)};
+    \draw<1,14->\ptedge{(lvl22A.south)}{(-0.5,1.4)}{(lvl32A)}{(-0.5,0.55)};
+    \circover{-1,-3.9}{0.13}{\tiny $\times$}{1,14-}
+    
+    \node<1,15-> (lvl41A) at (-1.75+0.75-1-.95,-7+.35) {\binsize$1$};
+    \node<1,15-> (lvl42A) at (-1.75+0.75-1+.95,-7+.35) {\binsize$0$};
+    \draw<1,15->\ptedge{(lvl31A.south)}{(-0.5,1.4)}{(lvl41A)}{(-0.5,0.55)};
+    \draw<1,15->\ptedge{(lvl31A.south)}{(-0.5,1.4)}{(lvl42A)}{(-0.5,0.55)};
+    \circover{-2,-5.625}{0.13}{\tiny $\times$}{1,15-}
+\end{tikzpicture}
+}

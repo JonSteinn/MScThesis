@@ -1,0 +1,17 @@
+\begin{frame}{Parallel specifications - example}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle (10,7.5);
+        %\draw [blue!30,dotted] (current bounding box.north west) rectangle (current bounding box.south east);
+        \draw [black,opacity=0] (5,0) -- (5,7.5);
+        \end{tikzpicture}
+        \caption{Two parallel specifications.}
+    \end{figure}
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[at=(current page.center),yshift=-0.2cm,xshift=-(\paperwidth+1cm)*0.26]{\input{graphics/parallel-ex-left}};
+    \end{tikzpicture}
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[at=(current page.center),yshift=-0.2cm,xshift=(\paperwidth-1cm)*0.26]{\input{graphics/parallel-ex-right}};
+    \end{tikzpicture}
+\end{frame}

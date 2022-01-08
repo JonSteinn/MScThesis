@@ -1,0 +1,54 @@
+\begin{frame}{Cell}
+    \begin{figure}
+        \centering
+        \input{graphics/cell}
+        \caption{A cell $(c,r)\in\N^2$ defines the region $[c,c+1) \times [r,r+1)$.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Gridded permutation}
+    \begin{block}{Definition\hfill(\authcite{albert2012geometric})}
+    A pair $(\pi,P)$ where
+    \begin{itemize}
+        \item $\pi = \pi_1\pi_2 \dotsm \pi_n$ is a permutation
+        \item $P = ((c_1,r_1),(c_2,r_2),\dotsc,(c_n,r_n))$ is a $n$-tuple of cells
+    \end{itemize}
+    is called a \emph{gridded permutation} \onslide<2->{if
+    \begin{itemize}
+        \item $i<j$ implies $c_i \leq c_j$
+        \item $\pi_i < \pi_j$ implies $r_i \leq r_j$
+    \end{itemize}
+     for all $1 \leq i,j \leq n$.}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Gridded permutation - example}
+\only<1>{\begin{figure}
+    \centering
+    \begin{tikzpicture}[scale=1.8]
+    \draw[opacity=0] (0,0) rectangle (5,3);
+    \end{tikzpicture}
+    \caption{The gridded permutation with $\pi=87162435$ and $P=((0,2),(0,2),(1,0),(1,2),(1,0),(3,1),(3,0),(4,2))$.}
+\end{figure}
+\input{graphics/gp}
+}
+\addtocounter{figure}{1}
+\only<2>{\begin{figure}
+    \centering
+    \begin{tikzpicture}[scale=1.8]
+    \draw[opacity=0] (0,0) rectangle (5,3);
+    \end{tikzpicture}
+    \caption{An occurrence of $3^{(0,2)}1^{(1,0)}2^{(3,1)}$ in the gridded permutation $87^{(0,2)}1^{(1,0)}6^{(1,2)}2^{(1,0)}4^{(3,1)}3^{(3,0)}5^{(4,2)}$.}
+\end{figure}
+\input{graphics/gppatt}
+}
+\end{frame}
+
+
+%\begin{frame}{Gridded permutation - combinatorial class}
+%    \begin{figure}
+%        \centering
+%        \input{graphics/gpclass}
+%        \caption{The combinatorial class $\mathcal{G}^{(5,3)}$.}
+%    \end{figure}
+%\end{frame}
