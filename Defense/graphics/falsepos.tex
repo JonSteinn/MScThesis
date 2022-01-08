@@ -1,0 +1,23 @@
+\begin{tikzpicture}[vertex/.style = {shape=circle,draw,minimum size=1.5em},edge/.style = {->,> = latex'},scale=0.7, every node/.style={scale=0.7}]
+\node[vertex] (a) at (0,0) {$A$};
+\node[vertex] (b) at (-1,-2) {$B$};
+\node[vertex] (c) at (1,-2) {$C$};
+\node[vertex] (d) at (-2,-4) {$\set{\varepsilon}$};
+\node[vertex] (e) at (0,-4) {$A$};
+
+\draw[edge] (a) to (b);
+\draw[edge, red, dotted] (a) to (c);
+\draw[edge] (b) to (d);
+\draw[edge] (b) to (e);
+
+\node[vertex] (f) at (7,0) {$D$};
+\node[vertex] (g) at (6,-2) {$E$};
+\node[vertex] (h) at (8,-2) {$F$};
+\node[vertex] (i) at (5,-4) {$\set{\varepsilon}$};
+\node[vertex] (j) at (7,-4) {$D$};
+
+\draw[edge] (f) to (g);
+\draw[edge, red, dotted] (f) to (h);
+\draw[edge] (g) to (i);
+\draw[edge] (g) to (j);
+\end{tikzpicture}

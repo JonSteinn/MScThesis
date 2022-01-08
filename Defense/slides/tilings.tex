@@ -1,0 +1,22 @@
+\begin{frame}{Tiling}
+    \begin{block}{Definition\hfill(\authcite{BeanPhd:phd})}
+        A \emph{tiling} is a triple $\mathcal{T} = ((c,r), \mathcal{O}, \mathcal{R})$ where
+        \begin{itemize}
+            \item $(c,r) \in \Z^+ \times \Z^+$  is called \emph{dimension}
+            \item $\mathcal{O} \subseteq \mathcal{G}^{(c,r)}$ is called \emph{obstructions}
+            \item $\mathcal{R}=\set{\mathcal{R}_1,\mathcal{R}_2,\dotsc,\mathcal{R}_k} \subseteq \left(\mathcal{G}^{(c,r)}\right)^k$ is called \emph{requirements}
+        \end{itemize}
+    \end{block}
+    \onslide<2->{The gridded permutations in $\textsf{Grid}(\mathcal{T})$ are those in $\mathcal{G}^{(c,r)}$ that 
+    \begin{itemize}
+        \item avoid $\mathcal{O}$
+        \item contain $\mathcal{R}_1, \mathcal{R}_2, \dotsc, \mathcal{R}_k$
+    \end{itemize}}
+\end{frame}
+\begin{frame}{Tiling - example}
+    \begin{figure}
+        \centering
+        \input{graphics/tiling}
+        \caption{A tiling with $(c,r) = (3,2)$, $\mathcal{R} = \set{\set{1^{(1,1)}},\set{2^{(1,1)}1^{(2,0)}}}$ and $\mathcal{O} = \set{1^{(0,0)},12^{(1,1)},21^{(1,1)},3^{(0,1)}1^{(1,0)}2^{(2,1)}}$.}
+    \end{figure}
+\end{frame}

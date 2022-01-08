@@ -1,0 +1,18 @@
+\begin{tikzpicture}[ele/.style={fill=black,circle,minimum width=.8pt,inner sep=1pt},every fit/.style={ellipse,draw,inner sep=35},scale=0.6, every node/.style={scale=0.6}]
+    \node[ele,label=left:$1$] (a1) at (0,4) {};    
+    \node[ele,label=left:$2$] (a2) at (0,3) {};    
+    \node[ele,label=left:$3$] (a3) at (0,2) {};    
+    \node[ele,label=left:$4$] (a4) at (0,1) {};
+    
+    \node[ele,label=right:$a$] (b1) at (6,4) {};
+    \node[ele,label=right:$b$] (b2) at (6,3) {};
+    \node[ele,label=right:$c$] (b3) at (6,2) {};
+    \node[ele,label=right:$d$] (b4) at (6,1) {};
+    
+    \node[draw,fit= (a1) (a2) (a3) (a4),minimum width=4cm] {} ;
+    \node[draw,fit= (b1) (b2) (b3) (b4),minimum width=4cm] {} ;  
+    \draw[->,thick,shorten <=2pt,shorten >=2pt] (a1) -- (b3);
+    \draw[->,thick,shorten <=2pt,shorten >=2] (a2) -- (b4);
+    \draw[->,thick,shorten <=2pt,shorten >=2] (a3) -- (b2);
+    \draw[->,thick,shorten <=2pt,shorten >=2] (a4) -- (b1);
+\end{tikzpicture}

@@ -1,0 +1,41 @@
+\begin{frame}{Symbolic method}
+    The \emph{symbolic method} in \authcite{flajolet:ac} describes how combinatorial classes can be constructed. 
+    \begin{itemize}
+        \item \emph{Combinatorial specifications}
+        \item \emph{Constructors}
+        \item \emph{Atoms}
+        \item \emph{Combinatorial rules}\footnote{Not a terminology from \authcite{flajolet:ac}}
+    \end{itemize}
+\end{frame}
+
+{
+\begin{frame}{Symbolic method - example}
+    \begin{figure}
+    \centering
+    \input{graphics/binaryspec}
+    \end{figure}
+    % Some horrible hack until I find out how to deal with overlay and captions...
+    \onslide<9->{\begin{figure}\begin{tikzpicture}[yshift=-20cm]\draw[slideback,opacity=0] (0,0) -- (0,-6);\end{tikzpicture}\caption{A specification for binary strings avoiding repeated 1's.}\end{figure}}
+\end{frame}
+
+\begin{frame}{Symbolic method - example}
+    \onslide<1->{%
+    We now have a system of equations
+    \[
+    \systeme*{A(z) = 1 + B(z) + C(z), B(z) = zA(z), C(z) = z + D(z), D(z) = z^2A(z)}
+    \]
+    }
+    \onslide<2->{%
+    and solving for $A(z)$ gives
+    \[
+        A(z) = \frac{1+z}{1-z-z^2}.
+    \]
+    }
+    \onslide<3->{%
+    Taylor series at $z=0$ is
+    \[
+        A(z) = 1 + 2 z + 3 z^2 + 5 z^3 + 8 z^4 + 13 z^5 + 21 z^6 + 34 z^7 + 55 z^8 + \dotsm
+    \]
+    }
+\end{frame}
+}

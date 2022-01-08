@@ -1,0 +1,16 @@
+\begin{frame}{Bijection search}
+    \begin{itemize}
+        \item Expands both universes until both contain specifications
+        \item Gathers all the matched pairs
+        \item Uses dynamic programming and backtracking
+        \item A second tree search attempts to construct parallel specifications from matched pairs
+        \item Detects false positives from recursion
+    \end{itemize}
+    \onslide<2>{%
+    \begin{figure}
+        \centering
+        \input{graphics/falsepos}
+        \caption{Classes $B$ and $E$ are incorrectly matched because of a recursion to $A$ and $D$ that we fail to matched later.}
+    \end{figure}
+    }
+\end{frame}

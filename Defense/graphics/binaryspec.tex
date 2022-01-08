@@ -1,0 +1,61 @@
+{
+\newcommand{\rootcls}{(0\,|\,10)\!\ast(1\,|\,\varepsilon)}
+\begin{tikzpicture}[remember picture,overlay,yshift=0cm,xshift=-1cm,scale=0.75, every node/.style={scale=0.7}]
+    % slide 1
+    \node (root) at (0, 0) {$\rootcls$};
+    % slide 2
+    \node<2-> (rootop) at (0,-1) {$\sqcup$};
+    \draw<2-> (rootop) circle (0.2);
+    \node<2-> (lvl11) at (-3,-2.5) {$0\rootcls$};
+    \node<2-> (lvl12) at (0,-2.5) {$\varepsilon$};
+    \node<2-> (lvl13) at (3,-2.5) {$1\,|\,(10\rootcls)$};
+    \draw<2-> (root) -- (rootop);
+    \draw<2-> \ptedge{(rootop)}{(-0.5,1.1)}{(lvl11)}{(-0.5,0.55)};
+    \draw<2-> (rootop) -- (lvl12);
+    \draw<2-> \ptedge{(rootop)}{(-0.5,1.1)}{(lvl13)}{(-0.5,0.55)};
+    % slide 3 - rule
+    \node<3-> [brownish,left=0.3cm of root] {$\mathcal{A}$};
+    \node<3-> [brownish,left=0.3cm of lvl11] {$\mathcal{B}$};
+    \node<3-> [brownish,right=0.3cm of lvl13] {$\mathcal{C}$};
+    \draw<3-> [brownish,dotted] (-5.2,-8.3) rectangle (-2,-6.1);
+    \draw<3-> [brownish,dotted] (-1.7,-8.3) rectangle (2.3,-6.1);
+    \draw<3-> [brownish] (-5,-6.5) node[anchor=west] {$\mathcal{A} \cong \mathcal{B} \sqcup \set{\varepsilon}  \sqcup \mathcal{C}$};
+    \draw<3-> [brownish] (-1.69,-6.5) node[anchor=west] {$A(z) = 1 + B(z) + C(z)$};
+    % slide 4
+    \node<4-> (lvl11op) at (-3,-3.5) {$\times$};
+    \draw<4-> (lvl11op) circle (0.2);
+    \node<4-> (lvl21) at (-5, -5) {$0$};
+    \node<4-> (lvl22) at (-1, -5) {$\rootcls$};
+    \draw<4-> (lvl11) -- (lvl11op);
+    \draw<4-> \ptedge{(lvl11op)}{(-0.5,1.1)}{(lvl21)}{(-0.5,0.55)};
+    \draw<4-> \ptedge{(lvl11op)}{(-0.5,1.1)}{(lvl22)}{(-0.5,0.55)};
+    % slide 5 - rule
+    \node<5-> [brownish,left=0.3cm of lvl22] {$\mathcal{A}$};
+    \draw<5-> [brownish] (-4.96,-7) node[anchor=west] {$\mathcal{B} \cong \set{0} \times \mathcal{A}$};
+    \draw<5-> [brownish] (-1.7,-7) node[anchor=west] {$B(z) = zA(z)$};
+    % slide 6
+    \node<6-> (lvl13op) at (3,-3.5) {$\sqcup$};
+    \draw<6-> (lvl13op) circle (0.2);
+    \node<6-> (lvl23) at (1, -5) {$1$};
+    \node<6-> (lvl24) at (5, -5) {$10\rootcls$};
+    \draw<6-> (lvl13) -- (lvl13op);
+    \draw<6-> \ptedge{(lvl13op)}{(-0.5,1.1)}{(lvl23)}{(-0.5,0.55)};
+    \draw<6-> \ptedge{(lvl13op)}{(-0.5,1.1)}{(lvl24)}{(-0.5,0.55)};
+    % slide 7 - rule
+    \node<7-> [brownish,right=0.3cm of lvl24] {$\mathcal{D}$};
+    \draw<7-> [brownish] (-4.925,-7.5) node[anchor=west] {$\mathcal{C} \cong \set{1} \sqcup \mathcal{D}$};
+    \draw<7-> [brownish] (-1.7,-7.5) node[anchor=west] {$C(z) = z + D(z)$};
+    % slide 8 
+    \node<8-> (lvl24op) at (5,-6) {$\times$};
+    \draw<8-> (lvl24op) circle (0.2);
+    \node<8-> (lvl31) at (3,-7.5) {$10$};
+    \node<8-> (lvl32) at (7,-7.5) {$\rootcls$};
+    \draw<8-> (lvl24) -- (lvl24op);
+    \draw<8->\ptedge{(lvl24op)}{(-0.5,1.1)}{(lvl31)}{(-0.5,0.55)};
+    \draw<8-> \ptedge{(lvl24op)}{(-0.5,1.1)}{(lvl32)}{(-0.5,0.55)};
+    % slide 9 - rule
+    \node<9-> [brownish,right=0.3cm of lvl32] {$\mathcal{A}$};
+    \draw<9-> [brownish] (-5,-8) node[anchor=west] {$\mathcal{D} \cong \set{10} \times \mathcal{A}$};
+    \draw<9-> [brownish] (-1.71,-8) node[anchor=west] {$D(z) = z^2A(z)$};
+\end{tikzpicture}
+}

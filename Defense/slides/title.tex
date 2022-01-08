@@ -1,0 +1,9 @@
+{
+\newcommand{\backgroundart}{\input{graphics/titleart}}
+\usebackgroundtemplate{\tikz[remember picture,overlay,opacity=0.04,inner sep=0] \node at (current page.center) {\backgroundart};}
+
+\begin{frame}
+    \titlepage
+    \tikz [remember picture,overlay] \node at ([yshift=8cm,xshift=4.8cm]current page.south) {\includegraphics[scale=0.5]{graphics/ru-logo.eps}};
+\end{frame}
+}

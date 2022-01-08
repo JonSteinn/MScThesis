@@ -1,0 +1,11 @@
+
+    \begin{tikzpicture}[,scale=0.6, every node/.style={scale=0.6}]
+            \foreach \x in {1,...,4} {
+                    \draw[ultra thin] (\x,5)--(\x,0);
+                    \draw[ultra thin] (5,\x)--(0,\x);
+            }
+            \draw[fill=black] (1,1) circle (5pt);
+            \draw[fill=black] (2,4) circle (5pt);
+            \draw[fill=black] (3,2) circle (5pt);
+            \draw[fill=black] (4,3) circle (5pt);
+    \end{tikzpicture}

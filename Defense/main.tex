@@ -1,0 +1,69 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+  \usetheme{metropolis}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{rose} % or try albatross, beaver, crane, ...
+  \usefonttheme{structurebold}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  \setbeamertemplate{itemize items}[square]
+}
+\input{packs}
+\input{macros}
+
+
+\title[Automated Bijections]{Automated Bijections\\with Combinatorial Exploration}
+\author[Jón Steinn Elíasson]{Jón Steinn Elíasson}
+\institute[Reykjavik University]{Reykjavík University}
+\date{\today}
+
+\begin{document}
+
+\input{slides/title}
+\input{slides/outline}
+
+\section{Introduction}
+\input{slides/intro}
+
+\section{Background}
+\input{slides/combclass}
+\input{slides/bijections}
+\input{slides/lengthpresbi}
+\input{slides/countseq}
+\input{slides/symbmeth}
+\input{slides/css}
+\input{slides/perms}
+\input{slides/patt}
+\input{slides/permcls}
+\input{slides/gp}
+\input{slides/tilings}
+
+\section{Parallel Specifications}
+%\input{slides/eq_constructors}
+\input{slides/par_specs}
+\input{slides/par_specs_example}
+
+\section{Parallel Bijections}
+\input{slides/par_bij}
+\input{slides/par_bij_example}
+
+
+\section{Bijection Search}
+\input{slides/search_alg}
+%\input{slides/search_alg_fusion}
+
+\section{Results}
+\input{slides/results}
+\input{slides/res-cross}
+\input{slides/res-wilf}
+\input{slides/res-exp}
+
+\section{Conclusion}
+\input{slides/conclusion}
+
+\begin{frame}[allowframebreaks]
+    \printbibliography{}
+\end{frame}
+
+\end{document}

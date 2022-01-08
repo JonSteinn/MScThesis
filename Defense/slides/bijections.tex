@@ -1,0 +1,28 @@
+\begin{frame}{Bijection}
+    \begin{block}{Definition}<1->
+        A bijection between two sets $A$ and $B$ is an invertible function $f: A \mapsto B$, i.e., there exists an inverse $f^{-1}: B \mapsto A$ such that $a = f^{-1}(f(a))$ and $b=f\left(f^{-1}(b)\right)$ for all $a \in A$ and $b \in B$.
+    \end{block}
+    \only<2>{%
+        \begin{figure}
+            \centering
+            \input{graphics/notinjective}
+            \caption{A mapping that is not a bijection as two elements map to the same one.}
+        \end{figure}
+    }
+    \addtocounter{figure}{1}
+    \only<3>{%
+        \begin{figure}
+            \centering
+            \input{graphics/notsurjective}
+            \caption{A mapping that is not a bijection as there is an element in the codomain that no element maps to.}
+        \end{figure}
+    }
+    \addtocounter{figure}{1}
+    \onslide<4>{%
+        \begin{figure}
+            \centering
+            \input{graphics/bijective}
+            \caption{A bijection.}
+        \end{figure}
+    }
+\end{frame}
