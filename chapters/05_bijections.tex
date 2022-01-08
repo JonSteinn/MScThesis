@@ -17,11 +17,11 @@ Given a specification $\spec{C} = (L,(\circ_1,\circ_2,\dotsc,\circ_k),R,D)$ acco
 
 \section{Object parsing}
 % Unification otherway? 
-Let $\spec{C} = (L,O,R,D)$ be a parsable specification with $k$ rules, parser $(\phi_1,\phi_2,\dotsc,\phi_k)$, specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic partitioning} of $c$ in $\spec{C}$ where \[
+Let $\spec{C} = (L,O,R,D)$ be a parsable specification with $k$ rules, a parser $(\phi_1,\phi_2,\dotsc,\phi_k)$, a specification graph $\mathfrak{G}(\spec{C})$ and an object $c$ in the root class. We define $\omega_{\spec{C}}(c) = \varphi_{\spec{C}}(c,\varepsilon)$ as the \emph{atomic partitioning} of $c$ in $\spec{C}$ where \[
     \varphi_{\spec{C}}(c,p) = \begin{cases}
         \set{p} & \text{ if } \textsf{tail}(p) \text{ is a terminal class}\\
         \bigcup_{j=1}^\ell\varphi_{\spec{C}}(c_j,p \oplus e_j) & \text{ if }
-        \textsf{tail}(p) = L_i \text{ and } \phi_j(c) = ((c_1,e_1),\dotsc,(c_\ell,e_\ell))
+        \textsf{tail}(p) = L_i \text{ and } \phi_i(c) = ((c_1,e_1),\dotsc,(c_\ell,e_\ell))
     \end{cases}
 \]
 
@@ -41,11 +41,11 @@ This is shown with a tree in \FigureRef{fig:atomic_partitioning}. Note that the 
 \begin{figure}[ht!]
     \centering
     \input{graphics/atomic_partitioning}
-    \caption{The atomic partitioning of $3241$ for the specification graph in \FigureRef{fig:specgraph132}. Double underlining is used to highlight paths to terminal classes.}
+    \caption{The atomic partitioning of $3241$ for the specification graph in \FigureRef{fig:specgraph132}. Double underlining is used to highlight paths to terminal classes. The dotted lines represent paths not taken by parental objects.}
     \label{fig:atomic_partitioning}
 \end{figure}
 
-To define the inverse of $\omega_{\spec{C}}$ we start by providing a few supporting maps. Given a set of terminal ending paths $S$ we define $T(S) = \cset{(c,p)}{p \in S \text{ and } c \in \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $\textsf{nxt}(P)$ as the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define the \emph{next siblings} as
+To define the inverse of $\omega_{\spec{C}}$ we start by providing a few supporting maps. Given a set of terminal ending paths $S$ we define $T(S) = \cset{(c,p)}{p \in S \text{ and } c = \textsf{tail}(p)}$. Given set of paths and object pairs $P$ we define $\textsf{nxt}(P)$ as the longest path in $P$, breaking ties with lexicographic order of edge labels as tuples. We define the \emph{next siblings} as
 \[
     \textsf{sib}(P) = \cset{(c, e_1e_2 \dotsm e_{n-1} \oplus e') \in P}{\textsf{nxt}(P) = e_1e_2 \dotsm e_n}.
 \]
@@ -280,7 +280,7 @@ The bijection from all elements in $\overline{c}$ are shown in \TableRef{tab:fus
     \label{tab:fuseidxmap}
 \end{table}
 
-Suppose we have two indexable rules that are nonbijective from left hand sides $\mathcal{C}$ and $\mathcal{D}$. In order for the two of them to be equivalent, they additionally need to satisfy an existance of a bijection between $\cset{\overline{c}}{c \in \mathcal{C}}$ and $\cset{\overline{d}}{d \in \mathcal{D}}$ that preserves cardinality.
+Suppose we have two indexable rules that are nonbijective from left hand sides $\mathcal{C}$ and $\mathcal{D}$. In order for the two of them to be equivalent, they additionally need to satisfy an existence of a bijection between $\cset{\overline{c}}{c \in \mathcal{C}}$ and $\cset{\overline{d}}{d \in \mathcal{D}}$ that preserves cardinality.
 
 \begin{figure}[ht!]
     \centering

@@ -14,10 +14,10 @@
         \State\Return{$2-\left|\cset{|c|}{c \in \mathcal{C} \cup \mathcal{D}}\right|$}
     \EndIf
     \State $(V,U) \gets \left(\set{\mathcal{C}}, \set{\mathcal{D}}\right)$
-    \While{$o_1(\mathcal{C}) = \idop$}
+    \While{$o_1(\mathcal{C}) = \,\idop$}
         \State $\left(V, \mathcal{C}\right) \gets \left(V \cup \set{\alpha_1(\mathcal{C})}, \alpha_1(\mathcal{C})\right)$
     \EndWhile
-    \While{$o_2(\mathcal{D}) = \idop$}
+    \While{$o_2(\mathcal{D}) = \,\idop$}
         \State $\left(U, \mathcal{D}\right) \gets \left(U \cup \set{\beta_1(\mathcal{D})}, \beta_1(\mathcal{D})\right)$
     \EndWhile
     \If{$V\times U \cap A \neq \emptyset$}

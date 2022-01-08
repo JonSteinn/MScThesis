@@ -6,7 +6,7 @@ A \emph{combinatorial class} is a set $\mathcal{C}$ and a size function $\mathca
 \]
 is finite. We refer to an element of a combinatorial class, $c\in\mathcal{C}$, as a \emph{combinatorial object} and its size is denoted by $|c|$. The set of words over a finite alphabet is an example of a combinatorial class where the number of characters in the word serves as a size function.
 
-A \emph{bijection} between sets $A$ and $B$ is an invertible function $f: A \mapsto B$ such that $a=f^{-1}(f(a))$ and $b=f(f^{-1}(b))$ for all $a\in A$ and $b \in B$. The existance of a bijection between sets $A$ and $B$ implies $|A|=|B|$. Suppose $A$ is the set of binary strings of size $n$ avoiding consecutive 1's and $B$ the set of subsets of $\setn$ containing no consecutive numbers. By mapping each binary string $\wordseq{b}{n} \in A$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
+A \emph{bijection} between sets $A$ and $B$ is an invertible function $f: A \mapsto B$ such that $a=f^{-1}(f(a))$ and $b=f(f^{-1}(b))$ for all $a\in A$ and $b \in B$. The existence of a bijection between sets $A$ and $B$ implies $|A|=|B|$. Suppose $A$ is the set of binary strings of size $n$ avoiding consecutive 1's and $B$ the set of subsets of $\setn$ containing no consecutive numbers. By mapping each binary string $\wordseq{b}{n} \in A$ to the set containing $i$ if and only if $b_i=1$, we have a bijection. This bijection can be seen in \FigureRef{fig:bijection_example} for $n=3$.
 
 \begin{figure}[htbp]
     \centering
@@ -71,7 +71,7 @@ and symmetrically we have
 \[
     E \cong \set{\varepsilon} \sqcup C \sqcup A.
 \]
-Now we have our specification, a system of rules with each class on the left at most once, defining an unambiguous formal grammar as shown with a tree representation in \FigureRef{fig:gridtree}.
+Now we have our \emph{specification}, a system of rules with each class on the left at most once, defining an unambiguous formal grammar as shown with a tree representation in \FigureRef{fig:gridtree}.
 
 \begin{figure}[htbp]
     \centering
@@ -98,7 +98,7 @@ which corresponds to the number of grids for each size, e.g., there are 17 and 9
 \]
 This is not always the case and depends on the type of generating function we have.
 
-In the context of this thesis, we will refer to combinatorial classes as classes and the same goes for combinatorial specifications and rules. We also assume all constructors to be admissible and all rules to entail isomorphism. 
+In the context of this thesis, we will refer to combinatorial classes as classes and the same goes for combinatorial specifications and rules. We also assume all constructors to be admissible and all rules to entail isomorphism, e.g., there exists a bijection from the left hand side of any rule to the right hand side.
 
 \section{Permutations\label{sec:permutations}}
 A \emph{permutation} $\pi$ is a bijection between a set and itself. In our context, the set in question is $[n] = \setn$. We adopt a one line notation for permutations, $\pi = \perm{\pi}{n}$ where $\pi_i = j$ if $i$ maps to $j$. This correspondence for the permutation $1423$ can be seen in \FigureRef{fig:perm_example} as well as its geometric representation which displays the points $\cset{(i,\pi(i))}{i \in [n]}$ in the Cartesian plane.
@@ -298,7 +298,7 @@ and a generating function, obtained by solving the system of equations derived f
 \[
 \frac{1-\sqrt{1-4z}}{2z}.
 \]
-This is a simple example but given different classes and constructors, we can end up with classes that are difficult to describe rigorously. The purpose of tilings is to provide a sort of language to describe classes with more complicated permutation constraints or limited parts of permutations, e.g., we can describe $\textsf{Av}_{\geq1}(132)$ with the tiling seen in \FigureRef{fig:tiling132}.
+This is a simple example but given different classes and constructors, we can end up with classes that are difficult to describe rigorously. The purpose of tilings is to provide a sort of language to describe classes with more complicated permutation constraints or limited parts of permutations, e.g., we can describe $\textsf{Av}_{\geq1}(132)$ with the tiling shown in \FigureRef{fig:tiling132}.
 
 \begin{figure}[htbp]
     \centering
@@ -308,9 +308,9 @@ This is a simple example but given different classes and constructors, we can en
 \end{figure}
 
 \section{Combinatorial Exploration}
-Combinatorial Exploration \cite{css} is a domain agnostic specification searcher. It uses strategies to generate rules for classes. Strategies are independent of classes and describe an action that may result in rules given an applicable class. The search method is done in a breadth-first manner from the root class. When run, it uses a predefined set of strategies and expands a universe in hope of finding a specification within it.
+Combinatorial Exploration \cite{css} is a domain agnostic specification searcher. It uses strategies to generate rules for classes. Strategies are independent of classes and describe an action that may result in rules given an applicable class. The search method is done in a breadth-first manner from the initial class. When run, it uses a predefined set of strategies and expands a universe in hope of finding a specification within it.
 
-To avoid tautologies, the searcher gives classes equivalence labels and tracks rules in terms of parent and children pairs as equivalence labels. The rules within a single equivalence label may or may not be equivalence rules. Any rule with a single class on its right hand side that can result in a tautology may be contained in an equivalence label with nonequivalent classes. When a specification is found and extracted from the universe, any sequence of equivalence rules is merged into a single rule.
+To avoid tautologies, the searcher gives classes equivalence labels and tracks rules in terms of parent and children pairs as equivalence labels. The classes that share an equivalence label may or may not be isomorphic. Any rule with a single class on its right hand side that can result in a tautology may have both sides with the same equivalence label. When a specification is found and extracted from the universe, any sequence of equivalence rules is merged into a single rule.
 
 \section{TileScope}
 TileScope \cite{tiling} is an implementation of Combinatorial Exploration for tilings. A root class with a single cell and no requirements is in direct correspondence to a permutation class. The library utilizes Permuta \cite{permuta}, a general permutation library. Most of the strategies TileScope uses can be found in \authcite{BeanPhd:phd}. We will give a brief explanation of those that are not as well as introduce new strategies in Chapter~\ref{ch:strats}. The strategies introduced in this thesis enabled TileScope to discover a specification for $\Av{1432}$.
@@ -359,7 +359,7 @@ in $\textsf{Grid}(\mathcal{T})$, where the subsequences $\alpha$ and $\beta$ are
     &\hspace{2.5cm}\vdots\\
     &\alpha\alpha_1^{(c+1,0)}\alpha_2^{(c+1,0)}\dotsm\alpha_i^{(c+1,0)}\beta_1^{(c+1,0)}\beta_2^{(c+1,0)}\dotsm\beta_j^{(c+1,0)}\beta.
 \end{align*}
-An example of a fusable tiling is seen in \FigureRef{fig:fusable}. The rules, in terms of generating functions, depend on the tiling's assumptions. Some common scenarios are shown in \TableRef{tab:fusegf}
+An example of a fusable tiling is shown in \FigureRef{fig:fusable}. The rules, in terms of generating functions, depend on the tiling's assumptions. Some common scenarios are shown in \TableRef{tab:fusegf}
 
 \begin{figure}[ht!]
     \centering

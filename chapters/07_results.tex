@@ -20,14 +20,14 @@ The tiling in question here is
 \[
     \mathcal{T} = \left((2,1), \set{2^{(0,0)}1^{(1,0)}, 21^{(1,0)}, 231^{(0,0)}, 321^{(0,0)}},\emptyset\right),
 \]
-seen in \FigureRef{fig:wordtiling}.
+shown in \FigureRef{fig:wordtiling}.
 \begin{figure}[ht!]
     \centering
     \input{graphics/wordtiling}
     \caption{The tiling used instead of $\Av{231,312}$ to deal with the sequence offset of binary strings.}
     \label{fig:wordtiling}
 \end{figure}
-Now we can find and construct bijections between $\mathcal{W}$ and $\textsf{Grid}(\mathcal{T})$. It will map the words to gridded permutations in $\mathcal{G}^{(2,1)}$ instead of $\mathcal{G}^{(1,1)}$ but there is a trivial bijection from these gridded permutations to permutations.
+Now we can find and construct bijections between $\mathcal{W}$ and $\textsf{Grid}(\mathcal{T})$. It will map the words to gridded permutations in $\mathcal{G}^{(2,1)}$ instead of $\mathcal{G}^{(1,1)}$ but there is a trivial bijection from these gridded permutations to permutations in $\textsf{Av}_{\geq1}(231,312)$.
 
 The other bijection found was between $\mathcal{W} = (\varepsilon, \set{0,1}, \set{11})$ and $\Av{231,312,321}$. These are counted by the Fibonacci numbers but here we have the same issue as before, with one sequence being off by one. We remedy this in the same way as before, leaving us with a tiling root that can be seen in \FigureRef{fig:fibpermoffbyone}. This tiling can have at most a single point in cell $(1,0)$ and if it includes one, it must be greater than all the points in cell $(0,0)$. We can map any such gridded permutation to a permutation with a trivial bijection. Given a gridded permutation of size $n$ that contains no point in cell $(1,0)$ we append $n+1$ to the underlying permutation. If it contains a point in $(1,0)$ we place $n+1$ immediately prior to the last element.
 
@@ -241,4 +241,3 @@ Every experimental class was confirmed to be a Wilf class with the exception of 
     \Av{1243,1342,1423,1432,2143,2413,3142,3412,4231}
 \]
 and any other class. We leave that as an open problem. The connections created by bijections found for each experimental class can be seen in Figures~\ref{fig:expgrp_I}-\ref{fig:expgrp_XXVI} in Appendix \ref{ch:conclusion}. Experimental classes with only two permutation classes are omitted since all of them were successfully shown to be Wilf classes and no information is contained in their figure.
-

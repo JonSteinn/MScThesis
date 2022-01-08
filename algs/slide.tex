@@ -26,13 +26,13 @@
             \State $\alpha \gets \pi_i$
             \State $\beta \gets \pi_j$
             \For{$z\gets i, j-1$}
-                \State $\pi_{z}^{(x_z,y_z)} \gets \pi_{z+1}^{(x_{z+1},y_{z+1})}$
+                \State $\pi_{z}^{(x_z,0)} \gets \pi_{z+1}^{(x_{z+1},y_{z+1})}$
             \EndFor
             \State $\pi_{j-1} \gets \alpha$
             \For{$z\gets j, k - 1$}
-                \State $\pi_{z}^{(x_z,y_z)} \gets \pi_{z+1}^{(x_{z+1},y_{z+1})}$
+                \State $\pi_{z}^{(x_z,0)} \gets \pi_{z+1}^{(x_{z+1},y_{z+1})}$
             \EndFor
-            \State $\pi_{k}^{(x_k,y_k)} \gets \beta^{(2,0)}$
+            \State $\pi_{k}^{(x_k,0)} \gets \beta^{(2,0)}$
         \EndIf
     \EndWhile
     \State \Return{$\pi_1^{(x_1 - 1,0)}\pi_2^{(x_2 - 1,0)}\cdots\pi_n^{(x_n - 1,0)}$}

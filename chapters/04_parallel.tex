@@ -328,7 +328,7 @@ be a pair of classes that are tails of paths $\textsf{rextend}(\alpha)$ and $\te
 \[
     \textsf{rextend}(\alpha)^+ = \cset{\textsf{rextend}(\alpha) \oplus a_i}{i \in [k]} \text{ and } \textsf{rextend}(\beta)^+ = \cset{\textsf{rextend}(\beta) \oplus b_i}{i \in [k]}
 \]
-where $a_i$ and $b_i$ are edges. The \emph{matching order}, $\Gamma_{\mathcal{C},\mathcal{D}}$, for $\mathcal{C}$ and $\mathcal{D}$ is a bijection such that $\Gamma_{\mathcal{C},\mathcal{D}}(a_i) = b_j$ if $\phi(\textsf{rextend}(\alpha) \oplus a_i) = \textsf{rextend}(\beta) \oplus b_j$.
+where $a_i$ and $b_i$ are edges and $k = \left|\textsf{rextend}(\alpha)^+\right| = \left|\textsf{rextend}(\beta)^+\right|$. The \emph{matching order}, $\Gamma_{\mathcal{C},\mathcal{D}}$, for $\mathcal{C}$ and $\mathcal{D}$ is a bijection such that $\Gamma_{\mathcal{C},\mathcal{D}}(a_i) = b_j$ if $\phi(\textsf{rextend}(\alpha) \oplus a_i) = \textsf{rextend}(\beta) \oplus b_j$.
 \end{definition}
 
  The bijections shown in the recursion tree in \FigureRef{fig:para_spec_rec} interpreted with matching order for classes of specifications can be seen in \TableRef{tab:corrmatch}. There are no recurring pairs in this example but if there were, one would have to choose a fixed bijection and which one does not matter. The benefit of using the matching order is that it allows us to extend this pairing to paths of any finite size.
